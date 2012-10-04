@@ -12,15 +12,15 @@ module type Law = sig
   val next : (int -> symbol option) -> symbol
 end
 
-module type Vlmc =
+module type S =
   sig
-    type symbol
+    module Law : Law
     type t
     type pos = int
 
     val create : int -> t
-    val get : t -> pos -> symbol
+    val get : t -> pos -> Law.symbol
     val first_diff_pos : t -> pos -> pos -> pos
   end
 
-module Make : functor (L : Law) -> Vlmc with type symbol = L.symbol
+module Make : functor (L : Law) -> S

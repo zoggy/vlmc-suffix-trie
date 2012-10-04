@@ -1,0 +1,6 @@
+version = "0.1"
+description = "Building suffix tries from VLMCs"
+requires = ""
+archive(byte) = "vlmcs.cma"
+archive(native) = "vlmcs.cmxa"
+

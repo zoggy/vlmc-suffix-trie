@@ -1,3 +1,5 @@
+(** *)
+
 module type Symbol = sig
   type symbol
   val compare : symbol -> symbol -> int
@@ -10,30 +12,30 @@ module type Law = sig
   val next : (int -> symbol option) -> symbol
 end
 
-module type Vlmc =
+module type S =
   sig
-    type symbol
+    module Law : Law
     type t
     type pos = int
 
     val create : int -> t
-    val get : t -> pos -> symbol
+    val get : t -> pos -> Law.symbol
     val first_diff_pos : t -> pos -> pos -> pos
   end
 
 module Make (L : Law) =
   struct
-    type symbol = L.symbol
+    module Law = L
     type t = {
         increment : int ;
-        mutable seq : L.symbol array ;
+        mutable seq : Law.symbol array ;
       }
     type pos = int
 
     let next vlmc =
       let len = Array.length vlmc.seq in
       let get i = if i >= len then None else Some vlmc.seq.(len-i-1) in
-      L.next get
+      Law.next get
 
     let increase vlmc =
       let curlen = Array.length vlmc.seq in
