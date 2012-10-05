@@ -181,7 +181,7 @@ module Dynamic (Trie : Trie.S) =
       }
 
     let run nb_exp length =
-      let prefix = Printf.sprintf "%s-%dx%d" Trie.Vlmc.Law.id nb_exp length in
+      let prefix = Printf.sprintf "%s_%dx%d" Trie.Vlmc.Law.id nb_exp length in
       prerr_endline (Printf.sprintf "Law %S - Dynamic (%d)" Trie.Vlmc.Law.id nb_exp);
       let (heights, sats) =
         let f i =
@@ -242,35 +242,27 @@ let generate_dynamic_R_main ~title nb_exp length r_file results =
   p b "draw <- function (file, label, %s) {\n"
     (String.concat ", " (List.map (fun n -> Printf.sprintf "v%d" n) n_list));
   p b "f=paste(%S,label,sep=\"_\")\n" prefix;
+  p b "f=paste(f,\".jpg\",sep=\"\")\n";
   p b "jpeg(f, width=800)\n";
   List.iter (fun n -> p b "max%d = max(v%d)\n" n n) n_list;
   p b "ymax=max(%s)\n" (String.concat "," (List.map (fun n -> Printf.sprintf "v%d" n) n_list));
+  p b "plot(0,0,xlab=\"Number of suffixes inserted\",col=\"black\",ylab=label,xlim=c(0,measure_step * length(v1)),ylim=c(0,ymax+1),cex=.01)\n";
+  List.iter
+    (fun n -> p b "lines(x,v%d,col=\"black\",lty=%d,lwd=2)\n" n n)
+    n_list;
+  p b "legend(x=\"topleft\", c(%s), col = c(%s), lty=c(%s), lwd=c(%s))\n"
+    (String.concat ", " (List.map (fun r -> Printf.sprintf "%S" r.dyn_id) results))
+    (String.concat ", " (List.map (fun _ -> "\"black\"") n_list))
+    (String.concat ", " (List.map string_of_int n_list))
+    (String.concat ", " (List.map (fun _ -> "2") n_list));
+  p b "title(main=\"%s -- dynamic behaviour -- %d simulations\")\n" title nb_exp;
+  p b "dev.off()\n";
   p b "}\n";
-  (*
-plot(0,0,xlab="Number of suffixes inserted", col="black",ylab="height",xlim=c(0,measure_step * length(h1)),ylim=c(0,ymax+1),cex=.01)
-lines(x, h1, col="black")
-lines(x, h2, col="black",lty=2)
-lines(x, h3, col="black",lty=3)
-legend(x="topleft", c("height(log)", "height(fact)", "height(expo)"), col = c("black","black","black"), lty=c(1,2,3))
-title(main="Logarithmic and factorial combs -- dynamic behaviour -- 15 simulations")
-dev.off();
-*)
-(*
-  let oc = open_out r_file in
-  let p = Printf.fprintf oc in
-
-  let max_y = List.fold_left (fun acc (_,_,_,y,_,_) -> max acc y) 0 results in
-  Printf.bprintf b "plot(0,0,xlab=\"Number of suffixes inserted\", ylab=\"height\",xlim=c(0,%d),ylim=c(0,%f),cex=.0)\n" (len * !measure_step) max_y;
-  let f lty (_,var_heights
-  Printf.bprintf b "lines(x, %s, col=\"black\",lty=1, lwd=2)\n" var_heights;
-  Printf.bprintf b "lines(x, %s, col=\"darkgrey\", lty=2, lwd=2)\n" var_sats;
-  Printf.bprintf b "legend(x=\"topleft\", c(\"height\", \"saturation level\"), col = c(\"black\",\"darkgrey\"), lty=c(1,2), lwd=c(2,2))\n";
-  Printf.bprintf b "title(main=\"%s%sdynamic behaviour -- %d simulation%s\")\n"
-  Trie.Vlmc.Law.description
-  (if Trie.Vlmc.Law.description = "" then "" else " -- ") exp
-  (if exp > 1 then "s" else "");
-  close_out oc      ;
-  *)
+  p b "draw(\"%d_%dexp\", \"height\", %s)\n" length nb_exp
+    (String.concat ", " (List.map (fun r -> r.dyn_var_heights) results));
+  p b "draw(\"%d_%dexp\", \"saturation level\", %s)\n" length nb_exp
+    (String.concat ", " (List.map (fun r -> r.dyn_var_sats) results));
+  file_of_string ~file: r_file (Buffer.contents b);
   if !auto_run_r then run_r r_file
 ;;
 
