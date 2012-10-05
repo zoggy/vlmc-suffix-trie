@@ -172,46 +172,18 @@ module Dynamic (Trie : Trie.S) =
       Buffer.contents b
 
     let run nb_exp length =
-      let prefix = Trie.Vlmc.Law.id in
+      let prefix = Printf.sprintf "%s-%dx%d" Trie.Vlmc.Law.id nb_exp length in
       prerr_endline (Printf.sprintf "Law %S - Dynamic (%d)" Trie.Vlmc.Law.id nb_exp);
-      let progress (vlmc, trie, heights, sats) i =
-        if i mod 1000 = 0 then
-          prerr_endline (Printf.sprintf "length = %d / %d, height=%d, sat=%d"
-           i length heights.(i) sats.(i));
-        if i > 0 && i mod 50_000 = 0 then
-          (
-           let jpg_file = Printf.sprintf "%s-%d.jpg" prefix i in
-           let (_,_,heights, sats) =
-             (vlmc, trie,
-              Array.sub heights 0 (i+1),
-              Array.sub sats 0 (i+1)
-             )
-           in
-           let r_code = generate_R_dynamic_exp
-             (Array.map float heights)
-             (Array.map float sats)
-             jpg_file
-           in
-           let r_file = Printf.sprintf "%s-%d.R" prefix i in
-           file_of_string ~file: r_file r_code
-          )
-      in
       let (heights, sats) =
         let f i =
-          if nb_exp <= 1 then
-            let (_,_,h,s) = dynamic_experiment ~dot: true ~progress length in
-            (h,s)
-          else
-            (
-             let progress _ j =
-               if j mod 10_000 = 0 then
-                 prerr_endline (Printf.sprintf "task %d: progress=%d" i j)
-             in
-             let res = dynamic_experiment ~progress length in
-             prerr_endline (Printf.sprintf "task %d done" i);
-             let (_,_,h,sats) = res in
-             (h, sats)
-            )
+          let progress _ j =
+            if j mod 10_000 = 0 then
+              prerr_endline (Printf.sprintf "task %d: progress=%d" i j)
+          in
+          let res = dynamic_experiment ~progress length in
+          prerr_endline (Printf.sprintf "task %d done" i);
+          let (_,_,h,sats) = res in
+          (h, sats)
         in
         Functory.Cores.set_number_of_cores 5;
         let results = Functory.Cores.map
