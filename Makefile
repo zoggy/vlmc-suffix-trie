@@ -41,3 +41,8 @@ uninstall: dummy
 
 clean:
 	rm -f *.cm* *.annot *.x *.byte *.o
+
+.depend depend:
+	ocamldep *.ml *.mli > .depend
+
+include .depend

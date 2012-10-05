@@ -1,0 +1,6 @@
+trie.cmo : vlmc.cmi trie.cmi
+trie.cmx : vlmc.cmx trie.cmi
+vlmc.cmo : vlmc.cmi
+vlmc.cmx : vlmc.cmi
+trie.cmi : vlmc.cmi
+vlmc.cmi :

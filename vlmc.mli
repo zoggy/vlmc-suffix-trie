@@ -9,6 +9,7 @@ end
 
 module type Law = sig
   include Symbol
+  val description : string
   val next : (int -> symbol option) -> symbol
 end
 
@@ -18,6 +19,7 @@ module type S =
     type t
     type pos = int
 
+    val description : string
     val create : int -> t
     val get : t -> pos -> Law.symbol
     val first_diff_pos : t -> pos -> pos -> pos
