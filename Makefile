@@ -1,6 +1,7 @@
 PACKAGE=vlmcs
 INCLUDES=-I laws
 OCAMLFIND=ocamlfind
+OCAMLFLAGS= -g
 
 LIB=vlmcs.cmxa
 LIB_BYTE=$(LIB:.cmxa=.cma)
@@ -10,8 +11,9 @@ CMO_FILES=$(CMX_FILES:.cmx=.cmo)
 CMI_FILES=$(CMX_FILES:.cmx=.cmi)
 
 VLMC_EXP=vlmc_exp
+VLMC_EXP_BYTE=$(VLMC_EXP).byte
 
-TOOLS=$(VLMC_EXP)
+TOOLS=$(VLMC_EXP) $(VLMC_EXP_BYTE)
 
 all: opt byte $(TOOLS)
 
@@ -32,7 +34,10 @@ uninstall: dummy
 	$(OCAMLFIND) remove $(PACKAGE)
 
 $(VLMC_EXP): $(LIB) vlmc_exp.cmx
-	$(OCAMLFIND) ocamlopt -o $@ -linkall dynlink.cmxa $^
+	$(OCAMLFIND) ocamlopt $(OCAMLFLAGS)  -o $@ -linkall dynlink.cmxa $^
+
+$(VLMC_EXP_BYTE): $(LIB_BYTE) vlmc_exp.cmo
+	$(OCAMLFIND) ocamlc $(OCAMLFLAGS) -o $@ -linkall dynlink.cma $^
 
 LAWS_CMXFILES=\
 	laws/prob1.cmx \
@@ -40,23 +45,24 @@ LAWS_CMXFILES=\
 	laws/comb_log.cmx \
 	laws/expo.cmx
 LAWS_CMIFILES=$(LAWS_CMXFILES:.cmx=.cmi)
+LAWS_CMOFILES=$(LAWS_CMXFILES:.cmx=.cmo)
 LAWS_CMXSFILES=$(LAWS_CMXFILES:.cmx=.cmxs)
 
-laws: $(LAWS_CMXSFILES)
+laws: $(LAWS_CMXSFILES) $(LAWS_CMOFILES)
 
 .suffixes: .ml .mli .cmx .cmi .cmo .cmxs
 
 %.cmi: %.mli
-	$(OCAMLFIND) ocamlc $(INCLUDES) -annot -c $<
+	$(OCAMLFIND) ocamlc $(OCAMLFLAGS) $(INCLUDES) -annot -c $<
 
 %.cmx: %.ml
-	$(OCAMLFIND) ocamlopt -inline 10000 -verbose $(INCLUDES) -annot -c $<
+	$(OCAMLFIND) ocamlopt $(OCAMLFLAGS) -inline 10000 -verbose $(INCLUDES) -annot -c $<
 
 %.cmxs: %.ml
-	$(OCAMLFIND) ocamlopt -inline 10000 -shared $(INCLUDES) -annot -o $@ $<
+	$(OCAMLFIND) ocamlopt $(OCAMLFLAGS) -inline 10000 -shared $(INCLUDES) -annot -o $@ $<
 
 %.cmo: %.ml
-	$(OCAMLFIND) ocamlc -verbose $(INCLUDES) -annot -c $<
+	$(OCAMLFIND) ocamlc $(OCAMLFLAGS)  -verbose $(INCLUDES) -annot -c $<
 
 clean:
 	rm -f *.cm* *.annot $(TOOLS) *.o
