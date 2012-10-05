@@ -35,6 +35,18 @@ let usage =
 
 (** {2 Utilities} *)
 
+(*c==v=[List.make_int_list]=1.0====*)
+let make_int_list ~low ~high =
+  if low > high then
+    []
+  else
+    let rec iter acc = function
+	n when n <= high -> iter (n :: acc) (n+1)
+      |	_ -> List.rev acc
+    in
+    iter [] low
+(*/c==v=[List.make_int_list]=1.0====*)
+
 (*c==v=[File.file_of_string]=1.1====*)
 let file_of_string ~file s =
   let oc = open_out file in
@@ -100,6 +112,15 @@ module Single (Trie: Trie.S) =
       output_dot vlmc trie (Printf.sprintf "%s.dot" Trie.Vlmc.Law.id)
 end;;
 
+type dyn_result = {
+  dyn_r_data : string ;
+  dyn_var_heights : string ;
+  dyn_var_sats : string ;
+  dyn_desc : string ;
+  dyn_id : string ;
+  }
+
+
 module Dynamic (Trie : Trie.S) =
   struct
     let dynamic_experiment ?(dot=false) ?progress len =
@@ -131,45 +152,33 @@ module Dynamic (Trie : Trie.S) =
       name
       (String.concat ", " (List.rev (List.rev_map to_s l)))
 
-    let generate_R_dynamic_exp ?(exp=1) heights sats jpg_file =
-      let r_var_prefix = Trie.Vlmc.Law.id in
+    let generate_R_dynamic_exp ?(exp=1) heights sats prefix =
       let len = Array.length heights in
-      let b = Buffer.create 256 in
       let x = Array.init len (fun i -> (i+1) * !measure_step) in
       let max_y =
         Array.fold_left max
         (Array.fold_left max 0. heights)
         sats
       in
-      let var_heights = Printf.sprintf "%sheights" r_var_prefix in
-      let var_sats = Printf.sprintf "%ssats" r_var_prefix in
+      let var_heights = Printf.sprintf "%s_heights" prefix in
+      let var_sats = Printf.sprintf "%s_sats" prefix in
       let code_x = r_vector "x" string_of_int (Array.to_list x) in
       let code_heights = r_vector var_heights string_of_float (Array.to_list heights) in
       let code_sats = r_vector var_sats string_of_float (Array.to_list sats) in
-      begin
-        match r_var_prefix with
-          "" -> ()
-        | s ->
-            let file = Printf.sprintf "%s.R" s in
-            let oc = open_out file in
-            List.iter
-            (output_string oc) [ code_x ; code_heights ; code_sats ];
-            Printf.fprintf oc "measure_step=%d;\n" !measure_step;
-            close_out oc;
-      end;
-      Buffer.add_string b code_x;
-      Buffer.add_string b code_heights;
-      Buffer.add_string b code_sats;
-      Printf.bprintf b "jpeg(\"%s\", width=800);\n" jpg_file;
-      Printf.bprintf b "plot(0,0,xlab=\"Number of suffixes inserted\", ylab=\"height\",xlim=c(0,%d),ylim=c(0,%f),cex=.0)\n" (len * !measure_step) max_y;
-      Printf.bprintf b "lines(x, %s, col=\"black\",lty=1, lwd=2)\n" var_heights;
-      Printf.bprintf b "lines(x, %s, col=\"darkgrey\", lty=2, lwd=2)\n" var_sats;
-      Printf.bprintf b "legend(x=\"topleft\", c(\"height\", \"saturation level\"), col = c(\"black\",\"darkgrey\"), lty=c(1,2), lwd=c(2,2))\n";
-      Printf.bprintf b "title(main=\"%s%sdynamic behaviour -- %d simulation%s\")\n"
-        Trie.Vlmc.Law.description
-        (if Trie.Vlmc.Law.description = "" then "" else " -- ") exp
-        (if exp > 1 then "s" else "");
-      Buffer.contents b
+      let r_data_file =
+        let file = prefix^".R" in
+        let oc = open_out file in
+        List.iter (output_string oc) [ code_x ; code_heights ; code_sats ];
+        Printf.fprintf oc "measure_step=%d;\n" !measure_step;
+        close_out oc;
+        file
+      in
+      { dyn_r_data = r_data_file ;
+        dyn_var_heights = var_heights ;
+        dyn_var_sats = var_sats ;
+        dyn_desc = Trie.Vlmc.Law.description ;
+        dyn_id = Trie.Vlmc.Law.id ;
+      }
 
     let run nb_exp length =
       let prefix = Printf.sprintf "%s-%dx%d" Trie.Vlmc.Law.id nb_exp length in
@@ -206,13 +215,7 @@ module Dynamic (Trie : Trie.S) =
         let sats = array_avg sats in
         (heights, sats)
       in
-      let jpg_file = Printf.sprintf "%s.jpg" prefix in
-      let r_code = generate_R_dynamic_exp
-        ~exp: nb_exp heights sats jpg_file
-      in
-      let r_file = prefix ^ ".R" in
-      file_of_string ~file: r_file r_code;
-      if !auto_run_r then run_r r_file
+      generate_R_dynamic_exp ~exp: nb_exp heights sats prefix
   end
 
 (** {2 Start} *)
@@ -229,6 +232,48 @@ let dynamic_exp nb_exp length trie =
   D.run nb_exp length
 ;;
 
+let generate_dynamic_R_main ~title nb_exp length r_file results =
+  let prefix = try Filename.chop_extension r_file with _ -> r_file in
+  let n_list = make_int_list ~low: 1 ~high: (List.length results) in
+
+  let b = Buffer.create 256 in
+  let p b = Printf.bprintf b in
+  List.iter (fun r -> p b "source(%S)\n" r.dyn_r_data) results;
+  p b "draw <- function (file, label, %s) {\n"
+    (String.concat ", " (List.map (fun n -> Printf.sprintf "v%d" n) n_list));
+  p b "f=paste(%S,label,sep=\"_\")\n" prefix;
+  p b "jpeg(f, width=800)\n";
+  List.iter (fun n -> p b "max%d = max(v%d)\n" n n) n_list;
+  p b "ymax=max(%s)\n" (String.concat "," (List.map (fun n -> Printf.sprintf "v%d" n) n_list));
+  p b "}\n";
+  (*
+plot(0,0,xlab="Number of suffixes inserted", col="black",ylab="height",xlim=c(0,measure_step * length(h1)),ylim=c(0,ymax+1),cex=.01)
+lines(x, h1, col="black")
+lines(x, h2, col="black",lty=2)
+lines(x, h3, col="black",lty=3)
+legend(x="topleft", c("height(log)", "height(fact)", "height(expo)"), col = c("black","black","black"), lty=c(1,2,3))
+title(main="Logarithmic and factorial combs -- dynamic behaviour -- 15 simulations")
+dev.off();
+*)
+(*
+  let oc = open_out r_file in
+  let p = Printf.fprintf oc in
+
+  let max_y = List.fold_left (fun acc (_,_,_,y,_,_) -> max acc y) 0 results in
+  Printf.bprintf b "plot(0,0,xlab=\"Number of suffixes inserted\", ylab=\"height\",xlim=c(0,%d),ylim=c(0,%f),cex=.0)\n" (len * !measure_step) max_y;
+  let f lty (_,var_heights
+  Printf.bprintf b "lines(x, %s, col=\"black\",lty=1, lwd=2)\n" var_heights;
+  Printf.bprintf b "lines(x, %s, col=\"darkgrey\", lty=2, lwd=2)\n" var_sats;
+  Printf.bprintf b "legend(x=\"topleft\", c(\"height\", \"saturation level\"), col = c(\"black\",\"darkgrey\"), lty=c(1,2), lwd=c(2,2))\n";
+  Printf.bprintf b "title(main=\"%s%sdynamic behaviour -- %d simulation%s\")\n"
+  Trie.Vlmc.Law.description
+  (if Trie.Vlmc.Law.description = "" then "" else " -- ") exp
+  (if exp > 1 then "s" else "");
+  close_out oc      ;
+  *)
+  if !auto_run_r then run_r r_file
+;;
+
 let main () =
   Arg.parse options (fun file -> law_files := file :: !law_files) usage;
   begin
@@ -239,7 +284,10 @@ let main () =
   let tries = List.map make_trie !Vlmc_laws.laws in
   match !mode with
     Single -> List.iter (single_exp !length) tries
-  | Dynamic nb_exp -> List.iter (dynamic_exp nb_exp !length) tries
+  | Dynamic nb_exp ->
+      let results = List.map (dynamic_exp nb_exp !length) tries in
+      generate_dynamic_R_main ~title: "" nb_exp !length "out.R" results
+
   | _ -> failwith "not implemented"
 
 ;;
