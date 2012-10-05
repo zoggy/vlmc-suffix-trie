@@ -1,4 +1,7 @@
+*.jpg
+*.R
 vlmc_exp
+vlmc_exp.byte
 *.dot
 *.png
 .chamo*
