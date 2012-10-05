@@ -10,6 +10,7 @@ end
 module type Law = sig
   include Symbol
   val description : string
+  val id : string
   val next : (int -> symbol option) -> symbol
 end
 
@@ -19,7 +20,6 @@ module type S =
     type t
     type pos = int
 
-    val description : string
     val create : int -> t
     val get : t -> pos -> Law.symbol
     val first_diff_pos : t -> pos -> pos -> pos
@@ -34,11 +34,8 @@ module Make (L : Law) =
       }
     type pos = int
 
-    let description = L.description
-
-    let next vlmc =
-      let len = Array.length vlmc.seq in
-      let get i = if i >= len then None else Some vlmc.seq.(len-i-1) in
+    let next curlen vlmc =
+      let get i = if i >= curlen then None else Some vlmc.seq.(curlen - i -  1) in
       Law.next get
 
     let increase vlmc =
@@ -47,7 +44,7 @@ module Make (L : Law) =
       Array.blit vlmc.seq 0 seq 0 curlen;
       vlmc.seq <- seq;
       for i = 0 to vlmc.increment - 1 do
-        vlmc.seq.(curlen+i) <- next vlmc
+        vlmc.seq.(curlen+i) <- next curlen vlmc
       done
 
     let create len =

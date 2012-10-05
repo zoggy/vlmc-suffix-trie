@@ -1,3 +1,6 @@
+vlmc_exp
+*.dot
+*.png
 .chamo*
 *.annot
 *.cmo

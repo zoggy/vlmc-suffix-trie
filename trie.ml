@@ -1,15 +1,14 @@
 (** *)
 
 module type S = sig
-  type seq
-  type pos
-  type t
-  val empty : t
-  val insert : seq -> t -> pos -> t
-  val cardinal : t -> int * int
-  val height : t -> int
-  val saturation_level: t -> int
-  val dot : ?depth:int -> ?rankdir:string -> ?dots:bool -> seq -> t -> string
+    module Vlmc : Vlmc.S
+    type t
+    val empty : t
+    val insert : Vlmc.t -> t -> Vlmc.pos -> t
+    val cardinal : t -> int * int
+    val height : t -> int
+    val saturation_level: t -> int
+    val dot : ?depth:int -> ?rankdir:string -> ?dots:bool -> Vlmc.t -> t -> string
 end;;
 
 module Make (V : Vlmc.S) =
@@ -20,8 +19,8 @@ module Make (V : Vlmc.S) =
     type t =
         | Node of t Map.t
         | Leaf of V.pos
-    type pos = V.pos
-    type seq = V.t
+
+    module Vlmc = V
     let empty = Node Map.empty
     let is_root t = t = empty
 
