@@ -12,7 +12,7 @@ CMX_FILES=vlmc.cmx trie.cmx vlmc_zero_laws.cmx vlmc_laws.cmx
 CMO_FILES=$(CMX_FILES:.cmx=.cmo)
 CMI_FILES=$(CMX_FILES:.cmx=.cmi)
 
-VLMC_EXP=vlmc_exp
+VLMC_EXP=vlmc-exp
 VLMC_EXP_BYTE=$(VLMC_EXP).byte
 
 TOOLS=$(VLMC_EXP) $(VLMC_EXP_BYTE)
