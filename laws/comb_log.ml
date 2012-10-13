@@ -6,7 +6,7 @@ module M =
       if n = 0
       then 1. /. 2.
       else (1. -. (4. /. ((float n) +. 4.)))
-    let description = "log comb"
+    let description = "logarithmic comb"
     let id = "logcomb"
   end;;
 

@@ -34,8 +34,14 @@ module Make (L : Law) =
       }
     type pos = int
 
-    let next curlen vlmc =
-      let get i = if i >= curlen then None else Some vlmc.seq.(curlen - i -  1) in
+    let next pos_to_compute vlmc =
+      let get i =
+        let p = pos_to_compute - 1 - i in
+        if p > 0 then
+          Some vlmc.seq.(pos_to_compute - i -  1)
+        else
+          None
+       in
       Law.next get
 
     let increase vlmc =
@@ -44,7 +50,7 @@ module Make (L : Law) =
       Array.blit vlmc.seq 0 seq 0 curlen;
       vlmc.seq <- seq;
       for i = 0 to vlmc.increment - 1 do
-        vlmc.seq.(curlen+i) <- next curlen vlmc
+        vlmc.seq.(curlen+i) <- next (curlen+i) vlmc
       done
 
     let create len =
@@ -63,5 +69,5 @@ module Make (L : Law) =
         let c2 = get t (pos2+n) in
         if c1 = c2 then iter (n+1) else n
       in
-      iter 1
+      iter 0
   end;;

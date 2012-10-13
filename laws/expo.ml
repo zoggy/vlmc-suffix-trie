@@ -3,7 +3,7 @@
 module M =
   struct
     let prob n =  if n = 0 then (1. /. 3.) else (1. /. 3.) +. (1. /. (float (1+n))**2.)
-    let description = "expo"
+    let description = "log-n comb"
     let id = "expo"
   end;;
 

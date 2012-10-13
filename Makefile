@@ -15,7 +15,10 @@ CMI_FILES=$(CMX_FILES:.cmx=.cmi)
 VLMC_EXP=vlmc-exp
 VLMC_EXP_BYTE=$(VLMC_EXP).byte
 
-TOOLS=$(VLMC_EXP) $(VLMC_EXP_BYTE)
+TRIE_DRAW=trie-draw
+TRIE_DRAW_BYTE=$(TRIE_DRAW).byte
+
+TOOLS=$(VLMC_EXP) $(VLMC_EXP_BYTE) $(TRIE_DRAW) $(TRIE_DRAW_BYTE)
 
 all: opt byte $(TOOLS)
 
@@ -39,6 +42,12 @@ $(VLMC_EXP): $(LIB) vlmc_exp.cmx
 	$(OCAMLFIND) ocamlopt $(OCAMLFLAGS)  -o $@ -linkall $(SYS_LIBS) $^
 
 $(VLMC_EXP_BYTE): $(LIB_BYTE) vlmc_exp.cmo
+	$(OCAMLFIND) ocamlc $(OCAMLFLAGS) -o $@ -linkall $(SYS_LIBS_BYTE) $^
+
+$(TRIE_DRAW): $(LIB) trie_draw.cmx
+	$(OCAMLFIND) ocamlopt $(OCAMLFLAGS)  -o $@ -linkall $(SYS_LIBS) $^
+
+$(TRIE_DRAW_BYTE): $(LIB_BYTE) trie_draw.cmo
 	$(OCAMLFIND) ocamlc $(OCAMLFLAGS) -o $@ -linkall $(SYS_LIBS_BYTE) $^
 
 LAWS_CMXFILES=\

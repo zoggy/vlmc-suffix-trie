@@ -194,7 +194,7 @@ module Dynamic (Trie : Trie.S) =
           let (_,_,h,sats) = res in
           (h, sats)
         in
-        Functory.Cores.set_number_of_cores 5;
+        Functory.Cores.set_number_of_cores 8;
         let results = Functory.Cores.map
           (*List.map*)
           f
@@ -251,7 +251,7 @@ let generate_dynamic_R_main ~title nb_exp length r_file results =
     (fun n -> p b "lines(x,v%d,col=\"black\",lty=%d,lwd=2)\n" n n)
     n_list;
   p b "legend(x=\"topleft\", c(%s), col = c(%s), lty=c(%s), lwd=c(%s))\n"
-    (String.concat ", " (List.map (fun r -> Printf.sprintf "%S" r.dyn_id) results))
+    (String.concat ", " (List.map (fun r -> Printf.sprintf "%S" r.dyn_desc) results))
     (String.concat ", " (List.map (fun _ -> "\"black\"") n_list))
     (String.concat ", " (List.map string_of_int n_list))
     (String.concat ", " (List.map (fun _ -> "2") n_list));

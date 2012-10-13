@@ -34,7 +34,9 @@ module Make (V : Vlmc.S) =
       else
         match t with
           Leaf w2 ->
-            (*prerr_endline (Printf.sprintf "Leaf(w2=%d)" w2);*)
+            (*prerr_endline (Printf.sprintf "Leaf(w2=%d)" w2);
+            prerr_endline (Printf.sprintf "calling first_diff_pos %d %d"*
+              (from+h) (w2+h));*)
             let pdiff = V.first_diff_pos seq (from+h) (w2+h) in
             (*assert (pdiff > 0);*)
             (*prerr_endline (Printf.sprintf "pdiff=%d" pdiff);*)
@@ -45,15 +47,16 @@ module Make (V : Vlmc.S) =
             (*prerr_endline (Printf.sprintf "sub1 = Leaf(%d), sub2 = Leaf(%d)" from w2);*)
             let elt1 = V.get seq (from+h+pdiff) in
             let elt2 = V.get seq (w2+h+pdiff) in
-            (*prerr_endline (Printf.sprintf "elt1=%d, elt2=%d" elt1 elt2);*)
+            (*prerr_endline (Printf.sprintf "elt1=%d, elt2=%d" (Obj.magic elt1) (Obj.magic elt2));*)
             assert (elt1 <> elt2);
             let map =
               Map.add elt1 sub1
                 (Map.add elt2 sub2 Map.empty)
             in
             let t = ref (Node map) in
+            (*prerr_endline (Printf.sprintf "from=%d, h=%d, pdiff=%d" from h pdiff);*)
             for j = (from+h+pdiff-1) downto from+h do
-              (*prerr_endline (Printf.sprintf "j=%d, seq.(j) = %d" j (V.get seq j));*)
+              (*prerr_endline (Printf.sprintf "j=%d, seq.(j) = %d" j (Obj.magic (V.get seq j)));*)
               let map = Map.add (V.get seq j) !t Map.empty in
               t := Node map
             done;
