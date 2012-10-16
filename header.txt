@@ -1,4 +1,4 @@
-              Genet                                                      
+              Vlmc-suffix-trie                                           
                                                                          
   Copyright (C) 2012 Institut National de Recherche en Informatique      
   et en Automatique. All rights reserved.                                
