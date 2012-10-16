@@ -4,6 +4,8 @@
 
 let measure_step = ref 10;;
 
+let out_file = ref "out.R";;
+
 let length = ref 1_000;;
 let n_exp = ref 5_000;;
 
@@ -26,6 +28,8 @@ let options = [
 
     "--no-run-r", Arg.Clear auto_run_r,
     " do not run R on the output file, when R code is generated" ;
+
+    "-o", Arg.Set_string out_file, "<file.R> set output filename";
   ]
 
 let law_files = ref [];;
@@ -278,7 +282,7 @@ let main () =
     Single -> List.iter (single_exp !length) tries
   | Dynamic nb_exp ->
       let results = List.map (dynamic_exp nb_exp !length) tries in
-      generate_dynamic_R_main ~title: "" nb_exp !length "out.R" results
+      generate_dynamic_R_main ~title: "" nb_exp !length !out_file results
 
   | _ -> failwith "not implemented"
 

@@ -54,6 +54,9 @@ LAWS_CMXFILES=\
 	laws/prob1.cmx \
 	laws/comb_fact.cmx \
 	laws/comb_log.cmx \
+	laws/comb_log_1_2.cmx \
+	laws/comb_log_1_4.cmx \
+	laws/comb_log_1_8.cmx \
 	laws/expo.cmx
 LAWS_CMIFILES=$(LAWS_CMXFILES:.cmx=.cmi)
 LAWS_CMOFILES=$(LAWS_CMXFILES:.cmx=.cmo)
