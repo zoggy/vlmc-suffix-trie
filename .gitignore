@@ -1,7 +1,10 @@
+log
 *.jpg
 *.R
 vlmc-exp
 vlmc-exp.byte
+trie-draw
+trie-draw.byte
 *.dot
 *.png
 .chamo*

@@ -86,3 +86,13 @@ clean:
 	ocamldep *.ml *.mli > .depend
 
 include .depend
+
+## headers
+HEADFILES= Makefile *.ml *.mli laws/*.ml
+headers: dummy
+        echo $(HEADFILES)
+        headache -h header.txt -c .headache_config `ls $(HEADFILES) `
+
+noheaders: dummy
+        headache -r -c .headache_config `ls $(HEADFILES) `
+
