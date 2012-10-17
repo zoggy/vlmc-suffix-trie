@@ -28,6 +28,7 @@
 (** {2 Command line arguments} *)
 
 let measure_step = ref 10;;
+let cores = ref 4;;
 
 let out_file = ref "out.R";;
 
@@ -55,6 +56,9 @@ let options = [
     " do not run R on the output file, when R code is generated" ;
 
     "-o", Arg.Set_string out_file, "<file.R> set output filename";
+
+    "--cores", Arg.Set_int cores,
+     "<n> set number of cores to use; default is "^ (string_of_int !cores) ;
   ]
 
 let law_files = ref [];;
@@ -223,7 +227,7 @@ module Dynamic (Trie : Trie.S) =
           let (_,_,h,sats) = res in
           (h, sats)
         in
-        Functory.Cores.set_number_of_cores 8;
+        Functory.Cores.set_number_of_cores !cores;
         let results = Functory.Cores.map
           (*List.map*)
           f
