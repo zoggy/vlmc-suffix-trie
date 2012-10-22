@@ -5,6 +5,8 @@ vlmc-exp
 vlmc-exp.byte
 trie-draw
 trie-draw.byte
+random-walk
+random-walk.byte
 *.dot
 *.png
 .chamo*

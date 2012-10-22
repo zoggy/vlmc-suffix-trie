@@ -33,7 +33,7 @@ SYS_LIBS_BYTE=$(SYS_LIBS:.cmxa=.cma)
 LIB=vlmcs.cmxa
 LIB_BYTE=$(LIB:.cmxa=.cma)
 
-CMX_FILES=vlmc.cmx trie.cmx vlmc_zero_laws.cmx vlmc_laws.cmx
+CMX_FILES=vlmc_misc.cmx vlmc.cmx trie.cmx vlmc_zero_laws.cmx vlmc_laws.cmx
 CMO_FILES=$(CMX_FILES:.cmx=.cmo)
 CMI_FILES=$(CMX_FILES:.cmx=.cmi)
 
@@ -43,7 +43,10 @@ VLMC_EXP_BYTE=$(VLMC_EXP).byte
 TRIE_DRAW=trie-draw
 TRIE_DRAW_BYTE=$(TRIE_DRAW).byte
 
-TOOLS=$(VLMC_EXP) $(VLMC_EXP_BYTE) $(TRIE_DRAW) $(TRIE_DRAW_BYTE)
+RWALK=random-walk
+RWALK_BYTE=$(RWALK).byte
+
+TOOLS=$(VLMC_EXP) $(VLMC_EXP_BYTE) $(TRIE_DRAW) $(TRIE_DRAW_BYTE) $(RWALK) $(RWALK_BYTE)
 
 all: opt byte $(TOOLS)
 
@@ -73,6 +76,12 @@ $(TRIE_DRAW): $(LIB) trie_draw.cmx
 	$(OCAMLFIND) ocamlopt $(OCAMLFLAGS)  -o $@ -linkall $(SYS_LIBS) $^
 
 $(TRIE_DRAW_BYTE): $(LIB_BYTE) trie_draw.cmo
+	$(OCAMLFIND) ocamlc $(OCAMLFLAGS) -o $@ -linkall $(SYS_LIBS_BYTE) $^
+
+$(RWALK): $(LIB) random_walk.cmx
+	$(OCAMLFIND) ocamlopt $(OCAMLFLAGS)  -o $@ -linkall $(SYS_LIBS) $^
+
+$(RWALK_BYTE): $(LIB_BYTE) random_walk.cmo
 	$(OCAMLFIND) ocamlc $(OCAMLFLAGS) -o $@ -linkall $(SYS_LIBS_BYTE) $^
 
 LAWS_CMXFILES=\

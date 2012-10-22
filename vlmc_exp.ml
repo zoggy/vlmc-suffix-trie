@@ -66,38 +66,6 @@ let law_files = ref [];;
 let usage =
   Printf.sprintf "Usage: %s [options] [laws.cm[o|a|x|xs] ...]\nwhere options are:" Sys.argv.(0);;
 
-(** {2 Utilities} *)
-
-(*c==v=[List.make_int_list]=1.0====*)
-let make_int_list ~low ~high =
-  if low > high then
-    []
-  else
-    let rec iter acc = function
-	n when n <= high -> iter (n :: acc) (n+1)
-      |	_ -> List.rev acc
-    in
-    iter [] low
-(*/c==v=[List.make_int_list]=1.0====*)
-
-(*c==v=[File.file_of_string]=1.1====*)
-let file_of_string ~file s =
-  let oc = open_out file in
-  output_string oc s;
-  close_out oc
-(*/c==v=[File.file_of_string]=1.1====*)
-
-let run_r r_file =
-  let com = Printf.sprintf "R --vanilla --slave < %s" (Filename.quote r_file) in
-  match Sys.command com with
-    0 -> ()
-  | n ->
-      let msg = Printf.sprintf "Command %s returned error code %d"
-        (Filename.quote com) n
-      in
-      failwith msg
-;;
-
 (** {2 Loading laws} *)
 
 let make_trie law =
@@ -119,7 +87,7 @@ let load_law_file file =
 module Single (Trie: Trie.S) =
   struct
     let output_dot ?depth vlmc trie file =
-      file_of_string ~file (Trie.dot ?depth vlmc trie)
+      Vlmc_misc.file_of_string ~file (Trie.dot ?depth vlmc trie)
 
     let experiment ?(dot=false) len =
       let vlmc = Trie.Vlmc.create len in
@@ -175,15 +143,10 @@ module Dynamic (Trie : Trie.S) =
         end;
       done;
       let file = "trie_final.dot" in
-      file_of_string ~file (Trie.dot ~depth: 5 vlmc !trie);
+      Vlmc_misc.file_of_string ~file (Trie.dot ~depth: 5 vlmc !trie);
       ignore(Sys.command
        (Printf.sprintf "dot -Tpng -o %s.png %s" (Filename.quote file) (Filename.quote file)));
       (vlmc, !trie, heights, saturations)
-
-    let r_vector name to_s l =
-      Printf.sprintf "%s=c(%s)\n"
-      name
-      (String.concat ", " (List.rev (List.rev_map to_s l)))
 
     let generate_R_dynamic_exp ?(exp=1) heights sats prefix =
       let len = Array.length heights in
@@ -195,9 +158,9 @@ module Dynamic (Trie : Trie.S) =
       in
       let var_heights = Printf.sprintf "%s_heights" prefix in
       let var_sats = Printf.sprintf "%s_sats" prefix in
-      let code_x = r_vector "x" string_of_int (Array.to_list x) in
-      let code_heights = r_vector var_heights string_of_float (Array.to_list heights) in
-      let code_sats = r_vector var_sats string_of_float (Array.to_list sats) in
+      let code_x = Vlmc_misc.r_vector "x" string_of_int (Array.to_list x) in
+      let code_heights = Vlmc_misc.r_vector var_heights string_of_float (Array.to_list heights) in
+      let code_sats = Vlmc_misc.r_vector var_sats string_of_float (Array.to_list sats) in
       let r_data_file =
         let file = prefix^".R" in
         let oc = open_out file in
@@ -267,7 +230,7 @@ let dynamic_exp nb_exp length trie =
 
 let generate_dynamic_R_main ~title nb_exp length r_file results =
   let prefix = try Filename.chop_extension r_file with _ -> r_file in
-  let n_list = make_int_list ~low: 1 ~high: (List.length results) in
+  let n_list = Vlmc_misc.make_int_list ~low: 1 ~high: (List.length results) in
 
   let b = Buffer.create 256 in
   let p b = Printf.bprintf b in
@@ -295,8 +258,8 @@ let generate_dynamic_R_main ~title nb_exp length r_file results =
     (String.concat ", " (List.map (fun r -> r.dyn_var_heights) results));
   p b "draw(\"%d_%dexp\", \"saturation level\", %s)\n" length nb_exp
     (String.concat ", " (List.map (fun r -> r.dyn_var_sats) results));
-  file_of_string ~file: r_file (Buffer.contents b);
-  if !auto_run_r then run_r r_file
+  Vlmc_misc.file_of_string ~file: r_file (Buffer.contents b);
+  if !auto_run_r then Vlmc_misc.run_r r_file
 ;;
 
 let main () =

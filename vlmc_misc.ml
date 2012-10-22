@@ -25,29 +25,39 @@
 
 (** *)
 
-module type Symbol = sig
-  type symbol
-  val compare : symbol -> symbol -> int
-  val string : symbol -> string
-  val symbols : symbol array
-end
+(*c==v=[List.make_int_list]=1.0====*)
+let make_int_list ~low ~high =
+  if low > high then
+    []
+  else
+    let rec iter acc = function
+	n when n <= high -> iter (n :: acc) (n+1)
+      |	_ -> List.rev acc
+    in
+    iter [] low
+(*/c==v=[List.make_int_list]=1.0====*)
 
-module type Law = sig
-  include Symbol
-  val description : string
-  val id : string
-  val next : (int -> symbol option) -> symbol
-end
+(*c==v=[File.file_of_string]=1.1====*)
+let file_of_string ~file s =
+  let oc = open_out file in
+  output_string oc s;
+  close_out oc
+(*/c==v=[File.file_of_string]=1.1====*)
 
-module type S =
-  sig
-    module Law : Law
-    type t
-    type pos = int
+let run_r r_file =
+  let com = Printf.sprintf "R --vanilla --slave < %s" (Filename.quote r_file) in
+  match Sys.command com with
+    0 -> ()
+  | n ->
+      let msg = Printf.sprintf "Command %s returned error code %d"
+        (Filename.quote com) n
+      in
+      failwith msg
+;;
 
-    val create : int -> t
-    val get : t -> pos -> Law.symbol
-    val first_diff_pos : t -> pos -> pos -> pos
-  end
+let r_vector name to_s l =
+  Printf.sprintf "%s=c(%s)\n"
+  name
+  (String.concat ", " (List.rev (List.rev_map to_s l)))
+;;
 
-module Make : functor (L : Law) -> S with type Law.symbol = L.symbol
