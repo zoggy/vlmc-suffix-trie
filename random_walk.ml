@@ -85,15 +85,15 @@ let output_R r_file points =
   close_out oc
 ;;
 
-let make_law law =
+let make_law law ~desc ~id =
   let module Law =
     struct
      type symbol = direction = N | S | E | W
      let compare = Pervasives.compare
      let string = function N -> "N" | S -> "S" | E -> "E" | W -> "W"
      let symbols = directions
-     let description = "Law 1"
-     let id = "law1"
+     let description = desc
+     let id = id
      let next = law
     end
   in
@@ -118,9 +118,13 @@ let complement_dir = function
   | E | W -> [| N ; S |]
 ;;
 
-let log_law get =
+let p_log n = (1. -. (4. /. ((float n) +. 4.)));;
+let p_novar n = (1. -. (2. /. ((float n) +. 2.)));;
+let p_fact n = (1. /. ((float n) +. 2.));;
+
+let make_simple_law f_p get =
   let (d,n) = count_back get in
-  let p = (1. -. (4. /. ((float n) +. 4.))) in
+  let p = f_p n in
   let q = Random.float 1. in
   if p >= q then
     d
@@ -130,30 +134,19 @@ let log_law get =
      t.(Random.int 2)
     )
 ;;
-
-let fact_law get =
-  let (d,n) = count_back get in
-  let p = (1. /. ((float n) +. 2.)) in
-  let q = Random.float 1. in
-  if p >= q then
-    d
-  else
-    (
-     let t = complement_dir d in
-     t.(Random.int 2)
-    )
-;;
-
-
-let law_log = make_law log_law;;
-let law_fact = make_law fact_law;;
+let law_log = make_law (make_simple_law p_log) ~desc: "log_comb" ~id: "log_comb";;
+let law_fact = make_law (make_simple_law p_fact) ~desc: "fact" ~id: "fact";;
+let law_novar = make_law (make_simple_law p_novar) ~desc: "no variance" ~id: "novar";;
 module Law_log = (val law_log : Walk_law);;
 module Law_fact = (val law_fact : Walk_law);;
+module Law_novar = (val law_novar : Walk_law);;
 
 (*
 module W = Random_walk (Law_log);;
-*)
 module W = Random_walk (Law_fact);;
+*)
+module W = Random_walk (Law_novar);;
+
 let result = W.compute 10000;;
 let file = "walk.R";;
 let () = output_R file result;;
