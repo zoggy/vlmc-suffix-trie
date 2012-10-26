@@ -2,6 +2,7 @@
 with-contents="true"
 bib-files="vlmc.bib"
 >
+<qed>&#x220e;</qed>
 <authors>
   <author name="Peggy Cénac"
     affil="Université de Bourgogne, Institut de Mathématiques de Bourgogne, IMB UMR 5584 CNRS, 9 rue Alain Savary - BP 47870, 21078 DIJON CEDEX, France"
@@ -154,6 +155,46 @@ is uniform and exponential.
 </div></block>
 </theorem>
 
+<lemma id="" title="" href="">
+    <block counter-name="lemma" class="lemma"
+           label="Lemma" href="&lt;href/&gt;"
+           id="&lt;id/&gt;" title="&lt;title/&gt;">
+<div class="&lt;class/&gt;" id="&lt;id/&gt;">
+  <div class="title"><title/></div>
+  <div class="contents"><contents/></div>
+</div></block>
+</lemma>
+
+<prop id="" title="" href="">
+    <block counter-name="prop" class="prop"
+           label="Proposition" href="&lt;href/&gt;"
+           id="&lt;id/&gt;" title="&lt;title/&gt;">
+<div class="&lt;class/&gt;" id="&lt;id/&gt;">
+  <div class="title"><title/></div>
+  <div class="contents"><contents/></div>
+</div></block>
+</prop>
+
+<remark id="" title="" href="">
+    <block counter-name="remark" class="remark"
+           label="Remark" href="&lt;href/&gt;"
+           id="&lt;id/&gt;" title="&lt;title/&gt;">
+<div class="&lt;class/&gt;" id="&lt;id/&gt;">
+  <div class="title"><title/></div>
+  <div class="contents"><contents/></div>
+</div></block>
+</remark>
+
+<proof id="" title="" href="">
+    <block counter-name="" class="proof"
+           label="Proof" href="&lt;href/&gt;"
+           id="&lt;id/&gt;" title="&lt;title/&gt;">
+<div class="&lt;class/&gt;" id="&lt;id/&gt;">
+  <div class="title"><title/></div>
+  <div class="contents"><contents/></div>
+</div></block>
+</proof>
+
 <equation id="" title="" href="">
     <block counter-name="equation" class="equation"
            label="" href="&lt;href/&gt;"
@@ -163,10 +204,15 @@ is uniform and exponential.
   <div class="title">(<counter counter-name="equation"/>)</div>
 </div></block>
 </equation>
+
+<eqnarray>
+<table class="eqnarray"><contents/></table>
+</eqnarray>
 </functions_>
 
 <contents>
 \(<latex-defs/>\)
+<prepare-notes>
 <abstract/>
 <sep_/>
 <section id="sec:Intro" title="Introduction">
@@ -198,7 +244,15 @@ $\ell _n\in o\left(\frac{\log n}{(\log\log n)^\delta}\right)$, for any $\delta >
 </p>
 
 <p>
-The paper is organised as follows. In Section <elt href="#sec:source"/>, we define a VLMC source associated with an infinite comb. In Section, <elt href="#sec:mixing"/> we give results on the mixing properties of these sources by explicitely computing the suitable generating functions in terms of the source data. In Section <elt href="#sec:suffixtrie"/>, the associated suffix tries are built, and the two uncommon behaviours are stated and shown. The methods are based on two key tools concerning successive occurence times of patterns: a duality property and the computation of generating functions. The relation between the mixing of the source and the asymptotic behaviour of the trie is highlighted by the proof of Proposition~<elt href="#Phi2"/>.
+The paper is organised as follows. In Section <elt href="#sec:source"/>, we define a
+VLMC source associated with an infinite comb. In Section <elt href="#sec:mixing"/> we give
+results on the mixing properties of these sources by explicitely computing the suitable
+generating functions in terms of the source data. In Section <elt href="#sec:suffixtrie"/>,
+the associated suffix tries are built, and the two uncommon behaviours are stated and shown.
+The methods are based on two key tools concerning successive occurence times of patterns:
+a duality property and the computation of generating functions. The relation between the mixing
+of the source and the asymptotic behaviour of the trie is highlighted by the proof
+of Proposition~<elt href="#Phi2"/>.
 </p>
 </section>
 
@@ -284,47 +338,61 @@ c_n = \frac 1{(n+1)!}.
 $$
 </p>
 </subsection>
-
-<!--
 </section>
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-<section id="" title="Mixing properties of infinite combs">
-\label{sec:mixing}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-</p>
-<p>
-In this section, we first precise what we mean by mixing properties of a random sequence. We refer to Doukhan  <cite href="Doukhan"/>, especially for the notion of $\psi$-mixing defined in that book. We state in Proposition <elt href="#melange"/> a general result that provides the mixing coefficient for an infinite comb defined by $(c_n)_{n\geqslant 0}$ or equivalently by its generating function~$S$. This result is then applied to our two examples. The mixing of the logarithmic comb is polynomial but not uniform, it is a very weak mixing; the mixing of the factorial comb is uniform and exponential, it is a very strong mixing. Notice that mixing properties of some infinite combs have already been investigated by Isola~<cite href="Isola"/>, although with a slight different language.
-</p>
-<p>
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Mixing properties of general infinite combs}
-\label{ssec:mixingcomb}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-</p>
+<section id="sec:mixing" title="Mixing properties of infinite combs">
 <p>
-For a stationary sequence $(U_n)_{n\geqslant 0}$ with stationary measure $\pi$, we want to measure by means of a suitable coefficient the independence between two words $A$ and $B$ separated by $n$ letters. The sequence is said to be ``mixing'' when this coefficient vanishes when $n$ goes to $+\infty$. Among all types of mixing, we focus on one of the strongest type: <em>$\psi$-mixing</em>. More precisely, for $0\leqslant m\leqslant +\infty$, denote by ${\cal F}_0^m$ the $\sigma$-algebra generated by $\{U_k , 0\leqslant k \leqslant m\}$ and introduce for $A\in{\cal F}_0^m$ and $B\in{\cal F}_0^{\infty}$ the mixing coefficient
-\begin{eqnarray}
-\psi(n,A,B)&:=&\frac{\pi(A\cap T^{-(m+1)-n}B)-\pi(A)\pi(B)}{\pi(A)\pi(B)}\nonumber \\
-&& \nonumber \\
-&=&\frac{\sum_{|w|=n}\pi(AwB)-\pi(A)\pi(B)}{\pi(A)\pi(B)},\label{mixingCoeff}
-\end{eqnarray}
+In this section, we first precise what we mean by mixing properties of a random
+sequence. We refer to Doukhan  <cite href="Doukhan"/>, especially for the notion
+of $\psi$-mixing defined in that book. We state in Proposition <elt href="#melange"/>
+a general result that provides the mixing coefficient for an infinite comb defined by
+$(c_n)_{n\geqslant 0}$ or equivalently by its generating function $S$. This result
+is then applied to our two examples. The mixing of the logarithmic comb is polynomial
+but not uniform, it is a very weak mixing; the mixing of the factorial comb
+is uniform and exponential, it is a very strong mixing. Notice that mixing
+properties of some infinite combs have already been investigated by Isola~<cite href="Isola"/>,
+although with a slight different language.
+</p>
+
+<subsection id="ssec:mixingcomb" title="Mixing properties of general infinite combs">
+<p>
+For a stationary sequence $(U_n)_{n\geqslant 0}$ with stationary measure
+$\pi$, we want to measure by means of a suitable coefficient the independence between
+two words $A$ and $B$ separated by $n$ letters. The sequence is said to be ``mixing''
+when this coefficient vanishes when $n$ goes to $+\infty$. Among all types of mixing,
+we focus on one of the strongest type: <em>$\psi$-mixing</em>. More precisely, for
+$0\leqslant m\leqslant +\infty$, denote by ${\cal F}_0^m$ the $\sigma$-algebra
+generated by $\{U_k , 0\leqslant k \leqslant m\}$ and introduce for
+ $A\in{\cal F}_0^m$ and $B\in{\cal F}_0^{\infty}$ the mixing coefficient
+</p>
+<eqnarray>
+<tr><td class="right">$\psi(n,A,B)$</td>
+    <td class="center">$:=$</td>
+    <td class="left">$\frac{\pi(A\cap T^{-(m+1)-n}B)-\pi(A)\pi(B)}{\pi(A)\pi(B)}$</td>
+</tr>
+<tr id="mixingCoeff"><td/>
+    <td class="center">$=$</td>
+    <td class="left">$\frac{\sum_{|w|=n}\pi(AwB)-\pi(A)\pi(B)}{\pi(A)\pi(B)}$</td>
+</tr>
+</eqnarray>
+<p>
 where $T$ is the shift map and where the sum runs over the finite words $w$ with length $|w|=n$.
 </p>
 <p>
 A sequence $(U_n)_{n\geqslant 0}$ is called <em>$\psi$-mixing</em> whenever
-\[\lim_{n\to\infty}Ê\ \sup_{m\geqslant 0,A\in{\cal F}_0^m, B\in{\cal F}_0^{\infty}}|\psi(n,A,B)|=0.\]
-In this definition, the convergence to zero is uniform over all words $A$ and~$B$. This is not going to be the case in our first example.
-As in Isola <cite href="Isola"/>, we widely use the renewal properties of infinite combs (see Lemma~<elt href="#lemme_un"/>) but more detailed results are needed, in particular we investigate the lack of uniformity for the logarithmic comb.
+\[\lim_{n\to\infty}\ \sup_{m\geqslant 0,A\in{\cal F}_0^m, B\in{\cal F}_0^{\infty}}|\psi(n,A,B)|=0.\]
+In this definition, the convergence to zero is uniform over all words $A$ and~$B$. This is not going
+to be the case in our first example.
+As in Isola <cite href="Isola"/>, we widely use the renewal properties of infinite combs (see
+Lemma~<elt href="#lemme_un"/>) but more detailed results are needed, in particular we investigate
+the lack of uniformity for the logarithmic comb.
 </p>
+</subsection>
+
+<subsection id="notations" title="Notations and Generating functions">
 <p>
-\subsubsection*{Notations and Generating functions}
-</p>
-<p>
-\medskip
-</p>
-<p>
-$\bullet$ For a comb, recall that $S$ is the generating function of the nonincreasing sequence $(c_n)_{n\geqslant 0}$ defined by (<elt href="#def-S"/>).
+$\bullet$ For a comb, recall that $S$ is the generating function of the nonincreasing
+sequence $(c_n)_{n\geqslant 0}$ defined by (<elt href="#def-S"/>).
 </p>
 <p>
 $\bullet$ Set $\rho_0=0$ and for $n\geqslant 1$,
@@ -334,103 +402,132 @@ $$
 P(x) := \sum_{n\geqslant 1} \rho_n x^n.
 $$
 $\bullet$ Define the sequence $(u_n)_{n\geqslant 0}$ by $u_0=1$ and for $n\geqslant 1$,
-\begin{equation}\label{un}
+<equation id="un">
 u_n:=\frac{\pi(U_0=1,U_{n}=1)}{\pi(1)}=\frac{1}{\pi(1)}\sum_{|w|=n-1}\pi(1w1),
-\end{equation}
+</equation>
 and let
 \[U(x):=\sum_{n\geqslant 0}u_nx^n\]
 denote its generating function. Hereunder is stated a key lemma that will be widely used in Proposition~<elt href="#melange"/>. In some sense, this kind of relation (sometimes called Renewal Equation) reflects the renewal properties of the infinite comb.
-\begin{Lem}
-\label{lemme_un}
+</p>
+<lemma id="lemme_un">
+<p>
 The sequences $(u_n)_{n\geqslant 0}$ and $(\rho_n)_{n\geqslant 0}$ are connected by the relations:
 \[\forall n\geqslant 1,~~u_n=\rho_n+u_1\rho_{n-1}+\ldots+u_{n-1}\rho_1\]
 and (consequently)
 \[U(x) = \sum_{n=0}^{\infty}u_nx^n=\frac{1}{1-P(x)}=\frac{1}{(1-x)S(x)}.\]
-\end{Lem}
-%\pnote{Fin de la relecture}
-\pff
-For a finite word $w=\alpha_1\ldots\alpha_m$ such that $w \neq 0^m$, let $l(w)$ denote the position of the last $1$ in $w$, that is $l(w):=\max\{1\le i\le m,~\alpha_i=1\}$. Then, the sum in the expression (<elt href="#un"/>) of $u_n$ can be decomposed as follows:
+</p>
+</lemma>
+<p>
+For a finite word $w=\alpha_1\ldots\alpha_m$ such that $w \neq 0^m$, let $l(w)$ denote
+the position of the last $1$ in $w$, that is $l(w):=\max\{1\le i\le m,~\alpha_i=1\}$.
+Then, the sum in the expression (<elt href="#un"/>) of $u_n$ can be decomposed as follows:
 \[\sum_{|w|=n-1}\pi(1w1)=\pi(10^{n-1}1)+\sum_{i=1}^{n-1}\sum_{{|w|=n-1}\atop{l(w)=i}}\pi(1w1).\]
 Now, by disjoint union $\pi(10^{n-1})=\pi(10^{n-1}1)+\pi(10^{n})$, so that
 \[\pi(10^{n-1}1)=\pi(1)(c_{n-1}-c_{n})=\pi(1)\rho_n.\]
-In the same way, for $w=\alpha_1\ldots\alpha_{n-1}$, if $l(w)=i$ then $\pi(1w1)=\pi(1\alpha_1\ldots\alpha_{i-1}1)\rho_{n-i}$, so that
-\begin{eqnarray*}
-u_n & = & \rho_n+\sum_{i=1}^{n-1}\rho_{n-i}\frac{1}{\pi(1)}\sum_{|w|=i-1}\pi(1w1) \\
- & = & \rho_n+\sum_{i=1}^{n-1}\rho_{n-i}u_{i},
-\end{eqnarray*}
-which leads to $U(x)=(1-P(x))^{-1}$ by summation.
-\QED
+In the same way, for $w=\alpha_1\ldots\alpha_{n-1}$, if $l(w)=i$ then
+ $\pi(1w1)=\pi(1\alpha_1\ldots\alpha_{i-1}1)\rho_{n-i}$, so that
 </p>
+<eqnarray>
+<tr><td class="right">$u_n$</td>
+     <td class="center">$ = $</td>
+     <td class="left">$\rho_n+\sum_{i=1}^{n-1}\rho_{n-i}\frac{1}{\pi(1)}\sum_{|w|=i-1}\pi(1w1)$</td>
+</tr>
+<tr><td/><td class="center">$ = $</td>
+     <td class="left">$\rho_n+\sum_{i=1}^{n-1}\rho_{n-i}u_{i}$,</td>
+</tr>
+</eqnarray>
 <p>
-\subsubsection*{Mixing coefficients}
-The mixing coefficients $\psi(n,A,B)$ are expressed as the $n$-th coefficient in the series expansion of an analytic function $M^{A,B}$ which is given in terms of $S$ and~$U$. The notation $[x^n] A(x)$ means the  coefficient of $x^n$ in the power expansion of $A(x)$ at the origin.
+which leads to $U(x)=(1-P(x))^{-1}$ by summation.
+<qed/>
+</p>
+</subsection>
+
+<subsection id="mixingcoefficients" title="Mixing coefficients">
+<p>
+The mixing coefficients $\psi(n,A,B)$ are expressed as the $n$-th coefficient
+in the series expansion of an analytic function $M^{A,B}$ which is given in
+terms of $S$ and~$U$. The notation $[x^n] A(x)$ means the  coefficient
+of $x^n$ in the power expansion of $A(x)$ at the origin.
 Denote the remainders associated with the series $S(x)$ by
 $$
 r_n : = \sum_{k\geqslant n} c_k, \quad R_n(x):=\sum_{k\geqslant n}c_k x^k
 $$
 and for $a\geqslant 0$, define the ``shifted'' generating function
-\begin{equation}
-\label{defPa}
+<equation id="defPeg">
 P_a(x):=\frac 1{c_a}\sum _{n\geqslant 1}\rho _{a+n}x^n=x+\frac{x-1}{c_ax^a}R_{a+1}(x).
-\end{equation}
-\begin{Prop}\label{melange}
+</equation>
+</p>
+<prop id="melange">
+<p>
 For any finite word $A$ and any word $B$, the identity
 \[\psi(n,A,B)=[x^{n+1}] M^{A,B}(x)\]
 holds for the generating functions $M^{A,B}$ respectively defined by:
-\begin{enumerate}
-\item if $A=A'1$ and $B=1B'$ where $A'$ and $B'$ are any finite words, then $$M^{A,B}(x) = M(x) := \displaystyle\frac{S(x)-S(1)}{(x-1)S(x)};$$
-\item if $A=A'10^a$ and $B=0^b1B'$ where $A'$ and $B'$ are any finite words and $a+b\geqslant 1$, then
+</p>
+<ol>
+<li>if $A=A'1$ and $B=1B'$ where $A'$ and $B'$ are any finite words, then
+ $$M^{A,B}(x) = M(x) := \displaystyle\frac{S(x)-S(1)}{(x-1)S(x)};$$
+</li>
+<li>if $A=A'10^a$ and $B=0^b1B'$ where $A'$ and $B'$ are any finite words
+  and $a+b\geqslant 1$, then
 \[M^{A,B}(x)
-%= M^{a,b}(x)
 := S(1)\displaystyle\frac{c_{a+b}}{c_ac_b}P_{a+b}(x) + U(x)\left[ S(1)P_a(x)P_b(x)-S(x)\right];\]
-\item if $A=0^a$ and $B=0^b$ with $a,b\geqslant 1$, then
+</li>
+<li>if $A=0^a$ and $B=0^b$ with $a,b\geqslant 1$, then
 \[M^{A,B}(x)
-%= M^{a,b}(x)
 := S(1)\displaystyle\frac{1}{r_ar_b}\sum _{n\geqslant 1}r_{a+b+n}x^n + \displaystyle U(x)
 \left[ \frac{S(1)R_a(x)R_b(x)}{r_ar_bx^{a+b-2}}-S(x)\right];
 \]
-\item if $A=A'10^a$ and $B=0^b$ where $A'$ is any finite words and $a,b\geqslant 0$, then
+</li>
+<li>if $A=A'10^a$ and $B=0^b$ where $A'$ is any finite words and $a,b\geqslant 0$, then
 $$
 M^{A,B}(x)
-%= M^{a,b}(x)
 := S(1)\displaystyle\frac{1}{c_ar_bx^{a+b-1}}R_{a+b}(x)+  \displaystyle U(x)
 \left[ \frac{S(1)P_a(x)R_b(x)}{c_ar_bx^{b-1}}-S(x)\right];
 $$
-\item if $A=0^a$ and $B=0^b1B'$ where $B'$ is any finite words and $a,b\geqslant 0$, then
+</li>
+<li>if $A=0^a$ and $B=0^b1B'$ where $B'$ is any finite words and $a,b\geqslant 0$, then
   \[
   M^{A,B}(x)
   %= M^{a,b}(x)
   := S(1)\displaystyle\frac{1}{r_ac_bx^{a+b-1}}R_{a+b}(x)+  \displaystyle U(x)
 \left[ \frac{S(1)R_a(x)P_b(x)}{r_ac_bx^{a-1}}-S(x)\right].
   \]
-\end{enumerate}
-\end{Prop}
-\begin{Rem}
-It is worth noticing that the asymptotics of $\psi(n,A,B)$ may not be uniform in all words $A$ and $B$. We  call this kind of system non-uniformly $\psi$-mixing. It may happen that $\psi(n,A,B)$ goes to zero for any fixed $A$ and $B$, but (for example, in case \textbf{\itshape iii)}) the larger $a$ or $b$, the slower the convergence, preventing it from being uniform.
-\end{Rem}
-\pff
-The following identity has been established in <cite href="ccpp"/> (see formula (17) in that paper) and will be used many times in the sequel. For any two finite words $w$ and $w'$,
-\begin{equation}
-\label{renouvellement}
+</li>
+</ol>
+</prop>
+<remark>
+<p>
+It is worth noticing that the asymptotics of $\psi(n,A,B)$ may not be uniform in all
+words $A$ and $B$. We  call this kind of system non-uniformly $\psi$-mixing. It may happen
+that $\psi(n,A,B)$ goes to zero for any fixed $A$ and $B$, but (for example, in case (iii)) the
+larger $a$ or $b$, the slower the convergence, preventing it from being uniform.
+</p>
+</remark>
+<proof id="proof2">
+<p>
+The following identity has been established in <cite href="ccpp"/> (see formula (17) in
+that paper) and will be used many times in the sequel. For any two finite words $w$ and $w'$,
+<equation id="renouvellement">
 \pi(w1w')\pi(1)=\pi(w1)\pi(1w').
-\end{equation}
-\begin{enumerate}
-\item
- If $A=A'1$ and $B=1B'$, then (<elt href="#renouvellement"/>) yields
+</equation>
+</p>
+<ol>
+<li>
+ If $A=A'1$ and $B=1B'$, then (<equation href="renouvellement"/>) yields
 \[\pi(AwB)=\pi(A'1w1B')=\frac{\pi(A'1)}{\pi(1)}\pi(1w1B')=S(1)\pi(A)\pi(B)\frac{\pi(1w1)}{\pi(1)}.\]
 So
 $$
 \psi(n,A,B) = S(1) u_{n+1} - 1
 $$
 and by Lemma <elt href="#lemme_un"/>, the result follows.
-</p>
+</li>
+<li>
 <p>
-%\medskip
-\item
 Let $A=A'10^a$ and $B=0^b1B'$ with $a,b\geqslant 0$ and $a+b\neq 0$.
 To begin with,
 \[\pi(AwB)=\frac{1}{\pi(1)}\pi(A'1)\pi(10^aw0^b1B')=\frac{1}{\pi(1)^2}\pi(A'1)\pi(10^aw0^b1)\pi(1B').\]
-Furthermore, $\pi(A)=c_a\pi(A'1)$ and  by (<elt href="#sym"/>), $\pi(0^b1)=\pi(10^b)$, so it comes %\pnote{une ref ou rappel dans partie Brigitte de $\pi(0^b1)=\pi(10^b)$ ?}
+Furthermore, $\pi(A)=c_a\pi(A'1)$ and  by (<elt href="#sym"/>), $\pi(0^b1)=\pi(10^b)$, so it comes
+ <!--\pnote{une ref ou rappel dans partie Brigitte de $\pi(0^b1)=\pi(10^b)$ ?}-->
  \[\pi(B)=\frac{1}{\pi(1)}\pi(0^b1)\pi(1B')=\frac{\pi(10^b)}{\pi(1)}\pi(1B')=c_b\pi(1B').\]
  Therefore,
  \[\pi(AwB)=\frac{\pi(A)\pi(B)}{c_ac_b\pi(1)^2}\pi(10^aw0^b1).\]
@@ -438,60 +535,99 @@ Using $\pi(1)S(1)=1$, this proves
 \[\psi(n,A,B)=S(1)\frac{v_{n}^{a,b}}{c_ac_b}-1\]
 where
   \[v_n^{a,b}:=\frac{1}{\pi(1)}\sum_{|w|=n}\pi(10^aw0^b1).\]
-As in the proof of the previous lemma, if $w=\alpha_1\ldots\alpha_{m}$ is any finite word different from $0^m$, we call $f(w):=\min\{1\le i \le m, \alpha_{i}=1\}$ the first place where  $1$ can be seen in $w$ and recall that $l(w)$ denotes the last place where  $1$ can be seen in $w$. One has
+As in the proof of the previous lemma, if $w=\alpha_1\ldots\alpha_{m}$ is any finite word different
+from $0^m$, we call $f(w):=\min\{1\le i \le m, \alpha_{i}=1\}$ the first place where  $1$ can be
+seen in $w$ and recall that $l(w)$ denotes the last place where  $1$ can be seen in $w$. One has
 \[\sum_{|w|=n}\pi(10^aw0^b1) = \pi(10^{a+n+b}1)+\sum_{1\le i\le j\le n}\sum_{{{|w|=n}\atop{f(w)=i,l(w)=j}}}\pi(10^aw0^b1).\]
-If $i=j$ then $w$ is the word $0^{i-1}10^{n-i}$, else $w$ is of the form $0^{i-1}1w'10^{n-j}$, with $|w'|=j-i-1$. Hence, the previous sum can be rewritten as
-\begin{eqnarray*}
-  \sum_{|w|=n}\pi(10^aw0^b1) & = & \pi(1)\rho_{a+b+n+1}+\pi(1)\sum_{i=1}^{n}\rho_{a+i}\rho_{n+1-i+b}\\
- & + &\sum_{1\leqslant i<j\leqslant n}\sum_{{{w}\atop{|w|=j-i-1}}}\pi(10^{a+i-1}1w10^{n-j+b}1).
-\end{eqnarray*}
-Equation (<elt href="#renouvellement"/>) shows
-\begin{eqnarray*}
-\pi(10^{a+i-1}1w10^{n-j+b}1) & = & \frac{\pi(10^{a+i-1}1)}{\pi(1)}\frac{\pi(1w1)}{\pi(1)}\pi(10^{n-j+b}1) \\
- & = & \rho_{a+i}\rho_{n+1-j+b}\pi(1w1).
-\end{eqnarray*}
+If $i=j$ then $w$ is the word $0^{i-1}10^{n-i}$, else $w$ is of the form
+ $0^{i-1}1w'10^{n-j}$, with $|w'|=j-i-1$. Hence, the previous sum can be rewritten as
+</p>
+<eqnarray>
+<tr><td class="right">$\sum_{|w|=n}\pi(10^aw0^b1)$</td>
+    <td class="center">$ = $</td>
+    <td class="left">$\pi(1)\rho_{a+b+n+1}+\pi(1)\sum_{i=1}^{n}\rho_{a+i}\rho_{n+1-i+b}$</td>
+</tr>
+<tr><td/><td class="center">$ + $</td>
+     <td class="left">$\sum_{1\leqslant i\lt j\leqslant n}\sum_{{{w}\atop{|w|=j-i-1}}}\pi(10^{a+i-1}1w10^{n-j+b}1)$.</td>
+</tr>
+</eqnarray>
+<p>
+Equation (<equation href="renouvellement"/>) shows
+</p>
+<eqnarray>
+<tr><td class="right">$\pi(10^{a+i-1}1w10^{n-j+b}1)$</td>
+    <td class="center">$ = $</td>
+    <td class="left">$\frac{\pi(10^{a+i-1}1)}{\pi(1)}\frac{\pi(1w1)}{\pi(1)}\pi(10^{n-j+b}1)$</td>
+</tr>
+<tr><td/><td class="center">$ = $</td>
+    <td class="left">$\rho_{a+i}\rho_{n+1-j+b}\pi(1w1)$.</td>
+</tr>
+</eqnarray>
+<p>
 This implies:
 \[v_n^{a,b}=\rho_{a+b+n+1}+\sum_{i=1}^{n}\rho_{a+i}\rho_{n+1-i+b}
-   +  \sum_{1\le i<j\le n}\rho_{a+i}\rho_{n+1-j+b}\sum_{w, |w|=j-i11}\frac{\pi(1w1)}{\pi(1)}.\]
+   +  \sum_{1\le i\lt j\le n}\rho_{a+i}\rho_{n+1-j+b}\sum_{w, |w|=j-i11}\frac{\pi(1w1)}{\pi(1)}.\]
 Recalling that $u_0=1$, one gets
  \[v_n^{a,b}=\rho_{a+b+n+1}+\sum_{1\le i\le j\le n}\rho_{a+i}\rho_{n+1-j+b}u_{j-i}\]
-which gives the result  \textbf{\itshape ii)} with Lemma <elt href="#lemme_un"/>.
+which gives the result  \textbf{\itshape ii)} with Lemma <lemma href="lemme_un"/>.
 </p>
+</li>
+<li>
 <p>
-%\medskip
-\item
 Let $A=0^a$ and $B=0^b$ with $a,b\geqslant 1$.
 Set
  \[v_n^{a,b}:=\frac{1}{\pi(1)}\sum_{|w|=n}\pi(0^aw0^b).\]
-First, recall that, due to (<elt href="#probas"/>), $\pi(A)=\pi(1)r_a$ and $\pi(B)=\pi(1)r_b$. Consequently,
+First, recall that, due to (<elt href="#probas"/>), $\pi(A)=\pi(1)r_a$ and $\pi(B)=\pi(1)r_b$.
+Consequently,
  \[\psi(n,A,B)=\frac{\pi(1)v_{n}^{a,b}-\pi(A)\pi(B)}{\pi(A)\pi(B)}=S(1)\frac{v_{n}^{a,b}}{r_ar_b}-1.\]
 Let $w$ be a finite word with $|w|=n$. If $w=0^{n}$, then
 \[\pi(AwB)=\pi(0^{a+n+b})=\pi(1)r_{a+b+n}.\]
 If not, let $f(w)$ denote as before the first position of $1$ in $w$ and $l(w)$ the last one in $w$. If $f(w)=l(w)$, then
- \[\begin{array}{rcl}
- \pi(AwB) & = & \pi(0^{a+f(w)-1}10^{n-f(w)+b}) \\
-  & = & \frac{1}{\pi(1)}\pi(0^{a+f(w)-1}1)\pi(10^{n-f(w)+b})=\pi(1)c_{a+f(w)-1}c_{n-f(w)+b}.
-  \end{array}\]
- If $f(w)<l(w)$, then writing $w=w_1 \ldots w_{n}$,
- \[\begin{array}{rcl}
- \pi(AwB) & = & \pi(0^{a+f(w)-1}1w_{f(w)+1}\ldots w_{l(w)-1}10^{n-l(w)}) \\
-   & = & \frac{1}{\pi(1)^2}\pi(0^{a+f(w)-1}1)\pi(1w_{f(w)+1}\ldots w_{l(w)-1}1)\pi(10^{n-l(w)+b}).
-   \end{array}\]
- Summing yields
- \[\begin{array}{rcl}
- v_n^{a,b} & = & r_{a+b+n}+\displaystyle\sum_{i=1}^{n}c_{a+i-1}c_{n+b-i}+\sum_{{{i,j=1}\atop{i<j}}}^{n}\sum_{{{w,}\atop{|w|=j-i-1}}}c_{a+i-1}\frac{\pi(1w1)}{\pi(1)}c_{n+b-j} \\
- & = & r_{a+b+n}+\displaystyle\sum_{1\le i\le j\le n}c_{a+i-1}c_{n+b-j}u_{j-i},
- \end{array}\]
+</p>
+<eqnarray>
+<tr><td class="right">$\pi(AwB)$</td>
+    <td class="center">$ = $</td>
+    <td class="left">$\pi(0^{a+f(w)-1}10^{n-f(w)+b})$</td>
+</tr>
+<tr><td/><td class="center">$ = $</td>
+  <td class="left">$\frac{1}{\pi(1)}\pi(0^{a+f(w)-1}1)\pi(10^{n-f(w)+b})=\pi(1)c_{a+f(w)-1}c_{n-f(w)+b}$.</td>
+</tr>
+</eqnarray>
+<p>
+ If $f(w)\lt l(w)$, then writing $w=w_1 \ldots w_{n}$,
+</p>
+<eqnarray>
+<tr><td class="right">$\pi(AwB)$</td>
+    <td class="center">$ = $</td>
+    <td class="left">$\pi(0^{a+f(w)-1}1w_{f(w)+1}\ldots w_{l(w)-1}10^{n-l(w)})$</td>
+</tr>
+<tr><td/><td class="center">$ = $</td>
+    <td class="left">$\frac{1}{\pi(1)^2}\pi(0^{a+f(w)-1}1)\pi(1w_{f(w)+1}\ldots w_{l(w)-1}1)\pi(10^{n-l(w)+b})$.</td>
+</tr>
+</eqnarray>
+<p>
+Summing yields
+</p>
+<eqnarray>
+<tr><td class="right">$v_n^{a,b}$</td>
+    <td class="center">$ = $</td>
+    <td class="left">$r_{a+b+n}+\displaystyle\sum_{i=1}^{n}c_{a+i-1}c_{n+b-i}+\sum_{{{i,j=1}\atop{i\lt j}}}^{n}\sum_{{{w,}\atop{|w|=j-i-1}}}c_{a+i-1}\frac{\pi(1w1)}{\pi(1)}c_{n+b-j}$</td>
+</tr>
+<tr><td/><td class="center">$ = $</td>
+    <td class="left">$r_{a+b+n}+\displaystyle\sum_{1\le i\le j\le n}c_{a+i-1}c_{n+b-j}u_{j-i}$,</td>
+</tr>
+</eqnarray>
+<p>
 which gives the desired result. The last two items, left to the reader, follow the same guidelines.
-\QED
-\end{enumerate}
+<qed/>
 </p>
-<p>
-
-</p>
-<p>
+</li>
+</ol>
+</proof>
+</subsection>
+<!--
 %%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Mixing of the logarithmic infinite comb}
+<subsection id="" title="Mixing of the logarithmic infinite comb">
 \label{ssec:mixinglogarithmiccomb}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Consider the first example in Section~<elt href="#sec:source"/>, that is the probabilized infinite comb defined by $c_0 = 1$ and  for any $n\geqslant 1$ by
@@ -600,7 +736,7 @@ as $n$ tends to infinity, showing the mixing inequality and the non uniformity.
 The remaining cases \textbf{\itshape{ii)}}, \textbf{\itshape{iv)}} and \textbf{\itshape{v)}} are of the same flavour.
 \QED
 %%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Mixing of the factorial infinite comb}
+<subsection id="" title="Mixing of the factorial infinite comb">
 \label{ssec:mixingfactccomb}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 </p>
@@ -749,7 +885,7 @@ We prove in Section <elt href="#ssec:heightLog"/> that the height of the first o
 <p>
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Suffix tries}
+<subsection id="" title="Suffix tries">
 \label{ssec:height}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Let $(y_n)_{n\geqslant 1}$ be a sequence of right-infinite words on $\{ 0,1\}$.
@@ -800,7 +936,7 @@ See Figure <elt href="#1figtriesuffconstruction"/> for an example.
 Note that the saturation level should not be mistaken for the shortest path up to a leaf.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%
-\subsection{Duality}
+<subsection id="" title="Duality">
 \label{ssec:duality}
 %%%%%%%%%%%%%%%
 </p>
@@ -856,7 +992,7 @@ Notice that $T_k(s)$ denotes the <em>beginning</em> of the second occurrence of 
 \end{equation}
 More generally, in <cite href="ccpp"/> , for any $r\geqslant 1$,  the random waiting time $\tau^{(r)}(w)$ is defined as the end of the $r$-{th} occurrence of $w$ in the sequence $(U_n)_{n\geqslant 1}$ and the generating function of the $\tau^{(r)}$ is calculated. We go over these calculations in the sequel.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Successive occurence times generating functions}
+<subsection id="" title="Successive occurence times generating functions">
 \label{ssec:generating}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{Prop}
@@ -934,7 +1070,7 @@ makes $U$ twice differentiable and elementary calculations lead to
 and finally to (<elt href="#esp-var"/>).
 \QED
 %%%%%%%%%
-\subsection{Logarithmic comb and factorial comb}
+<subsection id="" title="Logarithmic comb and factorial comb">
 \label{ssec:results}
 %%%%%%%%%
 Let $h_+$ and $h_-$ be the constants in $[0,+\infty ]$ defined by
@@ -1053,7 +1189,7 @@ These asymptotic behaviours, all coming from the same model, the infinite comb, 
 <p>
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Height for the logarithmic comb}
+<subsection id="" title="Height for the logarithmic comb">
 \label{ssec:heightLog}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 In this subsection, we prove Theorem <elt href="#hauteur"/>.
@@ -1136,7 +1272,7 @@ Notice that our proof shows actually that the convergence to $+\infty$ in Theore
 </p>
 <p>
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Saturation level for the factorial comb}
+<subsection id="" title="Saturation level for the factorial comb">
 \label{ssec:saturation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 In this subsection, we prove Theorem <elt href="#saturation"/>.
@@ -1228,6 +1364,8 @@ They would like to thank also all people managing two very important tools for f
 \end{document}
 -->
 </section>
+<notes/>
+</prepare-notes>
 <bibliography/>
 </contents>
 </article>

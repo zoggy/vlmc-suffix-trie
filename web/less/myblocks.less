@@ -10,15 +10,26 @@ div.eqn {
   margin-bottom: 1em;
   margin-left: auto;
   margin-right: auto;
-  text-align: center;
   width: 100%;
-
   div.title {
   font-weight: bold;
   }
   div.contents {
     padding: 0.5em;
   }
+
+}
+
+.myenumblock() {
+ .myblock ();
+ .rounded-box;
+ background-color: @bgcolor;
+ border-width: 0 1px 0 1px;
+ div.contents {
+   margin-bottom: 0;
+   padding-bottom: 0;
+  }
+ p { margin-bottom: 0 }
 }
 
 div.figure {
@@ -26,11 +37,26 @@ div.figure {
 }
 
 div.theorem {
-  .myblock ();
+  .myenumblock ();
+}
+div.lemma {
+  .myenumblock ();
+}
+div.prop {
+  .myenumblock ();
+}
+div.remark {
+  .myenumblock ();
+}
+div.proof {
+  .myenumblock ();
+  border-width: 0 ;
+  background-color: #eeeeee;
 }
 
 div.equation {
   .myblock();
+  text-align: center;
   div.title {
     display: inline;
     font-weight: normal;
@@ -38,6 +64,15 @@ div.equation {
     padding-right: 2em;
    }
   .contents { display: inline; }
+}
 
+table.eqnarray {
+  margin-left: auto;
+  margin-right: auto;
+  td { padding-left: 0.2em ; padding-right: 0.2em; }
+  tr { height: @baseLineHeight * 2; }
+  td.right { text-align: right ; }
+  td.left { text-align: left ; }
+  td.center { text-align: center ; }
 }
 
