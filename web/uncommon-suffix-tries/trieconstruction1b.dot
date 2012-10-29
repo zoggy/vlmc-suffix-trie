@@ -1,0 +1,33 @@
+digraph G {
+  rankdir=BT;
+  node [ shape="point", width=0.13, ordering="out"];
+  ROOT ;
+  ROOT -> N0 [ label=0 ];
+  ROOT -> N1 [ label=1 ];
+  N0 -> N00 [ label=0 ];
+  N00 -> N000 [ label=0 ];
+  N000 [ shape="rect", label="000..." ];
+  N00 -> N001 [label=1];
+  N001 [ shape="rect", label="001..." ];
+  N0 -> N01 [ label=1 ];
+  N01 -> N011 [ label=1 ];
+  N011 -> N0111 [ label=1 ];
+
+  N0111 -> N01110 [ label=0 ];
+  N01110 [ shape="rect", label="01110..." ];
+  N0111 -> N01111 [ label=1 ];
+  N01111 [ shape="rect", label="01111..." ];
+
+  N1 -> N10 [ label=0 ];
+  N10 [ shape="rect", label="10..."];
+  N1 -> N11 [ label=1 ];
+  N11 -> N110 [ label=0 ];
+  N110 -> N1100 [ label=0 ];
+/*
+  N11 -> N111 [ label=1 ];
+  N111 [ shape="rect", label="111..."];
+*/
+  N1100 [ shape="rect", label="1100..."];
+  N110 -> N1101 [ label=1 ];
+  N1101 [ shape="rect", label="1101..."];
+}

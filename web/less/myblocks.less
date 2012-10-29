@@ -34,7 +34,14 @@ div.eqn {
 
 div.figure {
   .myblock ();
-  text-align: center;
+  div.contents {
+    text-align: center ;
+    div.legend {
+      text-align: justified ;
+      margin-left: 2em;
+      margin-right: 2em;
+      }
+  }
 }
 
 div.theorem {
@@ -76,4 +83,9 @@ table.eqnarray {
   td.left { text-align: left ; }
   td.center { text-align: center ; }
 }
+
+span.valign-middle {
+  vertical-align: middle;
+  height: 100%;
+  }
 

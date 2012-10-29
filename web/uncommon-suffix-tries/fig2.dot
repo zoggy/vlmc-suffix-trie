@@ -1,0 +1,46 @@
+digraph G {
+rankdir=BT;
+ ratio=auto;
+  N [ label="", shape="point"]; 
+  N0 [ label="", shape="point"]; 
+  N00 [ label="", shape="point"]; 
+  N001 [ label="", shape="point"]; 
+  N0010L1 [ shape="rect", label="0010..." ];
+N001 -> N0010L1 [ label="0"];
+  N0011L7 [ shape="rect", label="0011..." ];
+N001 -> N0011L7 [ label="1"];
+N00 -> N001 [ label="1"];
+N0 -> N00 [ label="0"];
+  N01 [ label="", shape="point"]; 
+  N010L2 [ shape="rect", label="010..." ];
+N01 -> N010L2 [ label="0"];
+  N011 [ label="", shape="point"]; 
+  N0110L4 [ shape="rect", label="0110..." ];
+N011 -> N0110L4 [ label="0"];
+  N0111L8 [ shape="rect", label="0111..." ];
+N011 -> N0111L8 [ label="1"];
+N01 -> N011 [ label="1"];
+N0 -> N01 [ label="1"];
+N -> N0 [ label="0"];
+  N1 [ label="", shape="point"]; 
+  N10 [ label="", shape="point"]; 
+  N100 [ label="", shape="point"]; 
+  N1001 [ label="", shape="point"]; 
+  N10010L0 [ shape="rect", label="10010..." ];
+N1001 -> N10010L0 [ label="0"];
+  N10011L6 [ shape="rect", label="10011..." ];
+N1001 -> N10011L6 [ label="1"];
+N100 -> N1001 [ label="1"];
+N10 -> N100 [ label="0"];
+  N101L3 [ shape="rect", label="101..." ];
+N10 -> N101L3 [ label="1"];
+N1 -> N10 [ label="0"];
+  N11 [ label="", shape="point"]; 
+  N110L5 [ shape="rect", label="110..." ];
+N11 -> N110L5 [ label="0"];
+  N111L9 [ shape="rect", label="111..." ];
+N11 -> N111L9 [ label="1"];
+N1 -> N11 [ label="1"];
+N -> N1 [ label="1"];
+
+}
