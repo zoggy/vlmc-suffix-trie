@@ -190,7 +190,7 @@ is uniform and exponential.
            label="Proof" href="&lt;href/&gt;"
            id="&lt;id/&gt;" title="&lt;title/&gt;">
 <div class="&lt;class/&gt;" id="&lt;id/&gt;">
-  <div class="title"><title/></div>
+  <div class="title">Proof.</div>
   <div class="contents"><contents/></div>
 </div></block>
 </proof>
@@ -209,7 +209,7 @@ is uniform and exponential.
 <table class="eqnarray"><contents/></table>
 </eqnarray>
 </functions_>
-
+<cite-format>[<bib-field name="id"/>]<if loc=""><span/><span>, <loc/></span></if></cite-format>
 <contents>
 \(<latex-defs/>\)
 <prepare-notes>
@@ -300,9 +300,9 @@ From now on, we assume that this condition is fulfilled and we call
 S(x):=\sum_{n\geqslant 0} c_n x^n
 </equation>
 its generating function so that $S(1) = \sum_{n\geqslant 0} c_n$. For any finite word $w$, we denote $\pi(w):=\pi(\rond Lw)$. Computations performed in <cite href="ccpp"/> show that for any $n\geqslant 0$,
-  \begin{equation}
- \label{probas}
- \pi(10^n)=\frac{c_n}{S(1)} \quad \mbox{and}\quad \pi(0^n)=\frac{\sum_{k \geqslant n}c_k}{S(1)}. \end{equation}
+<equation id="probas">
+ \pi(10^n)=\frac{c_n}{S(1)} \quad \mbox{and}\quad \pi(0^n)=\frac{\sum_{k \geqslant n}c_k}{S(1)}.
+</equation>
 Notice that, by disjointness of events $\pi(0^n)=\pi(0^{n+1})+\pi(10^n)$ and by stationarity, $\pi(0^n)=\pi(0^{n+1})+ \pi(0^n1)$ for all $n\geqslant 1$ so that
 <equation id="sym">
 \pi(10^n) =  \pi(0^n1) .
@@ -417,6 +417,7 @@ and (consequently)
 \[U(x) = \sum_{n=0}^{\infty}u_nx^n=\frac{1}{1-P(x)}=\frac{1}{(1-x)S(x)}.\]
 </p>
 </lemma>
+<proof id="proof1">
 <p>
 For a finite word $w=\alpha_1\ldots\alpha_m$ such that $w \neq 0^m$, let $l(w)$ denote
 the position of the last $1$ in $w$, that is $l(w):=\max\{1\le i\le m,~\alpha_i=1\}$.
@@ -440,6 +441,7 @@ In the same way, for $w=\alpha_1\ldots\alpha_{n-1}$, if $l(w)=i$ then
 which leads to $U(x)=(1-P(x))^{-1}$ by summation.
 <qed/>
 </p>
+</proof>
 </subsection>
 
 <subsection id="mixingcoefficients" title="Mixing coefficients">
@@ -495,7 +497,7 @@ $$
 </li>
 </ol>
 </prop>
-<remark>
+<remark id="remark1">
 <p>
 It is worth noticing that the asymptotics of $\psi(n,A,B)$ may not be uniform in all
 words $A$ and $B$. We  call this kind of system non-uniformly $\psi$-mixing. It may happen
@@ -513,7 +515,7 @@ that paper) and will be used many times in the sequel. For any two finite words 
 </p>
 <ol>
 <li>
- If $A=A'1$ and $B=1B'$, then (<equation href="renouvellement"/>) yields
+ If $A=A'1$ and $B=1B'$, then (<elt href="#renouvellement"/>) yields
 \[\pi(AwB)=\pi(A'1w1B')=\frac{\pi(A'1)}{\pi(1)}\pi(1w1B')=S(1)\pi(A)\pi(B)\frac{\pi(1w1)}{\pi(1)}.\]
 So
 $$
@@ -625,76 +627,83 @@ which gives the desired result. The last two items, left to the reader, follow t
 </ol>
 </proof>
 </subsection>
-<!--
-%%%%%%%%%%%%%%%%%%%%%%%%
-<subsection id="" title="Mixing of the logarithmic infinite comb">
-\label{ssec:mixinglogarithmiccomb}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Consider the first example in Section~<elt href="#sec:source"/>, that is the probabilized infinite comb defined by $c_0 = 1$ and  for any $n\geqslant 1$ by
+
+<subsection id="ssec:mixinglogarithmiccomb" title="Mixing of the logarithmic infinite comb">
+<p>
+Consider the first example in Section <elt href="#sec:source"/>, that is the probabilized infinite
+comb defined by $c_0 = 1$ and  for any $n\geqslant 1$ by
 $$
 c_n= \frac{1}{n(n+1)(n+2)(n+3)}.
 $$
-When $|x|<1$, the series $S(x)$ writes as follows
-\begin{equation}
-\label{defSpeigneLog}
+When $|x|\lt 1$, the series $S(x)$ writes as follows
+<equation id="defSpeigneLog">
 S(x)=\frac{47}{36}-\frac{5}{12x}+\frac{1}{6x^2}+\frac{(1-x)^3\log(1-x)}{6x^3}
-\end{equation}
+</equation>
 and
  \[S(1)=\frac{19}{18}.\]
-With Proposition~<elt href="#melange"/>, the asymptotics of the mixing coefficient comes from singularity analysis of the generating functions $M^{A,B}$.
+With <prop href="melange"/>, the asymptotics of the mixing coefficient comes from
+singularity analysis of the generating functions $M^{A,B}$.
 </p>
+<prop id="prop-3-4">
 <p>
-\begin{Prop}
-\label{prop-3-4}
-The VLMC defined by the logarithmic infinite comb has a non-uniform polynomial mixing of the following form:
- for any finite words $A$ and $B$, there exists a positive constant $C_{A,B}$ such that for any $n\geqslant 1$,
+The VLMC defined by the logarithmic infinite comb has a non-uniform polynomial
+mixing of the following form:
+for any finite words $A$ and $B$, there exists a positive constant $C_{A,B}$
+such that for any $n\geqslant 1$,
 $$
 |\psi (n,A,B)|\leqslant\frac {C_{A,B}}{n^3}.
 $$
-\end{Prop}
-\begin{Rem}
-The $C_{A,B}$ cannot be bounded above by some constant that does not depend on $A$ and $B$, as can be seen hereunder in the proof.
+</p>
+</prop>
+<remark id="remark2">
+<p>
+The $C_{A,B}$ cannot be bounded above by some constant that does not depend on $A$ and $B$,
+as can be seen hereunder in the proof.
 Indeed, we show that if $a$ and $b$ are positive integers,
 $$
 \psi(n,0^a,0^b)\sim\frac 13\left( \frac{S(1)}{r_ar_b}-\frac 1{r_a}-\frac 1{r_b}+\frac 1{S(1)}\right)\frac 1{n^3}
 $$
 as $n$ goes to infinity. In particular, $\psi(n,0,0^n)$ tends to the positive constant $\frac{13}{6}$.
-\end{Rem}
 </p>
+</remark>
+<proof id="proof3" title="Proof of &lt;prop href=&quot;prop-3-4&quot;/&gt;.">
 <p>
-\noindent {\sc Proof of Proposition~<elt href="#prop-3-4"/>.}\
-</p>
-<p>
-For any finite words $A$ and $B$ in case \textbf{\itshape i)} of Proposition~<elt href="#melange"/>, one deals with $U(x)=\left((1-x)S(x)\right)^{-1}$ which has $1$ as a unique dominant singularity. Indeed, $1$ is the unique dominant singularity of $S$, so that the dominant singularities of $U$ are $1$ or zeroes of $S$ contained in the closed unit disc. But $S$ does not vanish on the closed unit disc, because for any $z$ such that $ |z| \leqslant 1$,
+For any finite words $A$ and $B$ in case <strong><i>i)</i></strong> of
+<prop href="melange"/>, one deals with $U(x)=\left((1-x)S(x)\right)^{-1}$ which
+has $1$ as a unique dominant singularity. Indeed, $1$ is the unique dominant
+singularity of $S$, so that the dominant singularities of $U$ are $1$ or
+zeroes of $S$ contained in the closed unit disc. But $S$ does not vanish on
+the closed unit disc, because for any $z$ such that $ |z| \leqslant 1$,
 $$|S(z)| \geqslant 1- \sum_{n\geqslant 1} \frac{1}{n(n+1)(n+2)(n+3)} = 1-(S(1)-1)=\frac{17}{18}.$$
-</p>
-<p>
-\medskip
 </p>
 <p>
 Since
 \[M(x) =\frac{S(x)-S(1)}{(x-1)S(x)}= S(1)U(x) - \frac 1{1-x},\]
-the unique dominant singularity of $M$ is $1$, and when $x$ tends to $1$ in the unit disc, (<elt href="#defSpeigneLog"/>) leads to
+the unique dominant singularity of $M$ is $1$, and when $x$ tends to $1$ in
+the unit disc, (<elt href="#defSpeigneLog"/>) leads to
 \[
 M(x) = A(x)-\frac{1}{6S(1)}(1-x)^2\log(1-x)+\grandO{(1-x)^3\log(1-x)}
 \]
-where $A(x)$ is a polynomial of degree $2$. Using a classical transfer theorem  based on the analysis of the singularities of $M$
-(see Flajolet and Sedgewick \cite[section VI.4, p. 393 and special case p. 387]{FS}), we get
+where $A(x)$ is a polynomial of degree $2$. Using a classical transfer theorem
+based on the analysis of the singularities of $M$
+(see Flajolet and Sedgewick <cite href="FS" loc="section VI.4, p. 393 and special case p. 387"/>),
+we get
  \[\psi(n-1,w1,1w')=  [x^n] M(x)=\frac{1}{3S(1)}\frac{1}{n^3}+\petito{\frac{1}{n^3}}.\]
 </p>
 <p>
-The cases  \textbf{\itshape{ii)}}, \textbf{\itshape{iii)}}, \textbf{\itshape{iv)}} and \textbf{\itshape{v)}} of Proposition~<elt href="#melange"/> are of the same kind, and we completely deal with case  \textbf{\itshape{iii)}}.
+The cases  <strong><i>ii)</i></strong>, <strong><i>iii)</i></strong>,
+<strong><i>iv)</i></strong> and <strong><i>v)</i></strong> of <prop href="melange"/> are
+of the same kind, and we completely deal with case <strong><i>iii)</i></strong>.
 </p>
 <p>
-\vskip 5pt
-Case  \textbf{\itshape{iii)}}: words of the form $A=0^a$ and $B=0^b$, $a,b\geqslant 1$.
-As shown in Proposition~<elt href="#melange"/>, one has to compute the asymptotics of the $n$-th coefficient of the Taylor
-series of the function
-\begin{equation}
-\label{melangeLog3}
+Case <strong><i>iii)</i></strong>: words of the form $A=0^a$ and $B=0^b$, $a,b\geqslant 1$.
+As shown in <prop href="melange"/>, one has to compute the asymptotics of the $n$-th
+coefficient of the Taylor series of the function
+<equation id="melangeLog3">
 M^{a,b}(x):=S(1)\displaystyle\frac{1}{r_ar_b}\sum _{n\geqslant 1}r_{a+b+n}x^n + \displaystyle U(x)\left[ \frac{S(1)R_a(x)R_b(x)}{r_ar_bx^{a+b-2}}-S(x)\right].
-\end{equation}
-The contribution of the left-hand term of this sum is directly given by the asymptotics of the remainder
+</equation>
+The contribution of the left-hand term of this sum is directly given by the
+asymptotics of the remainder
 $$
 r_n=\sum _{k\geqslant n}c_k=\frac{1}{3n(n+1)(n+2)}=\frac{1}{3n^3}+\mathcal{O}\left( \frac {1}{n^4}\right) .
 $$
@@ -702,20 +711,30 @@ By means of singularity analysis, we deal with the right-hand term
 $$
 N^{a,b}(x):=\displaystyle U(x)\left[ \frac{S(1)R_a(x)R_b(x)}{r_ar_bx^{a+b-2}}-S(x)\right].
 $$
-Since $1$ is the only dominant singularity of $S$ and $U$ and consequently of any $R_a$, it suffices to compute
+Since $1$ is the only dominant singularity of $S$ and $U$ and consequently of any $R_a$,
+it suffices to compute
 an expansion of $N^{a,b}(x)$ at $x=1$.
-It follows from~(<elt href="#defSpeigneLog"/>) that
+It follows from (<elt href="#defSpeigneLog"/>) that
 $U$, $S$ and $R_a$ admit expansions near $1$ of the forms
-\begin{align*}
-U(x)
-&=\frac{1}{S(1)(1-x)}+\mbox{polynomial}+\frac{1}{6S(1)^2}(1-x)^2\log (1-x)+\mathcal{O}(1-x)^2, \\
-S(x)&=\mbox{polynomial}+\frac{1}{6}(1-x)^3\log (1-x)+\mathcal{O}(1-x)^3,
-\end{align*}
+</p>
+<eqnarray>
+<tr><td class="right">$U(x)$</td>
+    <td class="center">$ = $</td>
+    <td class="left">$\frac{1}{S(1)(1-x)}+\mbox{polynomial}+\frac{1}{6S(1)^2}(1-x)^2\log (1-x)+\mathcal{O}(1-x)^2$</td>,
+</tr>
+<tr><td class="right">$S(x)$</td>
+    <td class="center">$ = $</td>
+    <td>$\mbox{polynomial}+\frac{1}{6}(1-x)^3\log (1-x)+\mathcal{O}(1-x)^3$,</td>
+</tr>
+</eqnarray>
 and
-\begin{align*}
-R_a(x)
-&=\mbox{polynomial}+\frac{1}{6}(1-x)^3\log (1-x)+\mathcal{O}(1-x)^3. \quad
-\end{align*}
+<eqnarray>
+<tr><td class="right">$R_a(x)$</td>
+  <td class="center">$ = $</td>
+  <td>$\mbox{polynomial}+\frac{1}{6}(1-x)^3\log (1-x)+\mathcal{O}(1-x)^3$.</td>
+</tr>
+</eqnarray>
+<p>
 Consequently,
 $$
 N^{a,b}(x)=\frac 16\left( \frac 1{r_a}+\frac 1{r_b}-\frac 1{S(1)}\right)(1-x)^2\log (1-x)+\mathcal{O}(1-x)^2
@@ -733,9 +752,14 @@ Consequently (<elt href="#melangeLog3"/>) leads to
 as $n$ tends to infinity, showing the mixing inequality and the non uniformity.
 </p>
 <p>
-The remaining cases \textbf{\itshape{ii)}}, \textbf{\itshape{iv)}} and \textbf{\itshape{v)}} are of the same flavour.
-\QED
-%%%%%%%%%%%%%%%%%%%%%%%%
+The remaining cases <strong><i>ii)</i></strong>, <strong><i>iv)</i></strong>
+and <strong><i>v)</i></strong> are of the same flavour.
+<qed/>
+</p>
+</proof>
+</subsection>
+
+<!--
 <subsection id="" title="Mixing of the factorial infinite comb">
 \label{ssec:mixingfactccomb}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
