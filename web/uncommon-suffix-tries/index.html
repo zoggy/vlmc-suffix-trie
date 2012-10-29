@@ -209,7 +209,7 @@ is uniform and exponential.
 <table class="eqnarray"><contents/></table>
 </eqnarray>
 </functions_>
-<cite-format>[<bib-field name="id"/>]<if loc=""><span/><span>, <loc/></span></if></cite-format>
+<cite-format>[<bib-field name="id"/>]</cite-format>
 <contents>
 \(<latex-defs/>\)
 <prepare-notes>
@@ -571,7 +571,7 @@ This implies:
    +  \sum_{1\le i\lt j\le n}\rho_{a+i}\rho_{n+1-j+b}\sum_{w, |w|=j-i11}\frac{\pi(1w1)}{\pi(1)}.\]
 Recalling that $u_0=1$, one gets
  \[v_n^{a,b}=\rho_{a+b+n+1}+\sum_{1\le i\le j\le n}\rho_{a+i}\rho_{n+1-j+b}u_{j-i}\]
-which gives the result  \textbf{\itshape ii)} with Lemma <lemma href="lemme_un"/>.
+which gives the result  \textbf{\itshape ii)} with <lemma href="lemme_un"/>.
 </p>
 </li>
 <li>
@@ -686,7 +686,7 @@ M(x) = A(x)-\frac{1}{6S(1)}(1-x)^2\log(1-x)+\grandO{(1-x)^3\log(1-x)}
 \]
 where $A(x)$ is a polynomial of degree $2$. Using a classical transfer theorem
 based on the analysis of the singularities of $M$
-(see Flajolet and Sedgewick <cite href="FS" loc="section VI.4, p. 393 and special case p. 387"/>),
+(see Flajolet and Sedgewick <cite href="FS"/>, section VI.4, p. 393 and special case p. 387"),
 we get
  \[\psi(n-1,w1,1w')=  [x^n] M(x)=\frac{1}{3S(1)}\frac{1}{n^3}+\petito{\frac{1}{n^3}}.\]
 </p>
@@ -759,13 +759,10 @@ and <strong><i>v)</i></strong> are of the same flavour.
 </proof>
 </subsection>
 
-<!--
-<subsection id="" title="Mixing of the factorial infinite comb">
-\label{ssec:mixingfactccomb}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-</p>
+<subsection id="ssec:mixingfactccomb" title="Mixing of the factorial infinite comb">
 <p>
-Consider now the second Example in Section~<elt href="#sec:source"/>, that is the probabilized infinite comb defined by
+Consider now the second Example in Section <elt href="#sec:source"/>, that is the
+probabilized infinite comb defined by
 $$
 \forall n\in\g N,~c_n=\frac 1{(n+1)!}.
 $$
@@ -776,20 +773,25 @@ S(x)=\frac {e^x-1}x
 U(x)=\frac {x}{(1-x)(e^x-1)}.
 $$
 </p>
+
+<prop id="UniformMixing">
 <p>
-\begin{Prop}\label{UniformMixing}
-The VLMC defined by the factorial infinite comb has a uniform exponential mixing of the following form:
-there exists a positive constant $C$ such that for any $n\geqslant 1$ and for any finite words $A$ and $B$,
+The VLMC defined by the factorial infinite comb has a uniform
+exponential mixing of the following form: there exists a positive
+constant $C$ such that for any $n\geqslant 1$ and for any finite
+words $A$ and $B$,
 $$
 |\psi (n,A,B)|\leqslant\frac C{(2\pi )^n}.
 $$
-\end{Prop}
-\pff
-\begin{enumerate}
-\item First case of mixing in Proposition~<elt href="#melange"/>: $A=A'1$ and $B=1B'$.
 </p>
+</prop>
+<proof id="proof4">
+<ol>
+<li>First case of mixing in <prop href="melange"/>: $A=A'1$ and $B=1B'$.
 <p>
-Because of Proposition~<elt href="#melange"/>, the proof consists in computing the asymptotics of $[x^n] M(x)$. We make use of singularity analysis. The dominant singularities of
+Because of <prop href="melange"/>, the proof consists in computing the
+asymptotics of $[x^n] M(x)$. We make use of singularity analysis. The
+dominant singularities of
 $$
 M(x)=\frac{S(x)-S(1)}{(x-1)S(x)}
 $$
@@ -814,18 +816,18 @@ $$
 \right.
 $$
 </p>
+</li>
+<li>Second case of mixing: $A=A'10^a$ and $B=0^b1B'$.
 <p>
-\item Second case of mixing: $A=A'10^a$ and $B=0^b1B'$.
-</p>
-<p>
-Because of Proposition~<elt href="#melange"/>, one has to compute $[x^n]M^{a,b}(x)$
+Because of <prop href="melange"/>, one has to compute $[x^n]M^{a,b}(x)$
 with
 $$
 M^{a,b}(x):= S(1)\frac{c_{a+b}}{c_ac_b}P_{a+b}(x)
 +\frac 1{S(x)}\cdot\frac 1{1-x}\Big[ S(1)P_a(x)P_b(x)-S(x)\Big] ,
 $$
 where $ P_{a+b}$ is an entire function.
-In this last formula, the brackets contain an entire function that vanishes at $1$ so that the dominant singularities
+In this last formula, the brackets contain an entire function
+that vanishes at $1$ so that the dominant singularities
 of $M^{a,b}$ are again those of $S^{-1}$, namely $\pm2i\pi$.
 The expansion of $M^{a,b}(x)$ at $2i\pi$ writes thus
 $$
@@ -836,25 +838,25 @@ $$
 [x^n]M^{a,b}(x)\equivalent{n\to+\infty}2\Re\left(\frac{1-e}{1-2i\pi}\cdot\frac{P_a(2i\pi )P_b(2i\pi )}{(2i\pi )^n}\right) .
 $$
 Besides, the remainder of the exponential series satisfies
-\begin{equation}
-\label{resteSerieExp}
+<equation id="resteSerieExp">
 \sum _{n\geqslant a}\frac{x^n}{n!}=\frac{x^a}{a!}\left( 1+\frac xa+\mathcal{O}(\frac 1a)\right)
-\end{equation}
+</equation>
 when $a$ tends to infinity.
-Consequently, by Formula~(<elt href="#defPa"/>), $P_a(2i\pi )$ tends to $2i\pi$ as $a$ tends to infinity
-%for any $x\neq 0$, the asymptotics of the rest of the exponential series writes, when $a$ tends to infinity,
+Consequently, by Formula (<elt href="#defPa"/>), $P_a(2i\pi )$
+tends to $2i\pi$ as $a$ tends to infinity
+<!--%for any $x\neq 0$, the asymptotics of the rest of the exponential series writes, when $a$ tends to infinity,
 %$$
 %R_a(x)=\frac{x^a}{a!}\left( 1+O\left( \frac 1a\right)\right)
 %$$
-so that one gets a positive constant $C_1$ that does not depend on $a$ and $b$ such that for any
-$n\geqslant 1$,
+-->
+so that one gets a positive constant $C_1$ that does not
+depend on $a$ and $b$ such that for any $n\geqslant 1$,
 $$
 \left| \psi(n, A,B)\right|\leqslant\frac{C_1}{(2\pi )^n}.
 $$
 </p>
-<p>
-\item Third case of mixing: $A=0^a$ and $B=0^b$.
-</p>
+</li>
+<li>Third case of mixing: $A=0^a$ and $B=0^b$.
 <p>
 This time, one has to compute $[x^n]M^{a,b}(x)$
 with
@@ -872,65 +874,86 @@ $$
 \psi(n-1,A,B) \equivalent{n\to+\infty}
 2\Re\left(\frac{1-e}{1-2i\pi}\cdot\frac{R_a(2i\pi )R_b(2i\pi )}{r_ar_b(2i\pi )^{a+b-2}}\frac{1}{(2i\pi )^n}\right) .
 $$
-Once more, because of~(<elt href="#resteSerieExp"/>), this implies that there is a positive constant $C_2$ independent of $a$ and $b$ and such that for any $n\geqslant 1$,
+Once more, because of (<elt href="#resteSerieExp"/>), this implies that
+there is a positive constant $C_2$ independent of $a$ and $b$ and
+such that for any $n\geqslant 1$,
 $$
 \left| \psi(n,A,B)\right|\leqslant\frac{C_2}{(2\pi )^n}.
 $$
 </p>
-<p>
-\item and \itshape{\textbf{v)}}: both remaining cases of mixing that respectively correspond to words of the form $A=A'10^a$, $B=0^b$
-and $A=0^a$, $B=0^b1B'$ are of the same vein and lead to similar results.\QED
-\end{enumerate}
-</p>
-<p>
+</li>
+<li> and <strong><i>v)</i></strong>: both remaining cases of mixing
+that respectively correspond to words of the form $A=A'10^a$, $B=0^b$
+and $A=0^a$, $B=0^b1B'$ are of the same vein and lead to similar results.
+<qed/>
+</li>
+</ol>
+</proof>
+</subsection>
+</section>
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-<section id="" title="Height and saturation level of suffix tries">
-\label{sec:suffixtrie}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+<section id="sec:suffixtrie" title="Height and saturation level of suffix tries">
+<p>
+In this section, we consider a suffix trie process $(\rond{T}_n)_{n\geq 1}$
+associated with an infinite random word generated by an infinite comb.
+A precise definition of tries and suffix tries is given in
+section <elt href="#ssec:height"/>. We are interested in the height
+and the saturation level of such a suffix trie.
 </p>
 <p>
+Our method to study these two parameters uses a duality property à
+la Pittel developed in Section <elt href="#ssec:duality"/>, together with
+a careful and explicit calculation of the generating function of the
+second occurrence of a word (in Section <elt href="#ssec:generating"/>) which
+can be achieved for any infinite comb. These calculations are not so
+intricate because they are strongly related to the mixing coefficient
+and the mixing properties detailed in Section <elt href="#sec:mixing"/>.
+</p>
+<p>
+More specifically, we look at our two favourite examples, the logarithmic
+comb and the factorial comb. We prove in Section <elt href="#ssec:heightLog"/>
+that the height of the first one is not logarithmic but polynomial
+and in Section <elt href="#ssec:saturation"/> that the saturation
+level of the second one is not logarithmic either but negligibly smaller.
+Remark that despite the very particular form of the comb in the wide
+family of variable length Markov models, the comb sources provide a
+spectrum of asymptotic behaviours for the suffix tries.
+</p>
 
-</p>
+<subsection id="ssec:height" title="Suffix tries">
 <p>
-In this section, we consider a suffix trie process $(\rond{T}_n)_{n\geq 1}$ associated with an infinite random word generated by an infinite comb. A precise definition of tries and suffix tries is given in section~<elt href="#ssec:height"/>. We are interested in the height and the saturation level of such a suffix trie.
-</p>
-<p>
-Our method to study these two parameters uses a duality property \`a la Pittel developed in Section <elt href="#ssec:duality"/>, together with a careful and explicit calculation of the generating function of the second occurrence of a word (in Section <elt href="#ssec:generating"/>) which can be achieved for any infinite comb. These calculations are not so intricate because they are strongly related to the mixing coefficient and the mixing properties detailed in Section~<elt href="#sec:mixing"/>.
-</p>
-<p>
-
-More specifically, we look at our two favourite examples, the logarithmic comb and the factorial comb.
-We prove in Section <elt href="#ssec:heightLog"/> that the height of the first one is not logarithmic but polynomial  and in Section <elt href="#ssec:saturation"/> that the saturation level of the second one is not logarithmic either but negligibly smaller. Remark that despite the very particular form of the comb in the wide family of variable length Markov models, the comb sources provide a spectrum of asymptotic behaviours for the suffix tries.
-</p>
-<p>
-
-</p>
-<p>
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-<subsection id="" title="Suffix tries">
-\label{ssec:height}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Let $(y_n)_{n\geqslant 1}$ be a sequence of right-infinite words on $\{ 0,1\}$.
-With this sequence is associated a \textbf{trie process} $(\rond{T}_n)_{n\geq 1}$ which is a planar unary-binary tree increasing sequence defined the following way.
+Let $(y_n)_{n\geqslant 1}$ be a sequence of right-infinite words
+on $\{ 0,1\}$.
+With this sequence is associated a <strong>trie process</strong>
+$(\rond{T}_n)_{n\geq 1}$ which is a planar unary-binary tree increasing
+sequence defined the following way.
 The tree $\rond{T}_n$ contains the words $y_1,\dots ,y_n$ in its leaves.
-It is obtained by a sequential construction, inserting the words $y_n$ successively.
-At the beginning, $\rond T_1$ is the tree containing the root and the leaf $0\dots$ (resp. the leaf $1\dots$) if $y_1$ begins with $0$ (resp. with $1$).
-For $n\geq 2$, given the tree $\rond{T}_{n-1}$, the word $y_n$ is inserted as follows. We go through the tree along the branch whose nodes are encoded by the successive prefixes of $y_n$; when the branch ends, if an internal node is reached, then $y_n$ is inserted at the free leaf, else we make the branch grow   comparing the next letters of both words until they can be inserted in two different leaves. As one can clearly see on Figure~<elt href="#1figtrieconstruction"/> a trie is not a complete tree and the insertion of a word can make a branch grow by more than one level.
-Notice that if the trie contains a finite word $w$ as internal node, there are at least two already inserted infinite words $y_n$ that have $w$ as a prefix.
+It is obtained by a sequential construction, inserting the words $y_n$
+successively.
+At the beginning, $\rond T_1$ is the tree containing the root and the
+leaf $0\dots$ (resp. the leaf $1\dots$) if $y_1$ begins with $0$ (resp. with $1$).
+For $n\geq 2$, given the tree $\rond{T}_{n-1}$, the word $y_n$ is inserted
+as follows. We go through the tree along the branch whose nodes are encoded
+by the successive prefixes of $y_n$; when the branch ends, if an internal
+node is reached, then $y_n$ is inserted at the free leaf, else we make the
+branch grow comparing the next letters of both words until they can be
+inserted in two different leaves. As one can clearly see on
+<figure href="1figtrieconstruction"/> a trie is not a complete tree and
+the insertion of a word can make a branch grow by more than one level.
+Notice that if the trie contains a finite word $w$ as internal node, there
+are at least two already inserted infinite words $y_n$ that have $w$ as a prefix.
 This indicates why the <em>second</em> occurrence of a word is prominent in the growing of a trie.
 </p>
-<p>
-\medskip
-%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%% Figure 2
- \begin{figure}[h]
- \begin{center}
- \includegraphics[height=5.5cm]{trieconstruction} $\longrightarrow$ \includegraphics[height=7cm]{trieconstruction2}
- \end{center}
-\caption{\label{1figtrieconstruction}Last steps of the construction of a trie built from the set $(000\ldots,10\ldots, 1101\ldots, 001,\ldots, 01110\ldots , 1100\ldots, 01111\ldots)$.}
-\end{figure}
+<figure id="1figtrieconstruction" title="Trie construction">
+<img src="trieconstruction.svg" width="300"/> $\longrightarrow$
+<img src="trieconstruction2.svg" width="300"/>
+<div class="legend">
+Last steps of the construction of a trie built from the set
+$(000\ldots,10\ldots, 1101\ldots, 001,\ldots, 01110\ldots , 1100\ldots, 01111\ldots)$."
+</div>
+</figure>
+</subsection>
+<!--
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Figure 3
  \begin{figure}[h]
  \begin{center}
