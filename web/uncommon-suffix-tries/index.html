@@ -147,7 +147,7 @@ is uniform and exponential.
 </figure>
 <theorem id="" title="" href="">
     <block counter-name="theorem" class="theorem"
-           label="Th." href="&lt;href/&gt;"
+           label="Theorem" href="&lt;href/&gt;"
            id="&lt;id/&gt;" title="&lt;title/&gt;">
 <div class="&lt;class/&gt;" id="&lt;id/&gt;">
   <div class="title"><title/></div>
@@ -218,7 +218,7 @@ is uniform and exponential.
 <section id="sec:Intro" title="Introduction">
 <p>
 <em>Trie</em> (abbreviation of re<i>trie</i>val) is a natural data structure, efficient for searching words in a given set and used in many algorithms as data compression, spell checking or IP addresses lookup. A <em>trie</em> is a digital tree in which
-words are inserted in external nodes. The trie process grows up by successively inserting words according to their prefixes. A precise definition will be given in Section <elt href="ssec:height"/>.
+words are inserted in external nodes. The trie process grows up by successively inserting words according to their prefixes. A precise definition will be given in Section <elt href="#ssec:height"/>.
 </p>
 <p>
 As soon as a set of
@@ -235,11 +235,11 @@ In the present paper we are interested in the height $H_n$ and the saturation le
 </p>
 <p>
 A first browse of the literature reveals tries or suffix tries that have a height and a saturation level both growing logarithmically with the number of words inserted. For plain tries, <em>i.e.</em> when the inserted words are independent, the results due to Pittel <cite href="Pittel"/> rely on  two assumptions on the source that produces the words: first, the source is uniformly mixing, second, the probability of any word decays exponentially with its length.
-Let us also mention the general analysis of tries by Clément <em>et al.</em>\@ <cite href="ClementFlajoletVallee"/> for dynamical sources.
+Let us also mention the general analysis of tries by Clément <em>et al.</em> <cite href="ClementFlajoletVallee"/> for dynamical sources.
 For suffix tries, Szpankowski <cite href="Szpan93"/> obtains the same result, with a weaker mixing assumption (still uniform though) and with the same hypothesis on the measure of the words. Nevertheless, in <cite href="Shields"/>, Shields states a result on prefixes of ergodic processes suggesting that the saturation level of suffix tries might not necessarily grow logarithmically with the number of words inserted.
 </p>
 <p>
-Our aim is to exhibit two cases when the behaviour of the height or the saturation level is no longer logarithmic. The first example is the ``<em>logarithmic comb</em>'', for which we show that the mixing is slow in some sense, namely non uniformly polynomial (see Section \ref{ssec:mixinglogarithmiccomb} for a precise statement) and the measure of some increasing sequence of words decays polynomially. We prove in Theorem~\ref{hauteur} that the height of this trie is larger than a power of $n$ (when $n$ is the number of inserted suffixes in the tree). The second example is the ``<em>factorial comb</em>'', which has a uniformly exponential mixing, thus fulfilling the mixing hypothesis of Szpankowski  <cite href="Szpan93"/>, but the measure of some increasing sequence of words decays faster than any exponential. In this case we prove in Theorem~\ref{saturation} that the saturation level is negligible with respect to $\log n$. We prove more precisely that, almost surely,
+Our aim is to exhibit two cases when the behaviour of the height or the saturation level is no longer logarithmic. The first example is the ``<em>logarithmic comb</em>'', for which we show that the mixing is slow in some sense, namely non uniformly polynomial (see Section \ref{ssec:mixinglogarithmiccomb} for a precise statement) and the measure of some increasing sequence of words decays polynomially. We prove in <theorem href="hauteur"/> that the height of this trie is larger than a power of $n$ (when $n$ is the number of inserted suffixes in the tree). The second example is the ``<em>factorial comb</em>'', which has a uniformly exponential mixing, thus fulfilling the mixing hypothesis of Szpankowski  <cite href="Szpan93"/>, but the measure of some increasing sequence of words decays faster than any exponential. In this case we prove in <theorem href="saturation"/> that the saturation level is negligible with respect to $\log n$. We prove more precisely that, almost surely,
 $\ell _n\in o\left(\frac{\log n}{(\log\log n)^\delta}\right)$, for any $\delta >1$.
 </p>
 
@@ -252,7 +252,7 @@ the associated suffix tries are built, and the two uncommon behaviours are state
 The methods are based on two key tools concerning successive occurence times of patterns:
 a duality property and the computation of generating functions. The relation between the mixing
 of the source and the asymptotic behaviour of the trie is highlighted by the proof
-of Proposition~<elt href="#Phi2"/>.
+of <prop href="Phi2"/>.
 </p>
 </section>
 
@@ -321,7 +321,10 @@ The logarithmic comb is defined by $c_0=1$ and for $n\geqslant 1$,
 \[c_n = \frac{1}{n(n+1)(n+2)(n+3)}. \]
 The corresponding conditional probabilities on the leaves of the tree are
   \[q_1(0)=\frac{1}{24}\quad \mbox{and for }n\geqslant 1, \quad q_{0^n1}(0)=1-\frac{4}{n+4}.\]
-The expression of $c_n$ was chosen to make the computations as simple as possible and also because the square-integrability of the waiting time of some pattern will be needed (see end of Section~<elt href="#ssec:generating"/>), guaranteed by
+The expression of $c_n$ was chosen to make the computations as simple
+as possible and also because the square-integrability of the waiting time of
+some pattern will be needed (see end of Section<elt href="#ssec:generating"/>),
+guaranteed by
 \[\sum_{n\geqslant 0} n^2c_n\lt+\infty.\]
 </p>
 </subsection>
@@ -350,7 +353,7 @@ $(c_n)_{n\geqslant 0}$ or equivalently by its generating function $S$. This resu
 is then applied to our two examples. The mixing of the logarithmic comb is polynomial
 but not uniform, it is a very weak mixing; the mixing of the factorial comb
 is uniform and exponential, it is a very strong mixing. Notice that mixing
-properties of some infinite combs have already been investigated by Isola~<cite href="Isola"/>,
+properties of some infinite combs have already been investigated by Isola <cite href="Isola"/>,
 although with a slight different language.
 </p>
 
@@ -370,9 +373,9 @@ generated by $\{U_k , 0\leqslant k \leqslant m\}$ and introduce for
     <td class="center">$:=$</td>
     <td class="left">$\frac{\pi(A\cap T^{-(m+1)-n}B)-\pi(A)\pi(B)}{\pi(A)\pi(B)}$</td>
 </tr>
-<tr id="mixingCoeff"><td/>
+<tr><td/>
     <td class="center">$=$</td>
-    <td class="left">$\frac{\sum_{|w|=n}\pi(AwB)-\pi(A)\pi(B)}{\pi(A)\pi(B)}$</td>
+    <td class="left"><equation id="mixingCoeff">\frac{\sum_{|w|=n}\pi(AwB)-\pi(A)\pi(B)}{\pi(A)\pi(B)}</equation></td>
 </tr>
 </eqnarray>
 <p>
@@ -381,10 +384,10 @@ where $T$ is the shift map and where the sum runs over the finite words $w$ with
 <p>
 A sequence $(U_n)_{n\geqslant 0}$ is called <em>$\psi$-mixing</em> whenever
 \[\lim_{n\to\infty}\ \sup_{m\geqslant 0,A\in{\cal F}_0^m, B\in{\cal F}_0^{\infty}}|\psi(n,A,B)|=0.\]
-In this definition, the convergence to zero is uniform over all words $A$ and~$B$. This is not going
+In this definition, the convergence to zero is uniform over all words $A$ and $B$. This is not going
 to be the case in our first example.
 As in Isola <cite href="Isola"/>, we widely use the renewal properties of infinite combs (see
-Lemma~<elt href="#lemme_un"/>) but more detailed results are needed, in particular we investigate
+<lemma href="lemme_un"/>) but more detailed results are needed, in particular we investigate
 the lack of uniformity for the logarithmic comb.
 </p>
 </subsection>
@@ -407,7 +410,9 @@ u_n:=\frac{\pi(U_0=1,U_{n}=1)}{\pi(1)}=\frac{1}{\pi(1)}\sum_{|w|=n-1}\pi(1w1),
 </equation>
 and let
 \[U(x):=\sum_{n\geqslant 0}u_nx^n\]
-denote its generating function. Hereunder is stated a key lemma that will be widely used in Proposition~<elt href="#melange"/>. In some sense, this kind of relation (sometimes called Renewal Equation) reflects the renewal properties of the infinite comb.
+denote its generating function. Hereunder is stated a key lemma that will be widely used
+ in <prop href="melange"/>. In some sense, this kind of relation (sometimes called
+  Renewal Equation) reflects the renewal properties of the infinite comb.
 </p>
 <lemma id="lemme_un">
 <p>
@@ -448,14 +453,14 @@ which leads to $U(x)=(1-P(x))^{-1}$ by summation.
 <p>
 The mixing coefficients $\psi(n,A,B)$ are expressed as the $n$-th coefficient
 in the series expansion of an analytic function $M^{A,B}$ which is given in
-terms of $S$ and~$U$. The notation $[x^n] A(x)$ means the  coefficient
+terms of $S$ and $U$. The notation $[x^n] A(x)$ means the  coefficient
 of $x^n$ in the power expansion of $A(x)$ at the origin.
 Denote the remainders associated with the series $S(x)$ by
 $$
 r_n : = \sum_{k\geqslant n} c_k, \quad R_n(x):=\sum_{k\geqslant n}c_k x^k
 $$
 and for $a\geqslant 0$, define the ``shifted'' generating function
-<equation id="defPeg">
+<equation id="defPa">
 P_a(x):=\frac 1{c_a}\sum _{n\geqslant 1}\rho _{a+n}x^n=x+\frac{x-1}{c_ax^a}R_{a+1}(x).
 </equation>
 </p>
@@ -769,7 +774,7 @@ $$
 With previous notations, one gets
 $$
 S(x)=\frac {e^x-1}x
-{\rm ~~and~~}
+{\rm and }
 U(x)=\frac {x}{(1-x)(e^x-1)}.
 $$
 </p>
@@ -810,8 +815,8 @@ $$
 \epsilon _n=
 \left\{
 \begin{array}{l}
-1{\rm ~~if~}n{\rm ~is~even}\\
-2\pi{\rm ~~if~}n{\rm ~is~odd}.
+1{\rm if }n{\rm is even}\\
+2\pi{\rm if }n{\rm is odd}.
 \end{array}
 \right.
 $$
@@ -842,7 +847,7 @@ Besides, the remainder of the exponential series satisfies
 \sum _{n\geqslant a}\frac{x^n}{n!}=\frac{x^a}{a!}\left( 1+\frac xa+\mathcal{O}(\frac 1a)\right)
 </equation>
 when $a$ tends to infinity.
-Consequently, by Formula (<elt href="#defPa"/>), $P_a(2i\pi )$
+Consequently, by Formula (<equation href="defPa"/>), $P_a(2i\pi )$
 tends to $2i\pi$ as $a$ tends to infinity
 <!--%for any $x\neq 0$, the asymptotics of the rest of the exponential series writes, when $a$ tends to infinity,
 %$$
@@ -885,9 +890,9 @@ $$
 <li> and <strong><i>v)</i></strong>: both remaining cases of mixing
 that respectively correspond to words of the form $A=A'10^a$, $B=0^b$
 and $A=0^a$, $B=0^b1B'$ are of the same vein and lead to similar results.
-<qed/>
 </li>
 </ol>
+<qed/>
 </proof>
 </subsection>
 </section>
@@ -1091,61 +1096,88 @@ of $w$ in the sequence $(U_n)_{n\geqslant 1}$ and the generating function of the
 $\tau^{(r)}$ is calculated. We go over these calculations in the sequel.
 </p>
 </subsection>
-<!--
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-<subsection id="" title="Successive occurence times generating functions">
-\label{ssec:generating}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{Prop}
-\label{Phi2}
-Let $k\geqslant 1$. Let also $w=10^{k-1}$ and $\tau^{(2)}(w)$ be the end of the second occurrence of $w$ in a sequence generated by a comb defined by $(c_n)_{n\geqslant 0}$. Let $S$ and $U$ be the ordinary generating functions defined in Section <elt href="#ssec:mixingcomb"/>. The probability generating function of $\tau^{(2)}(w)$ is
+<subsection id="ssec:generating" title="Successive occurence times generating functions">
+<prop id="Phi2">
+<p>
+Let $k\geqslant 1$. Let also $w=10^{k-1}$ and $\tau^{(2)}(w)$ be the
+end of the second occurrence of $w$ in a sequence generated by a comb defined
+by $(c_n)_{n\geqslant 0}$. Let $S$ and $U$ be the ordinary generating
+functions defined in Section <elt href="#ssec:mixingcomb"/>. The
+probability generating function of $\tau^{(2)}(w)$ is
 \[
  \Phi^{(2)}_w(x) = \frac{c_{k-1}^2x^{2k-1}\big(U(x)-1\big)}{S(1)(1-x)\big[ 1+c_{k-1}x^{k-1}(U(x)-1)\big] ^2}.
 \]
-Furthermore, as soon as $\sum_{n \geqslant 1}n^2c_n <\infty$, the random variable $\tau^{(2)}(w)$
+Furthermore, as soon as $\sum_{n \geqslant 1}n^2c_n \lt \infty$, the random
+variable $\tau^{(2)}(w)$
 is square-integrable and
-\begin{equation}
-\label{esp-var}
+<equation id="esp-var">
 \g E(\tau^{(2)}(w))=\frac{2S(1)}{c_{k-1}}+o\left(\frac{1}{c_{k-1}}\right), \quad \Var(\tau^{(2)}(w))=\frac{2S(1)^2}{c_{k-1}^2}+o\left(\frac{1}{c_{k-1}^2}\right).
-\end{equation}
-\end{Prop}
+</equation>
 </p>
+</prop>
+<proof id="proof5">
 <p>
-\pff
 For any $r\geqslant 1
 $, let $\tau^{(r)}(w)$ denote the end of the $r$-th occurrence of $w$
-in a random sequence generated by a comb and $\Phi_w^{(r)}$ its probability generating function. The reversed word of $c=\alpha _1\dots\alpha _N$ will be denoted by the overline $\overline c:=\alpha _N\dots\alpha _1$
+in a random sequence generated by a comb and $\Phi_w^{(r)}$ its
+probability generating function. The reversed word
+of $c=\alpha _1\dots\alpha _N$ will be denoted by the overline
+$\overline c:=\alpha _N\dots\alpha _1$
 </p>
 <p>
-We use a result of~<cite href="ccpp"/> that computes these generating functions in terms of stationary
-probabilities $q_c^{(n)}$. These probabilities measure the occurrence of a finite word after $n$ steps, conditioned
-to start from the word $\overline{c}$.
+We use a result of <cite href="ccpp"/> that computes these generating
+functions in terms of stationary probabilities $q_c^{(n)}$. These
+probabilities measure the occurrence of a finite word after $n$ steps,
+conditioned to start from the word $\overline{c}$.
 More precisely,  for any finite words $u$ and $\overline{c}$ and for any
 $n\geqslant 0$, let
 \[q_c^{(n)}(u):=\pi\left(U_{n-|u|+|c|+1}\ldots U_{n+|c|}=u\big| U_{1}\ldots U_{|c|}=\overline c\right).\]
-It is shown in <cite href="ccpp"/> that, for $|x|<1$,
+It is shown in <cite href="ccpp"/> that, for $|x|\lt 1$,
 $$
 \Phi_w^{(1)}(x)=\frac{x^k\pi(w)}{(1-x)S_w(x)}
 $$
 and for $r\geq 1$,
-%\[\Phi_w^{(2)}(x)=\Phi_w^{(1)}(x)\left(1-\frac{1}{S_w(x)}\right),\]
+<!--%\[\Phi_w^{(2)}(x)=\Phi_w^{(1)}(x)\left(1-\frac{1}{S_w(x)}\right),\]-->
 \[\Phi_w^{(r)}(x)=\Phi_w^{(1)}(x)\left(1-\frac{1}{S_w(x)}\right)^{r-1}
 \]
 where
-\begin{eqnarray*}
-S_w(x)&:=& C_w(x) + \sum_{n=k}^{\infty}q_{\petitlpref(w)}^{(n)}(w)x^n,\\
-C_w(x)&:=& 1+\sum_{j=1}^{k-1}\ind{w_{j+1}\ldots w_{k}=w_{1}\ldots w_{k-j}}q_{\petitlpref(w)}^{(j)}\left(w_{k-j+1} \ldots w_k\right)x^j.
-\end{eqnarray*}
 </p>
+<eqnarray>
+<tr><td class="right">$S_w(x)$</td>
+    <td class="center">$:=$</td>
+    <td class="left">$C_w(x) + \sum_{n=k}^{\infty}q_{\petitlpref(w)}^{(n)}(w)x^n$</td>,
+</tr>
+<tr><td class="right">$C_w(x)$</td>
+    <td class="center">$:=$</td>
+    <td class="left">$1+\sum_{j=1}^{k-1}\ind{w_{j+1}\ldots w_{k}=w_{1}\ldots w_{k-j}}q_{\petitlpref(w)}^{(j)}\left(w_{k-j+1} \ldots w_k\right)x^j$.</td>
+</tr>
+</eqnarray>
 <p>
-In the particular case when $w=10^{k-1}$, then $\lpref(w)=\overline{w}=0^{k-1}1$ and $\pi(w)=\frac{c_{k-1}}{S(1)}$.
-Moreover, Definition (<elt href="#mixingCoeff"/>) of the mixing coefficient and Proposition~<elt href="#melange"/>~<em>\textbf{i)</em>} imply successively that
-\begin{align*}
-  q_{\petitlpref(w)}^{(n)}(w) & = \pi\Big(U_{n+k-|w|+1}\ldots U_{n+k}=w\Big| U_{1}\ldots U_k=\lpref(w)\Big) \\
-   & = \pi(w) \Big( \psi\big( n-k,\lpref (w),w\big) +1\Big) \\
-   & = \pi(w) S(1)u_{n-k+1}\\
-   &= c_{k-1}u_{n-k+1},
-   \end{align*}
+In the particular case when $w=10^{k-1}$, then
+ $\lpref(w)=\overline{w}=0^{k-1}1$ and $\pi(w)=\frac{c_{k-1}}{S(1)}$.
+Moreover, Definition (<equation href="mixingCoeff"/>) of the mixing
+coefficient and <prop href="melange"/> <i><strong>i)</strong></i>
+imply successively that
+</p>
+<eqnarray>
+<tr>
+  <td class="right">$q_{\petitlpref(w)}^{(n)}(w) $</td>
+  <td class="left">$= \pi\Big(U_{n+k-|w|+1}\ldots U_{n+k}=w\Big| U_{1}\ldots U_k=\lpref(w)\Big)$</td>
+</tr>
+<tr>
+  <td/>
+  <td class="left">$ = \pi(w) \Big( \psi\big( n-k,\lpref (w),w\big) +1\Big)$</td>
+</tr>
+<tr>
+  <td/>
+  <td class="left">$ = \pi(w) S(1)u_{n-k+1}$</td>
+</tr>
+<tr>
+  <td/>
+  <td class="left">$= c_{k-1}u_{n-k+1}$,</td>
+</tr>
+</eqnarray>
+<p>
 This relation makes more explicit the link between successive occurence times and mixing.
 This leads to
  \[\sum_{n\geqslant k}q_{\petitlpref(w)}^{(n)}(w)x^n=c_{k-1}x^{k-1}\sum_{n\geqslant 1}u_nx^n=c_{k-1}x^{k-1}\big( U(x)-1\big) .\]
@@ -1154,85 +1186,107 @@ Furthermore, there is no auto-correlation structure inside $w$ so that $C_w(x)=1
 This entails
  \[\Phi^{(1)}_w(x)=\frac{c_{k-1}x^k}{S(1)(1-x)\left[ 1+c_{k-1}x^{k-1}\big( U(x)-1\big)\right]}\]
 and
-\begin{eqnarray*}
- \Phi^{(2)}_w(x) & = & \Phi^{(1)}_w(x)\left(1-\frac{1}{S_w(x)}\right) \\
-  & = & \frac{c_{k-1}^2x^{2k-1}\big( U(x)-1\big)}{S(1)(1-x)\left[ 1+c_{k-1}x^{k-1}\big( U(x)-1\big)\right] ^2}
-\end{eqnarray*}
+</p>
+<eqnarray>
+<tr>
+  <td class="right">$ \Phi^{(2)}_w(x)$</td>
+  <td class="center">$ = $</td>
+  <td class="left">$\Phi^{(1)}_w(x)\left(1-\frac{1}{S_w(x)}\right)$</td>
+</tr>
+<tr>
+  <td/>
+  <td class="center">$ = $</td>
+  <td class="left">$\frac{c_{k-1}^2x^{2k-1}\big( U(x)-1\big)}{S(1)(1-x)\left[ 1+c_{k-1}x^{k-1}\big( U(x)-1\big)\right] ^2}$</td>
+</tr>
+</eqnarray>
+<p>
 which is the announced result.
 The assumption
-\[\sum_{n \geqslant 1}n^2c_n <\infty\]
+\[\sum_{n \geqslant 1}n^2c_n \lt \infty\]
 makes $U$ twice differentiable and elementary calculations lead to
-\begin{eqnarray*}
-&& (\Phi_w^{(1)})'(1)=\frac{S(1)}{c_{k-1}}-S(1)+1+\frac{S'(1)}{S(1)}, \qquad
-%(\Phi_w^{(2)})'(1)=\frac{2S(1)}{c_{k-1}}-S(1)+1+\frac{S'(1)}{S(1)},\\
-(\Phi_w^{(2)})'(1)=(\Phi_w^{(1)})'(1)+\frac{S(1)}{c_{k-1}},\\
-&& (\Phi_w^{(1)})''(1)=\frac{2S(1)^2}{c_{k-1}^2}+o\left(\frac{1}{c_{k-1}^2}\right)\quad \mbox{and} \quad (\Phi_w^{(2)})''(1)=\frac{6S(1)^2}{c_{k-1}^2}+o\left(\frac{1}{c_{k-1}^2}\right),\\
-\end{eqnarray*}
-and finally to (<elt href="#esp-var"/>).
-\QED
-%%%%%%%%%
-<subsection id="" title="Logarithmic comb and factorial comb">
-\label{ssec:results}
-%%%%%%%%%
+</p>
+<eqnarray>
+<tr>
+  <td/><td/>
+  <td class="left">$(\Phi_w^{(1)})'(1)=\frac{S(1)}{c_{k-1}}-S(1)+1+\frac{S'(1)}{S(1)}, \qquad
+     (\Phi_w^{(2)})'(1)=(\Phi_w^{(1)})'(1)+\frac{S(1)}{c_{k-1}},$</td>
+</tr>
+<tr>
+  <td/><td/>
+  <td class="left">$(\Phi_w^{(1)})''(1)=\frac{2S(1)^2}{c_{k-1}^2}+o\left(\frac{1}{c_{k-1}^2}\right)\quad \mbox{and} \quad (\Phi_w^{(2)})''(1)=\frac{6S(1)^2}{c_{k-1}^2}+o\left(\frac{1}{c_{k-1}^2}\right)$,</td>
+</tr>
+</eqnarray>
+<p>
+and finally to (<equation href="esp-var"/>).
+<qed/>
+</p>
+</proof>
+</subsection>
+
+<subsection id="ssec:results" title="Logarithmic comb and factorial comb">
+<p>
 Let $h_+$ and $h_-$ be the constants in $[0,+\infty ]$ defined by
-\begin{equation}
-\label{4defh+} h_+ := \lim_{n\to +\infty}\frac{1}{n} \max\Bigl\{\ln\Bigl(\frac{1}{\pi\left(w\right)}\Bigr)\ \Bigr\}
-\mbox{~and~~}h_- := \lim_{n\to +\infty}\frac{1}{n} \min\Bigl\{\ln\Bigl(\frac{1}{\pi\left(w\right)}\Bigr)\ \Bigr\},
-\end{equation}
-where the maximum and the minimum range over the words $w$ of length $n$ with $\pi\left({w}\right)>0$. In their papers, Pittel <cite href="Pittel"/> and Szpankowski <cite href="Szpan93"/> only deal with the cases $h_+<+\infty$ and $h_->0$, which amounts to saying that the probability of any word is exponentially decreasing with its length. Here, we focus on our two examples for which these assumptions are not fulfilled. More precisely, for the logarithmic infinite comb, (<elt href="#probas"/>) implies that $\pi(10^n)$ is of order $n^{-4}$, so that
+<equation id="4defh+">
+h_+ := \lim_{n\to +\infty}\frac{1}{n} \max\Bigl\{\ln\Bigl(\frac{1}{\pi\left(w\right)}\Bigr)\ \Bigr\}
+\mbox{ and }h_- := \lim_{n\to +\infty}\frac{1}{n} \min\Bigl\{\ln\Bigl(\frac{1}{\pi\left(w\right)}\Bigr)\ \Bigr\},
+</equation>
+where the maximum and the minimum range over the words $w$ of length $n$ with
+ $\pi\left({w}\right)>0$. In their papers, Pittel <cite href="Pittel"/> and
+ Szpankowski <cite href="Szpan93"/> only deal with the cases $h_+\lt +\infty$ and
+  $h_->0$, which amounts to saying that the probability of any word is exponentially
+  decreasing with its length. Here, we focus on our two examples for which these
+  assumptions are not fulfilled. More precisely, for the logarithmic infinite comb,
+  (<equation href="probas"/>) implies that $\pi(10^n)$ is of order $n^{-4}$, so that
 $$
 h_- \leqslant \lim_{n\to +\infty}\frac{1}{n} \ln\Bigl(\frac{1}{\pi\left(10^{n-1}\right)}\Bigr) = 4\lim_{n\to +\infty}\frac{\ln n}{n} =0.
 $$
-%and hence the constant $h_-$ is equal to zero.
-Besides, for the factorial infinite comb, $\pi(10^n)$ is of order $\frac 1{(n+1)!}$ so that
 </p>
 <p>
+Besides, for the factorial infinite comb, $\pi(10^n)$ is of order $\frac 1{(n+1)!}$ so that
 $$
 h_+ \geqslant \lim_{n\to +\infty}\frac{1}{n} \ln\Bigl(\frac{1}{\pi\left(10^{n-1}\right)}\Bigr) =  \lim_{n\to +\infty}\frac{\log n!}{n} = +\infty .
 $$
-%and one has $h_+=+\infty$.
-For these two models, the asymptotic behaviour of the lengths of the branches is not always logarithmic, as can be seen in the two following theorems, shown in Sections~<elt href="#ssec:heightLog"/> and~<elt href="#ssec:saturation"/>.
-\begin{Th}[Height of the logarithmic infinite comb]
-\label{hauteur}
-Let $\rond{T}_n$ be the suffix trie built from the $n$ first suffixes of a sequence generated by a logarithmic infinite comb. Then, the height $H_n$ of $\rond{T}_n$ satisfies
+<!--%and one has $h_+=+\infty$.-->
+</p>
+<p>
+For these two models, the asymptotic behaviour of the lengths of the branches
+is not always logarithmic, as can be seen in the two following theorems, shown in
+Sections <elt href="#ssec:heightLog"/> and <elt href="#ssec:saturation"/>.
+</p>
+<theorem id="hauteur" title="Height of the logarithmic infinite comb">
+<p>
+Let $\rond{T}_n$ be the suffix trie built from the $n$ first suffixes of a
+sequence generated by a logarithmic infinite comb. Then, the height $H_n$
+of $\rond{T}_n$ satisfies
 \[\forall \delta > 0, \hskip 1cm \frac{H_n}{n^{\frac 14 - \delta}}
 ~\limite{n\to \infty}{}~+\infty \quad \mbox{in probability.}
 \]
-\end{Th}
 </p>
+</theorem>
+
+<theorem id="saturation" title="Saturation level of the factorial infinite comb">
 <p>
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\begin{figure}[h]
-% \begin{center}
-% \includegraphics[height=9cm]{peigne_log_15exp_100000.jpg}
-% \end{center}
-%\caption{\label{dyn-peigne-log} Simulations of $15$ random sequence. Letters of the sequence are generated by a logarithmic comb. On the $x-$axis, number
-%$n$ of inserted sufixes; on the $y$-axis, the mean for the $15$ experiences of fill-up level $\ell_n$ ("under" curve) and height $H_n$ ("upper" curve).}
-%\end{figure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-</p>
-<p>
-\begin{Th}[Saturation level
-of the factorial infinite comb]
-\label{saturation}
-Let $\rond{T}_n$ be the suffix trie built from the $n$ first suffixes of the sequence generated by a factorial infinite comb. Then, the saturation level $\ell_n$ of $\rond{T}_n$ satisfies:
+Let $\rond{T}_n$ be the suffix trie built from the $n$ first suffixes of the
+sequence generated by a factorial infinite comb. Then, the saturation level
+$\ell_n$ of $\rond{T}_n$ satisfies:
 for any $\delta >1$, almost surely, when $n$ tends to infinity,
 $$
 \ell _n\in o\left(\frac{\log n}{(\log\log n)^\delta}\right).
 $$
-\end{Th}
 </p>
+</theorem>
+<remark id="remark3">
 <p>
-
-\begin{Rem}
 The behaviour of the height of the factorial infinite comb can be
 deduced from Szpankowski <cite href="Szpan93"/>. Namely the property of uniform mixing
-stated in Proposition~<elt href="#UniformMixing"/> implies
+stated in <prop href="UniformMixing"/> implies
 the existence of two strictly positive constants $C$ and $\gamma$ such
 that, for every integer $n\geqslant 1$ and for every word $w$ of length $n$,
-$\pi(w)\leqslant Ce^{-\gamma n}$ (see Galves and Schmitt <cite href="GalSch"/> for a proof). This
-entails $h_2\geqslant\frac{\gamma}{2}>0$ and therefore Theorem 2. in Szpankowski <cite href="Szpan93"/>
-applies: $\frac{H_n}{\log n}$ converges almost surely to
+$\pi(w)\leqslant Ce^{-\gamma n}$ (see Galves and
+ Schmitt <cite href="GalSch"/> for a proof). This
+entails $h_2\geqslant\frac{\gamma}{2}>0$ and therefore Theorem 2. in
+Szpankowski <cite href="Szpan93"/>  applies: $\frac{H_n}{\log n}$ converges
+almost surely to
 $\frac{1}{h_2}$.
 </p>
 <p>
@@ -1242,95 +1296,101 @@ mixing property. In spite of that we conjecture (the numerical simulations seem 
 go in this direction) that the saturation level grows like $\log n$. As
 this is not the main point of the present paper, we decided not to prove
 it, but we think the techniques used here should help.
-\end{Rem}
 </p>
-<p>
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\begin{figure}[h]
-% \begin{center}
-% \includegraphics[height=9cm]{peigne_fact_15exp_100000.jpg}  \end{center}
-%\caption{\label{dyn-peigne-fac} Simulations of $15$ random sequence. Letters of the sequence are generated by a factorial comb. On the $x-$axis, number
-%$n$ of inserted sufixes; on the $y$-axis, the mean for the $15$ experiences of fill-up level $\ell_n$ ("under" curve) and height $H_n$ ("upper" curve).}
-%\end{figure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[h]
- \begin{center}
-  \includegraphics[height=10cm]{250k_25exp_heights.jpg}
-  \includegraphics[height=10cm]{250k_25exp_sats.jpg}
- \end{center}
-\caption{\label{dyn-peigne}
-Respective heights and saturation levels for a logarithmic comb (plain lines), a factorial comb (long dashed lines) and a $\log n$-comb (short dashed lines).}
-\end{figure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The dynamic asymptotics of the height and of the saturation level can be visualized on Figure~<elt href="#dyn-peigne"/>.
-The number $n$ of leaves of the suffix trie is put on the $x$-axis while heights or saturation levels of tries are put on the $y$-axis.
-Plain lines represent a logarithmic comb while long dashed lines are those of a factorial comb (mean values of $25$ simulations).
-</p>
-<p>
+</remark>
 
-Short dashed lines represent a third infinite comb defined by the data $c_n=\frac13\prod_{k=1}^{n-1}\left(\frac{1}{3}+\frac{1}{(1+k)^2}\right)$ for $n\geqslant 1$.
-Such a process has a uniform exponential mixing, a finite $h_+$ and a positive $h_-$ as can be elementarily checked. As a matter of consequence, it satisfies all assumptions of Pittel <cite href="Pittel"/> and Szpankowski <cite href="Szpan93"/> implying that the height and the saturation level are both of order $\log n$.
-Such assumptions will always be fulfilled as soon as the data $(c_n)_n$ satisfy $\varlimsup _nc_n^{1/n}<1$; the proof of this result is left to the reader.
+<figure id="dyn-peigne">
+<img src="250k_25exp_heights.jpg" width="500"/>
+<img src="250k_25exp_sats.jpg" width="500"/>
+<div class="legend">
+Respective heights and saturation levels for a logarithmic comb (plain lines), a factorial comb
+(long dashed lines) and a $\log n$-comb (short dashed lines).
+</div>
+</figure>
+<p>
+The dynamic asymptotics of the height and of the saturation level can be
+visualized on <figure href="dyn-peigne"/>.
+The number $n$ of leaves of the suffix trie is put on the $x$-axis while heights
+or saturation levels of tries are put on the $y$-axis.
+Plain lines represent a logarithmic comb while long dashed lines are those of
+a factorial comb (mean values of $25$ simulations).
+</p>
+<p>
+Short dashed lines represent a third infinite comb defined by the data
+$c_n=\frac13\prod_{k=1}^{n-1}\left(\frac{1}{3}+\frac{1}{(1+k)^2}\right)$ for
+$n\geqslant 1$.
+Such a process has a uniform exponential mixing, a finite $h_+$ and a positive
+$h_-$ as can be elementarily checked. As a matter of consequence, it satisfies
+all assumptions of Pittel <cite href="Pittel"/> and Szpankowski <cite href="Szpan93"/>
+implying that the height and the saturation level are both of order $\log n$.
+Such assumptions will always be fulfilled as soon as the data $(c_n)_n$ satisfy
+$\varlimsup _nc_n^{1/n}\lt 1$; the proof of this result is left to the reader.
 </p>
 <p>
 One can notice the height of the logarithmic comb that grows as a power of $n$.
-The saturation level of the factorial comb, negligible with respect to $\log n$ is more difficult to highlight because of the very slow growth of logarithms.
+The saturation level of the factorial comb, negligible with respect to
+$\log n$ is more difficult to highlight because of the very slow growth of logarithms.
 </p>
-<p>
+<!--<p>
 %Letters are drawn by a logarithmic comb (see the curves in plain line), by a factorial comb (in long dash points) or by an extra comb (in short dash points). For the sake of comparison, we give this extra-example for which, we have chosen $c_n=\frac13\prod_{k=1}^{n-1}\left(\frac{1}{3}+\frac{1}{(1+k)^2}\right)$ for $n\geqslant 1$ in order to have exponential probabilities of words and to be in the frameworks of Pittel <cite href="Pittel"/> and Szpankowski <cite href="Szpan"/>.\pnote{Nicolas au boulot ! :-)} For this comb, both the height's curve and the saturation level's curve are at rate logarithmic. Difficult to visually observe because of the slow rate of convergence of the logarithm, the saturation level of the factorial comb is slower and in fact negligible. One can also vizualize the polynomial behaviour of the height's curve for the logarithmic comb.
 </p>
+-->
 <p>
-\medskip
-These asymptotic behaviours, all coming from the same model, the infinite comb, stress its surprising richness.%immensely noteworthy luxuriousness.
+These asymptotic behaviours, all coming from the same model, the infinite comb,
+stress its surprising richness.
 </p>
-<p>
+</subsection>
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+<subsection id="ssec:heightLog" title="Height for the logarithmic comb">
+<p>
+In this subsection, we prove <theorem href="hauteur"/>.
+<!--%the first result concerning the logarithmic infinite comb, Theorem <elt href="#hauteur"/>.-->
 </p>
 <p>
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-<subsection id="" title="Height for the logarithmic comb">
-\label{ssec:heightLog}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-In this subsection, we prove Theorem <elt href="#hauteur"/>.
-%the first result concerning the logarithmic infinite comb, Theorem <elt href="#hauteur"/>.
+Consider the right-infinite sequence $s=10^{\infty}$. Then, $T_k(s)$ is
+the second occurrence time of $w=10^{k-1}$. It is a nondecreasing (random)
+function of $k$. Moreover, $X_n(s)$ is the maximum of all $k$ such that
+$s^{(k)}\in\rond T_n$. It is nondecreasing in $n$. So, by definition of
+$X_n(s)$ and $T_k(s)$, the duality can be written
+<equation id="dualitybis">
+\forall n, \forall \omega, \exists k_n, \quad k_n\leqslant X_n(s)\lt k_n+1 \mbox{ and }T_{k_n}(s)\leqslant n \lt T_{k_n+1}(s).
+</equation>
 </p>
 <p>
-Consider the right-infinite sequence $s=10^{\infty}$. Then, $T_k(s)$ is the second occurrence time of $w=10^{k-1}$. It is a nondecreasing (random) function of $k$. Moreover, $X_n(s)$ is the maximum of all $k$ such that $s^{(k)}\in\rond T_n$. It is nondecreasing in~$n$. So, by definition of $X_n(s)$ and $T_k(s)$, the duality can be written
-\begin{equation}\label{dualitybis}
-\forall n, \forall \omega, \exists k_n, \quad k_n\leqslant X_n(s)<k_n+1 \mbox{~~and~~}T_{k_n}(s)\leqslant n < T_{k_n+1}(s).
-\end{equation}
-</p>
-<p>
-{\bf
-Claim}:
-\begin{equation}\label{xninfini}
-%\forall s,
+<strong>Claim</strong>:
+<equation id="xninfini">
 \lim_{n\rightarrow +\infty} X_n(s) = + \infty \quad \mbox{a.s.}
-\end{equation}
-Indeed, if $X_n(s)$ were bounded above, by $K$ say, then take $w = 10^{K}$ and consider $T_{K+1}(s)$ which is the time of the second occurrence of $10^{K}$.
-The choice of the $c_n$ in the definition of the logarithmic comb implies the convergence of the series $\sum _nn^2c_n$. Thus (<elt href="#esp-var"/>) holds and $\g E[T_{K+1}(s)]<\infty$ so that $T_{K+1}(s)$ is almost surely finite. This means that for $n>T_{K+1}(s)$, the word $10^{K}$ has been seen twice, leading to $X_n(s)\geqslant K+1$ which is a contradiction.
+</equation>
+Indeed, if $X_n(s)$ were bounded above, by $K$ say, then take $w = 10^{K}$
+and consider $T_{K+1}(s)$ which is the time of the second occurrence of $10^{K}$.
+The choice of the $c_n$ in the definition of the logarithmic comb implies
+the convergence of the series $\sum _nn^2c_n$. Thus (<equation href="esp-var"/>)
+holds and $\g E[T_{K+1}(s)]\lt \infty$ so that $T_{K+1}(s)$ is almost surely
+finite. This means that for $n\gt T_{K+1}(s)$, the word $10^{K}$ has been seen
+twice, leading to $X_n(s)\geqslant K+1$ which is a contradiction.
 </p>
 <p>
-\medskip
 We make use of the following lemma that is proven hereunder.
-\begin{Lem}\label{Tk} For $s=10^{\infty}$,
+</p>
+<lemma id="Tk">
+<p>For $s=10^{\infty}$,
 \[\forall \eta > 0, \quad \frac{T_k(s)}{k^{4+\eta}}~\limite{k \to \infty}{}~0{\sl ~~in~probability},
 \]
 and
-\begin{equation}\label{Tksurk}
+<equation id="Tksurk">
 \forall \eta > \frac 12, \quad \frac{T_k(s)}{k^{4+\eta}} \ \ \smash{\mathop{\longrightarrow}\limits _{k\to \infty}} \ \ 0 \quad \mbox{a.s.}
-\end{equation}
-\end{Lem}
+</equation>
 </p>
+</lemma>
 <p>
-With notations~(<elt href="#dualitybis"/>), because of~(<elt href="#xninfini"/>), the sequence $(k_n)$ tends to infinity, so that $\left(T_{k_n}(s)\right)$ is a subsequence of $\left(T_k(s)\right)$. Thus, (<elt href="#Tksurk"/>) implies that
+With notations (<equation href="dualitybis"/>), because of (<equation href="xninfini"/>),
+the sequence $(k_n)$ tends to infinity, so that $\left(T_{k_n}(s)\right)$ is a subsequence
+of $\left(T_k(s)\right)$. Thus, (<elt href="#Tksurk"/>) implies that
 \[
 \forall \eta > \frac 12, \quad \frac{T_{k_n}(s)}{k_n^{4+\eta}} \ \ \smash{\mathop{\longrightarrow}\limits _{n\to \infty}} \ \ 0 \quad \mbox{a.s.} \quad \mbox{and} \quad  \forall \eta > 0, \quad \frac{T_{k_n}(s)}{k_n^{4+\eta}}~\limite{k\to \infty}{P}~0.
 \]
-Using duality (<elt href="#dualitybis"/>) again leads to
-%$$\forall \eta > \frac 12, \hskip 1cm \frac{X_n(s)}{n^{1/({4+\eta})}} \ \ \smash{\mathop{\longrightarrow}\limits _{n\to \infty}} \ \ +\infty \hskip 1cm a.s.$$
+Using duality (<equation href="dualitybis"/>) again leads to
+<!--%$$\forall \eta > \frac 12, \hskip 1cm \frac{X_n(s)}{n^{1/({4+\eta})}} \ \ \smash{\mathop{\longrightarrow}\limits _{n\to \infty}} \ \ +\infty \hskip 1cm a.s.$$-->
 \[\forall \eta > 0, \quad \frac{X_n(s)}{n^{1/({4+\eta})}}~\limite{n \to \infty}{P}~+\infty.\]
 In other words
 $$
@@ -1338,97 +1398,111 @@ $$
 $$
 so that, since the height of the suffix trie is larger than $X_n(s)$,
 \[\forall \delta > 0, \quad \frac{H_n}{n^{\frac 14 - \delta}}~\limite{n\to \infty}{P}~+\infty.\]
-This ends the proof of Theorem~<elt href="#hauteur"/>.
-\QED
+This ends the proof of <theorem href="hauteur"/>.
+<qed/>
 </p>
+
+<proof id="proofTk" title="Proof of &lt;lemma href=&quot;#Tk&quot;/&gt;">
 <p>
-\bigskip
-{\sc Proof of Lemma <elt href="#Tk"/>.}
-</p>
-<p>
-Combining (<elt href="#lien-tau-T"/>) and (<elt href="#esp-var"/>) shows that
-\begin{equation}\label{meanTk}
+Combining (<equation href="lien-tau-T"/>) and (<equation href="esp-var"/>) shows that
+<equation id="meanTk">
 \g E(T_k(s)) = \g E(\tau^{(2)}(w))-k= \frac{19}{9} k^4 + o(k^4)
-\end{equation}
+</equation>
 and
-\begin{equation}\label{varTk}
+<equation id="varTk">
 \Var(T_k(s)) = \Var(\tau^{(2)}(w))=\frac{361}{162} k^8 + o(k^8).
-\end{equation}
+</equation>
 For all $\eta >0$, write
 $$
 \frac{T_k(s)}{k^{4+\eta}} = \frac{T_k(s) -\g E(T_k(s))}{k^{4+\eta}} + \frac{\g E(T_k(s))}{k^{4+\eta}} .
 $$
-The deterministic part in the second-hand right term goes to $0$ with $k$ thanks to (<elt href="#meanTk"/>), so that we focus on the term $\displaystyle\frac{T_k(s) -\g E(T_k(s))}{k^{4+\eta}}$.
+The deterministic part in the second-hand right term goes to $0$ with $k$ thanks
+to (<equation href="meanTk"/>), so that we focus on the term
+$\displaystyle\frac{T_k(s) -\g E(T_k(s))}{k^{4+\eta}}$.
 For any $\varepsilon >0$, because of Bienaymé-Tchebychev inequality,
 $$
 \g \PP\left(\frac{|T_k(s) -\g E[T_k(s)]|}{k^{4+\eta}} >\varepsilon\right) \leqslant \frac{Var(T_k(s))}{\varepsilon^2 k^{8+2\eta}}=\mathcal{O}\left(\frac 1{k^{2\eta}}\right).
-%= \frac{C}{\varepsilon^2 k^{2\eta}}\left( 1+o(1)\right)
 $$
-%where $C$ is any constant such that $C>\frac{361}{162}$, the constant in (<elt href="#varTk"/>).
-This shows the convergence in probability in Lemma~<elt href="#Tk"/>. Moreover, Borel-Cantelli Lemma ensures the almost sure convergence as soon as $\eta > \frac 12$. \QED
+This shows the convergence in probability in <lemma href="Tk"/>.
+Moreover, Borel-Cantelli Lemma ensures the almost sure convergence as soon as $\eta > \frac 12$.
+<qed/>
+</p>
+</proof>
+<remark id="remark4">
+<p>
+Notice that our proof shows actually that the convergence to
+$+\infty$ in <theorem href="hauteur"/> is valid a.s. (and not only in probability)
+as soon as $\delta > \frac 1{36}$.
+</p>
+</remark>
+</subsection>
+
+<subsection id="ssec:saturation" title="Saturation level for the factorial comb">
+<p>
+In this subsection, we prove <theorem href="saturation"/>.
 </p>
 <p>
-\begin{Rem}
-Notice that our proof shows actually that the convergence to $+\infty$ in Theorem~<elt href="#hauteur"/> is valid a.s. (and not only in probability) as soon as $\delta > \frac 1{36}$. \end{Rem}
-</p>
-<p>
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-<subsection id="" title="Saturation level for the factorial comb">
-\label{ssec:saturation}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-In this subsection, we prove Theorem <elt href="#saturation"/>.
-</p>
-<p>
-Consider the probabilized infinite <em>factorial</em> comb defined in Section~<elt href="#sec:source"/>
+Consider the probabilized infinite <em>factorial</em> comb defined in
+Section <elt href="#sec:source"/>
 by
 $$
 \forall n\in\g N,~c_n=\frac{1}{(n+1)!}.
 $$
-The proof hereunder shows actually that $\left( \frac{\ell _n\log\log n}{\log n}\right) _n$ is an almost surely bounded sequence, which implies the result.
+The proof hereunder shows actually that
+ $\left( \frac{\ell _n\log\log n}{\log n}\right) _n$ is an almost surely
+bounded sequence, which implies the result.
+<!--
 %Recall that the <em>saturation level</em> of the related suffix trie at time $n$ is defined as the height of the smallest
 %complete subtree made of internal nodes after insertion of $n$ keys, \pnote{pas tout a fait vrai, je peux l'enlever ?}namely
 %$$
 %\ell _n=\min _{s\in\rond R}X_n(s).
 %$$
+-->
 Recall that $\rond R$ denotes the set of all right-infinite sequences.
-By characterization of the saturation level as a function of $X_n$ (see (<elt href="#defi-var"/>)),
+By characterization of the saturation level as a function of $X_n$
+(see (<equation href="defi-var"/>)),
 $\g P\left(\ell _n\leqslant k\right) =\g P\left(\exists s\in\rond R,~X_n(s)\leqslant k\right)$ for all positive integers $n,k$.
-Duality formula~(<elt href="#duality"/>) then provides
+Duality formula (<equation href="duality"/>) then provides
 $$
 \begin{array}{rl}
-\g P\left(\ell _n\leqslant k\right)&=\g P\left(\exists s\in\rond R,~T_k(s)\geqslant n\right)\\ \\
-&\geqslant\g P\left( T_k( \widetilde{s})\geqslant n\right)
+\g P\left(\ell _n\leqslant k\right)&amp;=\g P\left(\exists s\in\rond R,~T_k(s)\geqslant n\right)\\ \\
+&amp;\geqslant\g P\left( T_k( \widetilde{s})\geqslant n\right)
 \end{array}
 $$
 where $\widetilde{s}$ denotes any infinite word having $10^{k-1}$ as a prefix.
 Markov inequality implies
-\begin{equation}
-\label{postMarkov}
-\forall x\in ]0,1[,~\g P\left( \ell _n\geqslant k+1\right)\leqslant \g P\Big(\tau^{(2)}(10^{k-1})<n+k\Big)\leqslant\frac{\Phi ^{(2)}_{10^{k-1}}(x)}{x^{n+k}}
-\end{equation}
+<equation id="postMarkov">
+\forall x\in ]0,1[,~\g P\left( \ell _n\geqslant k+1\right)\leqslant \g P\Big(\tau^{(2)}(10^{k-1})\lt n+k\Big)\leqslant\frac{\Phi ^{(2)}_{10^{k-1}}(x)}{x^{n+k}}
+</equation>
 where $\Phi ^{(2)}_{10^{k-1}}(x)$
- denotes as above the generating function of the rank of the final letter of the second occurrence of $10^{k-1}$ in the infinite random word $(U_n)_{n\geq 1}$. The simple form of the factorial comb leads to the explicit expression
+ denotes as above the generating function of the rank of the final letter
+ of the second occurrence of $10^{k-1}$ in the infinite random word
+ $(U_n)_{n\geq 1}$. The simple form of the factorial comb leads to the
+ explicit expression
 $U(x)=\frac{x}{(1-x)(e^x-1)}$ and, after computation,
-\begin{equation}
-\label{phi2Factoriel}
+<equation id="phi2Factoriel">
 \Phi ^{(2)}_{10^{k-1}}(x)=
 \frac{e^x-1}{e-1}\cdot
 \frac{x^{2k-1}\big( 1-e^x(1-x)\big)}
 {\Big[ k!\left( e^x-1\right)\left( 1-x\right)+x^{k-1}\big( 1-e^x(1-x)\big)\Big] ^2}.
-\end{equation}
-In particular, applying Formulae~(<elt href="#postMarkov"/>) and~(<elt href="#phi2Factoriel"/>) with $n=(k-1)!$ and $x=1-\frac 1{(k-1)!}$ implies that
+</equation>
+In particular, applying Formulae (<equation href="postMarkov"/>) and
+(<equation href="phi2Factoriel"/>) with $n=(k-1)!$ and $x=1-\frac 1{(k-1)!}$
+implies that
 for any $k\geqslant 2$,
 $$
 \g P(\ell _{(k-1)!}\geqslant k+1)\leqslant
 \frac{\left( 1-\frac{1}{(k-1)!}\right) ^{2k-1}}{\Big[ k!(e^{1/2}-1)\frac{1}{(k-1)!}\Big] ^2}
 \cdot\frac {1}{\left( 1-\frac{1}{(k-1)!}\right) ^{(k-1)!+k}}.
 $$
-Consequently, $\g P\left(\ell _{(k-1)!}\geqslant k+1\right)=\mathcal{O}(k^{-2})$ is the general term of a convergent series.
+Consequently, $\g P\left(\ell _{(k-1)!}\geqslant k+1\right)=\mathcal{O}(k^{-2})$ is
+the general term of a convergent series.
 Thanks to Borel-Cantelli Lemma, one gets almost surely
 \[
 \varlimsup _{n\to+\infty}\frac{\ell _{n!}}{n}\leqslant 1.
 \]
-Let $\Gamma ^{-1}$ denote the inverse of Euler's Gamma function, defined and increasing on the real interval
+Let $\Gamma ^{-1}$ denote the inverse of Euler's Gamma function, defined and
+increasing on the real interval
 $[2,+\infty [$.
 If $n$ and $k$ are integers such that $(k+1)!\leqslant n\leqslant (k+2)!$, then
 $$
@@ -1447,26 +1521,27 @@ $$
 \Gamma ^{-1}(x)\equivalent {+\infty}\frac{\log x}{\log\log x},
 $$
 which implies the result.
-\QED
+<qed/>
 </p>
+</subsection>
+<subsection id="acks" title="Acknowledgements">
 <p>
-\subsection*{Acknowledgements}
-The authors are very grateful to Eng. Maxence Guesdon for providing simulations with great talent and an infinite patience.
-They would like to thank also all people managing two very important tools for french mathematicians: first the Institut Henri Poincaré, where a large part of this work was done and second Mathrice which provides a large number of services.
-%Among them, svn was very helpful for us.
+The authors are very grateful to Eng. Maxence Guesdon for providing
+simulations with great talent and an infinite patience.
+They would like to thank also all people managing two very important
+tools for french mathematicians: first the Institut Henri Poincaré, where a
+large part of this work was done and second Mathrice which provides a
+large number of services.
+<!--%Among them, svn was very helpful for us.-->
 </p>
-<p>
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\bibliographystyle{plain}
-\bibliography{vlmc}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-</p>
-<p>
-\end{document}
--->
+</subsection>
 </section>
 <notes/>
 </prepare-notes>
+
+<section id="bib" title="Bibliography">
 <bibliography/>
+</section>
+
 </contents>
 </article>
