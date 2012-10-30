@@ -231,7 +231,23 @@ Suffix tries, also called suffix trees in the literature, have been developped w
 The growing of suffix tries (called prefix trees in Shields' book <cite href="Shieldsbook"/>) is closely related to second occurrences of patterns; this will be precisely explained later in Section \ref{ssec:height}. Consequently, many results on this subject can be found in papers dealing with occurrences of words, renewal theory or waiting times like Shields <cite href="Shields"/> or Wyner-Ziv <cite href="WynZiv"/>.
 </p>
 <p>
-In the present paper we are interested in the height $H_n$ and the saturation level $\ell_n$ of a suffix trie $\rond T_n$ containing the first $n$ suffixes of an infinite word produced by a probabilistic source. The analysis of the height and the saturation level is usually motivated by optimization of the memory cost. Height is clearly relevant to this point; saturation level is algorithmically relevant as well because internal nodes below the saturation level are often replaced by a less expansive table. Such parameters depend crucially on the characteristics of the source. Most of the above mentioned results are obtained for memoryless or Markovian sources, while realistic sources are often more complex. We work here with a more general source model. It includes nonmarkovian processes where the dependency on past history is unbounded. It has the advantage of making calculations possible as well. The source is associated with a so-called Variable Length Markov Chain (VLMC) (see Rissanen <cite href="Ris"/> for the seminal work, Galves-L\"ocherbach <cite href="GalLoc"/> for an overview,  and  <cite href="ccpp"/> for a probabilistic frame). We deal with a particular VLMC source defined by an infinite comb, described hereafter.
+In the present paper we are interested in the height $H_n$ and the saturation
+level $\ell_n$ of a suffix trie $\rond T_n$ containing the first $n$ suffixes
+of an infinite word produced by a probabilistic source. The analysis of the
+height and the saturation level is usually motivated by optimization of the
+memory cost. Height is clearly relevant to this point; saturation level is
+algorithmically relevant as well because internal nodes below the saturation
+level are often replaced by a less expansive table. Such parameters depend
+crucially on the characteristics of the source. Most of the above mentioned
+results are obtained for memoryless or Markovian sources, while realistic
+sources are often more complex. We work here with a more general source model.
+It includes nonmarkovian processes where the dependency on past history is
+unbounded. It has the advantage of making calculations possible as well.
+The source is associated with a so-called Variable Length Markov Chain (VLMC)
+(see Rissanen <cite href="Ris"/> for the seminal work, Galves-Löcherbach
+<cite href="GalLoc"/> for an overview,  and  <cite href="ccpp"/> for a
+probabilistic frame). We deal with a particular VLMC source defined by an
+infinite comb, described hereafter.
 </p>
 <p>
 A first browse of the literature reveals tries or suffix tries that have a height and a saturation level both growing logarithmically with the number of words inserted. For plain tries, <em>i.e.</em> when the inserted words are independent, the results due to Pittel <cite href="Pittel"/> rely on  two assumptions on the source that produces the words: first, the source is uniformly mixing, second, the probability of any word decays exponentially with its length.
@@ -267,7 +283,7 @@ The set of leaves is
 \[
 \mathcal{C}:=\{0^n1,\, n\ge 0\}\cup \{0^\infty\}.
 \]
-Each leaf is labelled with a Bernoulli distribution on $\{0,1\}$, respectively  denoted by $q_{0^k1}, k\geqslant 0$ and $q_{0^\infty}$, <em>i.e.</em>\@
+Each leaf is labelled with a Bernoulli distribution on $\{0,1\}$, respectively  denoted by $q_{0^k1}, k\geqslant 0$ and $q_{0^\infty}$, <em>i.e.</em>
 \[\forall k \geq 0 \quad q_{0^k1}(0)=1-q_{0^k1}(1).\]
 This probabilized tree is called <em>the infinite comb</em>.
 </p>
@@ -294,7 +310,9 @@ c_n:= \prod_{k=0}^{n-1} q_{0^{k}1}(0).
 $$
 </p>
 <p>
-It is proved in <cite href="ccpp"/> that in the irreducible case <em>i.e.</em>\@ when $q_{0^{\infty}}(0)\not= 1$, there exists a unique stationary probability measure $\pi$ on $\rond L$ for $(V_n)_n$ if and only if the series $\sum c_n$ converges.
+It is proved in <cite href="ccpp"/> that in the irreducible case <em>i.e.</em>
+when $q_{0^{\infty}}(0)\not= 1$, there exists a unique stationary probability
+measure $\pi$ on $\rond L$ for $(V_n)_n$ if and only if the series $\sum c_n$ converges.
 From now on, we assume that this condition is fulfilled and we call
 <equation id="def-S">
 S(x):=\sum_{n\geqslant 0} c_n x^n
@@ -576,7 +594,7 @@ This implies:
    +  \sum_{1\le i\lt j\le n}\rho_{a+i}\rho_{n+1-j+b}\sum_{w, |w|=j-i11}\frac{\pi(1w1)}{\pi(1)}.\]
 Recalling that $u_0=1$, one gets
  \[v_n^{a,b}=\rho_{a+b+n+1}+\sum_{1\le i\le j\le n}\rho_{a+i}\rho_{n+1-j+b}u_{j-i}\]
-which gives the result  \textbf{\itshape ii)} with <lemma href="lemme_un"/>.
+which gives the result <strong><i>ii)</i></strong> with <lemma href="lemme_un"/>.
 </p>
 </li>
 <li>
@@ -1379,7 +1397,7 @@ We make use of the following lemma that is proven hereunder.
 </p>
 <lemma id="Tk">
 <p>For $s=10^{\infty}$,
-\[\forall \eta > 0, \quad \frac{T_k(s)}{k^{4+\eta}}~\limite{k \to \infty}{}~0{\sl ~~in~probability},
+\[\forall \eta > 0, \quad \frac{T_k(s)}{k^{4+\eta}}~\limite{k \to \infty}{}~0\quad \mbox{in probability},
 \]
 and
 <equation id="Tksurk">
