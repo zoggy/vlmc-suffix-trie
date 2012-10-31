@@ -136,85 +136,93 @@ is uniform and exponential.
 </latex-defs>
 
 <functions_>
-<figure id="" title="" href="">
-    <block counter-name="figure" class="figure"
-           label="Figure" href="&lt;href/&gt;"
-           id="&lt;id/&gt;" title="&lt;title/&gt;">
+<figure id="" title="" href=""><block
+  counter-name="figure" class="figure"
+  label="Figure" href="&lt;href/&gt;"
+  id="&lt;id/&gt;" title="&lt;title/&gt;"
+>
 <div class="&lt;class/&gt;" id="&lt;id/&gt;">
   <div class="title"><title/></div>
   <div class="contents"><contents/></div>
-</div></block>
-</figure>
-<theorem id="" title="" href="">
-    <block counter-name="theorem" class="theorem"
-           label="Theorem" href="&lt;href/&gt;"
-           id="&lt;id/&gt;" title="&lt;title/&gt;">
-<div class="&lt;class/&gt;" id="&lt;id/&gt;">
-  <div class="title"><title/></div>
-  <div class="contents"><contents/></div>
-</div></block>
-</theorem>
+</div></block></figure>
 
-<lemma id="" title="" href="">
-    <block counter-name="lemma" class="lemma"
-           label="Lemma" href="&lt;href/&gt;"
-           id="&lt;id/&gt;" title="&lt;title/&gt;">
+<theorem id="" title="" href=""><block
+  counter-name="theorem" class="theorem"
+  label="Theorem" href="&lt;href/&gt;"
+  id="&lt;id/&gt;" title="&lt;title/&gt;"
+>
 <div class="&lt;class/&gt;" id="&lt;id/&gt;">
   <div class="title"><title/></div>
   <div class="contents"><contents/></div>
-</div></block>
-</lemma>
+</div></block></theorem>
 
-<prop id="" title="" href="">
-    <block counter-name="prop" class="prop"
-           label="Proposition" href="&lt;href/&gt;"
-           id="&lt;id/&gt;" title="&lt;title/&gt;">
+<lemma id="" title="" href=""><block
+  counter-name="lemma" class="lemma"
+  label="Lemma" href="&lt;href/&gt;"
+  id="&lt;id/&gt;" title="&lt;title/&gt;"
+>
+<div class="&lt;class/&gt;" id="&lt;id/&gt;">
+  <div class="title"><label/> <counter counter-name="lemma"/></div>
+  <div class="contents"><contents/></div>
+</div></block></lemma>
+
+<prop id="" title="" href=""><block
+  with-contents="true"
+  counter-name="prop" class="prop"
+  label="Proposition" href="&lt;href/&gt;"
+  id="&lt;id/&gt;" title="&lt;title/&gt;"
+>
+<long-title-format><label/> <counter counter-name="prop"/></long-title-format>
+<short-title-format><label/> <counter counter-name="prop"/></short-title-format>
+<contents><div class="&lt;class/&gt;" id="&lt;id/&gt;">
+  <div class="title"><title/></div>
+  <div class="contents"><contents/></div>
+</div></contents></block></prop>
+
+<remark id="" title="" href=""><block
+  counter-name="remark" class="remark"
+  label="Remark" href="&lt;href/&gt;"
+  id="&lt;id/&gt;" title="&lt;title/&gt;"
+>
 <div class="&lt;class/&gt;" id="&lt;id/&gt;">
   <div class="title"><title/></div>
   <div class="contents"><contents/></div>
-</div></block>
-</prop>
+</div></block></remark>
 
-<remark id="" title="" href="">
-    <block counter-name="remark" class="remark"
-           label="Remark" href="&lt;href/&gt;"
-           id="&lt;id/&gt;" title="&lt;title/&gt;">
-<div class="&lt;class/&gt;" id="&lt;id/&gt;">
-  <div class="title"><title/></div>
-  <div class="contents"><contents/></div>
-</div></block>
-</remark>
-
-<proof id="" title="" href="">
-    <block counter-name="" class="proof"
-           label="Proof" href="&lt;href/&gt;"
-           id="&lt;id/&gt;" title="&lt;title/&gt;">
+<proof id="" title="" href=""><block
+  counter-name="" class="proof"
+  label="Proof" href="&lt;href/&gt;"
+  id="&lt;id/&gt;" title="&lt;title/&gt;"
+>
 <div class="&lt;class/&gt;" id="&lt;id/&gt;">
   <div class="title">Proof.</div>
   <div class="contents"><contents/></div>
-</div></block>
-</proof>
+</div></block></proof>
 
-<equation id="" title="" href="">
-    <block counter-name="equation" class="equation"
-           label="" href="&lt;href/&gt;"
-           id="&lt;id/&gt;" title="&lt;title/&gt;">
-<div class="&lt;class/&gt;" id="&lt;id/&gt;">
+<equation id="" title="" href=""><block
+  with-contents="true"
+  counter-name="equation" class="equation"
+  label="" href="&lt;href/&gt;"
+  id="&lt;id/&gt;" title="&lt;title/&gt;"
+>
+  <long-title-format>(<counter counter-name="equation"/>)</long-title-format>
+  <short-title-format>(<counter counter-name="equation"/>)</short-title-format>
+<contents><div class="&lt;class/&gt;" id="&lt;id/&gt;">
   <div class="contents">$<contents/>$</div>
-  <div class="title">(<counter counter-name="equation"/>)</div>
-</div></block>
-</equation>
+  <div class="title"><title/></div>
+</div></contents></block></equation>
 
-<eqnarray>
-<table class="eqnarray"><contents/></table>
-</eqnarray>
+<eqnarray><table class="eqnarray"><contents/></table></eqnarray>
 </functions_>
 <cite-format>[<bib-field name="id"/>]</cite-format>
 <contents>
 \(<latex-defs/>\)
+<prepare-toc>
 <prepare-notes>
 <abstract/>
 <sep_/>
+<toc/>
+
 <section id="sec:Intro" title="Introduction">
 <p>
 <em>Trie</em> (abbreviation of re<i>trie</i>val) is a natural data structure, efficient for searching words in a given set and used in many algorithms as data compression, spell checking or IP addresses lookup. A <em>trie</em> is a digital tree in which
@@ -228,7 +236,7 @@ words is given, the way they are inserted in the trie is deterministic. Neverthe
 Suffix tries, also called suffix trees in the literature, have been developped with tools from analysis of algorithms and information theory on one side and from probability theory and ergodic theory on the other side. Construction algorithms of such trees go back to Weiner <cite href="Weiner"/> in 1973 and many applications in computer science and biology can be found in Gusfield's book <cite href="Gusfield97"/>. As a major application of suffix tries one can cite an efficient implementation of the famous Lempel-Ziv lossless compression algorithm LZ77. The first results on the height of random suffix trees are due to Szpankowski <cite href="Szpan91"/> and Devroye <em>et al.</em> <cite href="Devroye2"/>, and the most recent results are in Szpankowski <cite href="Szpan93"/> and Fayolle <cite href="Fayolle"/>.
 </p>
 <p>
-The growing of suffix tries (called prefix trees in Shields' book <cite href="Shieldsbook"/>) is closely related to second occurrences of patterns; this will be precisely explained later in Section \ref{ssec:height}. Consequently, many results on this subject can be found in papers dealing with occurrences of words, renewal theory or waiting times like Shields <cite href="Shields"/> or Wyner-Ziv <cite href="WynZiv"/>.
+The growing of suffix tries (called prefix trees in Shields' book <cite href="Shieldsbook"/>) is closely related to second occurrences of patterns; this will be precisely explained later in Section <elt href="#ssec:height"/>. Consequently, many results on this subject can be found in papers dealing with occurrences of words, renewal theory or waiting times like Shields <cite href="Shields"/> or Wyner-Ziv <cite href="WynZiv"/>.
 </p>
 <p>
 In the present paper we are interested in the height $H_n$ and the saturation
@@ -255,7 +263,20 @@ Let us also mention the general analysis of tries by Clément <em>et al.</em> <c
 For suffix tries, Szpankowski <cite href="Szpan93"/> obtains the same result, with a weaker mixing assumption (still uniform though) and with the same hypothesis on the measure of the words. Nevertheless, in <cite href="Shields"/>, Shields states a result on prefixes of ergodic processes suggesting that the saturation level of suffix tries might not necessarily grow logarithmically with the number of words inserted.
 </p>
 <p>
-Our aim is to exhibit two cases when the behaviour of the height or the saturation level is no longer logarithmic. The first example is the ``<em>logarithmic comb</em>'', for which we show that the mixing is slow in some sense, namely non uniformly polynomial (see Section \ref{ssec:mixinglogarithmiccomb} for a precise statement) and the measure of some increasing sequence of words decays polynomially. We prove in <theorem href="hauteur"/> that the height of this trie is larger than a power of $n$ (when $n$ is the number of inserted suffixes in the tree). The second example is the ``<em>factorial comb</em>'', which has a uniformly exponential mixing, thus fulfilling the mixing hypothesis of Szpankowski  <cite href="Szpan93"/>, but the measure of some increasing sequence of words decays faster than any exponential. In this case we prove in <theorem href="saturation"/> that the saturation level is negligible with respect to $\log n$. We prove more precisely that, almost surely,
+Our aim is to exhibit two cases when the behaviour of the height or the saturation level
+is no longer logarithmic. The first example is the "<em>logarithmic comb</em>", for
+ which we show that the mixing is slow in some sense, namely non uniformly polynomial
+ (see Section <elt href="#ssec:mixinglogarithmiccomb"/> for a precise statement) and the
+ measure of some increasing sequence of words decays polynomially. We prove in
+ <theorem href="hauteur"/> that the height of this trie is larger than a power
+ of $n$ (when $n$ is the number of inserted suffixes in the tree).
+</p>
+<p>The second example is the "<em>factorial comb</em>", which has a uniformly
+exponential mixing, thus fulfilling the mixing hypothesis of Szpankowski
+<cite href="Szpan93"/>, but the measure of some increasing sequence of words
+decays faster than any exponential. In this case we prove in
+<theorem href="saturation"/> that the saturation level is negligible with respect
+to $\log n$. We prove more precisely that, almost surely,
 $\ell _n\in o\left(\frac{\log n}{(\log\log n)^\delta}\right)$, for any $\delta >1$.
 </p>
 
@@ -341,7 +362,7 @@ The corresponding conditional probabilities on the leaves of the tree are
   \[q_1(0)=\frac{1}{24}\quad \mbox{and for }n\geqslant 1, \quad q_{0^n1}(0)=1-\frac{4}{n+4}.\]
 The expression of $c_n$ was chosen to make the computations as simple
 as possible and also because the square-integrability of the waiting time of
-some pattern will be needed (see end of Section<elt href="#ssec:generating"/>),
+some pattern will be needed (see end of Section <elt href="#ssec:generating"/>),
 guaranteed by
 \[\sum_{n\geqslant 0} n^2c_n\lt+\infty.\]
 </p>
@@ -365,7 +386,7 @@ $$
 <p>
 In this section, we first precise what we mean by mixing properties of a random
 sequence. We refer to Doukhan  <cite href="Doukhan"/>, especially for the notion
-of $\psi$-mixing defined in that book. We state in Proposition <elt href="#melange"/>
+of $\psi$-mixing defined in that book. We state in <prop href="melange"/>
 a general result that provides the mixing coefficient for an infinite comb defined by
 $(c_n)_{n\geqslant 0}$ or equivalently by its generating function $S$. This result
 is then applied to our two examples. The mixing of the logarithmic comb is polynomial
@@ -379,7 +400,7 @@ although with a slight different language.
 <p>
 For a stationary sequence $(U_n)_{n\geqslant 0}$ with stationary measure
 $\pi$, we want to measure by means of a suitable coefficient the independence between
-two words $A$ and $B$ separated by $n$ letters. The sequence is said to be ``mixing''
+two words $A$ and $B$ separated by $n$ letters. The sequence is said to be "mixing"
 when this coefficient vanishes when $n$ goes to $+\infty$. Among all types of mixing,
 we focus on one of the strongest type: <em>$\psi$-mixing</em>. More precisely, for
 $0\leqslant m\leqslant +\infty$, denote by ${\cal F}_0^m$ the $\sigma$-algebra
@@ -413,7 +434,7 @@ the lack of uniformity for the logarithmic comb.
 <subsection id="notations" title="Notations and Generating functions">
 <p>
 $\bullet$ For a comb, recall that $S$ is the generating function of the nonincreasing
-sequence $(c_n)_{n\geqslant 0}$ defined by (<elt href="#def-S"/>).
+sequence $(c_n)_{n\geqslant 0}$ defined by <equation href="def-S"/>.
 </p>
 <p>
 $\bullet$ Set $\rho_0=0$ and for $n\geqslant 1$,
@@ -444,7 +465,7 @@ and (consequently)
 <p>
 For a finite word $w=\alpha_1\ldots\alpha_m$ such that $w \neq 0^m$, let $l(w)$ denote
 the position of the last $1$ in $w$, that is $l(w):=\max\{1\le i\le m,~\alpha_i=1\}$.
-Then, the sum in the expression (<elt href="#un"/>) of $u_n$ can be decomposed as follows:
+Then, the sum in the expression <equation href="un"/> of $u_n$ can be decomposed as follows:
 \[\sum_{|w|=n-1}\pi(1w1)=\pi(10^{n-1}1)+\sum_{i=1}^{n-1}\sum_{{|w|=n-1}\atop{l(w)=i}}\pi(1w1).\]
 Now, by disjoint union $\pi(10^{n-1})=\pi(10^{n-1}1)+\pi(10^{n})$, so that
 \[\pi(10^{n-1}1)=\pi(1)(c_{n-1}-c_{n})=\pi(1)\rho_n.\]
@@ -477,7 +498,7 @@ Denote the remainders associated with the series $S(x)$ by
 $$
 r_n : = \sum_{k\geqslant n} c_k, \quad R_n(x):=\sum_{k\geqslant n}c_k x^k
 $$
-and for $a\geqslant 0$, define the ``shifted'' generating function
+and for $a\geqslant 0$, define the "shifted" generating function
 <equation id="defPa">
 P_a(x):=\frac 1{c_a}\sum _{n\geqslant 1}\rho _{a+n}x^n=x+\frac{x-1}{c_ax^a}R_{a+1}(x).
 </equation>
@@ -538,7 +559,7 @@ that paper) and will be used many times in the sequel. For any two finite words 
 </p>
 <ol>
 <li>
- If $A=A'1$ and $B=1B'$, then (<elt href="#renouvellement"/>) yields
+ If $A=A'1$ and $B=1B'$, then <equation href="renouvellement"/> yields
 \[\pi(AwB)=\pi(A'1w1B')=\frac{\pi(A'1)}{\pi(1)}\pi(1w1B')=S(1)\pi(A)\pi(B)\frac{\pi(1w1)}{\pi(1)}.\]
 So
 $$
@@ -551,7 +572,7 @@ and by Lemma <elt href="#lemme_un"/>, the result follows.
 Let $A=A'10^a$ and $B=0^b1B'$ with $a,b\geqslant 0$ and $a+b\neq 0$.
 To begin with,
 \[\pi(AwB)=\frac{1}{\pi(1)}\pi(A'1)\pi(10^aw0^b1B')=\frac{1}{\pi(1)^2}\pi(A'1)\pi(10^aw0^b1)\pi(1B').\]
-Furthermore, $\pi(A)=c_a\pi(A'1)$ and  by (<elt href="#sym"/>), $\pi(0^b1)=\pi(10^b)$, so it comes
+Furthermore, $\pi(A)=c_a\pi(A'1)$ and  by <equation href="sym"/>, $\pi(0^b1)=\pi(10^b)$, so it comes
  <!--\pnote{une ref ou rappel dans partie Brigitte de $\pi(0^b1)=\pi(10^b)$ ?}-->
  \[\pi(B)=\frac{1}{\pi(1)}\pi(0^b1)\pi(1B')=\frac{\pi(10^b)}{\pi(1)}\pi(1B')=c_b\pi(1B').\]
  Therefore,
@@ -577,7 +598,7 @@ If $i=j$ then $w$ is the word $0^{i-1}10^{n-i}$, else $w$ is of the form
 </tr>
 </eqnarray>
 <p>
-Equation (<equation href="renouvellement"/>) shows
+Equation <equation href="renouvellement"/> shows
 </p>
 <eqnarray>
 <tr><td class="right">$\pi(10^{a+i-1}1w10^{n-j+b}1)$</td>
@@ -602,7 +623,7 @@ which gives the result <strong><i>ii)</i></strong> with <lemma href="lemme_un"/>
 Let $A=0^a$ and $B=0^b$ with $a,b\geqslant 1$.
 Set
  \[v_n^{a,b}:=\frac{1}{\pi(1)}\sum_{|w|=n}\pi(0^aw0^b).\]
-First, recall that, due to (<elt href="#probas"/>), $\pi(A)=\pi(1)r_a$ and $\pi(B)=\pi(1)r_b$.
+First, recall that, due to <equation href="probas"/>, $\pi(A)=\pi(1)r_a$ and $\pi(B)=\pi(1)r_b$.
 Consequently,
  \[\psi(n,A,B)=\frac{\pi(1)v_{n}^{a,b}-\pi(A)\pi(B)}{\pi(A)\pi(B)}=S(1)\frac{v_{n}^{a,b}}{r_ar_b}-1.\]
 Let $w$ be a finite word with $|w|=n$. If $w=0^{n}$, then
@@ -703,7 +724,7 @@ $$|S(z)| \geqslant 1- \sum_{n\geqslant 1} \frac{1}{n(n+1)(n+2)(n+3)} = 1-(S(1)-1
 Since
 \[M(x) =\frac{S(x)-S(1)}{(x-1)S(x)}= S(1)U(x) - \frac 1{1-x},\]
 the unique dominant singularity of $M$ is $1$, and when $x$ tends to $1$ in
-the unit disc, (<elt href="#defSpeigneLog"/>) leads to
+the unit disc, <equation href="defSpeigneLog"/> leads to
 \[
 M(x) = A(x)-\frac{1}{6S(1)}(1-x)^2\log(1-x)+\grandO{(1-x)^3\log(1-x)}
 \]
@@ -737,7 +758,7 @@ $$
 Since $1$ is the only dominant singularity of $S$ and $U$ and consequently of any $R_a$,
 it suffices to compute
 an expansion of $N^{a,b}(x)$ at $x=1$.
-It follows from (<elt href="#defSpeigneLog"/>) that
+It follows from <equation href="defSpeigneLog"/> that
 $U$, $S$ and $R_a$ admit expansions near $1$ of the forms
 </p>
 <eqnarray>
@@ -766,7 +787,7 @@ in a neighbourhood of $1$ in the unit disc so that, by singularity analysis,
 $$
 [x^n]N^{a,b}(x)=-\frac 13\left( \frac 1{r_a}+\frac 1{r_b}-\frac 1{S(1)}\right)\frac 1{n^3}+o\left(\frac 1{n^3}\right).
 $$
-Consequently (<elt href="#melangeLog3"/>) leads to
+Consequently <equation href="melangeLog3"/> leads to
 \[
 \psi(n-1,0^a,0^b)=  [x^n] M^{a,b}(x)
 \sim\frac 13\left( \frac{S(1)}{r_ar_b}-\frac 1{r_a}-\frac 1{r_b}+\frac 1{S(1)}\right)\frac 1{n^3}
@@ -865,7 +886,7 @@ Besides, the remainder of the exponential series satisfies
 \sum _{n\geqslant a}\frac{x^n}{n!}=\frac{x^a}{a!}\left( 1+\frac xa+\mathcal{O}(\frac 1a)\right)
 </equation>
 when $a$ tends to infinity.
-Consequently, by Formula (<equation href="defPa"/>), $P_a(2i\pi )$
+Consequently, by Formula <equation href="defPa"/>, $P_a(2i\pi )$
 tends to $2i\pi$ as $a$ tends to infinity
 <!--%for any $x\neq 0$, the asymptotics of the rest of the exponential series writes, when $a$ tends to infinity,
 %$$
@@ -897,7 +918,7 @@ $$
 \psi(n-1,A,B) \equivalent{n\to+\infty}
 2\Re\left(\frac{1-e}{1-2i\pi}\cdot\frac{R_a(2i\pi )R_b(2i\pi )}{r_ar_b(2i\pi )^{a+b-2}}\frac{1}{(2i\pi )^n}\right) .
 $$
-Once more, because of (<elt href="#resteSerieExp"/>), this implies that
+Once more, because of <equation href="resteSerieExp"/>, this implies that
 there is a positive constant $C_2$ independent of $a$ and $b$ and
 such that for any $n\geqslant 1$,
 $$
@@ -1055,10 +1076,10 @@ Let $s\in\rond R$ be a deterministic infinite sequence and $s ^{(k)}$ its prefix
 </tr>
 </eqnarray>
 <p>
-where ``$s ^{(k)}$ is in $\rond{T}_{n}\setminus \partial \rond{T}_n$''
+where "$s ^{(k)}$ is in $\rond{T}_{n}\setminus \partial \rond{T}_n$"
 stands for: there exists an internal node $v$ in $\rond{T}_{n}$ such that
 $s ^{(k)}$ encodes $v$. For any $k\geqslant 1$, $T_{k}(s)$ denotes the
-number of leaves of the first tree ``containing'' $s^{(k)}$.
+number of leaves of the first tree "containing" $s^{(k)}$.
 See <figure href="4figXnetTk"/> for an example.
 </p>
 <figure id="4figXnetTk">
@@ -1160,7 +1181,6 @@ $$
 \Phi_w^{(1)}(x)=\frac{x^k\pi(w)}{(1-x)S_w(x)}
 $$
 and for $r\geq 1$,
-<!--%\[\Phi_w^{(2)}(x)=\Phi_w^{(1)}(x)\left(1-\frac{1}{S_w(x)}\right),\]-->
 \[\Phi_w^{(r)}(x)=\Phi_w^{(1)}(x)\left(1-\frac{1}{S_w(x)}\right)^{r-1}
 \]
 where
@@ -1168,7 +1188,7 @@ where
 <eqnarray>
 <tr><td class="right">$S_w(x)$</td>
     <td class="center">$:=$</td>
-    <td class="left">$C_w(x) + \sum_{n=k}^{\infty}q_{\petitlpref(w)}^{(n)}(w)x^n$</td>,
+    <td class="left">$C_w(x) + \sum_{n=k}^{\infty}q_{\petitlpref(w)}^{(n)}(w)x^n$,</td>
 </tr>
 <tr><td class="right">$C_w(x)$</td>
     <td class="center">$:=$</td>
@@ -1178,7 +1198,7 @@ where
 <p>
 In the particular case when $w=10^{k-1}$, then
  $\lpref(w)=\overline{w}=0^{k-1}1$ and $\pi(w)=\frac{c_{k-1}}{S(1)}$.
-Moreover, Definition (<equation href="mixingCoeff"/>) of the mixing
+Moreover, Definition <equation href="mixingCoeff"/> of the mixing
 coefficient and <prop href="melange"/> <i><strong>i)</strong></i>
 imply successively that
 </p>
@@ -1240,7 +1260,7 @@ makes $U$ twice differentiable and elementary calculations lead to
 </tr>
 </eqnarray>
 <p>
-and finally to (<equation href="esp-var"/>).
+and finally to <equation href="esp-var"/>.
 <qed/>
 </p>
 </proof>
@@ -1259,7 +1279,7 @@ where the maximum and the minimum range over the words $w$ of length $n$ with
   $h_->0$, which amounts to saying that the probability of any word is exponentially
   decreasing with its length. Here, we focus on our two examples for which these
   assumptions are not fulfilled. More precisely, for the logarithmic infinite comb,
-  (<equation href="probas"/>) implies that $\pi(10^n)$ is of order $n^{-4}$, so that
+  <equation href="probas"/> implies that $\pi(10^n)$ is of order $n^{-4}$, so that
 $$
 h_- \leqslant \lim_{n\to +\infty}\frac{1}{n} \ln\Bigl(\frac{1}{\pi\left(10^{n-1}\right)}\Bigr) = 4\lim_{n\to +\infty}\frac{\ln n}{n} =0.
 $$
@@ -1387,7 +1407,7 @@ $X_n(s)$ and $T_k(s)$, the duality can be written
 Indeed, if $X_n(s)$ were bounded above, by $K$ say, then take $w = 10^{K}$
 and consider $T_{K+1}(s)$ which is the time of the second occurrence of $10^{K}$.
 The choice of the $c_n$ in the definition of the logarithmic comb implies
-the convergence of the series $\sum _nn^2c_n$. Thus (<equation href="esp-var"/>)
+the convergence of the series $\sum _nn^2c_n$. Thus <equation href="esp-var"/>
 holds and $\g E[T_{K+1}(s)]\lt \infty$ so that $T_{K+1}(s)$ is almost surely
 finite. This means that for $n\gt T_{K+1}(s)$, the word $10^{K}$ has been seen
 twice, leading to $X_n(s)\geqslant K+1$ which is a contradiction.
@@ -1406,13 +1426,13 @@ and
 </p>
 </lemma>
 <p>
-With notations (<equation href="dualitybis"/>), because of (<equation href="xninfini"/>),
+With notations <equation href="dualitybis"/>, because of <equation href="xninfini"/>,
 the sequence $(k_n)$ tends to infinity, so that $\left(T_{k_n}(s)\right)$ is a subsequence
-of $\left(T_k(s)\right)$. Thus, (<elt href="#Tksurk"/>) implies that
+of $\left(T_k(s)\right)$. Thus, <equation href="Tksurk"/> implies that
 \[
 \forall \eta > \frac 12, \quad \frac{T_{k_n}(s)}{k_n^{4+\eta}} \ \ \smash{\mathop{\longrightarrow}\limits _{n\to \infty}} \ \ 0 \quad \mbox{a.s.} \quad \mbox{and} \quad  \forall \eta > 0, \quad \frac{T_{k_n}(s)}{k_n^{4+\eta}}~\limite{k\to \infty}{P}~0.
 \]
-Using duality (<equation href="dualitybis"/>) again leads to
+Using duality <equation href="dualitybis"/> again leads to
 <!--%$$\forall \eta > \frac 12, \hskip 1cm \frac{X_n(s)}{n^{1/({4+\eta})}} \ \ \smash{\mathop{\longrightarrow}\limits _{n\to \infty}} \ \ +\infty \hskip 1cm a.s.$$-->
 \[\forall \eta > 0, \quad \frac{X_n(s)}{n^{1/({4+\eta})}}~\limite{n \to \infty}{P}~+\infty.\]
 In other words
@@ -1427,7 +1447,7 @@ This ends the proof of <theorem href="hauteur"/>.
 
 <proof id="proofTk" title="Proof of &lt;lemma href=&quot;#Tk&quot;/&gt;">
 <p>
-Combining (<equation href="lien-tau-T"/>) and (<equation href="esp-var"/>) shows that
+Combining <equation href="lien-tau-T"/> and <equation href="esp-var"/> shows that
 <equation id="meanTk">
 \g E(T_k(s)) = \g E(\tau^{(2)}(w))-k= \frac{19}{9} k^4 + o(k^4)
 </equation>
@@ -1440,7 +1460,7 @@ $$
 \frac{T_k(s)}{k^{4+\eta}} = \frac{T_k(s) -\g E(T_k(s))}{k^{4+\eta}} + \frac{\g E(T_k(s))}{k^{4+\eta}} .
 $$
 The deterministic part in the second-hand right term goes to $0$ with $k$ thanks
-to (<equation href="meanTk"/>), so that we focus on the term
+to <equation href="meanTk"/>, so that we focus on the term
 $\displaystyle\frac{T_k(s) -\g E(T_k(s))}{k^{4+\eta}}$.
 For any $\varepsilon >0$, because of Bienaymé-Tchebychev inequality,
 $$
@@ -1483,9 +1503,9 @@ bounded sequence, which implies the result.
 -->
 Recall that $\rond R$ denotes the set of all right-infinite sequences.
 By characterization of the saturation level as a function of $X_n$
-(see (<equation href="defi-var"/>)),
+(see <equation href="defi-var"/>),
 $\g P\left(\ell _n\leqslant k\right) =\g P\left(\exists s\in\rond R,~X_n(s)\leqslant k\right)$ for all positive integers $n,k$.
-Duality formula (<equation href="duality"/>) then provides
+Duality formula <equation href="duality"/> then provides
 $$
 \begin{array}{rl}
 \g P\left(\ell _n\leqslant k\right)&amp;=\g P\left(\exists s\in\rond R,~T_k(s)\geqslant n\right)\\ \\
@@ -1509,8 +1529,8 @@ $U(x)=\frac{x}{(1-x)(e^x-1)}$ and, after computation,
 \frac{x^{2k-1}\big( 1-e^x(1-x)\big)}
 {\Big[ k!\left( e^x-1\right)\left( 1-x\right)+x^{k-1}\big( 1-e^x(1-x)\big)\Big] ^2}.
 </equation>
-In particular, applying Formulae (<equation href="postMarkov"/>) and
-(<equation href="phi2Factoriel"/>) with $n=(k-1)!$ and $x=1-\frac 1{(k-1)!}$
+In particular, applying Formulae <equation href="postMarkov"/> and
+<equation href="phi2Factoriel"/> with $n=(k-1)!$ and $x=1-\frac 1{(k-1)!}$
 implies that
 for any $k\geqslant 2$,
 $$
@@ -1565,6 +1585,6 @@ large number of services.
 <section id="bib" title="Bibliography">
 <bibliography/>
 </section>
-
+</prepare-toc>
 </contents>
 </article>
