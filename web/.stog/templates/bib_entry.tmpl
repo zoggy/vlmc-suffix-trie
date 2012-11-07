@@ -1,10 +1,12 @@
 <div class="row-fluid clear-left-only">
 <div class="span1">[<bib-entry-rank/>]</div>
 <div class="span10">
-<div class="bib-entry-title"><bib-entry-title/></div>
 <div class="bib-entry-author"><bib-entry-author/></div>
-<span class="bib-entry-published"><bib-field name="publisher"/></span>
-<if bib-entry-year=""><span/><span class="bib-entry-year">(<bib-entry-year/>)</span></if>
-<if bib-entry-isbn=""><span/><span class="bib-entry-isbn">ISBN:<bib-entry-isbn/></span></if>
+<div class="bib-entry-title"><bib-entry-title/></div>
+<include file="bib-entry-&lt;bib-entry-kind/&gt;.tmpl"
+/><if bib-entry-note=""><main_/><span> <bib-entry-note/>.</span></if>
+<!--<span class="bib-entry-published"><bib-field name="publisher"/></span>
+<if bib-entry-year=""><main_/><span class="bib-entry-year">(<bib-entry-year/>)</span></if>
+<if bib-entry-isbn=""><main_/><span class="bib-entry-isbn">ISBN:<bib-entry-isbn/></span></if>-->
 </div>
 </div>
