@@ -513,8 +513,10 @@ div.dsq-clearfix::after {
   font-size: 80% ;
 }
 
+/*
 .bibliography *:target { background: #dddddd; }
 .note:target { background: #dddddd; }
+*/
 
 a.paragraph-url {
   float: left;
@@ -522,7 +524,7 @@ a.paragraph-url {
   display:none;
 }
 
-p:target, pre:target {
+*:target /*p:target, pre:target*/ {
   .rounded-box () ;
   background-color: #dddddd;
   border-width: 1px;
