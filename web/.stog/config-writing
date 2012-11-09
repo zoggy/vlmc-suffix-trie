@@ -2,5 +2,5 @@ automatic_ids = {
   default = false
   (* pairs (type, bool) specifying whether to use automatic ids on element
      types *)
-  by_type = []
+  by_type = [(article, true)]
 }
