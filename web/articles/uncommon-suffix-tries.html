@@ -234,12 +234,13 @@ is uniform and exponential.
 
 <section id="sec:Intro" title="Introduction">
 <p>
-<em>Trie</em> (abbreviation of re<i>trie</i>val) is a natural data structure, efficient for searching words in a given set and used in many algorithms as data compression, spell checking or IP addresses lookup. A <em>trie</em> is a digital tree in which
+<!--<em>Trie</em> (abbreviation of re<i>trie</i>val) is a natural data structure, efficient for searching words in a given set and used in many algorithms as data compression, spell checking or IP addresses lookup. A <em>trie</em> is a digital tree in which
 words are inserted in external nodes. The trie process grows up by successively inserting words according to their prefixes. A precise definition will be given in Section <elt href="#ssec:height"/>.
+-->
+<em>Trie</em> (abbreviation of re<em>trie</em>val) is a natural data structure, efficient for searching words in a given set and used in many algorithms as data compression, spell checking or IP addresses lookup. A <em>trie</em> is a digital tree in which words are inserted in external nodes. The trie process grows up by successively inserting words according to their prefixes. A precise definition will be given in Section <elt href="#ssec:height"/>.
 </p>
 <p>
-As soon as a set of
-words is given, the way they are inserted in the trie is deterministic. Nevertheless, a trie becomes random when the words are randomly drawn: each word is produced by a probabilistic source and $n$ words are chosen (usually independently) to be inserted in a trie. A <em>suffix trie</em> is a trie built on the suffixes of <em>one</em> infinite word. The randomness then comes from the source producing such an infinite word and the successive words inserted in the tree are far from being independent, they are strongly correlated.
+As soon as a set of words is given, the way they are inserted in the trie is deterministic. Nevertheless, a trie becomes random when the words are randomly drawn: each word is produced by a probabilistic source and $n$ words are chosen (usually independently) to be inserted in a trie. A <em>suffix trie</em> is a trie built on the suffixes of <em>one</em> infinite word. The randomness then comes from the source producing such an infinite word and the successive words inserted in the tree are far from being independent, they are strongly correlated.
 </p>
 <p>
 Suffix tries, also called suffix trees in the literature, have been developped with tools from analysis of algorithms and information theory on one side and from probability theory and ergodic theory on the other side. Construction algorithms of such trees go back to Weiner <cite href="Weiner"/> in 1973 and many applications in computer science and biology can be found in Gusfield's book <cite href="Gusfield97"/>. As a major application of suffix tries one can cite an efficient implementation of the famous Lempel-Ziv lossless compression algorithm LZ77. The first results on the height of random suffix trees are due to Szpankowski <cite href="Szpan91"/> and Devroye <em>et al.</em> <cite href="Devroye2"/>, and the most recent results are in Szpankowski <cite href="Szpan93"/> and Fayolle <cite href="Fayolle"/>.
@@ -1327,12 +1328,12 @@ $$
 $$
 </p>
 </theorem>
-<remark id="remark3">
+<remark id="remLogn">
 <p>
 The behaviour of the height of the factorial infinite comb can be
 deduced from Szpankowski <cite href="Szpan93"/>. Namely the property of uniform mixing
 stated in <prop href="UniformMixing"/> implies
-the existence of two strictly positive constants $C$ and $\gamma$ such
+the existence of two positive constants $C$ and $\gamma$ such
 that, for every integer $n\geqslant 1$ and for every word $w$ of length $n$,
 $\pi(w)\leqslant Ce^{-\gamma n}$ (see Galves and
  Schmitt <cite href="GalSch"/> for a proof). This
@@ -1343,53 +1344,60 @@ $\frac{1}{h_2}$.
 </p>
 <p>
 As for the saturation level of the logarithmic infinite comb, the results of
-<cite href="Szpan93"/> no longer apply since it does not enjoy the uniform
-mixing property. In spite of that we conjecture (the numerical simulations seem to
-go in this direction) that the saturation level grows like $\log n$. As
-this is not the main point of the present paper, we decided not to prove
-it, but we think the techniques used here should help.
+<cite href="Szpan93"/> no longer apply since the process does not enjoy the uniform
+mixing property. In spite of that we conjecture that the saturation level grows like $\log n$.
+We do not go further on this subject because it is not the main point of the present paper,
+but we think the techniques used here should help to prove such a result.
 </p>
 </remark>
 
 <figure id="dyn-peigne">
-<img src="uncommon-suffix-tries/250k_25exp_heights.jpg" width="800"/>
-<img src="uncommon-suffix-tries/250k_25exp_sats.jpg" width="800"/>
+<img src="uncommon-suffix-tries/rsa_2012_height.jpg" width="800"/>
+<img src="uncommon-suffix-tries/rsa_2012_saturation_level.jpg" width="800"/>
 <div class="legend">
-Respective heights and saturation levels for a logarithmic comb (plain lines), a factorial comb
-(long dashed lines) and a $\log n$-comb (short dashed lines).
+Above:
+the height of a logarithmic comb (plain lines) compared with the height
+of a $\log n$-comb (long dashed lines) and with the height of a factorial comb (short dashed lines).
+Below:
+the saturation level of a factorial comb (plain lines) compared with the saturation
+level of a $\log n$-comb (long dashed lines).
+In both figures, mean values of $25$ simulations are represented on the $y$-axes.
 </div>
 </figure>
 <p>
 The dynamic asymptotics of the height and of the saturation level can be
 visualized on <figure href="dyn-peigne"/>.
-The number $n$ of leaves of the suffix trie is put on the $x$-axis while heights
-or saturation levels of tries are put on the $y$-axis.
-Plain lines represent a logarithmic comb while long dashed lines are those of
-a factorial comb (mean values of $25$ simulations).
+The number $n$ of leaves of the suffix trie is put on the $x$-axis while heights or
+saturation levels are put on the $y$-axis (mean values of $25$ simulations).
+</p>
+<p><em>Plain lines</em> illustrate our results:
+height of a suffix trie generated by a logarithmic comb in the first figure,
+saturation level of a trie generated by a factorial comb in the second one.
 </p>
 <p>
-Short dashed lines represent a third infinite comb defined by the data
-$c_n=\frac13\prod_{k=1}^{n-1}\left(\frac{1}{3}+\frac{1}{(1+k)^2}\right)$ for
-$n\geqslant 1$.
-Such a process has a uniform exponential mixing, a finite $h_+$ and a positive
-$h_-$ as can be elementarily checked. As a matter of consequence, it satisfies
-all assumptions of Pittel <cite href="Pittel"/> and Szpankowski <cite href="Szpan93"/>
-implying that the height and the saturation level are both of order $\log n$.
-Such assumptions will always be fulfilled as soon as the data $(c_n)_n$ satisfy
-$\varlimsup _nc_n^{1/n}\lt 1$; the proof of this result is left to the reader.
+In the first figure, the <em>short dashed line</em> represent the height of a factorial comb.
+As pointed out in <remark href="remLogn"/>, this height is almost surely of the form $c\log n$
+where $c$ is a constant.
 </p>
 <p>
-One can notice the height of the logarithmic comb that grows as a power of $n$.
-The saturation level of the factorial comb, negligible with respect to
-$\log n$ is more difficult to highlight because of the very slow growth of logarithms.
+In both figures, <em>long dashed lines</em> represent a third infinite comb defined by the
+data $c_n=\frac13\prod_{k=1}^{n-1}\left(\frac{1}{3}+\frac{1}{(1+k)^2}\right)$ for $n\geqslant 1$.
+Such a process has a uniform exponential mixing, a finite $h_+$ and a positive $h_-$ as can be
+elementarily checked. As a matter of consequence, it satisfies all assumptions of Pittel
+<cite href="Pittel"/> and Szpankowski <cite href="Szpan93"/> implying that the height and
+the saturation level are both of order $\log n$.
+Such assumptions is fulfilled for any VLMC defined by a comb as soon as the data $(c_n)_n$ satisfy
+$\limsup _nc_n^{1/n}\lt 1$; the proof of this result is left to the reader.
 </p>
-<!--<p>
-%Letters are drawn by a logarithmic comb (see the curves in plain line), by a factorial comb (in long dash points) or by an extra comb (in short dash points). For the sake of comparison, we give this extra-example for which, we have chosen $c_n=\frac13\prod_{k=1}^{n-1}\left(\frac{1}{3}+\frac{1}{(1+k)^2}\right)$ for $n\geqslant 1$ in order to have exponential probabilities of words and to be in the frameworks of Pittel <cite href="Pittel"/> and Szpankowski <cite href="Szpan"/>.\pnote{Nicolas au boulot ! :-)} For this comb, both the height's curve and the saturation level's curve are at rate logarithmic. Difficult to visually observe because of the slow rate of convergence of the logarithm, the saturation level of the factorial comb is slower and in fact negligible. One can also vizualize the polynomial behaviour of the height's curve for the logarithmic comb.
-</p>
--->
 <p>
 These asymptotic behaviours, all coming from the same model, the infinite comb,
 stress its surprising richness.
+</p>
+<p>
+Simulations of suffix tries built from a sequence generated by an infinite comb VLMC can
+be made by anyone using the source code available on
+<code><ext-a href="http://zoggy.github.com/vlmc-suffix-trie/">http://zoggy.github.com/vlmc-suffix-trie</ext-a></code>.
+This site has been designed and realized by Eng. Maxence Guesdon<note>Maxence Guesdon, <tt>Maxence.Guesdon@inria.fr</tt></note>.
 </p>
 </subsection>
 
