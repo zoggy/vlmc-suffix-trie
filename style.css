@@ -4827,14 +4827,12 @@ pre {
 }
 @font-face {
   font-family: "Computer Modern";
-  src: /*local('Computer Modern'),*/
-   url('http://pauillac.inria.fr/~guesdon/vlmc/texfonts/cmunss.otf') format('opentype');/*    src: url('http://mirrors.ctan.org/fonts/cm-unicode/fonts/otf/cmunss.otf');*/
+  src: url('http://zoggy.github.com/vlmc-suffix-trie/texfonts/cmunss.otf') format('opentype');
 }
 @font-face {
   font-family: "Computer Modern";
-  src: /*local('Computer Modern'),*/
-   url('http://pauillac.inria.fr/~guesdon/vlmc/texfonts/cmunsx.otf') format('opentype');
-  font-weight: bold;/*    src: url('http://mirrors.ctan.org/fonts/cm-unicode/fonts/otf/cmunsx.otf');*/
+  src: url('http://zoggy.github.com/vlmc-suffix-trie/texfonts/cmunsx.otf') format('opentype');
+  font-weight: bold;
 }
 div.eqn {
   margin-left: auto;
