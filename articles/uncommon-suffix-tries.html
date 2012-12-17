@@ -1,0 +1,2036 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Vlmc and suffix tries : Uncommon suffix tries</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="http://pauillac.inria.fr/~guesdon/vlmc/style.css"/>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<link href="/favicon.png" rel="shortcut icon" type="image/png"/>
+</head><body>
+<div id="topbar">
+</div>
+<div id="page">
+<div id="header">
+<div id="site-title"><a href="http://pauillac.inria.fr/~guesdon/vlmc/index.html">Vlmc and suffix tries</a></div>
+<div class="site-desc"></div>
+</div>
+
+
+<div class="date">November 2012</div>
+<h1>Uncommon suffix tries</h1>
+<div id="elt-body">
+
+<span class="hidden">\(
+%\usepackage{fancyhdr,amsmath, amssymb, psfrag, graphicx, amsfonts, layout, color,enumerate,mathrsfs}
+%\usepackage{enumitem,tikz}
+%\setenumerate[1]{label=\it{\textbf{\roman*)} }}
+%\usepackage[english]{babel}
+
+\newcommand{\limite}[2]{\mathop{\longrightarrow}
+\limits_{\mathrm{#1}}^{\mathrm{#2}}}
+
+\def\Arg{\mathop{\rm Arg}\nolimits}
+\def\bigcapp#1#2{\displaystyle\bigcap _{\begin{array}{cc}\scriptstyle #1\\
+\scriptstyle #2\end{array}}}
+\def\cl{\mathop{\rm cl}\nolimits}
+\def\cnp #1#2{\begin{pmatrix} #1\\#2\end{pmatrix}}
+\def\conv{\smash{\mathop{\longrightarrow}\limits _{n\to \infty}}}
+\def\convloi{\smash{\mathop{~~\longrightarrow~}\limits _{n\to \infty}\limits ^{\cal D}}}
+\def\convloit{\smash{\mathop{~~\longrightarrow~}\limits _{t\to +\infty}\limits ^{\cal D}}}
+\def\convcont{\smash{\mathop{\longrightarrow}\limits _{t\to \infty}}}
+\def\D{\mathop{\rm D\!\!}\nolimits}
+\def\degre{\mathop{\rm \deg}\nolimits}
+\def\del{\mathop{\rm \delta\!}\nolimits}
+\def\Diag{\mathop{\rm Diag}\nolimits}
+\def\dim{\mathop{\rm dim}\nolimits}
+\def\doubleindice#1#2{\genfrac{}{}{0pt}{1}{#1}{#2}}
+\def\egalLoi{{~\mathop{= }\limits^{\rond L}}~}
+\def\End{\mathop{\rm End}\nolimits}
+\def\equivalent#1{{\mathop{\sim }\limits_{#1}}~}
+\def\GL{\mathop{\rm GL}\nolimits}
+\def\Id{\mathop{\rm Id}\nolimits}
+\def\ie{\emph{i.e.~}}
+\def\im{\mathop{\rm im}\nolimits}
+\def\intr{\mathop{\rm int}\nolimits}
+\def\ker{\mathop{\rm ker}\nolimits}
+%\def\ll{\mathop{\ell}\nolimits}
+%\def{\mathop{\rm pref}\limits ^{\longleftarrow}}
+%\newcommand{\lpref}{\smash{\raisebox{3.5pt}{\!\!\!\begin{tabular}{c}$\hskip-4pt\scriptstyle\longleftarrow$ \\[-7pt]{\rm pref}\end{tabular}\!\!}}}
+%\newcommand{\petitlpref}{\smash{\raisebox{2.5pt}{\!\!\!\begin{tabular}{c}$\hskip-2pt\scriptscriptstyle\longleftarrow$ \\[-9pt]{$\scriptstyle\hskip 1pt\rm pref$}\end{tabular}\!\!}}}
+
+\newcommand{\lpref}{\overleftarrow{\rm pref}}
+\newcommand{\petitlpref}{\overleftarrow{\rm pref}}
+
+\def\maxx#1#2{\max _{\begin{array}{cc}\scriptstyle #1\\\scriptstyle #2\end{array}}}
+\def\memeloi{{~\mathop{\sim }\limits^{\rond L}}~}
+%\def\summ#1#2{\sum _{\begin{array}{cc}\scriptstyle #1\\\scriptstyle #2\end{array}}}
+\def\ordPart#1{\mathop{\rm \sum _{#1}\uparrow}\nolimits}
+\def\Proba{\mathop{\bf {~\!\! P}}\nolimits}
+\def\rk{\mathop{\rm rk}\nolimits}
+\def\rpref{\mathop{\rm pref}\limits ^{\longrightarrow}}
+\def\ss{\mathop{\rm ss}\nolimits}
+\def\Sp{\mathop{\rm Sp}\nolimits}
+\def\Span{\mathop{\rm Span}\nolimits}
+\def\Var{\mathop{\rm Var}\nolimits}
+\def\stirling2 #1#2{\left\{\begin{matrix} #1\\#2\end{matrix}\right\}}
+\def\suff{\mathop{\rm suff}\nolimits}
+\def\summ#1#2{{\displaystyle\sum _{\doubleindice{#1}{#2}}}}
+\def\transp{\mathop{^t\!\!}\nolimits}
+\def\uu{\mathop{\bf u}\nolimits}
+\def\Vect{\mathop{\rm Span}\nolimits}
+\newcommand\1{\leavevmode\hbox{\rm \small1\kern-0.35em\normalsize1}}
+\newcommand\ind[1]{\1_{\{#1\}}}
+\newcommand{\petito}[1]{o\mathopen{}\left(#1\right)}
+\newcommand{\grandO}[1]{\mathcal{O}\mathopen{}\left(#1\right)}
+
+%%%%%%%%%%%%%%%%%%%%%
+%% Brigitte's commands
+%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\R}{\rm I\!R}
+\newcommand{\C}{\;{}^{{}_\vert}\!\!\!{\rm C}}
+\newcommand{\N}{{{\rm I}\!{\rm N}}}
+%\newcommand{\Z}{{{\rm Z}\mkern-5.5mu{\rm Z}}}
+\newcommand{\Q}{{\rm Q}\kern-.65em{}^{{}_/}}
+%\newcommand{\1}{\mathbb I}
+%\newcommand{\1}{\upharpoonleft\!\hspace{-.22mm} ]\hspace{-1.5mm} [}}
+%\newcommand{\1}{{{\rm 1}\!{\rm I}}}
+%\newcommand{\Proba}{{\rm I}\!{\rm P}}
+\newcommand{\PP}{\mathbb{P}}
+%\newcommand{\E}{{\rm I}\!{\rm E}}
+\def\1{{\bf 1}}
+
+%\font\dsrom=dsrom10 scaled 1200
+%\def \11{\textrm{\dsrom{1}}}
+%\def \11{\mathop{\bf 1}\nolimits}
+
+\def\g#1{\mathbb #1}
+\def\rond#1{\mathcal #1}
+\def\R{\g R}
+\def\C{\g C}
+\def\N{\g N}
+\def\Z{\g Z}
+
+\newcommand{\argmax}{\operatornamewithlimits{argmax}}
+\newcommand{\argmin}{\operatornamewithlimits{argmin}}
+
+%\usepackage[draft]{fixme}
+%\fxusetheme{color}
+%\fxsetup{layout=pdfcnote}
+%\FXRegisterAuthor{p}{apa}{P}
+%\FXRegisterAuthor{b}{ape}{B}
+%\FXRegisterAuthor{f}{af}{F}
+%\FXRegisterAuthor{n}{an}{N}
+
+\)</span>
+<div class="author-list">
+<span class="author"><span class="ext-a"><a href="http://cenac.perso.math.cnrs.fr/">Peggy Cénac</a></span></span>,<span class="author"><span class="ext-a"><a href="http://chauvin.perso.math.cnrs.fr">Brigitte Chauvin</a></span></span>,<span class="author"><span class="ext-a"><a href="http://lamfa.u-picardie.fr/paccaut/">Frédéric Paccaut</a></span></span>,<span class="author"><span class="ext-a"><a href="http://pouyanne.perso.math.cnrs.fr/">Nicolas Pouyanne</a></span></span>
+</div>
+
+<p id="Commonassump"><a class="paragraph-url" href="#Commonassump"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+Common assumptions on the source producing the words inserted in a suffix trie
+with $n$ leaves lead to a $\log n$ height and saturation level. We provide
+an example of a suffix trie whose height increases faster than a power of
+$n$ and another one whose saturation level is negligible with respect to $\log n$.
+Both are built from VLMC (Variable Length Markov Chain) probabilistic sources and are
+easily extended to families of tries having the same properties. The first example
+corresponds to a &quot;logarithmic infinite comb&quot; and enjoys a non uniform polynomial
+mixing. The second one corresponds to a &quot;factorial infinite comb&quot; for which mixing
+is uniform and exponential.
+</p>
+
+
+
+<ul class="toc"><li class="toc-section"><a href="#sec:Intro">Introduction</a></li><li class="toc-section"><a href="#sec:source">Infinite combs as sources</a></li><li class="toc-section"><a href="#sec:mixing">Mixing properties of infinite combs</a><ul class="toc"><li class="toc-subsection"><a href="#ssec:mixingcomb">Mixing properties of general infinite combs</a></li><li class="toc-subsection"><a href="#notations">Notations and Generating functions</a></li><li class="toc-subsection"><a href="#mixingcoefficients">Mixing coefficients</a></li><li class="toc-subsection"><a href="#ssec:mixinglogarithmiccomb">Mixing of the logarithmic infinite comb</a></li><li class="toc-subsection"><a href="#ssec:mixingfactccomb">Mixing of the factorial infinite comb</a></li></ul></li><li class="toc-section"><a href="#sec:suffixtrie">Height and saturation level of suffix tries</a><ul class="toc"><li class="toc-subsection"><a href="#ssec:height">Suffix tries</a></li><li class="toc-subsection"><a href="#ssec:duality">Duality</a></li><li class="toc-subsection"><a href="#ssec:generating">Successive occurence times generating functions</a></li><li class="toc-subsection"><a href="#ssec:results">Logarithmic comb and factorial comb</a></li><li class="toc-subsection"><a href="#ssec:heightLog">Height for the logarithmic comb</a></li><li class="toc-subsection"><a href="#ssec:saturation">Saturation level for the factorial comb</a></li><li class="toc-subsection"><a href="#acks">Acknowledgements</a></li></ul></li><li class="toc-section"><a href="#bib">Bibliography</a></li></ul>
+
+<div class="section"><div class="section-title" id="sec:Intro">1. Introduction</div>
+<p id="Trieabbrevia"><a class="paragraph-url" href="#Trieabbrevia"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+
+<em>Trie</em> (abbreviation of re<em>trie</em>val) is a natural data structure, efficient for searching words in a given set and used in many algorithms as data compression, spell checking or IP addresses lookup. A <em>trie</em> is a digital tree in which words are inserted in external nodes. The trie process grows up by successively inserting words according to their prefixes. A precise definition will be given in Section <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#ssec:height">4.1</a>.
+</p>
+<p id="Assoonasaset"><a class="paragraph-url" href="#Assoonasaset"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+As soon as a set of words is given, the way they are inserted in the trie is deterministic. Nevertheless, a trie becomes random when the words are randomly drawn: each word is produced by a probabilistic source and $n$ words are chosen (usually independently) to be inserted in a trie. A <em>suffix trie</em> is a trie built on the suffixes of <em>one</em> infinite word. The randomness then comes from the source producing such an infinite word and the successive words inserted in the tree are far from being independent, they are strongly correlated.
+</p>
+<p id="Suffixtriesa"><a class="paragraph-url" href="#Suffixtriesa"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+Suffix tries, also called suffix trees in the literature, have been developped with tools from analysis of algorithms and information theory on one side and from probability theory and ergodic theory on the other side. Construction algorithms of such trees go back to Weiner <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#bibentry_Weiner">[39]</a> in 1973 and many applications in computer science and biology can be found in Gusfield's book <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#bibentry_Gusfield97">[21]</a>. As a major application of suffix tries one can cite an efficient implementation of the famous Lempel-Ziv lossless compression algorithm LZ77. The first results on the height of random suffix trees are due to Szpankowski <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#bibentry_Szpan91">[37]</a> and Devroye <em>et al.</em> <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#bibentry_Devroye2">[12]</a>, and the most recent results are in Szpankowski <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#bibentry_Szpan93">[38]</a> and Fayolle <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#bibentry_Fayolle">[14]</a>.
+</p>
+<p id="Thegrowingof"><a class="paragraph-url" href="#Thegrowingof"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+The growing of suffix tries (called prefix trees in Shields' book <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#bibentry_Shieldsbook">[35]</a>) is closely related to second occurrences of patterns; this will be precisely explained later in Section <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#ssec:height">4.1</a>. Consequently, many results on this subject can be found in papers dealing with occurrences of words, renewal theory or waiting times like Shields <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#bibentry_Shields">[34]</a> or Wyner-Ziv <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#bibentry_WynZiv">[41]</a>.
+</p>
+<p id="Inthepresent"><a class="paragraph-url" href="#Inthepresent"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+In the present paper we are interested in the height $H_n$ and the saturation
+level $\ell_n$ of a suffix trie $\rond T_n$ containing the first $n$ suffixes
+of an infinite word produced by a probabilistic source. The analysis of the
+height and the saturation level is usually motivated by optimization of the
+memory cost. Height is clearly relevant to this point; saturation level is
+algorithmically relevant as well because internal nodes below the saturation
+level are often replaced by a less expansive table. Such parameters depend
+crucially on the characteristics of the source. Most of the above mentioned
+results are obtained for memoryless or Markovian sources, while realistic
+sources are often more complex. We work here with a more general source model.
+It includes nonmarkovian processes where the dependency on past history is
+unbounded. It has the advantage of making calculations possible as well.
+The source is associated with a so-called Variable Length Markov Chain (VLMC)
+(see Rissanen <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#bibentry_Ris">[31]</a> for the seminal work, Galves-Löcherbach
+<a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#bibentry_GalLoc">[18]</a> for an overview,  and  <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#bibentry_ccpp">[9]</a> for a
+probabilistic frame). We deal with a particular VLMC source defined by an
+infinite comb, described hereafter.
+</p>
+<p id="Afirstbrowse"><a class="paragraph-url" href="#Afirstbrowse"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+A first browse of the literature reveals tries or suffix tries that have a height and a saturation level both growing logarithmically with the number of words inserted. For plain tries, <em>i.e.</em> when the inserted words are independent, the results due to Pittel <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#bibentry_Pittel">[28]</a> rely on  two assumptions on the source that produces the words: first, the source is uniformly mixing, second, the probability of any word decays exponentially with its length.
+Let us also mention the general analysis of tries by Clément <em>et al.</em> <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#bibentry_ClementFlajoletVallee">[7]</a> for dynamical sources.
+For suffix tries, Szpankowski <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#bibentry_Szpan93">[38]</a> obtains the same result, with a weaker mixing assumption (still uniform though) and with the same hypothesis on the measure of the words. Nevertheless, in <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#bibentry_Shields">[34]</a>, Shields states a result on prefixes of ergodic processes suggesting that the saturation level of suffix tries might not necessarily grow logarithmically with the number of words inserted.
+</p>
+<p id="Ouraimistoex"><a class="paragraph-url" href="#Ouraimistoex"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+Our aim is to exhibit two cases when the behaviour of the height or the saturation level
+is no longer logarithmic. The first example is the &quot;<em>logarithmic comb</em>&quot;, for
+ which we show that the mixing is slow in some sense, namely non uniformly polynomial
+ (see Section <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#ssec:mixinglogarithmiccomb">3.4</a> for a precise statement) and the
+ measure of some increasing sequence of words decays polynomially. We prove in
+ <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#hauteur">Theorem 1</a> that the height of this trie is larger than a power
+ of $n$ (when $n$ is the number of inserted suffixes in the tree).
+</p>
+<p id="Thesecondexa"><a class="paragraph-url" href="#Thesecondexa"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>The second example is the &quot;<em>factorial comb</em>&quot;, which has a uniformly
+exponential mixing, thus fulfilling the mixing hypothesis of Szpankowski
+<a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#bibentry_Szpan93">[38]</a>, but the measure of some increasing sequence of words
+decays faster than any exponential. In this case we prove in
+<a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#saturation">Theorem 2</a> that the saturation level is negligible with respect
+to $\log n$. We prove more precisely that, almost surely,
+$\ell _n\in o\left(\frac{\log n}{(\log\log n)^\delta}\right)$, for any $\delta &gt;1$.
+</p>
+
+<p id="Thepaperisor"><a class="paragraph-url" href="#Thepaperisor"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+The paper is organised as follows. In Section <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#sec:source">2</a>, we define a
+VLMC source associated with an infinite comb. In Section <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#sec:mixing">3</a> we give
+results on the mixing properties of these sources by explicitely computing the suitable
+generating functions in terms of the source data. In Section <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#sec:suffixtrie">4</a>,
+the associated suffix tries are built, and the two uncommon behaviours are stated and shown.
+The methods are based on two key tools concerning successive occurence times of patterns:
+a duality property and the computation of generating functions. The relation between the mixing
+of the source and the asymptotic behaviour of the trie is highlighted by the proof
+of <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#Phi2">Proposition 4</a>.
+</p>
+</div>
+
+<div class="section"><div class="section-title" id="sec:source">2. Infinite combs as sources</div>
+<p id="Inthissectio"><a class="paragraph-url" href="#Inthissectio"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+In this section, a VLMC probabilistic source associated with an infinite comb is defined. Moreover, we present the two examples given in introduction: the logarithmic and the factorial combs. We begin with the definition of a general variable length Markov chain associated with a probabilized infinite comb.
+</p>
+<p id="Thefollowing"><a class="paragraph-url" href="#Thefollowing"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+The following presentation comes from <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#bibentry_ccpp">[9]</a>.
+Consider the binary tree (represented in Figure <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#peigne">Figure 1</a>) whose finite leaves are the words $1, 01, \dots, 0^k1, \dots $ and with an infinite leaf $0^{\infty}$ as well.
+The set of leaves is
+\[
+\mathcal{C}:=\{0^n1,\, n\ge 0\}\cup \{0^\infty\}.
+\]
+Each leaf is labelled with a Bernoulli distribution on $\{0,1\}$, respectively  denoted by $q_{0^k1}, k\geqslant 0$ and $q_{0^\infty}$, <em>i.e.</em>
+\[\forall k \geq 0 \quad q_{0^k1}(0)=1-q_{0^k1}(1).\]
+This probabilized tree is called <em>the infinite comb</em>.
+</p>
+<p id="Figure1Aninf"><a class="paragraph-url" href="#Figure1Aninf"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+
+<div class="figure" id="peigne">
+  <div class="title">Figure 1: An infinite comb</div>
+  <div class="contents"><img width="500" src="uncommon-suffix-tries/infiniteComb.svg"/></div>
+</div>
+</p>
+<p id="LetmathcalL0"><a class="paragraph-url" href="#LetmathcalL0"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+Let $\mathcal{L}= \{0,1\}^{-\mathbb{N}}$ be the set<sup id="source_note_1"><a href="#target_note_1">1</a></sup> of left-infinite words on the alphabet $\{0,1\}$.
+The <em>prefix function</em>
+$$\lpref :\mathcal{L}=\{0,1\}^{-\mathbb{N}}\to\mathcal{C}$$
+associates to any left-infinite word (reading from right to left) its first suffix appearing as a leaf of the comb. The prefix function indicates the length of the last run of $0$: for instance,
+ \[
+ \lpref (\ldots 1000)=0001=0^31.
+ \]
+The VLMC (Variable Length Markov Chain) associated with an infinite comb is the $\rond L$-valued Markov chain $(V_n)_{n\geqslant 0}$ defined by the transitions
+$$\g P(V_{n+1} = V_n\alpha | V_n)= q_{\petitlpref (V_n)}(\alpha )
+$$
+where $\alpha\in\{0,1\}$ is a letter. Notice that the VLMC is entirely determined by the family of distributions $q_{0^{\infty}}, q_{0^k1}, k\geqslant 0$. %Moreover the order of dependence  (the memory) depends on the past itself.
+</p>
+<p id="Fromnowonden"><a class="paragraph-url" href="#Fromnowonden"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+From now on, denote $c_0 = 1$ and for $n\geqslant 1$,
+$$
+c_n:= \prod_{k=0}^{n-1} q_{0^{k}1}(0).
+$$
+</p>
+<p id="Itisprovedin"><a class="paragraph-url" href="#Itisprovedin"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+It is proved in <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#bibentry_ccpp">[9]</a> that in the irreducible case <em>i.e.</em>
+when $q_{0^{\infty}}(0)\not= 1$, there exists a unique stationary probability
+measure $\pi$ on $\rond L$ for $(V_n)_n$ if and only if the series $\sum c_n$ converges.
+From now on, we assume that this condition is fulfilled and we call
+<span class="equation" id="def-S">
+  <span class="contents">$
+S(x):=\sum_{n\geqslant 0} c_n x^n
+$</span><span class="title">(1)</span>
+</span>
+its generating function so that $S(1) = \sum_{n\geqslant 0} c_n$. For any finite word $w$, we denote $\pi(w):=\pi(\rond Lw)$. Computations performed in <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#bibentry_ccpp">[9]</a> show that for any $n\geqslant 0$,
+<span class="equation" id="probas">
+  <span class="contents">$
+ \pi(10^n)=\frac{c_n}{S(1)} \quad \mbox{and}\quad \pi(0^n)=\frac{\sum_{k \geqslant n}c_k}{S(1)}.
+$</span><span class="title">(2)</span>
+</span>
+Notice that, by disjointness of events $\pi(0^n)=\pi(0^{n+1})+\pi(10^n)$ and by stationarity, $\pi(0^n)=\pi(0^{n+1})+ \pi(0^n1)$ for all $n\geqslant 1$ so that
+<span class="equation" id="sym">
+  <span class="contents">$
+\pi(10^n) =  \pi(0^n1) .
+$</span><span class="title">(3)</span>
+</span>
+If $U_n$ denotes the final letter of $V_n$, the random sequence $W=U_0U_1U_2\ldots$ is a right-infinite random word. We define in this way a probabilistic source in the sense of information theory <em>i.e.</em> a mechanism that produces random words.
+This VLMC probabilistic source is characterized by the family of nonnegative numbers
+$$
+p_w:=\g P(W \hbox{ has } w \hbox{ as a prefix }) = \pi(w),
+$$
+indexed by all finite words $w$. This paper deals with suffix tries built from such sources. More precisely we consider two particular examples of infinite comb defined as follows.
+</p>
+
+<div class="subsection"><div class="subsection-title" id="7df6-dda1-73e1-671a">2.1. Example 1: the logarithmic comb</div>
+<p id="Thelogarithm"><a class="paragraph-url" href="#Thelogarithm"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+The logarithmic comb is defined by $c_0=1$ and for $n\geqslant 1$,
+\[c_n = \frac{1}{n(n+1)(n+2)(n+3)}. \]
+The corresponding conditional probabilities on the leaves of the tree are
+  \[q_1(0)=\frac{1}{24}\quad \mbox{and for }n\geqslant 1, \quad q_{0^n1}(0)=1-\frac{4}{n+4}.\]
+The expression of $c_n$ was chosen to make the computations as simple
+as possible and also because the square-integrability of the waiting time of
+some pattern will be needed (see end of Section <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#ssec:generating">4.3</a>),
+guaranteed by
+\[\sum_{n\geqslant 0} n^2c_n\lt+\infty.\]
+</p>
+</div>
+
+<div class="subsection"><div class="subsection-title" id="3467-b3c3-e16e-bfa3">2.2. Example 2: the factorial comb</div>
+<p id="Thecondition"><a class="paragraph-url" href="#Thecondition"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+The conditional probabilities on the leaves are defined by
+$$
+q_{0^n1}(0)= \frac 1{n+2} \quad \mbox{ for }n\geqslant 0,
+$$
+so that
+$$
+c_n = \frac 1{(n+1)!}.
+$$
+</p>
+</div>
+</div>
+
+<div class="section"><div class="section-title" id="sec:mixing">3. Mixing properties of infinite combs</div>
+<p id="Inthissection"><a class="paragraph-url" href="#Inthissection"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+In this section, we first precise what we mean by mixing properties of a random
+sequence. We refer to Doukhan  <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#bibentry_Doukhan">[13]</a>, especially for the notion
+of $\psi$-mixing defined in that book. We state in <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#melange">Proposition 1</a>
+a general result that provides the mixing coefficient for an infinite comb defined by
+$(c_n)_{n\geqslant 0}$ or equivalently by its generating function $S$. This result
+is then applied to our two examples. The mixing of the logarithmic comb is polynomial
+but not uniform, it is a very weak mixing; the mixing of the factorial comb
+is uniform and exponential, it is a very strong mixing. Notice that mixing
+properties of some infinite combs have already been investigated by Isola <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#bibentry_Isola">[24]</a>,
+although with a slight different language.
+</p>
+
+<div class="subsection"><div class="subsection-title" id="ssec:mixingcomb">3.1. Mixing properties of general infinite combs</div>
+<p id="Forastationa"><a class="paragraph-url" href="#Forastationa"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+For a stationary sequence $(U_n)_{n\geqslant 0}$ with stationary measure
+$\pi$, we want to measure by means of a suitable coefficient the independence between
+two words $A$ and $B$ separated by $n$ letters. The sequence is said to be &quot;mixing&quot;
+when this coefficient vanishes when $n$ goes to $+\infty$. Among all types of mixing,
+we focus on one of the strongest type: <em>$\psi$-mixing</em>. More precisely, for
+$0\leqslant m\leqslant +\infty$, denote by ${\cal F}_0^m$ the $\sigma$-algebra
+generated by $\{U_k , 0\leqslant k \leqslant m\}$ and introduce for
+ $A\in{\cal F}_0^m$ and $B\in{\cal F}_0^{\infty}$ the mixing coefficient
+</p>
+<table class="eqnarray">
+<tr><td class="right">$\psi(n,A,B)$</td>
+    <td class="center">$:=$</td>
+    <td class="left">$\frac{\pi(A\cap T^{-(m+1)-n}B)-\pi(A)\pi(B)}{\pi(A)\pi(B)}$</td>
+</tr>
+<tr><td/>
+    <td class="center">$=$</td>
+    <td class="left"><span class="equation" id="mixingCoeff">
+  <span class="contents">$\frac{\sum_{|w|=n}\pi(AwB)-\pi(A)\pi(B)}{\pi(A)\pi(B)}$</span><span class="title">(4)</span>
+</span></td>
+</tr>
+</table>
+<p id="whereTisthes"><a class="paragraph-url" href="#whereTisthes"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+where $T$ is the shift map and where the sum runs over the finite words $w$ with length $|w|=n$.
+</p>
+<p id="AsequenceU_n"><a class="paragraph-url" href="#AsequenceU_n"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+A sequence $(U_n)_{n\geqslant 0}$ is called <em>$\psi$-mixing</em> whenever
+\[\lim_{n\to\infty}\ \sup_{m\geqslant 0,A\in{\cal F}_0^m, B\in{\cal F}_0^{\infty}}|\psi(n,A,B)|=0.\]
+In this definition, the convergence to zero is uniform over all words $A$ and $B$. This is not going
+to be the case in our first example.
+As in Isola <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#bibentry_Isola">[24]</a>, we widely use the renewal properties of infinite combs (see
+<a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#lemme_un">Lemma 1</a>) but more detailed results are needed, in particular we investigate
+the lack of uniformity for the logarithmic comb.
+</p>
+</div>
+
+<div class="subsection"><div class="subsection-title" id="notations">3.2. Notations and Generating functions</div>
+<p id="bulletForaco"><a class="paragraph-url" href="#bulletForaco"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+$\bullet$ For a comb, recall that $S$ is the generating function of the nonincreasing
+sequence $(c_n)_{n\geqslant 0}$ defined by <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#def-S">(1)</a>.
+</p>
+<p id="bulletSetrho"><a class="paragraph-url" href="#bulletSetrho"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+$\bullet$ Set $\rho_0=0$ and for $n\geqslant 1$,
+\[\rho_n:=c_{n-1}-c_{n},\]
+with generating function
+$$
+P(x) := \sum_{n\geqslant 1} \rho_n x^n.
+$$
+$\bullet$ Define the sequence $(u_n)_{n\geqslant 0}$ by $u_0=1$ and for $n\geqslant 1$,
+<span class="equation" id="un">
+  <span class="contents">$
+u_n:=\frac{\pi(U_0=1,U_{n}=1)}{\pi(1)}=\frac{1}{\pi(1)}\sum_{|w|=n-1}\pi(1w1),
+$</span><span class="title">(5)</span>
+</span>
+and let
+\[U(x):=\sum_{n\geqslant 0}u_nx^n\]
+denote its generating function. Hereunder is stated a key lemma that will be widely used
+ in <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#melange">Proposition 1</a>. In some sense, this kind of relation (sometimes called
+  Renewal Equation) reflects the renewal properties of the infinite comb.
+</p>
+
+<div class="lemma" id="lemme_un">
+  <div class="title">Lemma 1</div>
+  <div class="contents">
+<p id="Thesequences"><a class="paragraph-url" href="#Thesequences"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+The sequences $(u_n)_{n\geqslant 0}$ and $(\rho_n)_{n\geqslant 0}$ are connected by the relations:
+\[\forall n\geqslant 1,~~u_n=\rho_n+u_1\rho_{n-1}+\ldots+u_{n-1}\rho_1\]
+and (consequently)
+\[U(x) = \sum_{n=0}^{\infty}u_nx^n=\frac{1}{1-P(x)}=\frac{1}{(1-x)S(x)}.\]
+</p>
+</div>
+</div>
+<div class="proof">
+<button href="#proof1" data-toggle="collapse" class="btn btn-info proof">Proof.</button>
+<div class="collapse" id="proof1">
+
+  <div class="contents">
+<p id="Forafinitewo"><a class="paragraph-url" href="#Forafinitewo"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+For a finite word $w=\alpha_1\ldots\alpha_m$ such that $w \neq 0^m$, let $l(w)$ denote
+the position of the last $1$ in $w$, that is $l(w):=\max\{1\le i\le m,~\alpha_i=1\}$.
+Then, the sum in the expression <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#un">(5)</a> of $u_n$ can be decomposed as follows:
+\[\sum_{|w|=n-1}\pi(1w1)=\pi(10^{n-1}1)+\sum_{i=1}^{n-1}\sum_{{|w|=n-1}\atop{l(w)=i}}\pi(1w1).\]
+Now, by disjoint union $\pi(10^{n-1})=\pi(10^{n-1}1)+\pi(10^{n})$, so that
+\[\pi(10^{n-1}1)=\pi(1)(c_{n-1}-c_{n})=\pi(1)\rho_n.\]
+In the same way, for $w=\alpha_1\ldots\alpha_{n-1}$, if $l(w)=i$ then
+ $\pi(1w1)=\pi(1\alpha_1\ldots\alpha_{i-1}1)\rho_{n-i}$, so that
+</p>
+<table class="eqnarray">
+<tr><td class="right">$u_n$</td>
+     <td class="center">$ = $</td>
+     <td class="left">$\rho_n+\sum_{i=1}^{n-1}\rho_{n-i}\frac{1}{\pi(1)}\sum_{|w|=i-1}\pi(1w1)$</td>
+</tr>
+<tr><td/><td class="center">$ = $</td>
+     <td class="left">$\rho_n+\sum_{i=1}^{n-1}\rho_{n-i}u_{i}$,</td>
+</tr>
+</table>
+<p id="whichleadsto"><a class="paragraph-url" href="#whichleadsto"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+which leads to $U(x)=(1-P(x))^{-1}$ by summation.
+∎
+</p>
+</div>
+</div></div>
+</div>
+
+<div class="subsection"><div class="subsection-title" id="mixingcoefficients">3.3. Mixing coefficients</div>
+<p id="Themixingcoe"><a class="paragraph-url" href="#Themixingcoe"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+The mixing coefficients $\psi(n,A,B)$ are expressed as the $n$-th coefficient
+in the series expansion of an analytic function $M^{A,B}$ which is given in
+terms of $S$ and $U$. The notation $[x^n] A(x)$ means the  coefficient
+of $x^n$ in the power expansion of $A(x)$ at the origin.
+Denote the remainders associated with the series $S(x)$ by
+$$
+r_n : = \sum_{k\geqslant n} c_k, \quad R_n(x):=\sum_{k\geqslant n}c_k x^k
+$$
+and for $a\geqslant 0$, define the &quot;shifted&quot; generating function
+<span class="equation" id="defPa">
+  <span class="contents">$
+P_a(x):=\frac 1{c_a}\sum _{n\geqslant 1}\rho _{a+n}x^n=x+\frac{x-1}{c_ax^a}R_{a+1}(x).
+$</span><span class="title">(6)</span>
+</span>
+</p>
+<div class="prop" id="melange">
+  <div class="title">Proposition 1</div>
+  <div class="contents">
+<p id="Foranyfinite"><a class="paragraph-url" href="#Foranyfinite"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+For any finite word $A$ and any word $B$, the identity
+\[\psi(n,A,B)=[x^{n+1}] M^{A,B}(x)\]
+holds for the generating functions $M^{A,B}$ respectively defined by:
+</p>
+<ol>
+<li>if $A=A'1$ and $B=1B'$ where $A'$ and $B'$ are any finite words, then
+ $$M^{A,B}(x) = M(x) := \displaystyle\frac{S(x)-S(1)}{(x-1)S(x)};$$
+</li>
+<li>if $A=A'10^a$ and $B=0^b1B'$ where $A'$ and $B'$ are any finite words
+  and $a+b\geqslant 1$, then
+\[M^{A,B}(x)
+:= S(1)\displaystyle\frac{c_{a+b}}{c_ac_b}P_{a+b}(x) + U(x)\left[ S(1)P_a(x)P_b(x)-S(x)\right];\]
+</li>
+<li>if $A=0^a$ and $B=0^b$ with $a,b\geqslant 1$, then
+\[M^{A,B}(x)
+:= S(1)\displaystyle\frac{1}{r_ar_b}\sum _{n\geqslant 1}r_{a+b+n}x^n + \displaystyle U(x)
+\left[ \frac{S(1)R_a(x)R_b(x)}{r_ar_bx^{a+b-2}}-S(x)\right];
+\]
+</li>
+<li>if $A=A'10^a$ and $B=0^b$ where $A'$ is any finite words and $a,b\geqslant 0$, then
+$$
+M^{A,B}(x)
+:= S(1)\displaystyle\frac{1}{c_ar_bx^{a+b-1}}R_{a+b}(x)+  \displaystyle U(x)
+\left[ \frac{S(1)P_a(x)R_b(x)}{c_ar_bx^{b-1}}-S(x)\right];
+$$
+</li>
+<li>if $A=0^a$ and $B=0^b1B'$ where $B'$ is any finite words and $a,b\geqslant 0$, then
+  \[
+  M^{A,B}(x)
+  %= M^{a,b}(x)
+  := S(1)\displaystyle\frac{1}{r_ac_bx^{a+b-1}}R_{a+b}(x)+  \displaystyle U(x)
+\left[ \frac{S(1)R_a(x)P_b(x)}{r_ac_bx^{a-1}}-S(x)\right].
+  \]
+</li>
+</ol>
+</div>
+</div>
+
+<div class="remark" id="remark1">
+  <div class="title">Remark 1: </div>
+  <div class="contents">
+<p id="Itisworthnot"><a class="paragraph-url" href="#Itisworthnot"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+It is worth noticing that the asymptotics of $\psi(n,A,B)$ may not be uniform in all
+words $A$ and $B$. We  call this kind of system non-uniformly $\psi$-mixing. It may happen
+that $\psi(n,A,B)$ goes to zero for any fixed $A$ and $B$, but (for example, in case (iii)) the
+larger $a$ or $b$, the slower the convergence, preventing it from being uniform.
+</p>
+</div>
+</div>
+<div class="proof">
+<button href="#proof2" data-toggle="collapse" class="btn btn-info proof">Proof.</button>
+<div class="collapse" id="proof2">
+
+  <div class="contents">
+<p id="Thefollowingi"><a class="paragraph-url" href="#Thefollowingi"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+The following identity has been established in <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#bibentry_ccpp">[9]</a> (see formula (17) in
+that paper) and will be used many times in the sequel. For any two finite words $w$ and $w'$,
+<span class="equation" id="renouvellement">
+  <span class="contents">$
+\pi(w1w')\pi(1)=\pi(w1)\pi(1w').
+$</span><span class="title">(7)</span>
+</span>
+</p>
+<ol>
+<li>
+ If $A=A'1$ and $B=1B'$, then <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#renouvellement">(7)</a> yields
+\[\pi(AwB)=\pi(A'1w1B')=\frac{\pi(A'1)}{\pi(1)}\pi(1w1B')=S(1)\pi(A)\pi(B)\frac{\pi(1w1)}{\pi(1)}.\]
+So
+$$
+\psi(n,A,B) = S(1) u_{n+1} - 1
+$$
+and by Lemma <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#lemme_un">Lemma 1</a>, the result follows.
+</li>
+<li>
+<p id="LetAA10aandB"><a class="paragraph-url" href="#LetAA10aandB"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+Let $A=A'10^a$ and $B=0^b1B'$ with $a,b\geqslant 0$ and $a+b\neq 0$.
+To begin with,
+\[\pi(AwB)=\frac{1}{\pi(1)}\pi(A'1)\pi(10^aw0^b1B')=\frac{1}{\pi(1)^2}\pi(A'1)\pi(10^aw0^b1)\pi(1B').\]
+Furthermore, $\pi(A)=c_a\pi(A'1)$ and  by <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#sym">(3)</a>, $\pi(0^b1)=\pi(10^b)$, so it comes
+ 
+ \[\pi(B)=\frac{1}{\pi(1)}\pi(0^b1)\pi(1B')=\frac{\pi(10^b)}{\pi(1)}\pi(1B')=c_b\pi(1B').\]
+ Therefore,
+ \[\pi(AwB)=\frac{\pi(A)\pi(B)}{c_ac_b\pi(1)^2}\pi(10^aw0^b1).\]
+Using $\pi(1)S(1)=1$, this proves
+\[\psi(n,A,B)=S(1)\frac{v_{n}^{a,b}}{c_ac_b}-1\]
+where
+  \[v_n^{a,b}:=\frac{1}{\pi(1)}\sum_{|w|=n}\pi(10^aw0^b1).\]
+As in the proof of the previous lemma, if $w=\alpha_1\ldots\alpha_{m}$ is any finite word different
+from $0^m$, we call $f(w):=\min\{1\le i \le m, \alpha_{i}=1\}$ the first place where  $1$ can be
+seen in $w$ and recall that $l(w)$ denotes the last place where  $1$ can be seen in $w$. One has
+\[\sum_{|w|=n}\pi(10^aw0^b1) = \pi(10^{a+n+b}1)+\sum_{1\le i\le j\le n}\sum_{{{|w|=n}\atop{f(w)=i,l(w)=j}}}\pi(10^aw0^b1).\]
+If $i=j$ then $w$ is the word $0^{i-1}10^{n-i}$, else $w$ is of the form
+ $0^{i-1}1w'10^{n-j}$, with $|w'|=j-i-1$. Hence, the previous sum can be rewritten as
+</p>
+<table class="eqnarray">
+<tr><td class="right">$\sum_{|w|=n}\pi(10^aw0^b1)$</td>
+    <td class="center">$ = $</td>
+    <td class="left">$\pi(1)\rho_{a+b+n+1}+\pi(1)\sum_{i=1}^{n}\rho_{a+i}\rho_{n+1-i+b}$</td>
+</tr>
+<tr><td/><td class="center">$ + $</td>
+     <td class="left">$\sum_{1\leqslant i\lt j\leqslant n}\sum_{{{w}\atop{|w|=j-i-1}}}\pi(10^{a+i-1}1w10^{n-j+b}1)$.</td>
+</tr>
+</table>
+<p id="Equation77sh"><a class="paragraph-url" href="#Equation77sh"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+Equation <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#renouvellement">(7)</a> shows
+</p>
+<table class="eqnarray">
+<tr><td class="right">$\pi(10^{a+i-1}1w10^{n-j+b}1)$</td>
+    <td class="center">$ = $</td>
+    <td class="left">$\frac{\pi(10^{a+i-1}1)}{\pi(1)}\frac{\pi(1w1)}{\pi(1)}\pi(10^{n-j+b}1)$</td>
+</tr>
+<tr><td/><td class="center">$ = $</td>
+    <td class="left">$\rho_{a+i}\rho_{n+1-j+b}\pi(1w1)$.</td>
+</tr>
+</table>
+<p id="Thisimpliesv"><a class="paragraph-url" href="#Thisimpliesv"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+This implies:
+\[v_n^{a,b}=\rho_{a+b+n+1}+\sum_{i=1}^{n}\rho_{a+i}\rho_{n+1-i+b}
+   +  \sum_{1\le i\lt j\le n}\rho_{a+i}\rho_{n+1-j+b}\sum_{w, |w|=j-i11}\frac{\pi(1w1)}{\pi(1)}.\]
+Recalling that $u_0=1$, one gets
+ \[v_n^{a,b}=\rho_{a+b+n+1}+\sum_{1\le i\le j\le n}\rho_{a+i}\rho_{n+1-j+b}u_{j-i}\]
+which gives the result <strong><i>ii)</i></strong> with <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#lemme_un">Lemma 1</a>.
+</p>
+</li>
+<li>
+<p id="LetA0aandB0b"><a class="paragraph-url" href="#LetA0aandB0b"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+Let $A=0^a$ and $B=0^b$ with $a,b\geqslant 1$.
+Set
+ \[v_n^{a,b}:=\frac{1}{\pi(1)}\sum_{|w|=n}\pi(0^aw0^b).\]
+First, recall that, due to <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#probas">(2)</a>, $\pi(A)=\pi(1)r_a$ and $\pi(B)=\pi(1)r_b$.
+Consequently,
+ \[\psi(n,A,B)=\frac{\pi(1)v_{n}^{a,b}-\pi(A)\pi(B)}{\pi(A)\pi(B)}=S(1)\frac{v_{n}^{a,b}}{r_ar_b}-1.\]
+Let $w$ be a finite word with $|w|=n$. If $w=0^{n}$, then
+\[\pi(AwB)=\pi(0^{a+n+b})=\pi(1)r_{a+b+n}.\]
+If not, let $f(w)$ denote as before the first position of $1$ in $w$ and $l(w)$ the last one in $w$. If $f(w)=l(w)$, then
+</p>
+<table class="eqnarray">
+<tr><td class="right">$\pi(AwB)$</td>
+    <td class="center">$ = $</td>
+    <td class="left">$\pi(0^{a+f(w)-1}10^{n-f(w)+b})$</td>
+</tr>
+<tr><td/><td class="center">$ = $</td>
+  <td class="left">$\frac{1}{\pi(1)}\pi(0^{a+f(w)-1}1)\pi(10^{n-f(w)+b})=\pi(1)c_{a+f(w)-1}c_{n-f(w)+b}$.</td>
+</tr>
+</table>
+<p id="Iffwltlwthen"><a class="paragraph-url" href="#Iffwltlwthen"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+ If $f(w)\lt l(w)$, then writing $w=w_1 \ldots w_{n}$,
+</p>
+<table class="eqnarray">
+<tr><td class="right">$\pi(AwB)$</td>
+    <td class="center">$ = $</td>
+    <td class="left">$\pi(0^{a+f(w)-1}1w_{f(w)+1}\ldots w_{l(w)-1}10^{n-l(w)})$</td>
+</tr>
+<tr><td/><td class="center">$ = $</td>
+    <td class="left">$\frac{1}{\pi(1)^2}\pi(0^{a+f(w)-1}1)\pi(1w_{f(w)+1}\ldots w_{l(w)-1}1)\pi(10^{n-l(w)+b})$.</td>
+</tr>
+</table>
+<p id="Summingyield"><a class="paragraph-url" href="#Summingyield"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+Summing yields
+</p>
+<table class="eqnarray">
+<tr><td class="right">$v_n^{a,b}$</td>
+    <td class="center">$ = $</td>
+    <td class="left">$r_{a+b+n}+\displaystyle\sum_{i=1}^{n}c_{a+i-1}c_{n+b-i}+\sum_{{{i,j=1}\atop{i\lt j}}}^{n}\sum_{{{w,}\atop{|w|=j-i-1}}}c_{a+i-1}\frac{\pi(1w1)}{\pi(1)}c_{n+b-j}$</td>
+</tr>
+<tr><td/><td class="center">$ = $</td>
+    <td class="left">$r_{a+b+n}+\displaystyle\sum_{1\le i\le j\le n}c_{a+i-1}c_{n+b-j}u_{j-i}$,</td>
+</tr>
+</table>
+<p id="whichgivesth"><a class="paragraph-url" href="#whichgivesth"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+which gives the desired result. The last two items, left to the reader, follow the same guidelines.
+∎
+</p>
+</li>
+</ol>
+</div>
+</div></div>
+</div>
+
+<div class="subsection"><div class="subsection-title" id="ssec:mixinglogarithmiccomb">3.4. Mixing of the logarithmic infinite comb</div>
+<p id="Considerthef"><a class="paragraph-url" href="#Considerthef"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+Consider the first example in Section <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#sec:source">2</a>, that is the probabilized infinite
+comb defined by $c_0 = 1$ and  for any $n\geqslant 1$ by
+$$
+c_n= \frac{1}{n(n+1)(n+2)(n+3)}.
+$$
+When $|x|\lt 1$, the series $S(x)$ writes as follows
+<span class="equation" id="defSpeigneLog">
+  <span class="contents">$
+S(x)=\frac{47}{36}-\frac{5}{12x}+\frac{1}{6x^2}+\frac{(1-x)^3\log(1-x)}{6x^3}
+$</span><span class="title">(8)</span>
+</span>
+and
+ \[S(1)=\frac{19}{18}.\]
+With <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#melange">Proposition 1</a>, the asymptotics of the mixing coefficient comes from
+singularity analysis of the generating functions $M^{A,B}$.
+</p>
+<div class="prop" id="prop-3-4">
+  <div class="title">Proposition 2</div>
+  <div class="contents">
+<p id="TheVLMCdefin"><a class="paragraph-url" href="#TheVLMCdefin"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+The VLMC defined by the logarithmic infinite comb has a non-uniform polynomial
+mixing of the following form:
+for any finite words $A$ and $B$, there exists a positive constant $C_{A,B}$
+such that for any $n\geqslant 1$,
+$$
+|\psi (n,A,B)|\leqslant\frac {C_{A,B}}{n^3}.
+$$
+</p>
+</div>
+</div>
+
+<div class="remark" id="remark2">
+  <div class="title">Remark 2: </div>
+  <div class="contents">
+<p id="TheC_ABcanno"><a class="paragraph-url" href="#TheC_ABcanno"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+The $C_{A,B}$ cannot be bounded above by some constant that does not depend on $A$ and $B$,
+as can be seen hereunder in the proof.
+Indeed, we show that if $a$ and $b$ are positive integers,
+$$
+\psi(n,0^a,0^b)\sim\frac 13\left( \frac{S(1)}{r_ar_b}-\frac 1{r_a}-\frac 1{r_b}+\frac 1{S(1)}\right)\frac 1{n^3}
+$$
+as $n$ goes to infinity. In particular, $\psi(n,0,0^n)$ tends to the positive constant $\frac{13}{6}$.
+</p>
+</div>
+</div>
+<div class="proof">
+<button href="#proof3" data-toggle="collapse" class="btn btn-info proof">Proof.</button>
+<div class="collapse" id="proof3">
+
+  <div class="contents">
+<p id="Foranyfinitew"><a class="paragraph-url" href="#Foranyfinitew"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+For any finite words $A$ and $B$ in case <strong><i>i)</i></strong> of
+<a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#melange">Proposition 1</a>, one deals with $U(x)=\left((1-x)S(x)\right)^{-1}$ which
+has $1$ as a unique dominant singularity. Indeed, $1$ is the unique dominant
+singularity of $S$, so that the dominant singularities of $U$ are $1$ or
+zeroes of $S$ contained in the closed unit disc. But $S$ does not vanish on
+the closed unit disc, because for any $z$ such that $ |z| \leqslant 1$,
+$$|S(z)| \geqslant 1- \sum_{n\geqslant 1} \frac{1}{n(n+1)(n+2)(n+3)} = 1-(S(1)-1)=\frac{17}{18}.$$
+</p>
+<p id="SinceMxfracS"><a class="paragraph-url" href="#SinceMxfracS"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+Since
+\[M(x) =\frac{S(x)-S(1)}{(x-1)S(x)}= S(1)U(x) - \frac 1{1-x},\]
+the unique dominant singularity of $M$ is $1$, and when $x$ tends to $1$ in
+the unit disc, <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#defSpeigneLog">(8)</a> leads to
+\[
+M(x) = A(x)-\frac{1}{6S(1)}(1-x)^2\log(1-x)+\grandO{(1-x)^3\log(1-x)}
+\]
+where $A(x)$ is a polynomial of degree $2$. Using a classical transfer theorem
+based on the analysis of the singularities of $M$
+(see Flajolet and Sedgewick <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#bibentry_FS">[15]</a>, section VI.4, p. 393 and special case p. 387&quot;),
+we get
+ \[\psi(n-1,w1,1w')=  [x^n] M(x)=\frac{1}{3S(1)}\frac{1}{n^3}+\petito{\frac{1}{n^3}}.\]
+</p>
+<p id="Thecasesiiii"><a class="paragraph-url" href="#Thecasesiiii"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+The cases  <strong><i>ii)</i></strong>, <strong><i>iii)</i></strong>,
+<strong><i>iv)</i></strong> and <strong><i>v)</i></strong> of <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#melange">Proposition 1</a> are
+of the same kind, and we completely deal with case <strong><i>iii)</i></strong>.
+</p>
+<p id="Caseiiiwords"><a class="paragraph-url" href="#Caseiiiwords"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+Case <strong><i>iii)</i></strong>: words of the form $A=0^a$ and $B=0^b$, $a,b\geqslant 1$.
+As shown in <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#melange">Proposition 1</a>, one has to compute the asymptotics of the $n$-th
+coefficient of the Taylor series of the function
+<span class="equation" id="melangeLog3">
+  <span class="contents">$
+M^{a,b}(x):=S(1)\displaystyle\frac{1}{r_ar_b}\sum _{n\geqslant 1}r_{a+b+n}x^n + \displaystyle U(x)\left[ \frac{S(1)R_a(x)R_b(x)}{r_ar_bx^{a+b-2}}-S(x)\right].
+$</span><span class="title">(9)</span>
+</span>
+The contribution of the left-hand term of this sum is directly given by the
+asymptotics of the remainder
+$$
+r_n=\sum _{k\geqslant n}c_k=\frac{1}{3n(n+1)(n+2)}=\frac{1}{3n^3}+\mathcal{O}\left( \frac {1}{n^4}\right) .
+$$
+By means of singularity analysis, we deal with the right-hand term
+$$
+N^{a,b}(x):=\displaystyle U(x)\left[ \frac{S(1)R_a(x)R_b(x)}{r_ar_bx^{a+b-2}}-S(x)\right].
+$$
+Since $1$ is the only dominant singularity of $S$ and $U$ and consequently of any $R_a$,
+it suffices to compute
+an expansion of $N^{a,b}(x)$ at $x=1$.
+It follows from <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#defSpeigneLog">(8)</a> that
+$U$, $S$ and $R_a$ admit expansions near $1$ of the forms
+</p>
+<table class="eqnarray">
+<tr><td class="right">$U(x)$</td>
+    <td class="center">$ = $</td>
+    <td class="left">$\frac{1}{S(1)(1-x)}+\mbox{polynomial}+\frac{1}{6S(1)^2}(1-x)^2\log (1-x)+\mathcal{O}(1-x)^2$</td>,
+</tr>
+<tr><td class="right">$S(x)$</td>
+    <td class="center">$ = $</td>
+    <td>$\mbox{polynomial}+\frac{1}{6}(1-x)^3\log (1-x)+\mathcal{O}(1-x)^3$,</td>
+</tr>
+</table>
+and
+<table class="eqnarray">
+<tr><td class="right">$R_a(x)$</td>
+  <td class="center">$ = $</td>
+  <td>$\mbox{polynomial}+\frac{1}{6}(1-x)^3\log (1-x)+\mathcal{O}(1-x)^3$.</td>
+</tr>
+</table>
+<p id="Consequently"><a class="paragraph-url" href="#Consequently"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+Consequently,
+$$
+N^{a,b}(x)=\frac 16\left( \frac 1{r_a}+\frac 1{r_b}-\frac 1{S(1)}\right)(1-x)^2\log (1-x)+\mathcal{O}(1-x)^2
+$$
+in a neighbourhood of $1$ in the unit disc so that, by singularity analysis,
+$$
+[x^n]N^{a,b}(x)=-\frac 13\left( \frac 1{r_a}+\frac 1{r_b}-\frac 1{S(1)}\right)\frac 1{n^3}+o\left(\frac 1{n^3}\right).
+$$
+Consequently <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#melangeLog3">(9)</a> leads to
+\[
+\psi(n-1,0^a,0^b)=  [x^n] M^{a,b}(x)
+\sim\frac 13\left( \frac{S(1)}{r_ar_b}-\frac 1{r_a}-\frac 1{r_b}+\frac 1{S(1)}\right)\frac 1{n^3}
+%\sim\frac q3\frac{(S(1)-r_a)(S(1)-r_b)}{S(1)r_ar_b}\frac 1{n^3}
+\]
+as $n$ tends to infinity, showing the mixing inequality and the non uniformity.
+</p>
+<p id="Theremaining"><a class="paragraph-url" href="#Theremaining"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+The remaining cases <strong><i>ii)</i></strong>, <strong><i>iv)</i></strong>
+and <strong><i>v)</i></strong> are of the same flavour.
+∎
+</p>
+</div>
+</div></div>
+</div>
+
+<div class="subsection"><div class="subsection-title" id="ssec:mixingfactccomb">3.5. Mixing of the factorial infinite comb</div>
+<p id="Considernowt"><a class="paragraph-url" href="#Considernowt"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+Consider now the second Example in Section <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#sec:source">2</a>, that is the
+probabilized infinite comb defined by
+$$
+\forall n\in\g N,~c_n=\frac 1{(n+1)!}.
+$$
+With previous notations, one gets
+$$
+S(x)=\frac {e^x-1}x
+{\rm and }
+U(x)=\frac {x}{(1-x)(e^x-1)}.
+$$
+</p>
+
+<div class="prop" id="UniformMixing">
+  <div class="title">Proposition 3</div>
+  <div class="contents">
+<p id="TheVLMCdefine"><a class="paragraph-url" href="#TheVLMCdefine"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+The VLMC defined by the factorial infinite comb has a uniform
+exponential mixing of the following form: there exists a positive
+constant $C$ such that for any $n\geqslant 1$ and for any finite
+words $A$ and $B$,
+$$
+|\psi (n,A,B)|\leqslant\frac C{(2\pi )^n}.
+$$
+</p>
+</div>
+</div>
+<div class="proof">
+<button href="#proof4" data-toggle="collapse" class="btn btn-info proof">Proof.</button>
+<div class="collapse" id="proof4">
+
+  <div class="contents">
+<ol>
+<li>First case of mixing in <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#melange">Proposition 1</a>: $A=A'1$ and $B=1B'$.
+<p id="BecauseofPro"><a class="paragraph-url" href="#BecauseofPro"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+Because of <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#melange">Proposition 1</a>, the proof consists in computing the
+asymptotics of $[x^n] M(x)$. We make use of singularity analysis. The
+dominant singularities of
+$$
+M(x)=\frac{S(x)-S(1)}{(x-1)S(x)}
+$$
+are readily seen to be $2i\pi$ and $-2i\pi$, and
+$$
+M(x)\ \equivalent{2i\pi}\frac{1-e}{1-2i\pi}\cdot\frac{1}{1-\frac{z}{2i\pi}}.
+$$
+The behaviour of $M$ in a neighbourhood of $-2i\pi$ is obtained by complex conjugacy.
+Singularity analysis via  transfer theorem provides thus that
+$$
+[x^n]M(x)
+\equivalent{n\to +\infty}\frac {2(e-1)}{1+4\pi ^2}\left( \frac 1{2\pi }\right) ^n \epsilon _n
+$$
+where
+$$
+\epsilon _n=
+\left\{
+\begin{array}{l}
+1{\rm\ if\ }n{\rm\ is\ even}\\
+2\pi{\rm\ if\ }n{\rm\ is\ odd}.
+\end{array}
+\right.
+$$
+</p>
+</li>
+<li>Second case of mixing: $A=A'10^a$ and $B=0^b1B'$.
+<p id="BecauseofProo"><a class="paragraph-url" href="#BecauseofProo"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+Because of <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#melange">Proposition 1</a>, one has to compute $[x^n]M^{a,b}(x)$
+with
+$$
+M^{a,b}(x):= S(1)\frac{c_{a+b}}{c_ac_b}P_{a+b}(x)
++\frac 1{S(x)}\cdot\frac 1{1-x}\Big[ S(1)P_a(x)P_b(x)-S(x)\Big] ,
+$$
+where $ P_{a+b}$ is an entire function.
+In this last formula, the brackets contain an entire function
+that vanishes at $1$ so that the dominant singularities
+of $M^{a,b}$ are again those of $S^{-1}$, namely $\pm2i\pi$.
+The expansion of $M^{a,b}(x)$ at $2i\pi$ writes thus
+$$
+M^{a,b}(x)\ \equivalent{2i\pi}\frac{-S(1)P_a(2i\pi )P_b(2i\pi )}{1-2i\pi}\cdot\frac{1}{1-\frac{x}{2i\pi}}
+$$
+which implies, by singularity analysis, that
+$$
+[x^n]M^{a,b}(x)\equivalent{n\to+\infty}2\Re\left(\frac{1-e}{1-2i\pi}\cdot\frac{P_a(2i\pi )P_b(2i\pi )}{(2i\pi )^n}\right) .
+$$
+Besides, the remainder of the exponential series satisfies
+<span class="equation" id="resteSerieExp">
+  <span class="contents">$
+\sum _{n\geqslant a}\frac{x^n}{n!}=\frac{x^a}{a!}\left( 1+\frac xa+\mathcal{O}(\frac 1a)\right)
+$</span><span class="title">(10)</span>
+</span>
+when $a$ tends to infinity.
+Consequently, by Formula <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#defPa">(6)</a>, $P_a(2i\pi )$
+tends to $2i\pi$ as $a$ tends to infinity
+
+so that one gets a positive constant $C_1$ that does not
+depend on $a$ and $b$ such that for any $n\geqslant 1$,
+$$
+\left| \psi(n, A,B)\right|\leqslant\frac{C_1}{(2\pi )^n}.
+$$
+</p>
+</li>
+<li>Third case of mixing: $A=0^a$ and $B=0^b$.
+<p id="Thistimeoneh"><a class="paragraph-url" href="#Thistimeoneh"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+This time, one has to compute $[x^n]M^{a,b}(x)$
+with
+$$
+M^{a,b}(x) := S(1)\displaystyle\frac{1}{r_ar_b}\sum _{n\geqslant 1}r_{a+b+n}x^n + \displaystyle U(x)
+\left[ \frac{S(1)R_a(x)R_b(x)}{r_ar_bx^{a+b-2}}-S(x)\right]
+$$
+the first term being an entire function.
+Here again, the dominant singularities of $M^{a,b}$ are located at $\pm 2i\pi$ and
+$$
+M^{a,b}(x)\ \equivalent{2i\pi}\frac{-S(1)R_a(2i\pi )R_b(2i\pi )}{(1-2i\pi )r_ar_b(2i\pi )^{a+b-2}}\cdot\frac{1}{1-\frac{x}{2i\pi}}
+$$
+which implies, by singularity analysis, that
+$$
+\psi(n-1,A,B) \equivalent{n\to+\infty}
+2\Re\left(\frac{1-e}{1-2i\pi}\cdot\frac{R_a(2i\pi )R_b(2i\pi )}{r_ar_b(2i\pi )^{a+b-2}}\frac{1}{(2i\pi )^n}\right) .
+$$
+Once more, because of <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#resteSerieExp">(10)</a>, this implies that
+there is a positive constant $C_2$ independent of $a$ and $b$ and
+such that for any $n\geqslant 1$,
+$$
+\left| \psi(n,A,B)\right|\leqslant\frac{C_2}{(2\pi )^n}.
+$$
+</p>
+</li>
+<li> and <strong><i>v)</i></strong>: both remaining cases of mixing
+that respectively correspond to words of the form $A=A'10^a$, $B=0^b$
+and $A=0^a$, $B=0^b1B'$ are of the same vein and lead to similar results.
+</li>
+</ol>
+∎
+</div>
+</div></div>
+</div>
+</div>
+
+<div class="section"><div class="section-title" id="sec:suffixtrie">4. Height and saturation level of suffix tries</div>
+<p id="Inthissectionw"><a class="paragraph-url" href="#Inthissectionw"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+In this section, we consider a suffix trie process $(\rond{T}_n)_{n\geq 1}$
+associated with an infinite random word generated by an infinite comb.
+A precise definition of tries and suffix tries is given in
+section <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#ssec:height">4.1</a>. We are interested in the height
+and the saturation level of such a suffix trie.
+</p>
+<p id="Ourmethodtos"><a class="paragraph-url" href="#Ourmethodtos"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+Our method to study these two parameters uses a duality property à
+la Pittel developed in Section <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#ssec:duality">4.2</a>, together with
+a careful and explicit calculation of the generating function of the
+second occurrence of a word (in Section <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#ssec:generating">4.3</a>) which
+can be achieved for any infinite comb. These calculations are not so
+intricate because they are strongly related to the mixing coefficient
+and the mixing properties detailed in Section <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#sec:mixing">3</a>.
+</p>
+<p id="Morespecific"><a class="paragraph-url" href="#Morespecific"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+More specifically, we look at our two favourite examples, the logarithmic
+comb and the factorial comb. We prove in Section <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#ssec:heightLog">4.5</a>
+that the height of the first one is not logarithmic but polynomial
+and in Section <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#ssec:saturation">4.6</a> that the saturation
+level of the second one is not logarithmic either but negligibly smaller.
+Remark that despite the very particular form of the comb in the wide
+family of variable length Markov models, the comb sources provide a
+spectrum of asymptotic behaviours for the suffix tries.
+</p>
+
+<div class="subsection"><div class="subsection-title" id="ssec:height">4.1. Suffix tries</div>
+<p id="Lety_n_ngeqs"><a class="paragraph-url" href="#Lety_n_ngeqs"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+Let $(y_n)_{n\geqslant 1}$ be a sequence of right-infinite words
+on $\{ 0,1\}$.
+With this sequence is associated a <strong>trie process</strong>
+$(\rond{T}_n)_{n\geq 1}$ which is a planar unary-binary tree increasing
+sequence defined the following way.
+The tree $\rond{T}_n$ contains the words $y_1,\dots ,y_n$ in its leaves.
+It is obtained by a sequential construction, inserting the words $y_n$
+successively.
+At the beginning, $\rond T_1$ is the tree containing the root and the
+leaf $0\dots$ (resp. the leaf $1\dots$) if $y_1$ begins with $0$ (resp. with $1$).
+For $n\geq 2$, given the tree $\rond{T}_{n-1}$, the word $y_n$ is inserted
+as follows. We go through the tree along the branch whose nodes are encoded
+by the successive prefixes of $y_n$; when the branch ends, if an internal
+node is reached, then $y_n$ is inserted at the free leaf, else we make the
+branch grow comparing the next letters of both words until they can be
+inserted in two different leaves. As one can clearly see on
+<a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#1figtrieconstruction">Figure 2</a> a trie is not a complete tree and
+the insertion of a word can make a branch grow by more than one level.
+Notice that if the trie contains a finite word $w$ as internal node, there
+are at least two already inserted infinite words $y_n$ that have $w$ as a prefix.
+This indicates why the <em>second</em> occurrence of a word is prominent in the growing of a trie.
+</p>
+
+<div class="figure" id="1figtrieconstruction">
+  <div class="title">Figure 2: Trie construction</div>
+  <div class="contents">
+<table class="img-row">
+<tr>
+<td><img src="uncommon-suffix-tries/trieconstruction.svg" width="300"/></td>
+<td>$\longrightarrow$</td>
+<td><img src="uncommon-suffix-tries/trieconstruction2.svg" width="300"/></td>
+</tr>
+</table>
+<div class="legend">
+Last steps of the construction of a trie built from the set $(000\ldots,10\ldots, 1101\ldots, 001,\ldots, 01110\ldots , 1100\ldots, 01111\ldots)$.
+</div>
+</div>
+</div>
+
+
+<div class="figure" id="1figtriesuffconstruction">
+  <div class="title">Figure 3: </div>
+  <div class="contents">
+
+<img src="uncommon-suffix-tries/suffixconstruction.svg" width="400"/>
+<div class="legend">
+Suffix trie $\rond T_{10}$ associated with the word $1001011001110\ldots$. Here, $H_{10}=4$ and $\ell_{10}=2$.
+</div>
+</div>
+</div>
+<p id="Letma_1a_2a_"><a class="paragraph-url" href="#Letma_1a_2a_"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+Let $m:=a_1a_2a_3 \ldots$ be an infinite word on $\{0,1\}$.
+The <strong>suffix trie</strong> $\rond{T}_n$ (with $n$ leaves) associated
+with $m$ is the trie built from the first $n$ suffixes of $m$ one obtains
+by deleting successively the left-most letter, that is
+\[
+y_1=m,~y_2=a_2a_3a_4\dots, ~y_3=a_3a_4\dots, ~\dots,~y_n=a_na_{n+1}\dots
+\]
+</p>
+<p id="Foragiventri"><a class="paragraph-url" href="#Foragiventri"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+For a given trie  $\rond{T}_n$, we are mainly interested in the <em>height</em>
+$H_n$ which is the maximal depth of an internal node of $\rond{T}_n$ and the
+<em>saturation level</em> $\ell_n$ which is the maximal depth up to which all
+the internal nodes are present in $\rond{T}_n$.
+Formally, if $\partial \rond T_n$ denotes the set of leaves of $\rond T_n$,
+</p>
+<table class="eqnarray">
+<tr><td class="right">$H_n$</td>
+    <td class="center">$=$</td>
+    <td class="left">$\max_{u \in \rond{T}_n\setminus \partial \rond{T}_n} \big\{ |u| \big\}$</td>
+</tr>
+<tr>
+
+    <td class="right">$\ell_n$</td>
+    <td class="center">$=$</td>
+    <td class="left">$\max \big\{j \in \N | \ \# \{u \in  \rond{T}_n\setminus \partial \rond{T}_n, |u|=j\}=2^j\big\}$.</td>
+</tr>
+</table>
+<p id="SeeFigurefor"><a class="paragraph-url" href="#SeeFigurefor"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+See Figure <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#1figtriesuffconstruction">Figure 3</a> for an example.
+Note that the saturation level should not be mistaken for the shortest path up to a leaf.
+</p>
+</div>
+
+<div class="subsection"><div class="subsection-title" id="ssec:duality">4.2. Duality</div>
+<p id="LetU_n_ngeqs"><a class="paragraph-url" href="#LetU_n_ngeqs"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+Let $(U_n)_{n\geqslant 1}$ be an infinite random word generated by some infinite
+comb and $(\rond{T}_n)_{n\geqslant 1}$ be the associated suffix trie process. We
+denote by $\rond R$ the set of right-infinite words. Besides, we define hereunder
+two random variables having a key role in the proof of <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#hauteur">Theorem 1</a>
+and <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#saturation">Theorem 2</a>. This method goes back to Pittel <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#bibentry_Pittel">[28]</a>.
+</p>
+<p id="LetsinrondRb"><a class="paragraph-url" href="#LetsinrondRb"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+Let $s\in\rond R$ be a deterministic infinite sequence and $s ^{(k)}$ its prefix of length $k$. For $n\geq 1$,
+
+</p>
+<table class="eqnarray">
+<tr><td class="right">$X_{n}(s)$</td>
+  <td class="center">$:=$</td>
+  <td class="right">$\left \{
+\begin{array}{l}
+0 \ \mbox{if}\ s^{(1)}\ \mbox{is not in}\ \rond{T}_{n}\\
+\max \{k\geqslant 1 \ |\ \mbox{the word}\ s ^{(k)} \mbox{ is already in }
+\rond{T}_{n}\setminus \partial \rond{T}_n\}, \\
+\end{array}
+\right.$
+</td>
+</tr>
+<tr><td class="right">$T_{k}(s)$</td>
+  <td class="center">$:=$</td>
+  <td class="left">$\min\{n\geqslant 1\ |\ X_{n}(s)=k\}$,</td>
+</tr>
+</table>
+<p id="whereskisinr"><a class="paragraph-url" href="#whereskisinr"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+where &quot;$s ^{(k)}$ is in $\rond{T}_{n}\setminus \partial \rond{T}_n$&quot;
+stands for: there exists an internal node $v$ in $\rond{T}_{n}$ such that
+$s ^{(k)}$ encodes $v$. For any $k\geqslant 1$, $T_{k}(s)$ denotes the
+number of leaves of the first tree &quot;containing&quot; $s^{(k)}$.
+See <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#4figXnetTk">Figure 4</a> for an example.
+</p>
+
+<div class="figure" id="4figXnetTk">
+  <div class="title">Figure 4: </div>
+  <div class="contents">
+
+<img src="uncommon-suffix-tries/XnetTk.svg" width="400"/>
+<div class="legend">
+Example of suffix trie with $n=20$ words. The saturation level is reached
+for any sequence having $1000$ as prefix (in red); $\ell_{20}=X_{20}(s)=3$ and
+thus $T_3(s) \leqslant 20$. The height (related to the maximum of $X_{20}$) is
+realized for any sequence of the form $110101\dots$ (in blue) and
+$H_{20}=6$. Remark that the shortest branch has length $4$ whereas the
+saturation level $\ell_n$ is equal to $3$.
+</div>
+</div>
+</div>
+<p id="Thusthesatur"><a class="paragraph-url" href="#Thusthesatur"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+Thus, the saturation level $\ell_n$ and the height $H_n$ can be
+described using $X_n(s)$:
+<span class="equation" id="defi-var">
+  <span class="contents">$
+\ell_n=\min_{s\in \rond R} X_n(s) \quad \mbox{and}\quad H_n=\max_{s\in \rond R} X_n(s).
+$</span><span class="title">(11)</span>
+</span>
+</p>
+<p id="Noticethatth"><a class="paragraph-url" href="#Noticethatth"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+Notice that the notation $X_n(s)$ is not exactly the same as in
+Pittel <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#bibentry_Pittel">[28]</a> so that $\ell_n$ does not correspond to the
+shortest path in $\mathcal{T}_n$.
+</p>
+<p id="RemarkthatX_"><a class="paragraph-url" href="#RemarkthatX_"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+Remark that $X_n(s)$ and $T_k(s)$ are in duality in the following sense:
+for all positive integers $k$ and $n$, one has the equality of the events
+<span class="equation" id="duality">
+  <span class="contents">$
+\{ X_{n}(s) \geqslant k \} = \{ T_{k}(s) \leqslant n \}.
+$</span><span class="title">(12)</span>
+</span>
+The random variable $T_{k}(s)$ (if $k\geqslant 2$) also represents the
+waiting time of the second occurrence of the deterministic word
+$s^{(k)}$ in the random sequence $(U_n)_{n\geq 1}$, <em>i.e.</em>
+one has to wait $T_{k}(s)$ for the source to create a prefix containing
+exactly two occurrences of $s^{(k)}$. More precisely, for
+$k \geqslant 2$, $T_{k}(s)$ can be rewritten as
+</p>
+<table class="eqnarray">
+<tr><td class="right">$T_k(s)=\min\Bigl\{n\geqslant 1\ \big| U_{n}U_{n+1}\ldots U_{n+k-1}$</td>
+     <td class="left">$=s^{(k)} \mbox{  and } \exists ! j\lt n \mbox{ such that } $</td>
+</tr>
+<tr><td class="right">$U_{j}U_{j+1}\ldots U_{j+k-1}$</td>
+    <td class="left">$=s^{(k)}\Bigr\}$.</td>
+</tr>
+</table>
+<p id="NoticethatT_"><a class="paragraph-url" href="#NoticethatT_"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+Notice that $T_k(s)$ denotes the <em>beginning</em> of the second occurrence
+of $s^{(k)}$ whereas in <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#bibentry_ccpp">[9]</a>, $\tau^{(2)}\left(s^{(k)}\right)$
+denotes the <em>end</em> of the second occurrence of $s^{(k)}$, so that
+<span class="equation" id="lien-tau-T">
+  <span class="contents">$
+\tau^{(2)}\left(s^{(k)}\right)=T_k(s)+k.
+$</span><span class="title">(13)</span>
+</span>
+More generally, in <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#bibentry_ccpp">[9]</a> , for any $r\geqslant 1$, the random
+waiting time $\tau^{(r)}(w)$ is defined as the end of the $r$-th occurrence
+of $w$ in the sequence $(U_n)_{n\geqslant 1}$ and the generating function of the
+$\tau^{(r)}$ is calculated. We go over these calculations in the sequel.
+</p>
+</div>
+<div class="subsection"><div class="subsection-title" id="ssec:generating">4.3. Successive occurence times generating functions</div>
+<div class="prop" id="Phi2">
+  <div class="title">Proposition 4</div>
+  <div class="contents">
+<p id="Letkgeqslant"><a class="paragraph-url" href="#Letkgeqslant"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+Let $k\geqslant 1$. Let also $w=10^{k-1}$ and $\tau^{(2)}(w)$ be the
+end of the second occurrence of $w$ in a sequence generated by a comb defined
+by $(c_n)_{n\geqslant 0}$. Let $S$ and $U$ be the ordinary generating
+functions defined in Section <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#ssec:mixingcomb">3.1</a>. The
+probability generating function of $\tau^{(2)}(w)$ is
+\[
+ \Phi^{(2)}_w(x) = \frac{c_{k-1}^2x^{2k-1}\big(U(x)-1\big)}{S(1)(1-x)\big[ 1+c_{k-1}x^{k-1}(U(x)-1)\big] ^2}.
+\]
+Furthermore, as soon as $\sum_{n \geqslant 1}n^2c_n \lt \infty$, the random
+variable $\tau^{(2)}(w)$
+is square-integrable and
+<span class="equation" id="esp-var">
+  <span class="contents">$
+\g E(\tau^{(2)}(w))=\frac{2S(1)}{c_{k-1}}+o\left(\frac{1}{c_{k-1}}\right), \quad \Var(\tau^{(2)}(w))=\frac{2S(1)^2}{c_{k-1}^2}+o\left(\frac{1}{c_{k-1}^2}\right).
+$</span><span class="title">(14)</span>
+</span>
+</p>
+</div>
+</div>
+<div class="proof">
+<button href="#proof5" data-toggle="collapse" class="btn btn-info proof">Proof.</button>
+<div class="collapse" id="proof5">
+
+  <div class="contents">
+<p id="Foranyrgeqsl"><a class="paragraph-url" href="#Foranyrgeqsl"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+For any $r\geqslant 1
+$, let $\tau^{(r)}(w)$ denote the end of the $r$-th occurrence of $w$
+in a random sequence generated by a comb and $\Phi_w^{(r)}$ its
+probability generating function. The reversed word
+of $c=\alpha _1\dots\alpha _N$ will be denoted by the overline
+$\overline c:=\alpha _N\dots\alpha _1$
+</p>
+<p id="Weusearesult"><a class="paragraph-url" href="#Weusearesult"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+We use a result of <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#bibentry_ccpp">[9]</a> that computes these generating
+functions in terms of stationary probabilities $q_c^{(n)}$. These
+probabilities measure the occurrence of a finite word after $n$ steps,
+conditioned to start from the word $\overline{c}$.
+More precisely,  for any finite words $u$ and $\overline{c}$ and for any
+$n\geqslant 0$, let
+\[q_c^{(n)}(u):=\pi\left(U_{n-|u|+|c|+1}\ldots U_{n+|c|}=u\big| U_{1}\ldots U_{|c|}=\overline c\right).\]
+It is shown in <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#bibentry_ccpp">[9]</a> that, for $|x|\lt 1$,
+$$
+\Phi_w^{(1)}(x)=\frac{x^k\pi(w)}{(1-x)S_w(x)}
+$$
+and for $r\geq 1$,
+\[\Phi_w^{(r)}(x)=\Phi_w^{(1)}(x)\left(1-\frac{1}{S_w(x)}\right)^{r-1}
+\]
+where
+</p>
+<table class="eqnarray">
+<tr><td class="right">$S_w(x)$</td>
+    <td class="center">$:=$</td>
+    <td class="left">$C_w(x) + \sum_{n=k}^{\infty}q_{\petitlpref(w)}^{(n)}(w)x^n$,</td>
+</tr>
+<tr><td class="right">$C_w(x)$</td>
+    <td class="center">$:=$</td>
+    <td class="left">$1+\sum_{j=1}^{k-1}\ind{w_{j+1}\ldots w_{k}=w_{1}\ldots w_{k-j}}q_{\petitlpref(w)}^{(j)}\left(w_{k-j+1} \ldots w_k\right)x^j$.</td>
+</tr>
+</table>
+<p id="Intheparticu"><a class="paragraph-url" href="#Intheparticu"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+In the particular case when $w=10^{k-1}$, then
+ $\lpref(w)=\overline{w}=0^{k-1}1$ and $\pi(w)=\frac{c_{k-1}}{S(1)}$.
+Moreover, Definition <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#mixingCoeff">(4)</a> of the mixing
+coefficient and <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#melange">Proposition 1</a> <i><strong>i)</strong></i>
+imply successively that
+</p>
+<table class="eqnarray">
+<tr>
+  <td class="right">$q_{\petitlpref(w)}^{(n)}(w) $</td>
+  <td class="left">$= \pi\Big(U_{n+k-|w|+1}\ldots U_{n+k}=w\Big| U_{1}\ldots U_k=\lpref(w)\Big)$</td>
+</tr>
+<tr>
+  <td/>
+  <td class="left">$ = \pi(w) \Big( \psi\big( n-k,\lpref (w),w\big) +1\Big)$</td>
+</tr>
+<tr>
+  <td/>
+  <td class="left">$ = \pi(w) S(1)u_{n-k+1}$</td>
+</tr>
+<tr>
+  <td/>
+  <td class="left">$= c_{k-1}u_{n-k+1}$,</td>
+</tr>
+</table>
+<p id="Thisrelation"><a class="paragraph-url" href="#Thisrelation"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+This relation makes more explicit the link between successive occurence times and mixing.
+This leads to
+ \[\sum_{n\geqslant k}q_{\petitlpref(w)}^{(n)}(w)x^n=c_{k-1}x^{k-1}\sum_{n\geqslant 1}u_nx^n=c_{k-1}x^{k-1}\big( U(x)-1\big) .\]
+Furthermore, there is no auto-correlation structure inside $w$ so that $C_w(x)=1$ and
+ \[S_w(x)=1+c_{k-1}x^{k-1}\big( U(x)-1\big) .\]
+This entails
+ \[\Phi^{(1)}_w(x)=\frac{c_{k-1}x^k}{S(1)(1-x)\left[ 1+c_{k-1}x^{k-1}\big( U(x)-1\big)\right]}\]
+and
+</p>
+<table class="eqnarray">
+<tr>
+  <td class="right">$ \Phi^{(2)}_w(x)$</td>
+  <td class="center">$ = $</td>
+  <td class="left">$\Phi^{(1)}_w(x)\left(1-\frac{1}{S_w(x)}\right)$</td>
+</tr>
+<tr>
+  <td/>
+  <td class="center">$ = $</td>
+  <td class="left">$\frac{c_{k-1}^2x^{2k-1}\big( U(x)-1\big)}{S(1)(1-x)\left[ 1+c_{k-1}x^{k-1}\big( U(x)-1\big)\right] ^2}$</td>
+</tr>
+</table>
+<p id="whichisthean"><a class="paragraph-url" href="#whichisthean"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+which is the announced result.
+The assumption
+\[\sum_{n \geqslant 1}n^2c_n \lt \infty\]
+makes $U$ twice differentiable and elementary calculations lead to
+</p>
+<table class="eqnarray">
+<tr>
+  <td/><td/>
+  <td class="left">$(\Phi_w^{(1)})'(1)=\frac{S(1)}{c_{k-1}}-S(1)+1+\frac{S'(1)}{S(1)}, \qquad
+     (\Phi_w^{(2)})'(1)=(\Phi_w^{(1)})'(1)+\frac{S(1)}{c_{k-1}},$</td>
+</tr>
+<tr>
+  <td/><td/>
+  <td class="left">$(\Phi_w^{(1)})''(1)=\frac{2S(1)^2}{c_{k-1}^2}+o\left(\frac{1}{c_{k-1}^2}\right)\quad \mbox{and} \quad (\Phi_w^{(2)})''(1)=\frac{6S(1)^2}{c_{k-1}^2}+o\left(\frac{1}{c_{k-1}^2}\right)$,</td>
+</tr>
+</table>
+<p id="andfinallyto"><a class="paragraph-url" href="#andfinallyto"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+and finally to <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#esp-var">(14)</a>.
+∎
+</p>
+</div>
+</div></div>
+</div>
+
+<div class="subsection"><div class="subsection-title" id="ssec:results">4.4. Logarithmic comb and factorial comb</div>
+<p id="Leth_andh_be"><a class="paragraph-url" href="#Leth_andh_be"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+Let $h_+$ and $h_-$ be the constants in $[0,+\infty ]$ defined by
+<span class="equation" id="4defh+">
+  <span class="contents">$
+h_+ := \lim_{n\to +\infty}\frac{1}{n} \max\Bigl\{\ln\Bigl(\frac{1}{\pi\left(w\right)}\Bigr)\ \Bigr\}
+\mbox{ and }h_- := \lim_{n\to +\infty}\frac{1}{n} \min\Bigl\{\ln\Bigl(\frac{1}{\pi\left(w\right)}\Bigr)\ \Bigr\},
+$</span><span class="title">(15)</span>
+</span>
+where the maximum and the minimum range over the words $w$ of length $n$ with
+ $\pi\left({w}\right)&gt;0$. In their papers, Pittel <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#bibentry_Pittel">[28]</a> and
+ Szpankowski <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#bibentry_Szpan93">[38]</a> only deal with the cases $h_+\lt +\infty$ and
+  $h_-&gt;0$, which amounts to saying that the probability of any word is exponentially
+  decreasing with its length. Here, we focus on our two examples for which these
+  assumptions are not fulfilled. More precisely, for the logarithmic infinite comb,
+  <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#probas">(2)</a> implies that $\pi(10^n)$ is of order $n^{-4}$, so that
+$$
+h_- \leqslant \lim_{n\to +\infty}\frac{1}{n} \ln\Bigl(\frac{1}{\pi\left(10^{n-1}\right)}\Bigr) = 4\lim_{n\to +\infty}\frac{\ln n}{n} =0.
+$$
+</p>
+<p id="Besidesforth"><a class="paragraph-url" href="#Besidesforth"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+Besides, for the factorial infinite comb, $\pi(10^n)$ is of order $\frac 1{(n+1)!}$ so that
+$$
+h_+ \geqslant \lim_{n\to +\infty}\frac{1}{n} \ln\Bigl(\frac{1}{\pi\left(10^{n-1}\right)}\Bigr) =  \lim_{n\to +\infty}\frac{\log n!}{n} = +\infty .
+$$
+
+</p>
+<p id="Forthesetwom"><a class="paragraph-url" href="#Forthesetwom"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+For these two models, the asymptotic behaviour of the lengths of the branches
+is not always logarithmic, as can be seen in the two following theorems, shown in
+Sections <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#ssec:heightLog">4.5</a> and <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#ssec:saturation">4.6</a>.
+</p>
+
+<div class="theorem" id="hauteur">
+  <div class="title">Theorem 1: Height of the logarithmic infinite comb</div>
+  <div class="contents">
+<p id="LetrondT_nbe"><a class="paragraph-url" href="#LetrondT_nbe"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+Let $\rond{T}_n$ be the suffix trie built from the $n$ first suffixes of a
+sequence generated by a logarithmic infinite comb. Then, the height $H_n$
+of $\rond{T}_n$ satisfies
+\[\forall \delta &gt; 0, \hskip 1cm \frac{H_n}{n^{\frac 14 - \delta}}
+~\limite{n\to \infty}{}~+\infty \quad \mbox{in probability.}
+\]
+</p>
+</div>
+</div>
+
+
+<div class="theorem" id="saturation">
+  <div class="title">Theorem 2: Saturation level of the factorial infinite comb</div>
+  <div class="contents">
+<p id="LetrondT_nbet"><a class="paragraph-url" href="#LetrondT_nbet"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+Let $\rond{T}_n$ be the suffix trie built from the $n$ first suffixes of the
+sequence generated by a factorial infinite comb. Then, the saturation level
+$\ell_n$ of $\rond{T}_n$ satisfies:
+for any $\delta &gt;1$, almost surely, when $n$ tends to infinity,
+$$
+\ell _n\in o\left(\frac{\log n}{(\log\log n)^\delta}\right).
+$$
+</p>
+</div>
+</div>
+
+<div class="remark" id="remLogn">
+  <div class="title">Remark 3: </div>
+  <div class="contents">
+<p id="Thebehaviour"><a class="paragraph-url" href="#Thebehaviour"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+The behaviour of the height of the factorial infinite comb can be
+deduced from Szpankowski <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#bibentry_Szpan93">[38]</a>. Namely the property of uniform mixing
+stated in <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#UniformMixing">Proposition 3</a> implies
+the existence of two positive constants $C$ and $\gamma$ such
+that, for every integer $n\geqslant 1$ and for every word $w$ of length $n$,
+$\pi(w)\leqslant Ce^{-\gamma n}$ (see Galves and
+ Schmitt <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#bibentry_GalSch">[19]</a> for a proof). This
+entails $h_2\geqslant\frac{\gamma}{2}&gt;0$ and therefore Theorem 2. in
+Szpankowski <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#bibentry_Szpan93">[38]</a>  applies: $\frac{H_n}{\log n}$ converges
+almost surely to
+$\frac{1}{h_2}$.
+</p>
+<p id="Asforthesatu"><a class="paragraph-url" href="#Asforthesatu"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+As for the saturation level of the logarithmic infinite comb, the results of
+<a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#bibentry_Szpan93">[38]</a> no longer apply since the process does not enjoy the uniform
+mixing property. In spite of that we conjecture that the saturation level grows like $\log n$.
+We do not go further on this subject because it is not the main point of the present paper,
+but we think the techniques used here should help to prove such a result.
+</p>
+</div>
+</div>
+
+
+<div class="figure" id="dyn-peigne">
+  <div class="title">Figure 5: </div>
+  <div class="contents">
+<img src="uncommon-suffix-tries/rsa_2012_height.jpg" width="800"/>
+<img src="uncommon-suffix-tries/rsa_2012_saturation_level.jpg" width="800"/>
+<div class="legend">
+Above:
+the height of a logarithmic comb (plain lines) compared with the height
+of a $\log n$-comb (long dashed lines) and with the height of a factorial comb (short dashed lines).
+Below:
+the saturation level of a factorial comb (plain lines) compared with the saturation
+level of a $\log n$-comb (long dashed lines).
+In both figures, mean values of $25$ simulations are represented on the $y$-axes.
+</div>
+</div>
+</div>
+<p id="Thedynamicas"><a class="paragraph-url" href="#Thedynamicas"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+The dynamic asymptotics of the height and of the saturation level can be
+visualized on <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#dyn-peigne">Figure 5</a>.
+The number $n$ of leaves of the suffix trie is put on the $x$-axis while heights or
+saturation levels are put on the $y$-axis (mean values of $25$ simulations).
+</p>
+<p id="Plainlinesil"><a class="paragraph-url" href="#Plainlinesil"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a><em>Plain lines</em> illustrate our results:
+height of a suffix trie generated by a logarithmic comb in the first figure,
+saturation level of a trie generated by a factorial comb in the second one.
+</p>
+<p id="Inthefirstfi"><a class="paragraph-url" href="#Inthefirstfi"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+In the first figure, the <em>short dashed line</em> represent the height of a factorial comb.
+As pointed out in <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#remLogn">Remark 3</a>, this height is almost surely of the form $c\log n$
+where $c$ is a constant.
+</p>
+<p id="Inbothfigure"><a class="paragraph-url" href="#Inbothfigure"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+In both figures, <em>long dashed lines</em> represent a third infinite comb defined by the
+data $c_n=\frac13\prod_{k=1}^{n-1}\left(\frac{1}{3}+\frac{1}{(1+k)^2}\right)$ for $n\geqslant 1$.
+Such a process has a uniform exponential mixing, a finite $h_+$ and a positive $h_-$ as can be
+elementarily checked. As a matter of consequence, it satisfies all assumptions of Pittel
+<a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#bibentry_Pittel">[28]</a> and Szpankowski <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#bibentry_Szpan93">[38]</a> implying that the height and
+the saturation level are both of order $\log n$.
+Such assumptions is fulfilled for any VLMC defined by a comb as soon as the data $(c_n)_n$ satisfy
+$\limsup _nc_n^{1/n}\lt 1$; the proof of this result is left to the reader.
+</p>
+<p id="Theseasympto"><a class="paragraph-url" href="#Theseasympto"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+These asymptotic behaviours, all coming from the same model, the infinite comb,
+stress its surprising richness.
+</p>
+<p id="Simulationso"><a class="paragraph-url" href="#Simulationso"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+Simulations of suffix tries built from a sequence generated by an infinite comb VLMC can
+be made by anyone using the source code available on
+<code><span class="ext-a"><a href="http://zoggy.github.com/vlmc-suffix-trie/">http://zoggy.github.com/vlmc-suffix-trie</a></span></code>.
+This site has been designed and realized by Eng.
+<span class="ext-a"><a href="http://pauillac.inria.fr/~guesdon/">Maxence Guesdon</a></span>.
+</p>
+</div>
+
+<div class="subsection"><div class="subsection-title" id="ssec:heightLog">4.5. Height for the logarithmic comb</div>
+<p id="Inthissubsec"><a class="paragraph-url" href="#Inthissubsec"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+In this subsection, we prove <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#hauteur">Theorem 1</a>.
+
+</p>
+<p id="Considerther"><a class="paragraph-url" href="#Considerther"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+Consider the right-infinite sequence $s=10^{\infty}$. Then, $T_k(s)$ is
+the second occurrence time of $w=10^{k-1}$. It is a nondecreasing (random)
+function of $k$. Moreover, $X_n(s)$ is the maximum of all $k$ such that
+$s^{(k)}\in\rond T_n$. It is nondecreasing in $n$. So, by definition of
+$X_n(s)$ and $T_k(s)$, the duality can be written
+<span class="equation" id="dualitybis">
+  <span class="contents">$
+\forall n, \forall \omega, \exists k_n, \quad k_n\leqslant X_n(s)\lt k_n+1 \mbox{ and }T_{k_n}(s)\leqslant n \lt T_{k_n+1}(s).
+$</span><span class="title">(16)</span>
+</span>
+</p>
+<p id="Claimlim_nri"><a class="paragraph-url" href="#Claimlim_nri"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+<strong>Claim</strong>:
+<span class="equation" id="xninfini">
+  <span class="contents">$
+\lim_{n\rightarrow +\infty} X_n(s) = + \infty \quad \mbox{a.s.}
+$</span><span class="title">(17)</span>
+</span>
+Indeed, if $X_n(s)$ were bounded above, by $K$ say, then take $w = 10^{K}$
+and consider $T_{K+1}(s)$ which is the time of the second occurrence of $10^{K}$.
+The choice of the $c_n$ in the definition of the logarithmic comb implies
+the convergence of the series $\sum _nn^2c_n$. Thus <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#esp-var">(14)</a>
+holds and $\g E[T_{K+1}(s)]\lt \infty$ so that $T_{K+1}(s)$ is almost surely
+finite. This means that for $n\gt T_{K+1}(s)$, the word $10^{K}$ has been seen
+twice, leading to $X_n(s)\geqslant K+1$ which is a contradiction.
+</p>
+<p id="Wemakeuseoft"><a class="paragraph-url" href="#Wemakeuseoft"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+We make use of the following lemma that is proven hereunder.
+</p>
+
+<div class="lemma" id="Tk">
+  <div class="title">Lemma 2</div>
+  <div class="contents">
+<p id="Fors10inftyf"><a class="paragraph-url" href="#Fors10inftyf"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>For $s=10^{\infty}$,
+\[\forall \eta &gt; 0, \quad \frac{T_k(s)}{k^{4+\eta}}~\limite{k \to \infty}{}~0\quad \mbox{in probability},
+\]
+and
+<span class="equation" id="Tksurk">
+  <span class="contents">$
+\forall \eta &gt; \frac 12, \quad \frac{T_k(s)}{k^{4+\eta}} \ \ \smash{\mathop{\longrightarrow}\limits _{k\to \infty}} \ \ 0 \quad \mbox{a.s.}
+$</span><span class="title">(18)</span>
+</span>
+</p>
+</div>
+</div>
+<p id="Withnotation"><a class="paragraph-url" href="#Withnotation"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+With notations <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#dualitybis">(16)</a>, because of <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#xninfini">(17)</a>,
+the sequence $(k_n)$ tends to infinity, so that $\left(T_{k_n}(s)\right)$ is a subsequence
+of $\left(T_k(s)\right)$. Thus, <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#Tksurk">(18)</a> implies that
+\[
+\forall \eta &gt; \frac 12, \quad \frac{T_{k_n}(s)}{k_n^{4+\eta}} \ \ \smash{\mathop{\longrightarrow}\limits _{n\to \infty}} \ \ 0 \quad \mbox{a.s.} \quad \mbox{and} \quad  \forall \eta &gt; 0, \quad \frac{T_{k_n}(s)}{k_n^{4+\eta}}~\limite{k\to \infty}{P}~0.
+\]
+Using duality <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#dualitybis">(16)</a> again leads to
+
+\[\forall \eta &gt; 0, \quad \frac{X_n(s)}{n^{1/({4+\eta})}}~\limite{n \to \infty}{P}~+\infty.\]
+In other words
+$$
+\forall \delta &gt; 0, \quad \frac{X_n(s)}{n^{\frac 14 - \delta}}~\limite{n\to \infty}{P}~+\infty
+$$
+so that, since the height of the suffix trie is larger than $X_n(s)$,
+\[\forall \delta &gt; 0, \quad \frac{H_n}{n^{\frac 14 - \delta}}~\limite{n\to \infty}{P}~+\infty.\]
+This ends the proof of <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#hauteur">Theorem 1</a>.
+∎
+</p>
+
+<div class="proof">
+<button href="#proofTk" data-toggle="collapse" class="btn btn-info proof">Proof.</button>
+<div class="collapse" id="proofTk">
+
+  <div class="contents">
+<p id="Combining181"><a class="paragraph-url" href="#Combining181"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+Combining <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#lien-tau-T">(13)</a> and <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#esp-var">(14)</a> shows that
+<span class="equation" id="meanTk">
+  <span class="contents">$
+\g E(T_k(s)) = \g E(\tau^{(2)}(w))-k= \frac{19}{9} k^4 + o(k^4)
+$</span><span class="title">(19)</span>
+</span>
+and
+<span class="equation" id="varTk">
+  <span class="contents">$
+\Var(T_k(s)) = \Var(\tau^{(2)}(w))=\frac{361}{162} k^8 + o(k^8).
+$</span><span class="title">(20)</span>
+</span>
+For all $\eta &gt;0$, write
+$$
+\frac{T_k(s)}{k^{4+\eta}} = \frac{T_k(s) -\g E(T_k(s))}{k^{4+\eta}} + \frac{\g E(T_k(s))}{k^{4+\eta}} .
+$$
+The deterministic part in the second-hand right term goes to $0$ with $k$ thanks
+to <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#meanTk">(19)</a>, so that we focus on the term
+$\displaystyle\frac{T_k(s) -\g E(T_k(s))}{k^{4+\eta}}$.
+For any $\varepsilon &gt;0$, because of Bienaymé-Tchebychev inequality,
+$$
+\g \PP\left(\frac{|T_k(s) -\g E[T_k(s)]|}{k^{4+\eta}} &gt;\varepsilon\right) \leqslant \frac{Var(T_k(s))}{\varepsilon^2 k^{8+2\eta}}=\mathcal{O}\left(\frac 1{k^{2\eta}}\right).
+$$
+This shows the convergence in probability in <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#Tk">Lemma 2</a>.
+Moreover, Borel-Cantelli Lemma ensures the almost sure convergence as soon as $\eta &gt; \frac 12$.
+∎
+</p>
+</div>
+</div></div>
+
+<div class="remark" id="remark4">
+  <div class="title">Remark 4: </div>
+  <div class="contents">
+<p id="Noticethatou"><a class="paragraph-url" href="#Noticethatou"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+Notice that our proof shows actually that the convergence to
+$+\infty$ in <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#hauteur">Theorem 1</a> is valid a.s. (and not only in probability)
+as soon as $\delta &gt; \frac 1{36}$.
+</p>
+</div>
+</div>
+</div>
+
+<div class="subsection"><div class="subsection-title" id="ssec:saturation">4.6. Saturation level for the factorial comb</div>
+<p id="Inthissubsect"><a class="paragraph-url" href="#Inthissubsect"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+In this subsection, we prove <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#saturation">Theorem 2</a>.
+</p>
+<p id="Considerthep"><a class="paragraph-url" href="#Considerthep"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+Consider the probabilized infinite <em>factorial</em> comb defined in
+Section <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#sec:source">2</a>
+by
+$$
+\forall n\in\g N,~c_n=\frac{1}{(n+1)!}.
+$$
+The proof hereunder shows actually that
+ $\left( \frac{\ell _n\log\log n}{\log n}\right) _n$ is an almost surely
+bounded sequence, which implies the result.
+
+Recall that $\rond R$ denotes the set of all right-infinite sequences.
+By characterization of the saturation level as a function of $X_n$
+(see <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#defi-var">(11)</a>),
+$\g P\left(\ell _n\leqslant k\right) =\g P\left(\exists s\in\rond R,~X_n(s)\leqslant k\right)$ for all positive integers $n,k$.
+Duality formula <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#duality">(12)</a> then provides
+$$
+\begin{array}{rl}
+\g P\left(\ell _n\leqslant k\right)&amp;=\g P\left(\exists s\in\rond R,~T_k(s)\geqslant n\right)\\ \\
+&amp;\geqslant\g P\left( T_k( \widetilde{s})\geqslant n\right)
+\end{array}
+$$
+where $\widetilde{s}$ denotes any infinite word having $10^{k-1}$ as a prefix.
+Markov inequality implies
+<span class="equation" id="postMarkov">
+  <span class="contents">$
+\forall x\in ]0,1[,~\g P\left( \ell _n\geqslant k+1\right)\leqslant \g P\Big(\tau^{(2)}(10^{k-1})\lt n+k\Big)\leqslant\frac{\Phi ^{(2)}_{10^{k-1}}(x)}{x^{n+k}}
+$</span><span class="title">(21)</span>
+</span>
+where $\Phi ^{(2)}_{10^{k-1}}(x)$
+ denotes as above the generating function of the rank of the final letter
+ of the second occurrence of $10^{k-1}$ in the infinite random word
+ $(U_n)_{n\geq 1}$. The simple form of the factorial comb leads to the
+ explicit expression
+$U(x)=\frac{x}{(1-x)(e^x-1)}$ and, after computation,
+<span class="equation" id="phi2Factoriel">
+  <span class="contents">$
+\Phi ^{(2)}_{10^{k-1}}(x)=
+\frac{e^x-1}{e-1}\cdot
+\frac{x^{2k-1}\big( 1-e^x(1-x)\big)}
+{\Big[ k!\left( e^x-1\right)\left( 1-x\right)+x^{k-1}\big( 1-e^x(1-x)\big)\Big] ^2}.
+$</span><span class="title">(22)</span>
+</span>
+In particular, applying Formulae <a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#postMarkov">(21)</a> and
+<a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html#phi2Factoriel">(22)</a> with $n=(k-1)!$ and $x=1-\frac 1{(k-1)!}$
+implies that
+for any $k\geqslant 2$,
+$$
+\g P(\ell _{(k-1)!}\geqslant k+1)\leqslant
+\frac{\left( 1-\frac{1}{(k-1)!}\right) ^{2k-1}}{\Big[ k!(e^{1/2}-1)\frac{1}{(k-1)!}\Big] ^2}
+\cdot\frac {1}{\left( 1-\frac{1}{(k-1)!}\right) ^{(k-1)!+k}}.
+$$
+Consequently, $\g P\left(\ell _{(k-1)!}\geqslant k+1\right)=\mathcal{O}(k^{-2})$ is
+the general term of a convergent series.
+Thanks to Borel-Cantelli Lemma, one gets almost surely
+\[
+\varlimsup _{n\to+\infty}\frac{\ell _{n!}}{n}\leqslant 1.
+\]
+Let $\Gamma ^{-1}$ denote the inverse of Euler's Gamma function, defined and
+increasing on the real interval
+$[2,+\infty [$.
+If $n$ and $k$ are integers such that $(k+1)!\leqslant n\leqslant (k+2)!$, then
+$$
+\frac{\ell _n}{\Gamma ^{-1}(n)}\leqslant\frac{\ell _{(k+2)!}}{\Gamma ^{-1}((k+1)!)}=\frac{\ell _{(k+2)!}}{k+2},
+$$
+which implies that, almost surely,
+$$
+\varlimsup _{n\to\infty}\frac{\ell _n}{\Gamma ^{-1}(n)}\leqslant 1.
+$$
+Inverting Stirling Formula, namely
+$$
+\Gamma (x)=\sqrt{\frac{2\pi}{x}}e^{x\log x-x}\left( 1+\mathcal{O}\left( \frac 1x\right)\right)
+$$
+when $x$ goes to infinity, leads to the equivalent
+$$
+\Gamma ^{-1}(x)\equivalent {+\infty}\frac{\log x}{\log\log x},
+$$
+which implies the result.
+∎
+</p>
+</div>
+<div class="subsection"><div class="subsection-title" id="acks">4.7. Acknowledgements</div>
+<p id="Theauthorsar"><a class="paragraph-url" href="#Theauthorsar"><img src="http://pauillac.inria.fr/~guesdon/vlmc/paragraph-url.png"/></a>
+The authors are very grateful to Eng.
+<span class="ext-a"><a href="http://pauillac.inria.fr/~guesdon/">Maxence Guesdon</a></span> for providing
+simulations with great talent and an infinite patience.
+They would like to thank also all people managing two very important
+tools for french mathematicians: first the Institut Henri Poincaré, where a
+large part of this work was done and second Mathrice which provides a
+large number of services.
+
+</p>
+</div>
+</div>
+<div class="notes"><div class="note" id="target_note_1"><sup><a href="#source_note_1">1</a></sup> The notation $-\mathbb{N}$ stands for the set $\{n \in \mathbb{Z} \mbox{ such that } -n \in \mathbb{N}\}$.</div></div>
+
+
+<div class="section"><div class="section-title" id="bib">5. Bibliography</div>
+<div class="bib-entry" id="bibentry_AG"><div class="row-fluid clear-left-only">
+<div class="span1">[1]</div>
+<div class="span10">
+<div class="bib-entry-author">Abadi, M. and Galves, A.</div>
+<div class="bib-entry-title">Inequalities for the occurence times of rare events in mixing processes. The state of the art</div>
+
+<em>Markov proc. Relat. Fields</em><span>, 7(1)</span><span>:97-112</span><span>, 2001</span>.
+
+</div>
+</div></div><div class="bib-entry" id="bibentry_AS"><div class="row-fluid clear-left-only">
+<div class="span1">[2]</div>
+<div class="span10">
+<div class="bib-entry-author">Abadi, M. and Saussol, B.</div>
+<div class="bib-entry-title">Hitting and returning into rare events for all alpha-mixing processes</div>
+
+<em>Preprint</em><span>, 2010</span>.<span> http://arxiv.org/abs/1003.4856.</span>
+
+</div>
+</div></div><div class="bib-entry" id="bibentry_Billingsley"><div class="row-fluid clear-left-only">
+<div class="span1">[3]</div>
+<div class="span10">
+<div class="bib-entry-author">Billingsley, P.</div>
+<div class="bib-entry-title">Probability and Measure</div>
+
+Wiley<span>, 1995</span>.
+
+
+</div>
+</div></div><div class="bib-entry" id="bibentry_Blom"><div class="row-fluid clear-left-only">
+<div class="span1">[4]</div>
+<div class="span10">
+<div class="bib-entry-author">Blom, G. and Thorburn, D.</div>
+<div class="bib-entry-title">How many random digits are required until given sequences are obtained ?</div>
+
+<em>Journal of Applied Probabilities</em><span>, 19</span><span>:518-531</span><span>, 1982</span>.
+
+</div>
+</div></div><div class="bib-entry" id="bibentry_Bl89"><div class="row-fluid clear-left-only">
+<div class="span1">[5]</div>
+<div class="span10">
+<div class="bib-entry-author">Blumer, A. Ehrenfeucht, A. and Haussler, D.</div>
+<div class="bib-entry-title">Average sizes of suffix trees and DAWGs</div>
+
+<em>Discrete Appl. Math.</em><span>, 24</span><span>:37--45</span><span>, 1989</span>.
+
+</div>
+</div></div><div class="bib-entry" id="bibentry_Buhlmann"><div class="row-fluid clear-left-only">
+<div class="span1">[6]</div>
+<div class="span10">
+<div class="bib-entry-author">Bühlmann, P. and Wyner, A.J.</div>
+<div class="bib-entry-title">Variable length markov chains</div>
+
+<em>Ann. Statist.</em><span>, 27</span><span>(2)</span><span>:480-513</span><span>, 1999</span>.
+
+</div>
+</div></div><div class="bib-entry" id="bibentry_ClementFlajoletVallee"><div class="row-fluid clear-left-only">
+<div class="span1">[7]</div>
+<div class="span10">
+<div class="bib-entry-author">Clément, J. and Flajolet, P. and Vallée, B.</div>
+<div class="bib-entry-title">Dynamical sources in Information Theory: a general analysis of trie structures</div>
+
+<em>Algorithmica</em><span>, 29</span><span>:307-369</span><span>, 2001</span>.
+
+</div>
+</div></div><div class="bib-entry" id="bibentry_Comets"><div class="row-fluid clear-left-only">
+<div class="span1">[8]</div>
+<div class="span10">
+<div class="bib-entry-author">Comets, F., Fernandez, R. and Ferrari, P.</div>
+<div class="bib-entry-title">Processes with long memory: Regenerative construction and perfect simulation</div>
+
+<em>Ann. of Appl. Prob.</em><span>, 12</span><span>(3)</span><span>:921-943</span><span>, 2002</span>.
+
+</div>
+</div></div><div class="bib-entry" id="bibentry_ccpp"><div class="row-fluid clear-left-only">
+<div class="span1">[9]</div>
+<div class="span10">
+<div class="bib-entry-author">Cénac, P. and Chauvin, B. and Paccaut, F. and Pouyanne, N.</div>
+<div class="bib-entry-title">Context trees, variable length Markov chains and dynamical sources</div>
+
+<em>Séminaire de Probabilités</em><span>, 2011</span>.<span> arXiv:1007.2986.</span>
+
+</div>
+</div></div><div class="bib-entry" id="bibentry_CCPG"><div class="row-fluid clear-left-only">
+<div class="span1">[10]</div>
+<div class="span10">
+<div class="bib-entry-author">Cénac, P. and Chauvin, B. and Pouyanne, N. and Ginouillac, S.</div>
+<div class="bib-entry-title">Digital Search Trees and Chaos Game Representation</div>
+
+<em>ESAIM Probability and Statistics</em><span>, 13</span><span>:15-37</span><span>, 2009</span>.
+
+</div>
+</div></div><div class="bib-entry" id="bibentry_Devroye"><div class="row-fluid clear-left-only">
+<div class="span1">[11]</div>
+<div class="span10">
+<div class="bib-entry-author">Devroye, L. and Neininger, R.</div>
+<div class="bib-entry-title">Random suffix search trees</div>
+
+<em>Random Structures Algorithms</em><span>, 23</span><span>(4)</span><span>:357--396</span><span>, 2003</span>.
+
+</div>
+</div></div><div class="bib-entry" id="bibentry_Devroye2"><div class="row-fluid clear-left-only">
+<div class="span1">[12]</div>
+<div class="span10">
+<div class="bib-entry-author">Devroye, L. and Szpankowski, W. and Rais, B.</div>
+<div class="bib-entry-title">A note on the height of suffix trees</div>
+
+<em>SIAM J. Comput.</em><span>, 21</span><span>(1)</span><span>:48--53</span><span>, 1992</span>.
+
+</div>
+</div></div><div class="bib-entry" id="bibentry_Doukhan"><div class="row-fluid clear-left-only">
+<div class="span1">[13]</div>
+<div class="span10">
+<div class="bib-entry-author">Doukhan, P.</div>
+<div class="bib-entry-title">Mixing : properties and examples</div>
+
+Springer-Verlag<span>, 1994</span>.
+
+
+</div>
+</div></div><div class="bib-entry" id="bibentry_Fayolle"><div class="row-fluid clear-left-only">
+<div class="span1">[14]</div>
+<div class="span10">
+<div class="bib-entry-author">Fayolle, J.</div>
+<div class="bib-entry-title">Compression de données sans perte et combinatoire analytique</div>
+
+Phd thesis, Université Paris VI, 2006.
+
+
+</div>
+</div></div><div class="bib-entry" id="bibentry_FS"><div class="row-fluid clear-left-only">
+<div class="span1">[15]</div>
+<div class="span10">
+<div class="bib-entry-author">Flajolet, P. and Sedgewick, R.</div>
+<div class="bib-entry-title">Analytic Combinatorics</div>
+
+Cambridge University Press<span>, Cambridge</span><span>, 2009</span>.
+
+
+</div>
+</div></div><div class="bib-entry" id="bibentry_Fu"><div class="row-fluid clear-left-only">
+<div class="span1">[16]</div>
+<div class="span10">
+<div class="bib-entry-author">Fu, J.C.</div>
+<div class="bib-entry-title">Bounds for reliability of large consecutive-k-out-of-n:F system</div>
+
+<em>IEEE trans. Reliability</em><span>, 35</span><span>:316-319</span><span>, 1986</span>.
+
+</div>
+</div></div><div class="bib-entry" id="bibentry_Fu-Koutras"><div class="row-fluid clear-left-only">
+<div class="span1">[17]</div>
+<div class="span10">
+<div class="bib-entry-author">Fu, J.C. and Koutras, M.V.</div>
+<div class="bib-entry-title">Distribution theory of runs: a Markov chain approach</div>
+
+<em>J. Amer. Statist. Soc.</em><span>, 89</span><span>:1050-1058</span><span>, 1994</span>.
+
+</div>
+</div></div><div class="bib-entry" id="bibentry_GalLoc"><div class="row-fluid clear-left-only">
+<div class="span1">[18]</div>
+<div class="span10">
+<div class="bib-entry-author">Galves, A. and Löcherbach, E.</div>
+<div class="bib-entry-title">Stochastic chains with memory of variable length</div>
+
+<em>TICSP Series</em><span>, 38</span><span>:117-133</span><span>, 2008</span>.
+
+</div>
+</div></div><div class="bib-entry" id="bibentry_GalSch"><div class="row-fluid clear-left-only">
+<div class="span1">[19]</div>
+<div class="span10">
+<div class="bib-entry-author">Galves, A. and Schmitt, B.</div>
+<div class="bib-entry-title">Inequalities for hitting times in mixing dynamical systems</div>
+
+<em>Random Comput. Dynam.</em><span>, 5</span><span>(4)</span><span>:337-347</span><span>, 1997</span>.
+
+</div>
+</div></div><div class="bib-entry" id="bibentry_Gerber-Li"><div class="row-fluid clear-left-only">
+<div class="span1">[20]</div>
+<div class="span10">
+<div class="bib-entry-author">Gerber, H. and Li, S.</div>
+<div class="bib-entry-title">The occurence of sequence patterns in repeated experiments and hitting times in a Markov chain</div>
+
+<em>Stochastic Processes and their Applications</em><span>(11)</span><span>:101-108</span><span>, 1981</span>.
+
+</div>
+</div></div><div class="bib-entry" id="bibentry_Gusfield97"><div class="row-fluid clear-left-only">
+<div class="span1">[21]</div>
+<div class="span10">
+<div class="bib-entry-author">Gusfield, D.</div>
+<div class="bib-entry-title">Algorithm on Strings, Trees, and Sequences: Computer Science and Computational Biology</div>
+
+Cambridge Press<span>, 1997</span>.
+
+
+</div>
+</div></div><div class="bib-entry" id="bibentry_Harris"><div class="row-fluid clear-left-only">
+<div class="span1">[22]</div>
+<div class="span10">
+<div class="bib-entry-author">Harris, T.E.</div>
+<div class="bib-entry-title">On chains of infinite order</div>
+
+<em>Pacific J. Math.</em><span>, 5</span><span>:707-724</span><span>, 1955</span>.
+
+</div>
+</div></div><div class="bib-entry" id="bibentry_HwPa"><div class="row-fluid clear-left-only">
+<div class="span1">[23]</div>
+<div class="span10">
+<div class="bib-entry-author">Hwang, H.K. and Nicodème, P. and Park, G. and Szpankowski, W.</div>
+<div class="bib-entry-title">Profile of tries</div>
+
+<em>submitted for publication, available at http://algo.stat.sinica.edu.tw/hk/</em><span>, 2006</span>.
+
+</div>
+</div></div><div class="bib-entry" id="bibentry_Isola"><div class="row-fluid clear-left-only">
+<div class="span1">[24]</div>
+<div class="span10">
+<div class="bib-entry-author">Isola, S.</div>
+<div class="bib-entry-title">Renewal sequences and intermittency</div>
+
+<em>J. Statist. Phys.</em><span>, 97</span><span>(1-2)</span><span>:263-280</span><span>, 1999</span>.
+
+</div>
+</div></div><div class="bib-entry" id="bibentry_Koutras"><div class="row-fluid clear-left-only">
+<div class="span1">[25]</div>
+<div class="span10">
+<div class="bib-entry-author">Koutras, M. V.</div>
+<div class="bib-entry-title">Waiting times and number of appearances of events in a
+              sequence of discrete random variables</div>
+
+<em>Advances in combinatorial methods and applications to
+              probability and statistics</em>,
+Birkhäuser Boston<span>, Boston, MA</span><span>, 1997</span>.
+
+
+</div>
+</div></div><div class="bib-entry" id="bibentry_Li"><div class="row-fluid clear-left-only">
+<div class="span1">[26]</div>
+<div class="span10">
+<div class="bib-entry-author">Li, S.-Y. R.</div>
+<div class="bib-entry-title">A martingale approach to the study of occurrence of sequence
+              patterns in repeated experiments</div>
+
+<em>Ann. Probab.</em><span>, 8</span><span>(6)</span><span>:1171--1176</span><span>, 1980</span>.
+
+</div>
+</div></div><div class="bib-entry" id="bibentry_Li2"><div class="row-fluid clear-left-only">
+<div class="span1">[27]</div>
+<div class="span10">
+<div class="bib-entry-author">Li, W.</div>
+<div class="bib-entry-title">The study of correlation structures of DNA sequences: a critical review</div>
+
+<em>Computer and Chemistry</em><span>, 21</span><span>(4)</span><span>:257-272</span><span>, 1997</span>.
+
+</div>
+</div></div><div class="bib-entry" id="bibentry_Pittel"><div class="row-fluid clear-left-only">
+<div class="span1">[28]</div>
+<div class="span10">
+<div class="bib-entry-author">Pittel, B.</div>
+<div class="bib-entry-title">Asymptotic growth of a class of random trees</div>
+
+<em>Annals Probab.</em><span>, 13</span><span>:414-427</span><span>, 1985</span>.
+
+</div>
+</div></div><div class="bib-entry" id="bibentry_Pozdnyakov"><div class="row-fluid clear-left-only">
+<div class="span1">[29]</div>
+<div class="span10">
+<div class="bib-entry-author">Pozdnyakov, V. and Glaz, J. and Kulldorff, M. and Steele, J. M.</div>
+<div class="bib-entry-title">A martingale approach to scan statistics</div>
+
+<em>Ann. Inst. Statist. Math.</em><span>, 57</span><span>(1)</span><span>:21--37</span><span>, 2005</span>.
+
+</div>
+</div></div><div class="bib-entry" id="bibentry_Schbath"><div class="row-fluid clear-left-only">
+<div class="span1">[30]</div>
+<div class="span10">
+<div class="bib-entry-author">Reinert, G. and Schbath, S. and Waterman, M.S.</div>
+<div class="bib-entry-title">Probabilistic and Statistical Properties of Words: An Overview</div>
+
+<em>Journal of Computational Biology</em><span>, 7</span><span>(1/2)</span><span>:1-46</span><span>, 2000</span>.
+
+</div>
+</div></div><div class="bib-entry" id="bibentry_Ris"><div class="row-fluid clear-left-only">
+<div class="span1">[31]</div>
+<div class="span10">
+<div class="bib-entry-author">Rissanen, J.</div>
+<div class="bib-entry-title">A universal data compression system</div>
+
+<em>IEEE Trans. Inform. Theory</em><span>, 29</span><span>(5)</span><span>:656-664</span><span>, 1983</span>.
+
+</div>
+</div></div><div class="bib-entry" id="bibentry_Daudin-Robin"><div class="row-fluid clear-left-only">
+<div class="span1">[32]</div>
+<div class="span10">
+<div class="bib-entry-author">Robin, S. and Daudin, J.J.</div>
+<div class="bib-entry-title">Exact distribution of word occurences in a random sequence of letters</div>
+
+<em>J. Appl. Prob.</em><span>, 36</span><span>:179-193</span><span>, 1999</span>.
+
+</div>
+</div></div><div class="bib-entry" id="bibentry_Regnier"><div class="row-fluid clear-left-only">
+<div class="span1">[33]</div>
+<div class="span10">
+<div class="bib-entry-author">Régnier, M.</div>
+<div class="bib-entry-title">A unified approach to word occurence probabilities</div>
+
+<em>Discrete Applied Mathematics</em><span>, 104</span><span>:259-280</span><span>, 2000</span>.
+
+</div>
+</div></div><div class="bib-entry" id="bibentry_Shields"><div class="row-fluid clear-left-only">
+<div class="span1">[34]</div>
+<div class="span10">
+<div class="bib-entry-author">Shields, P.C.</div>
+<div class="bib-entry-title">Entropy and prefixes.</div>
+
+<em>The Annals of Probability</em><span>, 20, no 1</span><span>:403--409</span><span>, 1992</span>.
+
+</div>
+</div></div><div class="bib-entry" id="bibentry_Shieldsbook"><div class="row-fluid clear-left-only">
+<div class="span1">[35]</div>
+<div class="span10">
+<div class="bib-entry-author">Shields, P.C.</div>
+<div class="bib-entry-title">The Ergodic Theory of Discrete Sample Paths</div>
+
+American Mathematical Society<span>, 1996</span>.
+
+
+</div>
+</div></div><div class="bib-entry" id="bibentry_SP"><div class="row-fluid clear-left-only">
+<div class="span1">[36]</div>
+<div class="span10">
+<div class="bib-entry-author">Stefanov, V. and Pakes, A. G.</div>
+<div class="bib-entry-title">Explicit distributional results in pattern formation</div>
+
+<em>Annals of Applied Probabilities</em><span>, 7</span><span>:666-678</span><span>, 1997</span>.
+
+</div>
+</div></div><div class="bib-entry" id="bibentry_Szpan91"><div class="row-fluid clear-left-only">
+<div class="span1">[37]</div>
+<div class="span10">
+<div class="bib-entry-author">Szpankowski, W.</div>
+<div class="bib-entry-title">On the Height of Digital Trees and Related Problems</div>
+
+<em>Algorithmica</em><span>, 6</span><span>:256--277</span><span>, 1991</span>.
+
+</div>
+</div></div><div class="bib-entry" id="bibentry_Szpan93"><div class="row-fluid clear-left-only">
+<div class="span1">[38]</div>
+<div class="span10">
+<div class="bib-entry-author">Szpankowski, W.</div>
+<div class="bib-entry-title">Asymptotic properties of data compression and suffix trees</div>
+
+<em>IEEE Trans. Information Theory</em><span>, 39</span><span>(5)</span><span>:1647--1659</span><span>, 1993</span>.
+
+</div>
+</div></div><div class="bib-entry" id="bibentry_Weiner"><div class="row-fluid clear-left-only">
+<div class="span1">[39]</div>
+<div class="span10">
+<div class="bib-entry-author">Weiner, P.</div>
+<div class="bib-entry-title">Linear pattern matching algorithm</div>
+
+<em>IEEE 14th Annual Symposium on Switching and Automata Theory</em><span>:1--11</span><span>, 1973</span>.
+
+</div>
+</div></div><div class="bib-entry" id="bibentry_Williams"><div class="row-fluid clear-left-only">
+<div class="span1">[40]</div>
+<div class="span10">
+<div class="bib-entry-author">Williams, D.</div>
+<div class="bib-entry-title">Probability with martingales</div>
+
+Cambridge University Press<span>, Cambridge</span><span>, 1991</span>.
+
+
+</div>
+</div></div><div class="bib-entry" id="bibentry_WynZiv"><div class="row-fluid clear-left-only">
+<div class="span1">[41]</div>
+<div class="span10">
+<div class="bib-entry-author">Wyner, A.D. and Ziv, J</div>
+<div class="bib-entry-title">Some Asymptotic Properties of the Entropy of a Stationary Ergodic Data Source with Applications to Data Compression</div>
+
+<em>IEEE Transactions on Information Theory</em><span>, 35, no 6</span><span>:1250--1258</span><span>, 1989</span>.
+
+</div>
+</div></div>
+</div>
+
+</div>
+
+</div>
+
+<footer id="bottombar">
+</footer>
+</body>
+<script type="text/javascript" src="http://pauillac.inria.fr/~guesdon/vlmc/jquery.js">_</script>
+<script type="text/javascript" src="http://pauillac.inria.fr/~guesdon/vlmc/bootstrap-collapse.js">_</script>
+</html>

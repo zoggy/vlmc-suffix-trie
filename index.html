@@ -1,11 +1,95 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
-<head><title>Vlmc suffix tries</title>
-<body>
-<h1>Page under construction</h1>
+<head>
+<title>Vlmc and suffix tries : Vlmc and suffix tries</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="http://pauillac.inria.fr/~guesdon/vlmc/style.css"/>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<link href="/favicon.png" rel="shortcut icon" type="image/png"/>
+</head><body>
+<div id="topbar">
+</div>
+<div id="page">
+<div id="header">
+<div id="site-title"><a href="http://pauillac.inria.fr/~guesdon/vlmc/index.html">Vlmc and suffix tries</a></div>
+<div class="site-desc"></div>
+</div>
+
+
+
+<span> </span>
+<div id="elt-body">
 <p>
-You will soon find here code sources used to run experiments for
-an article about VLMC and suffix tries.
+You will find here the source of the code used to run experiments for
+the article
+<a href="http://pauillac.inria.fr/~guesdon/vlmc/articles/uncommon-suffix-tries.html">Uncommon suffix tries</a>
+(a previous version is available <span class="ext-a"><a href="http://hal.archives-ouvertes.fr/hal-00652952">on HAL</a></span>),
+which provides an example of a suffix trie whose height increases faster than a power
+of $n$ and another one whose saturation level is negligible with
+respect to $\log n$. Both are built from VLMC (Variable Length Markov
+Chain) probabilistic sources; they are easily extended to families
+of sources having the same properties.
 </p>
+<dl>
+<dt>Authors of the article:</dt>
+<dd>
+<span class="ext-a"><a href="http://cenac.perso.math.cnrs.fr/">Peggy Cénac</a></span>,
+<span class="ext-a"><a href="http://chauvin.perso.math.cnrs.fr/">Brigitte Chauvin</a></span>,
+<span class="ext-a"><a href="http://lamfa.u-picardie.fr/paccaut/">Frédéric Paccaut</a></span>,
+<span class="ext-a"><a href="http://pouyanne.perso.math.cnrs.fr/">Nicolas Pouyanne</a></span>.</dd>
+<dt>Author of the software:</dt>
+<dd><span class="ext-a"><a href="http://pauillac.inria.fr/~guesdon/">Maxence Guesdon</a></span>
+</dd>
+</dl>
+<p>
+See the <span class="ext-a"><a href="http://sciencecodemanifesto.org/">Science code manifesto</a></span>
+for reasons why providing the source code associated to an article is good.
+</p>
+<div class="section"><div class="section-title" id="code">Using the code</div>
+<p>
+The code is <span class="ext-a"><a href="https://github.com/zoggy/vlmc-suffix-trie/">hosted on Github</a></span>.
+</p>
+<p>
+To use the code, you must have the following software installed:
+</p>
+<ul>
+<li><span class="ext-a"><a href="http://caml.inria.fr">OCaml</a></span> &gt;= 4.0.1,</li>
+<li><span class="ext-a"><a href="http://projects.camlcity.org/projects/findlib.html">Findlib</a></span> &gt;= 1.3.2,</li>
+<li><span class="ext-a"><a href="http://www.lri.fr/~filliatr/functory/About.html">Functory</a></span> &gt;= 0.5,</li>
+<li><span class="ext-a"><a href="http://www.r-project.org/">R</a></span>, to produce the figures.</li>
+</ul>
+<p>
+Get the source code:
+</p>
+<ul>
+<li>using <span class="ext-a"><a href="http://git-scm.com/">git</a></span>:
+<pre class="code-sh">git clone https<span class="hl opt">://</span>github.com<span class="hl opt">/</span>zoggy<span class="hl opt">/</span>vlmc<span class="hl opt">-</span>suffix<span class="hl opt">-</span>trie.git</pre>
+</li>
+<li>or from <span class="ext-a"><a href="https://github.com/zoggy/vlmc-suffix-trie/zipball/master">an archive</a></span> that
+you extract.</li>
+</ul>
+<p>
+Go to the source code directory and type:
+</p>
+<pre class="code-sh"><span class="hl kwc">make</span> all laws</pre>
+<p>This will compile the source code and some predefined laws. Then, typing the following command
+will produce the figures inserted in the article:
+</p>
+<pre class="code-sh">sh RSA<span class="hl opt">-</span><span class="hl num">2012</span>.sh
+<span class="hl kwc">ls</span> rsa_2012_heights.jpg rsa_2012_2_saturations.jpg</pre>
+</div>
+</div>
+
+</div>
+
+<footer id="bottombar">
+</footer>
 </body>
+<script type="text/javascript" src="http://pauillac.inria.fr/~guesdon/vlmc/jquery.js">_</script>
+<script type="text/javascript" src="http://pauillac.inria.fr/~guesdon/vlmc/bootstrap-collapse.js">_</script>
 </html>

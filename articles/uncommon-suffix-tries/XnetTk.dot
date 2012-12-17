@@ -1,0 +1,94 @@
+digraph G {
+  rankdir=BT;
+  node [ shape="point", width=0.13, ordering="out"];
+  ROOT ;
+  ROOT -> N0 [label=0];
+  ROOT -> N1 [label=1, color="brown", penwidth=2];
+  N0 -> N00 ;
+  N0 -> N01 ;
+  N00 -> N000 ;
+  N00 -> N001 ;
+  N000 -> N0000 ;
+  N0000 [ shape=square, label=""] ;
+  N000 -> N0001 ;
+  N0001 [ shape=square, label=""] ;
+  N001 -> N0010 ;
+  N0010 [ shape="square", label=""] ;
+  N001 -> N0011 ;
+  N0011 -> N00110;
+  N0011 -> N00111;
+  N00110 [ shape="square", label=""];
+  N00111 [ shape="square", label=""];
+
+  N01 -> N010 ;
+  N01 -> N011 ;
+  N010 -> N0101 ;
+  N0101 -> N01010 ;
+  N01010 -> N010100 ;
+  N01010 -> N010101 ;
+  N010100 [ shape="square", label=""];
+  N010101 [ shape="square", label=""];
+
+  N011 -> N0110;
+  N011 -> N0111;
+
+  N0110 -> N01100 ;
+  N0110 -> N01101 ;
+  N01100 [ shape="square", label="" ];
+  N01101 [ shape="square", label="" ];
+  N0111 [ shape="square", label=""] ;
+
+  N1 -> N10 [label=0, color="red", penwidth=2];
+  N1 -> N11 [label=1, color="blue", penwidth=2];
+
+  N10 -> N100 [label=0, color="red", penwidth=2];
+  N10 -> N101 ;
+
+  N100 -> N1000 [style="dashed", label=0, color="red", penwidth=2];
+  N1000 [ shape="point", width=0.001, label=""];
+  N1000 -> N10001 [ style="dashed", label=1, color="red", penwidth=2];
+  N10001 [ shape="point", width=0.001, label=""];
+  N10001 -> N100010 [ style="dashed", label=0, color="red", penwidth=2];
+  N100010 [ shape="point", width=0.001, label=""];
+  N100010 -> N1000100 [ style="dashed", label=0, color="red", penwidth=2];
+  N1000100 [ shape="point", width=0.001, label=""];
+  N1000100 -> N10001001 [ style="dashed", label="s", color="red", penwidth=2];
+  N10001001 [ shape="point", width=0.001, label=""];
+
+  N100 -> N1001 ;
+  N1001 -> N10010 ;
+  N10010 [ shape="square", label=""];
+  N1001 -> N10011 ;
+  N10011 [ shape="square", label=""];
+
+  N101 -> N1011 ;
+  N1011 -> N10110 ;
+  N10110 -> N101100 ;
+  N101100 [ shape="square", label=""];
+  N10110 -> N101101 ;
+  N101101 [ shape="square", label=""];
+
+  N11 -> N110 [label=0, color="blue", penwidth=2];
+  N110 -> N1100 ;
+  N1100 [ shape="square", label=""];
+  N110 -> N1101 [label=1, color="blue", penwidth=2];
+  N1101 -> N11010 [label=0, color="blue", penwidth=2];
+  N11010 -> N110101 [label=1, color="blue", penwidth=2];
+  N110101 -> N1101010 ;
+  N1101010 [ shape="square", label=""];
+  N110101 -> N1101011 [label=1, color="blue", penwidth=2];
+  N1101011 [ shape="square", label=""];
+  N1101011 -> N11010110 [ style="dashed", label="t", color="blue", penwidth=2];
+  N11010110 [ shape="point", width=0.001, label=""];
+
+  N11 -> N111 -> N1111 ;
+  N1111 -> N11110 ;
+  N11110 -> N111100 ;
+  N111100 [ shape="square", label=""];
+  N11110 -> N111101 ;
+  N111101 [ shape="square", label=""];
+
+  N1111 -> N11111 ;
+  N11111 [ shape="square", label=""];
+
+}
