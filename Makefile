@@ -25,10 +25,9 @@
 
 PACKAGE=vlmcs
 INCLUDES=-I laws -I +functory
+PACKAGES=unix,dynlink,functory
 OCAMLFIND=ocamlfind
 OCAMLFLAGS= -g $(INCLUDES) -annot
-SYS_LIBS=unix.cmxa functory.cmxa dynlink.cmxa
-SYS_LIBS_BYTE=$(SYS_LIBS:.cmxa=.cma)
 
 LIB=vlmcs.cmxa
 LIB_BYTE=$(LIB:.cmxa=.cma)
@@ -46,12 +45,16 @@ TRIE_DRAW_BYTE=$(TRIE_DRAW).byte
 RWALK=random-walk
 RWALK_BYTE=$(RWALK).byte
 
-TOOLS=$(VLMC_EXP) $(VLMC_EXP_BYTE) $(TRIE_DRAW) $(TRIE_DRAW_BYTE) $(RWALK) $(RWALK_BYTE)
+AUTOMATA=automata
+AUTOMATA_BYTE=$(AUTOMATA).byte
 
-all: opt byte $(TOOLS)
+TOOLS=$(VLMC_EXP) $(TRIE_DRAW) $(RWALK) $(AUTOMATA)
+TOOLS_BYTE=$(VLMC_EXP_BYTE) $(TRIE_DRAW_BYTE) $(RWALK_BYTE) $(AUTOMATA_BYTE)
 
-opt: $(LIB)
-byte: $(LIB_BYTE)
+all: opt byte
+
+opt: $(LIB) $(TOOLS)
+byte: $(LIB_BYTE) $(TOOLS_BYTE)
 
 $(LIB): $(CMI_FILES) $(CMX_FILES)
 	$(OCAMLFIND) ocamlopt -a -o $@ $(CMX_FILES)
@@ -67,22 +70,28 @@ uninstall: dummy
 	$(OCAMLFIND) remove $(PACKAGE)
 
 $(VLMC_EXP): $(LIB) vlmc_exp.cmx
-	$(OCAMLFIND) ocamlopt $(OCAMLFLAGS)  -o $@ -linkall $(SYS_LIBS) $^
+	$(OCAMLFIND) ocamlopt -package $(PACKAGES) $(OCAMLFLAGS)  -o $@ -linkpkg -linkall $^
 
 $(VLMC_EXP_BYTE): $(LIB_BYTE) vlmc_exp.cmo
-	$(OCAMLFIND) ocamlc $(OCAMLFLAGS) -o $@ -linkall $(SYS_LIBS_BYTE) $^
+	$(OCAMLFIND) ocamlc -package $(PACKAGES) $(OCAMLFLAGS) -o $@ -linkpkg -linkall $^
 
 $(TRIE_DRAW): $(LIB) trie_draw.cmx
-	$(OCAMLFIND) ocamlopt $(OCAMLFLAGS)  -o $@ -linkall $(SYS_LIBS) $^
+	$(OCAMLFIND) ocamlopt -package $(PACKAGES) $(OCAMLFLAGS)  -o $@ -linkpkg -linkall $^
 
 $(TRIE_DRAW_BYTE): $(LIB_BYTE) trie_draw.cmo
-	$(OCAMLFIND) ocamlc $(OCAMLFLAGS) -o $@ -linkall $(SYS_LIBS_BYTE) $^
+	$(OCAMLFIND) ocamlc -package $(PACKAGES) $(OCAMLFLAGS) -o $@ -linkpkg -linkall $^
 
 $(RWALK): $(LIB) random_walk.cmx
-	$(OCAMLFIND) ocamlopt $(OCAMLFLAGS)  -o $@ -linkall $(SYS_LIBS) $^
+	$(OCAMLFIND) ocamlopt -package $(PACKAGES) $(OCAMLFLAGS)  -o $@ -linkpkg -linkall $^
 
 $(RWALK_BYTE): $(LIB_BYTE) random_walk.cmo
-	$(OCAMLFIND) ocamlc $(OCAMLFLAGS) -o $@ -linkall $(SYS_LIBS_BYTE) $^
+	$(OCAMLFIND) ocamlc -package $(PACKAGES) $(OCAMLFLAGS) -o $@ -linkpkg -linkall $^
+
+$(AUTOMATA): automata.cmx
+	$(OCAMLFIND) ocamlopt -package $(PACKAGES) $(OCAMLFLAGS)  -o $@ -linkpkg  $^
+
+$(AUTOMATA_BYTE): automata.cmo
+	$(OCAMLFIND) ocamlc -package $(PACKAGES) $(OCAMLFLAGS) -o $@ -linkpkg $^
 
 LAWS_CMXFILES=\
 	laws/prob1.cmx \
@@ -101,16 +110,16 @@ laws: $(LAWS_CMXSFILES) $(LAWS_CMOFILES)
 .suffixes: .ml .mli .cmx .cmi .cmo .cmxs
 
 %.cmi: %.mli
-	$(OCAMLFIND) ocamlc $(OCAMLFLAGS) -c $<
+	$(OCAMLFIND) ocamlc -package $(PACKAGES) $(OCAMLFLAGS) -c $<
 
 %.cmx: %.ml
-	$(OCAMLFIND) ocamlopt $(OCAMLFLAGS) -inline 10000 -verbose -c $<
+	$(OCAMLFIND) ocamlopt -package $(PACKAGES) $(OCAMLFLAGS) -inline 10000 -verbose -c $<
 
 %.cmxs: %.ml
-	$(OCAMLFIND) ocamlopt $(OCAMLFLAGS) -inline 10000 -shared -o $@ $<
+	$(OCAMLFIND) ocamlopt -package $(PACKAGES) $(OCAMLFLAGS) -inline 10000 -shared -o $@ $<
 
 %.cmo: %.ml
-	$(OCAMLFIND) ocamlc $(OCAMLFLAGS)  -verbose -c $<
+	$(OCAMLFIND) ocamlc -package $(PACKAGES) $(OCAMLFLAGS)  -verbose -c $<
 
 clean:
 	rm -f *.cm* *.annot $(TOOLS) *.o
