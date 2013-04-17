@@ -30,7 +30,7 @@ let dot_of_context_tree f_sym f t =
       Array.iteri
         (fun i n ->
            let path = i :: path in
-           Printf.bprintf b "%s -> %s [ label=%S ];\n" id 
+           Printf.bprintf b "%s -> %s [ label=%S ];\n" id
              (id_of_path (List.rev path)) (f_sym i);
            iter path n
         )
@@ -63,7 +63,7 @@ let dot_of_automata_context_tree f_sym t =
            [] -> ()
          | _ ->
              Printf.bprintf b "%s -> %s [ label=%s, style=dashed, constraint=false];\n"
-               (id_of_path ac.ac_path) 
+               (id_of_path ac.ac_path)
                (id_of_path (List.rev path)) (f_sym i)
       )
       ac.ac_next;
@@ -219,12 +219,18 @@ let complement_contexts =
   fun ctxs tree ->
     iter tree ctxs
 ;;
+let rec fixpoint f x =
+  let x2 = f x in
+  if x2 = x then x else fixpoint f x2
+;;
 
 let complement_context_tree t =
   let (tree, contexts) = automata_context_tree t in
   prerr_endline (Printf.sprintf "length(contexts)=%d" (List.length contexts));
   let contexts = sort_automata_context_by_path_size contexts in
   complement_contexts contexts tree
+
+
 
 let test_tree =
   Node [|
