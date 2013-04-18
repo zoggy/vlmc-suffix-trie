@@ -1,4 +1,9 @@
 log
+automata
+automata.byte
+context-trees/*.svg
+context-trees/*.dot
+context-trees/*.png
 *.jpg
 *.R
 vlmc-exp
