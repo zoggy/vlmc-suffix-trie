@@ -87,10 +87,10 @@ $(RWALK): $(LIB) random_walk.cmx
 $(RWALK_BYTE): $(LIB_BYTE) random_walk.cmo
 	$(OCAMLFIND) ocamlc -package $(PACKAGES) $(OCAMLFLAGS) -o $@ -linkpkg -linkall $^
 
-$(AUTOMATA): automata.cmx
+$(AUTOMATA): automata.cmx automata_main.cmx
 	$(OCAMLFIND) ocamlopt -package $(PACKAGES) $(OCAMLFLAGS)  -o $@ -linkpkg  $^
 
-$(AUTOMATA_BYTE): automata.cmo
+$(AUTOMATA_BYTE): automata.cmo automata_main.cmo
 	$(OCAMLFIND) ocamlc -package $(PACKAGES) $(OCAMLFLAGS) -o $@ -linkpkg $^
 
 LAWS_CMXFILES=\

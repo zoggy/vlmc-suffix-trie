@@ -600,29 +600,3 @@ file_of_string ~file: "/tmp/cct.dot" (dot_of_cct string_of_int cct);;
 file_of_string ~file: "/tmp/diff.dot" (dot_of_tree_diff string_of_int test_tree cct);;
 *)
 
-let main () =
-  if Array.length Sys.argv < 2 then
-    failwith (Printf.sprintf "Usage: %s file.tree" Sys.argv.(0));
-  let file = Sys.argv.(1) in
-  let spec_str = string_of_file file in
-  let spec = read_spec spec_str in
-  let tree = context_tree_of_spec spec in
-  let basename = Filename.chop_extension file in
-
-  let dot = dot_of_context_tree spec.spec_sym (fun _ _ _ -> ["shape","triangle"; "label",""]) tree in
-  file_of_string ~file: (basename^".dot") dot;
-
-  let act = automata_context_tree tree in
-  file_of_string ~file: (basename^".ct.dot") (dot_of_automata_context_tree spec.spec_sym act);
-
-  let cct = complemented_context_tree act in
-  file_of_string ~file: (basename^".cct.dot") (dot_of_cct spec.spec_sym cct);
-
-  file_of_string ~file: (basename^".diff.dot") (dot_of_tree_diff spec.spec_sym tree cct);
-
-;;
-
-try main ()
-with
-  Sys_error msg
-|  Failure msg -> prerr_endline msg; exit 1;;
