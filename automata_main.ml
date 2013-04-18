@@ -30,4 +30,4 @@ let main () =
 try main ()
 with
   Sys_error msg
-|  Failure msg -> prerr_endline msg; exit 1;;
+| Failure msg -> prerr_endline msg; exit 1;;
