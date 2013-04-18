@@ -243,8 +243,10 @@ let complement_contexts =
     [] -> tree
   | ac :: q ->
       try
+        (*
         let dot = dot_of_automata_context_tree string_of_int tree in
         file_of_string ~file: ("/tmp/foo"^(string_of_int (gensym()))^".dot") dot;
+        *)
         let f (tree, i) _ =
           let path = i :: ac.ac_path in
           let ac_target =
