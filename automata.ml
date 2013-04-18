@@ -170,12 +170,6 @@ let replace_context tree path f =
         t
       in
       Node a
-(*
-      let a = Array.copy t in
-      let th = map (q, t.(h)) in
-      a.(h) <- th;
-      Node a
-*)
   in
   map (path, tree)
 ;;
@@ -287,10 +281,6 @@ let complement_contexts =
   fun ctxs tree ->
     iter tree ctxs
 ;;
-let rec fixpoint f x =
-  let x2 = f x in
-  if x2 = x then x else fixpoint f x2
-;;
 
 let complement_context_tree t =
   let (tree, contexts) = automata_context_tree t in
@@ -347,8 +337,181 @@ let dot_of_tree_diff f_sym tree cct =
   dot_of_context_tree ~edgeatts f_sym f cct.cct_tree
 ;;
 
+(*c==v=[String.split_string]=1.1====*)
+let split_string ?(keep_empty=false) s chars =
+  let len = String.length s in
+  let rec iter acc pos =
+    if pos >= len then
+      match acc with
+        "" -> []
+      | _ -> [acc]
+    else
+      if List.mem s.[pos] chars then
+        match acc with
+          "" ->
+            if keep_empty then
+              "" :: iter "" (pos + 1)
+            else
+              iter "" (pos + 1)
+        | _ -> acc :: (iter "" (pos + 1))
+      else
+        iter (Printf.sprintf "%s%c" acc s.[pos]) (pos + 1)
+  in
+  iter "" 0
+(*/c==v=[String.split_string]=1.1====*)
+(*c==v=[String.strip_string]=1.0====*)
+let strip_string s =
+  let len = String.length s in
+  let rec iter_first n =
+    if n >= len then
+      None
+    else
+      match s.[n] with
+        ' ' | '\t' | '\n' | '\r' -> iter_first (n+1)
+      | _ -> Some n
+  in
+  match iter_first 0 with
+    None -> ""
+  | Some first ->
+      let rec iter_last n =
+        if n <= first then
+          None
+        else
+          match s.[n] with
+            ' ' | '\t' | '\n' | '\r' -> iter_last (n-1)
+          |	_ -> Some n
+      in
+      match iter_last (len-1) with
+        None -> String.sub s first 1
+      |	Some last -> String.sub s first ((last-first)+1)
+(*/c==v=[String.strip_string]=1.0====*)
 
-let test_tree =
+type tree_spec =
+  { spec_symbols : char array ;
+    spec_ctxs : (int list * float array) list ;
+    spec_sym : int -> char ;
+  }
+
+let get_index_in_array t v =
+  let len = Array.length t in
+  let rec iter i =
+    if i < len then
+      if t.(i) = v then i else iter (i+1)
+    else
+      raise Not_found
+  in
+  iter 0
+;;
+
+let read_context symbols line =
+  let ctx_of_string s =
+    let s = strip_string s in
+    let len = String.length s in
+    let rec iter acc i =
+      if i >= len then
+        List.rev acc
+      else
+        try
+          let n = get_index_in_array symbols s.[i] in
+          iter (n :: acc) (i+1)
+        with Not_found -> failwith (Printf.sprintf "Undeclared symbol '%c'" s.[i])
+    in
+    iter [] 0
+  in
+  match split_string (strip_string line) [':'] with
+    [context] -> (ctx_of_string context, Array.map (fun _ -> 0.0) symbols)
+  | context :: s_probs :: [] ->
+      let probs = split_string s_probs [','] in
+      if List.length probs <> Array.length symbols then
+        failwith (Printf.sprintf "Number of probabilities differs from number of symbols: %s" s_probs);
+      let probs =
+        List.map (fun s ->
+           try float_of_string (strip_string s)
+           with _ -> failwith ("Invalid probability: "^s)
+        ) probs
+      in
+      (ctx_of_string context, Array.of_list probs)
+  | _ -> failwith ("Invalid syntax: "^line)
+;;
+let read_spec str =
+  let lines = split_string str ['\n'; '\r'] in
+  match lines with
+    [] | [_] -> failwith "Not enough lines"
+  | symbols :: lines ->
+      let symbols =
+        let s = strip_string symbols in
+        (* remove blanks *)
+        let s = String.concat "" (split_string s ['\n' ; ' ']) in
+        let len = String.length s in
+        let t = Array.make len 'a' in
+        for i = 0 to len - 1 do t.(i) <- s.[i] done;
+        t
+      in
+      let sym n =
+        try symbols.(n)
+        with _ -> failwith (Printf.sprintf "Invalid symbol index: %d" n)
+      in
+      let rec read_line acc n = function
+        [] ->
+          { spec_symbols = symbols ;
+            spec_ctxs = acc ;
+            spec_sym = sym ;
+          }
+      | line :: q ->
+          try
+            let ctx = read_context symbols line in
+            read_line (ctx :: acc) (n+1) q
+          with Failure msg ->
+            let msg = Printf.sprintf "Line %d: %s" n msg in
+            failwith msg
+      in
+      read_line [] 2 lines
+;;
+
+let test_spec = read_spec
+"01
+1: 0.2, 0.8
+01: 0.2, 0.8
+000
+0010
+0011"
+;;
+
+let partition_paths symbols paths =
+  let rec gather i acc = function
+    [] -> acc
+  | (h, ctx) :: q ->
+      match h with
+        x :: path when x = i -> gather i ((path, ctx) :: acc) q
+      | _ -> gather i acc q
+  in
+  let t = Array.mapi (fun i _ -> gather i [] paths) symbols in
+  let sum = Array.fold_left (fun n l -> n + List.length l) 0 t in
+  assert (sum = List.length paths);
+  t
+;;
+
+let context_tree_of_spec spec =
+  match spec.spec_ctxs with
+    [] -> failwith "No context"
+  | ctxs ->
+      let rec build_node cur_revpath i paths =
+        match paths with
+          [] ->
+            failwith ("Missing context: "^(string_of_path (List.rev (i::cur_revpath))))
+        | [ ([], ctx) ] ->
+            Context ctx
+        | _ ->
+            build (i :: cur_revpath) paths
+      and build cur_revpath paths =
+        let partitions = partition_paths spec.spec_symbols paths in
+        Node (Array.mapi (build_node cur_revpath) partitions)
+      in
+      build [] ctxs
+;;
+
+let test_tree = context_tree_of_spec test_spec;;
+(*
   Node [|
    Node [|
     Node [|
@@ -363,7 +526,7 @@ let test_tree =
    Context [| 0.2 ; 0.8 |] ;
   |]
 ;;
-
+*)
 
 let dot = dot_of_context_tree string_of_int (fun _ _ _ -> ["shape","triangle"]) test_tree;;
 print_endline dot;;
