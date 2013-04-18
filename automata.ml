@@ -174,7 +174,9 @@ let replace_context tree path f =
   map (path, tree)
 ;;
 
-let string_of_path path = String.concat "-" (List.map string_of_int path);;
+let string_of_path = function
+  [] -> "_"
+| l ->  String.concat "-" (List.map string_of_int l);;
 
 let break tree path =
   let added = ref [] in
@@ -499,19 +501,55 @@ let test_spec = read_spec
 0010
 0011"
 ;;
+(*c==v=[List.list_diff]=1.0====*)
+let list_diff ?(pred=(=)) l1 l2 =
+  List.fold_right
+    (fun el acc ->
+       if not (List.exists (pred el) l2) then
+         el :: acc
+       else
+         acc
+    )
+    l1 []
+(*/c==v=[List.list_diff]=1.0====*)
 
 let partition_paths symbols paths =
+(*
+  prerr_endline (Printf.sprintf "paritioning paths: %s"
+   (String.concat ", " (List.map (fun (path, _, _) -> string_of_path path) paths)));
+*)
   let rec gather i acc = function
     [] -> acc
-  | (h, ctx) :: q ->
+  | (h, orig_path, ctx) :: q ->
       match h with
-        x :: path when x = i -> gather i ((path, ctx) :: acc) q
+        x :: path when x = i -> gather i ((path, orig_path, ctx) :: acc) q
       | _ -> gather i acc q
   in
   let t = Array.mapi (fun i _ -> gather i [] paths) symbols in
-  let sum = Array.fold_left (fun n l -> n + List.length l) 0 t in
-  assert (sum = List.length paths);
-  t
+(*  Array.iteri
+    (fun i l ->
+       prerr_endline
+         (Printf.sprintf "[%d] => %s" i
+          (String.concat ", " (List.map (fun (path, _, _) -> string_of_path path) l))
+         )
+    )
+    t;
+*)
+  let (diff, _) = Array.fold_left
+    (fun (acc,n) pl ->
+       (list_diff acc
+        (List.map (fun (p,orig_path,ctx) -> (n :: p, orig_path, ctx)) pl), n+1)
+    )
+    (paths,0) t
+  in
+  match diff with
+    [] -> t
+  | _ ->
+    let msg =
+        Printf.sprintf "The following contexts should not be defined: %s"
+         (String.concat ", " (List.map (fun (_, orig_path, _) -> string_of_path orig_path) diff))
+      in
+    failwith msg
 ;;
 
 let context_tree_of_spec spec =
@@ -522,7 +560,7 @@ let context_tree_of_spec spec =
         match paths with
           [] ->
             failwith ("Missing context: "^(string_of_path (List.rev (i::cur_revpath))))
-        | [ ([], ctx) ] ->
+        | [ ([], _, ctx) ] ->
             Context ctx
         | _ ->
             build (i :: cur_revpath) paths
@@ -530,7 +568,7 @@ let context_tree_of_spec spec =
         let partitions = partition_paths spec.spec_symbols paths in
         Node (Array.mapi (build_node cur_revpath) partitions)
       in
-      build [] ctxs
+      build [] (List.map (fun (path, ctx) -> (path, path, ctx)) ctxs)
 ;;
 (*
 
