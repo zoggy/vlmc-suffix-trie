@@ -93,8 +93,18 @@ let dot_to_svg ?(svg_w=svg_width) ?(svg_h=svg_height) dot =
 ;;
 
 let form (cgi : Netcgi.cgi_activation) =
-  Printf.sprintf "<form action=%S>
-    <textarea width=\"80\" height=\"20\" name=\"spec\"> </textarea>
+  Printf.sprintf "
+    <p>Type the contexts in the following form.</p>
+    <p>The first line is the <strong>list of symbols</strong>, for example <code>01</code></p>
+    <p>On each following line, just type a <strong>context path</strong>, for example <code>0110</code></p>
+    <form action=%S>
+    <textarea cols=\"80\" rows=\"40\" name=\"spec\">01
+1
+01
+000
+0010
+0011
+</textarea>
     <input type=\"submit\"/>
     </form>"
       (cgi#url())
