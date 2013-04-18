@@ -282,7 +282,7 @@ let complement_contexts =
     iter tree ctxs
 ;;
 
-let complement_context_tree t =
+let automata_context_tree t =
   let (tree, contexts) = automata_context_tree t in
   prerr_endline (Printf.sprintf "length(contexts)=%d" (List.length contexts));
   let contexts = sort_automata_context_by_path_size contexts in
@@ -385,11 +385,34 @@ let strip_string s =
         None -> String.sub s first 1
       |	Some last -> String.sub s first ((last-first)+1)
 (*/c==v=[String.strip_string]=1.0====*)
+(*c==v=[File.string_of_file]=1.0====*)
+let string_of_file name =
+  let chanin = open_in_bin name in
+  let len = 1024 in
+  let s = String.create len in
+  let buf = Buffer.create len in
+  let rec iter () =
+    try
+      let n = input chanin s 0 len in
+      if n = 0 then
+        ()
+      else
+        (
+         Buffer.add_substring buf s 0 n;
+         iter ()
+        )
+    with
+      End_of_file -> ()
+  in
+  iter ();
+  close_in chanin;
+  Buffer.contents buf
+(*/c==v=[File.string_of_file]=1.0====*)
 
 type tree_spec =
   { spec_symbols : char array ;
     spec_ctxs : (int list * float array) list ;
-    spec_sym : int -> char ;
+    spec_sym : int -> string ;
   }
 
 let get_index_in_array t v =
@@ -448,7 +471,7 @@ let read_spec str =
         t
       in
       let sym n =
-        try symbols.(n)
+        try String.make 1 symbols.(n)
         with _ -> failwith (Printf.sprintf "Invalid symbol index: %d" n)
       in
       let rec read_line acc n = function
@@ -509,6 +532,7 @@ let context_tree_of_spec spec =
       in
       build [] ctxs
 ;;
+(*
 
 let test_tree = context_tree_of_spec test_spec;;
 (*
@@ -528,11 +552,39 @@ let test_tree = context_tree_of_spec test_spec;;
 ;;
 *)
 
-let dot = dot_of_context_tree string_of_int (fun _ _ _ -> ["shape","triangle"]) test_tree;;
+let dot = dot_of_context_tree string_of_int (fun _ _ _ -> ["shape","triangle"; "label", ""]) test_tree;;
 print_endline dot;;
-let t2 = complement_context_tree test_tree;;
+let t2 = automata_context_tree test_tree;;
 file_of_string ~file: "/tmp/result.dot" (dot_of_automata_context_tree string_of_int t2);;
 let cct = complemented_context_tree t2;;
 file_of_string ~file: "/tmp/cct.dot" (dot_of_cct string_of_int cct);;
 
 file_of_string ~file: "/tmp/diff.dot" (dot_of_tree_diff string_of_int test_tree cct);;
+*)
+
+let main () =
+  if Array.length Sys.argv < 2 then
+    failwith (Printf.sprintf "Usage: %s file.tree" Sys.argv.(0));
+  let file = Sys.argv.(1) in
+  let spec_str = string_of_file file in
+  let spec = read_spec spec_str in
+  let tree = context_tree_of_spec spec in
+  let basename = Filename.chop_extension file in
+
+  let dot = dot_of_context_tree spec.spec_sym (fun _ _ _ -> ["shape","triangle"; "label",""]) tree in
+  file_of_string ~file: (basename^".dot") dot;
+
+  let act = automata_context_tree tree in
+  file_of_string ~file: (basename^".ct.dot") (dot_of_automata_context_tree spec.spec_sym act);
+
+  let cct = complemented_context_tree act in
+  file_of_string ~file: (basename^".cct.dot") (dot_of_cct spec.spec_sym cct);
+
+  file_of_string ~file: (basename^".diff.dot") (dot_of_tree_diff spec.spec_sym tree cct);
+
+;;
+
+try main ()
+with
+  Sys_error msg
+|  Failure msg -> prerr_endline msg; exit 1;;
