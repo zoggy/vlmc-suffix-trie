@@ -127,7 +127,12 @@ let handle_http_query (cgi : Netcgi.cgi_activation) =
           let (tree_dot, compl_dot, auto_dot, nb_ctxs, nb_ctxs2) = compute spec_str in
           let tree_svg = dot_to_svg tree_dot in
           let compl_svg = dot_to_svg compl_dot in
-          let auto_svg = dot_to_svg ~svg_w: 1000 auto_dot in
+          let auto_svg = 
+            if nb_ctxs2 <= 40 then
+              dot_to_svg ~svg_w: 1000 auto_dot
+            else
+              "Two many contexts, automata not shown"
+          in
           "<p>Number of contexts: "^(string_of_int nb_ctxs)^" -&gt; "^(string_of_int nb_ctxs2)^"</p>\n"^
           "<h2>Input context tree</h2>\n"^tree_svg^"\n"^
           "<h2>Complemented context tree</h2>\n"^compl_svg^"\n"^
