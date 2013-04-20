@@ -49,7 +49,10 @@ let compute spec_str =
   let auto_dot = Automata.dot_of_cct spec.spec_sym cct in
 
   let compl_dot = Automata.dot_of_tree_diff spec.spec_sym tree cct in
-  (tree_dot, compl_dot, auto_dot)
+
+  let nb_ctxs = Automata.nb_contexts tree in
+  let nb_ctxs2 = Automata.nb_contexts cct.cct_tree in
+  (tree_dot, compl_dot, auto_dot, nb_ctxs, nb_ctxs2)
 ;;
 
 let svg_width = 700;;
@@ -121,10 +124,11 @@ let handle_http_query (cgi : Netcgi.cgi_activation) =
       match spec with
         "" -> form cgi
       | spec_str ->
-          let (tree_dot, compl_dot, auto_dot) = compute spec_str in
+          let (tree_dot, compl_dot, auto_dot, nb_ctxs, nb_ctxs2) = compute spec_str in
           let tree_svg = dot_to_svg tree_dot in
           let compl_svg = dot_to_svg compl_dot in
           let auto_svg = dot_to_svg ~svg_w: 1000 auto_dot in
+          "<p>Number of contexts: "^(string_of_int nb_ctxs)^" -&gt; "^(string_of_int nb_ctxs2)^"</p>\n"^
           "<h2>Input context tree</h2>\n"^tree_svg^"\n"^
           "<h2>Complemented context tree</h2>\n"^compl_svg^"\n"^
           "<h2>Automata details</h2>\n"^auto_svg
