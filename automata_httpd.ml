@@ -44,9 +44,8 @@ let compute spec_str =
   let tree_dot = Automata.dot_of_context_tree
     spec.spec_sym (fun _ _ _ -> ["shape","triangle"; "label",""]) tree
   in
-  let act = Automata.automata_context_tree tree in
 
-  let cct = Automata.complemented_context_tree act in
+  let cct = Automata.complemented_context_tree tree in
   let auto_dot = Automata.dot_of_cct spec.spec_sym cct in
 
   let compl_dot = Automata.dot_of_tree_diff spec.spec_sym tree cct in

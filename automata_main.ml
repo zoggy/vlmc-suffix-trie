@@ -15,11 +15,7 @@ let main () =
   in
   Automata.file_of_string ~file: (basename^".dot") dot;
 
-  let act = Automata.automata_context_tree tree in
-  Automata.file_of_string ~file: (basename^".ct.dot")
-    (Automata.dot_of_automata_context_tree spec.spec_sym act);
-
-  let cct = Automata.complemented_context_tree act in
+  let cct = Automata.complemented_context_tree tree in
   Automata.file_of_string ~file: (basename^".cct.dot")
     (Automata.dot_of_cct spec.spec_sym cct);
 

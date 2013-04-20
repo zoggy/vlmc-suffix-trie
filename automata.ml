@@ -61,11 +61,12 @@ module OrderedIntList = struct type t = int list let compare = Pervasives.compar
 module ACMap = Map.Make (OrderedIntList)
 module ACSet = Set.Make (OrderedIntList)
 
+(*
 type 'a automata_context = {
     ac_path : int list;
     ac_ctx : 'a context ;
     ac_next : int list context ;
-    ac_prev : ACSet.t ;
+    ac_ref : PathrefSet.t ;
   }
 
 let dot_of_automata_context_tree f_sym t =
@@ -95,7 +96,7 @@ let automata_context_tree t =
         { ac_path = List.rev path ;
           ac_ctx = c ;
           ac_next = Array.make (Array.length c) [] ;
-          ac_prev = ACSet.empty ;
+          ac_ref = PathrefSet.empty ;
         }
       in
       (Context ac, ac :: acc)
@@ -123,8 +124,8 @@ let sort_automata_context_by_path_size =
   in
   fun l -> List.sort compare l
 ;;
-
 exception Need_break
+*)
 
 let node_exists =
   let rec iter = function
@@ -136,13 +137,13 @@ let node_exists =
 ;;
 
 let find_context =
-  let rec iter exact = function
-    ([], Context c) -> c
-  | (_ :: _, Context c) -> if exact then assert false else c
+  let rec iter path exact = function
+    ([], Context c) -> (c, List.rev path)
+  | (_ :: _, Context c) -> if exact then assert false else (c, List.rev path)
   | ([], Node _) -> raise Not_found
-  | (h :: q, Node t) ->  iter exact (q, t.(h))
+  | (h :: q, Node t) ->  iter (h::path) exact (q, t.(h))
   in
-  fun ?(exact=false) path tree -> iter exact (path, tree)
+  fun ?(exact=false) path tree -> iter [] exact (path, tree)
 ;;
 
 let map_tree tree f =
@@ -178,75 +179,130 @@ let string_of_path = function
   [] -> "_"
 | l ->  String.concat "-" (List.map string_of_int l);;
 
+let string_of_pathref (path, sym) =
+ (string_of_path path)^"["^(string_of_int sym)^"]"
+;;
+
+let path_is_prefix p1 p2 =
+(*  prerr_endline (Printf.sprintf "path_is_prefix %s %s"
+    (string_of_path p1) (string_of_path p2));
+*)
+  let rec iter = function
+      [], _ -> true
+    | _, [] -> false
+    | h1 :: q1, h2 :: q2 ->
+      (h1 = h2) && iter (q1, q2)
+  in
+  iter (p1, p2)
+;;
+
+let gensym = let i = ref 0 in fun () -> incr i; !i;;
+
+(*
 let break tree path =
+  prerr_endline (Printf.sprintf "===== break context %s" (string_of_path path));
   let added = ref [] in
   let old_ac = find_context ~exact: true path tree in
   let f ac =
     let new_contexts =
       Array.mapi
         (fun i _ ->
+           let path_i = ac.ac_path @ [i] in
+           let first_sym = List.hd path_i in
+           let new_ref = PathrefSet.filter
+             (fun (p,_) -> path_is_prefix path_i (first_sym :: p))
+               ac.ac_ref
+           in
+           prerr_endline (Printf.sprintf "ac_path=%s\n  i=%d\n    old_ref=%s\n    new_ref=%s"
+             (string_of_path ac.ac_path) i
+             (String.concat ", " (List.map string_of_pathref (PathrefSet.elements ac.ac_ref)))
+             (String.concat ", " (List.map string_of_pathref (PathrefSet.elements new_ref)))
+           );
+
            let new_ac =
              {
-               ac_path = ac.ac_path @ [i] ;
+               ac_path = path_i ;
                ac_ctx = ac.ac_ctx ;
                ac_next = Array.map (fun _ -> []) ac.ac_ctx ;
-               ac_prev = ACSet.empty ;
+               ac_ref = new_ref ;
              }
            in
            new_ac
         )
         ac.ac_ctx
     in
+(*
+    let old_ref_card = PathrefSet.cardinal old_ac.ac_ref in
+    let new_ref_card =
+      Array.fold_left (fun sum ac -> sum + PathrefSet.cardinal ac.ac_ref)
+        0 new_contexts
+    in
+    if old_ref_card <> new_ref_card then
+      (
+       prerr_endline (Printf.sprintf "old_ref_card(%d) <> new_ref_card(%d)" old_ref_card new_ref_card);
+       assert false
+      );
+*)
     added := Array.to_list new_contexts ;
     let ctx_nodes = Array.map (fun ac -> Context ac) new_contexts in
     Node ctx_nodes
   in
   let tree = replace_context tree path f in
-  let f_prev prev_path tree =
-    match List.rev prev_path with
-      i :: p ->
-        let prev_path = List.rev p in
-        let f old_ac =
-          let new_next = Array.mapi
-            (fun j x ->
-               if j = i then
-                 begin
-                   (* set new link: search first context matching i :: old_ac.ac_path *)
-                   let ac = find_context (i :: old_ac.ac_path) tree in
+  let to_break = ref [] in
+  let f_ref (pathref, sym) tree =
+    prerr_endline (Printf.sprintf "f_ref (%s, %s)"
+      (string_of_path pathref) (string_of_int sym));
+    try
+      let f old_ac =
+        let new_next = Array.mapi
+          (fun j old_next ->
+             prerr_endline (Printf.sprintf "  j=%d, old_next=%s" j (string_of_path old_next));
+             if j = sym then
+               begin
+                 prerr_endline
+                   (Printf.sprintf "pathref=%s, j=%d find context %s"
+                    (string_of_path pathref) j
+                      (string_of_path (sym :: old_ac.ac_path)));
+                 try
+                   let ac = find_context (sym :: old_ac.ac_path) tree in
                    prerr_endline
-                     (Printf.sprintf "break: prev=%s, old_next=%s, new_next=%s"
-                      (string_of_path prev_path)
-                        (string_of_path old_ac.ac_next.(i))
+                     (Printf.sprintf "break: ref=%s, old_next=%s, new_next=%s"
+                      (string_of_path pathref)
+                        (string_of_path old_ac.ac_next.(sym))
                         (string_of_path ac.ac_path)
                      );
                    ac.ac_path
-                 end
-               else
-                 x
-            )
+                 with Not_found ->
+                     prerr_endline ("Must break "^ (string_of_path old_ac.ac_path));
+                     raise Need_break
+               end
+             else
+               old_next
+          )
             old_ac.ac_next
-          in
-          let new_ac = { old_ac with ac_next = new_next } in
-          Context new_ac
         in
-        replace_context tree prev_path f
-    | _ -> assert false
+        let new_ac = { old_ac with ac_next = new_next } in
+        Context new_ac
+      in
+      replace_context tree pathref f
+    with
+      Need_break ->
+        let c = find_context ~exact: true pathref tree in
+        to_break := c :: !to_break;
+        tree
   in
-  let tree = ACSet.fold f_prev old_ac.ac_prev tree in
-  (tree, !added)
+  let tree = PathrefSet.fold f_ref old_ac.ac_ref tree in
+  (tree, !added, !to_break)
 ;;
-
-let gensym = let i = ref 0 in fun () -> incr i; !i;;
 
 let complement_contexts =
   let rec iter tree = function
     [] -> tree
   | ac :: q ->
       try
-        (*
+        prerr_endline (Printf.sprintf "complement_contexts: ac.ac_path=%s" (string_of_path ac.ac_path));
         let dot = dot_of_automata_context_tree string_of_int tree in
-        file_of_string ~file: ("/tmp/foo"^(string_of_int (gensym()))^".dot") dot;
-        *)
+        file_of_string ~file: (Printf.sprintf "/tmp/foo%03d.dot" (gensym())) dot;
         let f (tree, i) _ =
           let path = i :: ac.ac_path in
           let ac_target =
@@ -267,7 +323,7 @@ let complement_contexts =
           let tree = replace_context tree ac_target.ac_path
             (fun ac_target ->
                let ac_target2 =
-                 { ac_target with ac_prev = ACSet.add (ac.ac_path @ [i]) ac_target.ac_prev }
+                 { ac_target with ac_ref = PathrefSet.add (ac.ac_path, i) ac_target.ac_ref }
                in
                Context ac_target2
             )
@@ -278,20 +334,14 @@ let complement_contexts =
         iter tree q
       with
         Need_break ->
-          let (tree, new_contexts) = break tree ac.ac_path in
+          let (tree, new_contexts, to_break) = break tree ac.ac_path in
           let l = sort_automata_context_by_path_size (new_contexts @ q) in
-          iter tree l
+          iter tree (to_break @ l)
   in
   fun ctxs tree ->
     iter tree ctxs
 ;;
-
-let automata_context_tree t =
-  let (tree, contexts) = automata_context_tree t in
-  prerr_endline (Printf.sprintf "length(contexts)=%d" (List.length contexts));
-  let contexts = sort_automata_context_by_path_size contexts in
-  complement_contexts contexts tree
-;;
+*)
 
 type 'a complemented_context_tree =
   { cct_map : int list array ACMap.t ;
@@ -320,16 +370,53 @@ let dot_of_cct f_sym cct =
   dot_of_context_tree f_sym f cct.cct_tree
 ;;
 
-let complemented_context_tree tree =
-  let map = ref ACMap.empty in
-  let f path ac =
-    map := ACMap.add path ac.ac_next !map ;
-    Context ac.ac_ctx
+let break path tree =
+  prerr_endline (Printf.sprintf "===== break context %s" (string_of_path path));
+  let f context =
+    let new_contexts = Array.map (fun _ -> Context context) context in
+    Node new_contexts
   in
-  let tree = map_tree tree f in
-  { cct_map = !map ;
-    cct_tree = tree ;
-  }
+  replace_context tree path f 
+;;
+
+let complemented_context_tree tree =
+  let rec iter tree path (map, to_break) = function
+    Context c ->
+      begin
+        let path = List.rev path in
+        try
+          let t = Array.mapi
+            (fun sym _ ->
+               let (_, path_next) = find_context (sym :: path) tree in
+               path_next
+            )
+            c
+          in
+          (ACMap.add path t map, to_break)
+        with Not_found ->
+            (map, ACSet.add path to_break)
+      end
+  | Node t ->
+      let (map, to_break, _) =
+        Array.fold_left
+          (fun (map, to_break, i) t ->
+             let (map, to_break) = iter tree (i::path) (map, to_break) t in
+             (map, to_break, i+1)
+          )
+          (map, to_break, 0)
+          t
+      in
+      (map, to_break)
+  in
+  let rec loop tree =
+    let (map, to_break) = iter tree [] (ACMap.empty, ACSet.empty) tree in
+    if ACSet.is_empty to_break then
+      { cct_map = map ; cct_tree = tree }
+    else
+      let tree = ACSet.fold break to_break tree in
+      loop tree
+  in
+  loop tree
 ;;
 
 let dot_of_tree_diff f_sym tree cct =
