@@ -7,6 +7,11 @@
 
 open Automata;;
 
+type param =
+  {
+    par_url : string option ;
+  }
+
 (*c==v=[String.replace_in_string]=1.0====*)
 let replace_in_string ~pat ~subs ~s =
   let len_pat = String.length pat in
@@ -94,7 +99,7 @@ let dot_to_svg ?(svg_w=svg_width) ?(svg_h=svg_height) dot =
   dot_to_svg ~options ~size: (svg_w,svg_h) dot
 ;;
 
-let form (cgi : Netcgi.cgi_activation) =
+let form param (cgi : Netcgi.cgi_activation) =
   Printf.sprintf "
     <p>Type the contexts in the following form.</p>
     <p>The first line is the <strong>list of symbols</strong>, for example <code>01</code></p>
@@ -109,7 +114,7 @@ let form (cgi : Netcgi.cgi_activation) =
 </textarea>
     <input type=\"submit\"/>
     </form>"
-      (cgi#url())
+      (match param.par_url with None -> cgi#url() | Some url -> url)
 ;;
 
 let mk_page contents =
@@ -117,17 +122,17 @@ let mk_page contents =
 ;;
 
 
-let handle_http_query (cgi : Netcgi.cgi_activation) =
+let handle_http_query param (cgi : Netcgi.cgi_activation) =
   try
     let spec = cgi#argument_value "spec" in
     let contents =
       match spec with
-        "" -> form cgi
+        "" -> form param cgi
       | spec_str ->
           let (tree_dot, compl_dot, auto_dot, nb_ctxs, nb_ctxs2) = compute spec_str in
           let tree_svg = dot_to_svg tree_dot in
           let compl_svg = dot_to_svg compl_dot in
-          let auto_svg = 
+          let auto_svg =
             if nb_ctxs2 <= 40 then
               dot_to_svg ~svg_w: 1000 auto_dot
             else
@@ -163,7 +168,7 @@ let handle_http_query (cgi : Netcgi.cgi_activation) =
       cgi#output#commit_work ()
 ;;
 
-let on_request notification =
+let on_request param notification =
   (* This function is called when the full HTTP request has been received. For
    * simplicity, we create a [std_activation] to serve the request.
    *
@@ -187,7 +192,7 @@ let on_request notification =
          env#input_channel
          (fun _ _ _ -> `Automatic)
      in
-     handle_http_query cgi;
+     handle_http_query param cgi;
     with
      e ->
        print_endline ("Uncaught exception: " ^ (Printexc.to_string e))
@@ -195,7 +200,7 @@ let on_request notification =
   notification#schedule_finish ()
 ;;
 
-let on_request_header (notification : Nethttpd_engine.http_request_header_notification) =
+let on_request_header param (notification : Nethttpd_engine.http_request_header_notification) =
   (* After receiving the HTTP header: We always decide to accept the HTTP body, if any
    * is following. We do not set up special processing of this body, it is just
    * buffered until complete. Then [on_request] will be called.
@@ -205,20 +210,22 @@ let on_request_header (notification : Nethttpd_engine.http_request_header_notifi
    * calling [notification # environment # input_ch_async # request_notification].)
    *)
   print_endline "Received HTTP header";
+  let on_request = on_request param in
   notification#schedule_accept_body ~on_request ()
 ;;
 
-let serve_connection ues fd =
+let serve_connection param ues fd =
   (* Creates the http engine for the connection [fd]. When a HTTP header is received
    * the function [on_request_header] is called.
    *)
   let config = Nethttpd_engine.default_http_engine_config in
   Unix.set_nonblock fd;
   let _http_engine =
+    let on_request_header = on_request_header param in
     new Nethttpd_engine.http_engine ~on_request_header () config fd ues in
   ()
 ;;
-let rec accept ues srv_sock_acc =
+let rec accept param ues srv_sock_acc =
   (* This function accepts the next connection using the [acc_engine]. After the
    * connection has been accepted, it is served by [serve_connection], and the
    * next connection will be waited for (recursive call of [accept]). Because
@@ -231,8 +238,8 @@ let rec accept ues srv_sock_acc =
     ~is_done:(fun (fd, fd_spec) ->
        if srv_sock_acc#multiple_connections then
          (
-          serve_connection ues fd;
-          accept ues srv_sock_acc
+          serve_connection param ues fd;
+          accept param ues srv_sock_acc
          )
        else
          srv_sock_acc#shut_down ()
@@ -241,7 +248,7 @@ let rec accept ues srv_sock_acc =
     acc_engine
 ;;
 
-let start_server ?(host=Unix.inet_addr_any) ~pending ~port =
+let start_server param ?(host=Unix.inet_addr_any) ~pending ~port =
   (* We set up [lstn_engine] whose only purpose is to create a server socket listening
    * on the specified port. When the socket is set up, [accept] is called.
    *)
@@ -257,7 +264,7 @@ let start_server ?(host=Unix.inet_addr_any) ~pending ~port =
     Uq_engines.listener
       (`Socket(`Sock_inet(Unix.SOCK_STREAM, host, port), opts)) ues
   in
-  Uq_engines.when_state ~is_done:(accept ues) lstn_engine;
+  Uq_engines.when_state ~is_done:(accept param ues) lstn_engine;
   (* Start the main event loop. *)
   Unixqueue.run ues
 ;;
@@ -275,9 +282,11 @@ let inet_addr_of_name host =
           raise (Failure message)
 ;;
 
+
 let main () =
   let port = ref 8915 in
   let host = ref None in
+  let url = ref None in
   let pending = ref 20 in
   let options =
     [
@@ -290,12 +299,15 @@ let main () =
       "-q", Arg.Set_int pending,
       "<n> Set maximum number of pending connections; default is "^ (string_of_int !pending) ;
 
+      "--url", Arg.String (fun s -> url := Some s),
+      "s use <s> as main url (useful for proxying)" ;
     ]
   in
   let options = Arg.align options in
   Arg.parse options (fun _ -> ())
      (Printf.sprintf "Usage: %s [options]\nwhere options are:" Sys.argv.(0));
 
+  let param = { par_url = !url } in
   Netsys_signal.init();
   let host =
     match !host with
@@ -303,7 +315,7 @@ let main () =
     | Some "localhost" -> Some Unix.inet_addr_loopback
     | Some h -> Some (inet_addr_of_name h)
   in
-  start_server ?host ~pending: !pending ~port: !port
+  start_server ?host ~pending: !pending ~port: !port param
 ;;
 
 try main ()
