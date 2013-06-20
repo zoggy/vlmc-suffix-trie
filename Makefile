@@ -99,6 +99,10 @@ $(AUTOMATA_HTTPD): automata.cmx automata_httpd.cmx
 	$(OCAMLFIND) ocamlopt -package $(PACKAGES),$(NETPACKAGES) $(OCAMLFLAGS) \
 	-o $@ -linkpkg $^
 
+automata_test: automata.cmx automata_test.cmx
+	$(OCAMLFIND) ocamlopt -package $(PACKAGES) $(OCAMLFLAGS) \
+	-o $@ -linkpkg $^
+
 LAWS_CMXFILES=\
 	laws/prob1.cmx \
 	laws/comb_fact.cmx \

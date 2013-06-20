@@ -4,6 +4,8 @@ automata_httpd.cmo : automata.cmo
 automata_httpd.cmx : automata.cmx
 automata_main.cmo : automata.cmo
 automata_main.cmx : automata.cmx
+automata_test.cmo : automata.cmo
+automata_test.cmx : automata.cmx
 random_walk.cmo : vlmc_misc.cmi vlmc.cmi
 random_walk.cmx : vlmc_misc.cmx vlmc.cmx
 trie.cmo : vlmc.cmi trie.cmi

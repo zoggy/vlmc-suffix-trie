@@ -13,7 +13,7 @@ type 'a context = 'a array
 type 'a tree =
   Context of 'a
 | Node of 'a tree array
-
+| Fun of (unit -> 'a tree)
 
 let dot_of_context_tree ?(graphatts=[]) ?edgeatts f_sym f t =
   let b = Buffer.create 256 in
@@ -51,6 +51,9 @@ let dot_of_context_tree ?(graphatts=[]) ?edgeatts f_sym f t =
            iter ipath n
         )
         t
+  | Fun _ ->
+      let id = id_of_path (List.rev path) in
+      Printf.bprintf b "%s [ shape=invtrapezium, color=\"red\", label=\"\" ];\n" id
   in
   iter [] t;
   Buffer.add_string b "}\n";
@@ -66,9 +69,15 @@ let node_exists =
     ([], _) -> true
   | (_ :: _, Context _) -> false
   | (h :: q, Node t) -> iter (q, t.(h))
+  | (path, Fun f) ->
+      match f () with
+        Fun _ -> assert false
+      | t -> iter (path, t)
   in
   fun tree path -> iter (path, tree)
 ;;
+
+exception Need_unroll of int list
 
 let find_context =
   let rec iter path exact = function
@@ -76,29 +85,37 @@ let find_context =
   | (_ :: _, Context c) -> if exact then assert false else (c, List.rev path)
   | ([], Node _) -> raise Not_found
   | (h :: q, Node t) ->  iter (h::path) exact (q, t.(h))
+(*  | (h :: q, Fun f) -> raise (Need_unroll ((List.rev path) @ [h]))*)
+  | (_, Fun f) -> raise (Need_unroll (List.rev path))
   in
   fun ?(exact=false) path tree -> iter [] exact (path, tree)
 ;;
 
 let replace_context tree path f =
-  let rec map = function
+  let rec map unrolled = function
     ([], Context c) -> f c
   | (_ :: _, Context _) -> assert false
-  | ([], Node _) -> assert false
+  | ([], Node t) when unrolled -> Node t
+  | ([], Node t) -> assert false
   | (h :: q, Node t) ->
       let a = Array.mapi
-        (fun i x -> if i = h then map(q, t.(h)) else x)
+        (fun i x -> if i = h then map unrolled (q, t.(h)) else x)
         t
       in
       Node a
+  | (l, Fun f) ->
+      match f () with
+        Fun _ -> assert false
+      | t -> map true (l, t)
   in
-  map (path, tree)
+  map false (path, tree)
 ;;
 
 let nb_contexts =
   let rec iter acc = function
     Context _ -> acc + 1
   | Node t -> Array.fold_left iter acc t
+  | Fun _ -> acc
   in
   fun t -> iter 0 t
 ;;
@@ -147,7 +164,9 @@ let dot_of_cct f_sym cct =
                (id_of_path next) (f_sym i)
                color color
       )
-      (ACMap.find path cct.cct_map);
+      (try (ACMap.find path cct.cct_map)
+       with Not_found -> [| |]
+      );
     ["shape", "triangle" ; "color", color; "label", ""]
   in
   dot_of_context_tree f_sym f cct.cct_tree
@@ -162,7 +181,7 @@ let break path tree =
   replace_context tree path f
 ;;
 
-let complemented_context_tree tree =
+let complemented_context_tree ?(max_iter=120) tree =
   let rec iter tree path (map, to_break) = function
     Context c ->
       begin
@@ -176,8 +195,11 @@ let complemented_context_tree tree =
             c
           in
           (ACMap.add path t map, to_break)
-        with Not_found ->
+        with
+          Not_found ->
             (map, ACSet.add path to_break)
+        | Need_unroll unroll_path ->
+            (map, ACSet.add unroll_path to_break)
       end
   | Node t ->
       let (map, to_break, _) =
@@ -190,16 +212,17 @@ let complemented_context_tree tree =
           t
       in
       (map, to_break)
+  | Fun f -> (map, to_break) (* FIXME: implement *)
   in
-  let rec loop tree =
+  let rec loop n tree =
     let (map, to_break) = iter tree [] (ACMap.empty, ACSet.empty) tree in
-    if ACSet.is_empty to_break then
+    if ACSet.is_empty to_break or n >= max_iter then
       { cct_map = map ; cct_tree = tree }
     else
       let tree = ACSet.fold break to_break tree in
-      loop tree
+      loop (n+1) tree
   in
-  loop tree
+  loop 0 tree
 ;;
 
 let dot_of_tree_diff f_sym tree cct =
@@ -442,33 +465,3 @@ let context_tree_of_spec spec =
       in
       build [] (List.map (fun (path, ctx) -> (path, path, ctx)) ctxs)
 ;;
-(*
-
-let test_tree = context_tree_of_spec test_spec;;
-(*
-  Node [|
-   Node [|
-    Node [|
-     Context [| 0.2 ; 0.8 |] ;
-     Node [|
-      Context [| 0.2 ; 0.8 |] ;
-      Context [| 0.2 ; 0.8 |] ;
-     |] ;
-    |] ;
-    Context [| 0.2 ; 0.8 |] ;
-   |] ;
-   Context [| 0.2 ; 0.8 |] ;
-  |]
-;;
-*)
-
-let dot = dot_of_context_tree string_of_int (fun _ _ _ -> ["shape","triangle"; "label", ""]) test_tree;;
-print_endline dot;;
-let t2 = automata_context_tree test_tree;;
-file_of_string ~file: "/tmp/result.dot" (dot_of_automata_context_tree string_of_int t2);;
-let cct = complemented_context_tree t2;;
-file_of_string ~file: "/tmp/cct.dot" (dot_of_cct string_of_int cct);;
-
-file_of_string ~file: "/tmp/diff.dot" (dot_of_tree_diff string_of_int test_tree cct);;
-*)
-
