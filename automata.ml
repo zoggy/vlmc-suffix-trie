@@ -468,13 +468,15 @@ let partition_paths symbols paths =
     failwith msg
 ;;
 
-let context_tree_of_spec spec =
+let context_tree_of_spec ?(autofill=false) spec =
   match spec.spec_ctxs with
     [] -> failwith "No context"
   | ctxs ->
       let rec build_node cur_revpath i paths =
         match paths with
-          [] ->
+          [] when autofill ->
+            Context (Array.create (Array.length spec.spec_symbols) 0.0)
+        | [] ->
             failwith ("Missing context: "^(string_of_path (List.rev (i::cur_revpath))))
         | [ ([], _, ctx) ] ->
             Context ctx

@@ -4,9 +4,12 @@ open Automata;;
 let main () =
   let args = ref [] in
   let max_iter = ref None in
+  let autofill = ref false in
   let options =
     [ "--max-iter", Arg.Int (fun n -> max_iter := Some n),
       "n set max iteration number when complementing, default is 120" ;
+
+      "--autofill", Arg.Set autofill, " automatically fill missing contexts" ;
     ]
   in
   Arg.parse options
@@ -17,7 +20,7 @@ let main () =
   | file :: _ ->
       let spec_str = Automata.string_of_file file in
       let spec = Automata.read_spec spec_str in
-      let tree = Automata.context_tree_of_spec spec in
+      let tree = Automata.context_tree_of_spec ~autofill: !autofill spec in
       let basename = Filename.chop_extension file in
 
       let dot = Automata.dot_of_context_tree
