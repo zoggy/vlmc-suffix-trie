@@ -65,9 +65,11 @@ let svg_height = 700;;
 let svg_dpi = 96. ;;
 
 let dot_to_svg ?(program="dot") ?(options="") ?size dot =
-  let temp_file = Filename.temp_file "automata" "svg" in
-  let com = Printf.sprintf "echo %s |%s %s -Tsvg | tail --lines=+%d > %s"
-    (Filename.quote dot) (Filename.quote program) options
+  let temp_file = Filename.temp_file "automata" ".svg" in
+  let dot_file = (Filename.chop_extension temp_file)^".dot" in
+  Automata.file_of_string dot ~file: dot_file;
+  let com = Printf.sprintf "%s %s -Tsvg %s | tail --lines=+%d > %s"
+    (Filename.quote program) options (Filename.quote dot_file)
     (match size with None -> 7 | Some _ -> 9)
     (Filename.quote temp_file)
   in
@@ -77,6 +79,7 @@ let dot_to_svg ?(program="dot") ?(options="") ?size dot =
       (* remove bad xlink:title="&lt;TABLE&gt;" in svg code *)
       let svg = replace_in_string ~pat: "xlink:title=\"&lt;TABLE&gt;\"" ~subs: "" ~s: svg in
       Sys.remove temp_file;
+      Sys.remove dot_file;
       let svg =
         match size with
           None -> svg

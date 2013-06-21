@@ -327,9 +327,13 @@ let string_of_file name =
   Buffer.contents buf
 (*/c==v=[File.string_of_file]=1.0====*)
 
+type ctx_spec =
+  Ctxfun of (unit -> float array tree)
+| Ctx of float array
+
 type tree_spec =
   { spec_symbols : char array ;
-    spec_ctxs : (int list * float array) list ;
+    spec_ctxs : (int list * ctx_spec) list ;
     spec_sym : int -> string ;
   }
 
@@ -344,23 +348,61 @@ let get_index_in_array t v =
   iter 0
 ;;
 
+let mk_repeat_fun probs word =
+  let word = Array.of_list word in
+  let len = Array.length word in
+  if len <= 0 then failwith "Cannot repeat empty word";
+  let size = Array.length probs in
+  let rec f n () =
+    let sym = word.(n mod len) in
+    Node
+      (Array.init size
+       (fun i ->
+          if i = sym then
+            Fun (f (n+1))
+          else
+            Context probs
+       )
+      )
+  in
+  f 0
+;;
+
 let read_context symbols line =
-  let ctx_of_string s =
+  let ctx_of_string probs s =
     let s = strip_string s in
     let len = String.length s in
-    let rec iter acc i =
+    let rec iter_fun path acc i =
       if i >= len then
-        List.rev acc
+        failwith "missing ending ')'"
       else
-        try
-          let n = get_index_in_array symbols s.[i] in
-          iter (n :: acc) (i+1)
-        with Not_found -> failwith (Printf.sprintf "Undeclared symbol '%c'" s.[i])
+        match s.[i] with
+          ')' ->
+            let f = mk_repeat_fun probs (List.rev acc) in
+            (path, Ctxfun f)
+        | c ->
+            try
+              let n = get_index_in_array symbols c in
+              iter_fun path (n :: acc) (i+1)
+            with Not_found -> failwith (Printf.sprintf "Undeclared symbol '%c'" c)
     in
-    iter [] 0
+    let rec iter_sym acc i =
+      if i >= len then
+        (List.rev acc, Ctx probs)
+      else
+        match s.[i] with
+          '(' ->
+            iter_fun (List.rev acc) [] (i+1)
+        | c ->
+            try
+              let n = get_index_in_array symbols c in
+              iter_sym (n :: acc) (i+1)
+            with Not_found -> failwith (Printf.sprintf "Undeclared symbol '%c'" c)
+    in
+    iter_sym [] 0
   in
   match split_string (strip_string line) [':'] with
-    [context] -> (ctx_of_string context, Array.map (fun _ -> 0.0) symbols)
+    [context] -> (ctx_of_string (Array.map (fun _ -> 0.0) symbols) context)
   | context :: s_probs :: [] ->
       let probs = split_string s_probs [','] in
       if List.length probs <> Array.length symbols then
@@ -371,9 +413,10 @@ let read_context symbols line =
            with _ -> failwith ("Invalid probability: "^s)
         ) probs
       in
-      (ctx_of_string context, Array.of_list probs)
+      ctx_of_string (Array.of_list probs) context
   | _ -> failwith ("Invalid syntax: "^line)
 ;;
+
 let read_spec str =
   let lines = split_string str ['\n'; '\r'] in
   match lines with
@@ -451,9 +494,10 @@ let partition_paths symbols paths =
     )
     t;
 *)
+  let eq (l11,l12,_) (l21,l22,_) = l11 = l21 && l12 = l22 in
   let (diff, _) = Array.fold_left
     (fun (acc,n) pl ->
-       (list_diff acc
+       (list_diff ~pred: eq acc
         (List.map (fun (p,orig_path,ctx) -> (n :: p, orig_path, ctx)) pl), n+1)
     )
     (paths,0) t
@@ -478,8 +522,10 @@ let context_tree_of_spec ?(autofill=false) spec =
             Context (Array.create (Array.length spec.spec_symbols) 0.0)
         | [] ->
             failwith ("Missing context: "^(string_of_path (List.rev (i::cur_revpath))))
-        | [ ([], _, ctx) ] ->
+        | [ ([], _, Ctx ctx) ] ->
             Context ctx
+        | [ ([], _, Ctxfun f) ] ->
+            Fun f
         | _ ->
             build (i :: cur_revpath) paths
       and build cur_revpath paths =
