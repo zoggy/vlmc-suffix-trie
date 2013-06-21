@@ -53,7 +53,7 @@ let dot_of_context_tree ?(graphatts=[]) ?edgeatts f_sym f t =
         t
   | Fun _ ->
       let id = id_of_path (List.rev path) in
-      Printf.bprintf b "%s [ shape=invtrapezium, color=\"red\", label=\"\" ];\n" id
+      Printf.bprintf b "%s [ shape=triangle, label=\"&#8734;\" ];\n" id
   in
   iter [] t;
   Buffer.add_string b "}\n";
@@ -85,7 +85,6 @@ let find_context =
   | (_ :: _, Context c) -> if exact then assert false else (c, List.rev path)
   | ([], Node _) -> raise Not_found
   | (h :: q, Node t) ->  iter (h::path) exact (q, t.(h))
-(*  | (h :: q, Fun f) -> raise (Need_unroll ((List.rev path) @ [h]))*)
   | (_, Fun f) -> raise (Need_unroll (List.rev path))
   in
   fun ?(exact=false) path tree -> iter [] exact (path, tree)
@@ -103,12 +102,27 @@ let replace_context tree path f =
         t
       in
       Node a
-  | (l, Fun f) ->
-      match f () with
-        Fun _ -> assert false
-      | t -> map true (l, t)
+  | (_, Fun _) -> assert false
   in
   map false (path, tree)
+;;
+
+let unroll path tree =
+  let rec unr = function
+    (_, Context _) -> assert false
+  | ([], Node _) -> assert false
+  | (h :: q, Node t) ->
+      let subt = unr (q, t.(h)) in
+      let t2 = Array.copy t in
+      t2.(h) <- subt;
+      Node t2
+  | ([], Fun f) -> f ()
+  | (path, Fun f) ->
+      match f () with
+        Fun _ -> assert false
+      | t -> unr (path, t)
+  in
+  unr (path, tree)
 ;;
 
 let nb_contexts =
@@ -182,7 +196,7 @@ let break path tree =
 ;;
 
 let complemented_context_tree ?(max_iter=120) tree =
-  let rec iter tree path (map, to_break) = function
+  let rec iter tree path (map, to_break, to_unroll) = function
     Context c ->
       begin
         let path = List.rev path in
@@ -194,31 +208,38 @@ let complemented_context_tree ?(max_iter=120) tree =
             )
             c
           in
-          (ACMap.add path t map, to_break)
+          (ACMap.add path t map, to_break, to_unroll)
         with
           Not_found ->
-            (map, ACSet.add path to_break)
+            (map, ACSet.add path to_break, to_unroll)
         | Need_unroll unroll_path ->
-            (map, ACSet.add unroll_path to_break)
+            (map, to_break, ACSet.add unroll_path to_unroll)
       end
   | Node t ->
-      let (map, to_break, _) =
+      let (map, to_break, to_unroll, _) =
         Array.fold_left
-          (fun (map, to_break, i) t ->
-             let (map, to_break) = iter tree (i::path) (map, to_break) t in
-             (map, to_break, i+1)
+          (fun (map, to_break, to_unroll, i) t ->
+             let (map, to_break, to_unroll) =
+               iter tree (i::path) (map, to_break, to_unroll) t
+             in
+             (map, to_break, to_unroll, i+1)
           )
-          (map, to_break, 0)
+          (map, to_break, to_unroll, 0)
           t
       in
-      (map, to_break)
-  | Fun f -> (map, to_break) (* FIXME: implement *)
+      (map, to_break, to_unroll)
+  | Fun f -> (map, to_break, to_unroll)
   in
   let rec loop n tree =
-    let (map, to_break) = iter tree [] (ACMap.empty, ACSet.empty) tree in
-    if ACSet.is_empty to_break or n >= max_iter then
+    let (map, to_break, to_unroll) =
+      iter tree [] (ACMap.empty, ACSet.empty, ACSet.empty) tree
+    in
+    if (ACSet.is_empty to_break && ACSet.is_empty to_unroll)
+      or n >= max_iter
+    then
       { cct_map = map ; cct_tree = tree }
     else
+      let tree = ACSet.fold unroll to_unroll tree in
       let tree = ACSet.fold break to_break tree in
       loop (n+1) tree
   in
