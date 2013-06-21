@@ -42,15 +42,15 @@ let replace_in_string ~pat ~subs ~s =
 
 exception Http_error of string * Nethttp.http_status
 
-let compute spec_str =
+let compute ~autofill ?max_iter spec_str =
   let spec = Automata.read_spec spec_str in
-  let tree = Automata.context_tree_of_spec spec in
+  let tree = Automata.context_tree_of_spec ~autofill spec in
 
   let tree_dot = Automata.dot_of_context_tree
     spec.spec_sym (fun _ _ _ -> ["shape","triangle"; "label",""]) tree
   in
 
-  let cct = Automata.complemented_context_tree tree in
+  let cct = Automata.complemented_context_tree ?max_iter tree in
   let auto_dot = Automata.dot_of_cct spec.spec_sym cct in
 
   let compl_dot = Automata.dot_of_tree_diff spec.spec_sym tree cct in
@@ -105,6 +105,13 @@ let form param (cgi : Netcgi.cgi_activation) =
     <p>The first line is the <strong>list of symbols</strong>, for example <code>01</code></p>
     <p>On each following line, just type a <strong>context path</strong>, for example <code>0110</code></p>
     <form action=%S>
+    <div>
+      <label for=\"max_iter\">Maximum number of iterations : </label>
+      <input name=\"max_iter\" type=\"text\"/>
+    </div>
+    <div>
+      <input name=\"autofill\" type=\"checkbox\" checked=\"checked\">Autofill missing contexts</input>
+    </div>
     <textarea cols=\"80\" rows=\"40\" name=\"spec\">01
 1
 01
@@ -125,11 +132,18 @@ let mk_page contents =
 let handle_http_query param (cgi : Netcgi.cgi_activation) =
   try
     let spec = cgi#argument_value "spec" in
+    let max_iter =
+      try Some (int_of_string (cgi#argument_value "max_iter"))
+      with _ -> None
+    in
+    let autofill = cgi#argument_value "autofill" <> "" in
     let contents =
       match spec with
         "" -> form param cgi
       | spec_str ->
-          let (tree_dot, compl_dot, auto_dot, nb_ctxs, nb_ctxs2) = compute spec_str in
+          let (tree_dot, compl_dot, auto_dot, nb_ctxs, nb_ctxs2) =
+            compute ~autofill ?max_iter spec_str
+          in
           let tree_svg = dot_to_svg tree_dot in
           let compl_svg = dot_to_svg compl_dot in
           let auto_svg =
