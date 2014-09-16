@@ -137,84 +137,6 @@ is uniform and exponential.
 ]]>
 </latex-defs>
 
-<figure id="" title="" href=""><block
-  counter-name="figure" class="figure"
-  label="Figure" href="&lt;href/&gt;"
-  id="&lt;id/&gt;" title="&lt;title/&gt;"
->
-<div class="&lt;class/&gt;" id="&lt;id/&gt;">
-  <div class="title"><title/></div>
-  <div class="contents"><contents/></div>
-</div></block></figure>
-
-<theorem id="" title="" href=""><block
-  counter-name="theorem" class="theorem"
-  label="Theorem" href="&lt;href/&gt;"
-  id="&lt;id/&gt;" title="&lt;title/&gt;"
->
-<div class="&lt;class/&gt;" id="&lt;id/&gt;">
-  <div class="title"><title/></div>
-  <div class="contents"><contents/></div>
-</div></block></theorem>
-
-<lemma id="" title="" href=""><block
-  counter-name="lemma" class="lemma"
-  label="Lemma" href="&lt;href/&gt;"
-  id="&lt;id/&gt;" title="&lt;title/&gt;"
->
-<div class="&lt;class/&gt;" id="&lt;id/&gt;">
-  <div class="title"><label/> <counter counter-name="lemma"/></div>
-  <div class="contents"><contents/></div>
-</div></block></lemma>
-
-<prop id="" title="" href=""><block
-  with-contents="true"
-  counter-name="prop" class="prop"
-  label="Proposition" href="&lt;href/&gt;"
-  id="&lt;id/&gt;" title="&lt;title/&gt;"
->
-<long-title-format><label/> <counter counter-name="prop"/></long-title-format>
-<short-title-format><label/> <counter counter-name="prop"/></short-title-format>
-<contents><div class="&lt;class/&gt;" id="&lt;id/&gt;">
-  <div class="title"><title/></div>
-  <div class="contents"><contents/></div>
-</div></contents></block></prop>
-
-<remark id="" title="" href=""><block
-  counter-name="remark" class="remark"
-  label="Remark" href="&lt;href/&gt;"
-  id="&lt;id/&gt;" title="&lt;title/&gt;"
->
-<div class="&lt;class/&gt;" id="&lt;id/&gt;">
-  <div class="title"><title/></div>
-  <div class="contents"><contents/></div>
-</div></block></remark>
-
-<proof id="" title="" href=""><block
-  counter-name="" class="proof"
-  label="Proof" href="&lt;href/&gt;"
-  id="&lt;id/&gt;" title="&lt;title/&gt;"
-><div class="&lt;class/&gt;">
-<button href="#&lt;id/&gt;" data-toggle="collapse" class="btn btn-info proof">Proof.</button>
-<div class="collapse" id="&lt;id/&gt;">
-<!--  <div class="title">Proof.</div>-->
-  <div class="contents"><contents/></div>
-</div></div></block></proof>
-
-<equation id="" title="" href=""><block
-  with-contents="true"
-  counter-name="equation" class="equation"
-  label="" href="&lt;href/&gt;"
-  id="&lt;id/&gt;" title="&lt;title/&gt;"
->
-  <long-title-format>(<counter counter-name="equation"/>)</long-title-format>
-  <short-title-format>(<counter counter-name="equation"/>)</short-title-format>
-<contents><span class="&lt;class/&gt;" id="&lt;id/&gt;">
-  <span class="contents">$<contents/>$</span><span class="title"><title/></span>
-</span></contents></block></equation>
-
-<eqnarray foo=""><table class="eqnarray"><contents/></table></eqnarray>
-
 <cite-format>[<bib-field name="rank"/>]</cite-format>
 
 <author name="" url="" affil=""
@@ -223,7 +145,7 @@ is uniform and exponential.
 
 <contents>
 <sep_/>
-<span class="hidden">\(<latex-defs/>\)</span>
+<span class="pathden">\(<latex-defs/>\)</span>
 <div class="author-list">
 <list sep=", " defer_="1"><authors/></list>
 </div>
@@ -235,9 +157,9 @@ is uniform and exponential.
 <section id="sec:Intro" title="Introduction">
 <p>
 <!--<em>Trie</em> (abbreviation of re<i>trie</i>val) is a natural data structure, efficient for searching words in a given set and used in many algorithms as data compression, spell checking or IP addresses lookup. A <em>trie</em> is a digital tree in which
-words are inserted in external nodes. The trie process grows up by successively inserting words according to their prefixes. A precise definition will be given in Section <elt href="#ssec:height"/>.
+words are inserted in external nodes. The trie process grows up by successively inserting words according to their prefixes. A precise definition will be given in Section <doc href="#ssec:height"/>.
 -->
-<em>Trie</em> (abbreviation of re<em>trie</em>val) is a natural data structure, efficient for searching words in a given set and used in many algorithms as data compression, spell checking or IP addresses lookup. A <em>trie</em> is a digital tree in which words are inserted in external nodes. The trie process grows up by successively inserting words according to their prefixes. A precise definition will be given in Section <elt href="#ssec:height"/>.
+<em>Trie</em> (abbreviation of re<em>trie</em>val) is a natural data structure, efficient for searching words in a given set and used in many algorithms as data compression, spell checking or IP addresses lookup. A <em>trie</em> is a digital tree in which words are inserted in external nodes. The trie process grows up by successively inserting words according to their prefixes. A precise definition will be given in Section <doc href="#ssec:height"/>.
 </p>
 <p>
 As soon as a set of words is given, the way they are inserted in the trie is deterministic. Nevertheless, a trie becomes random when the words are randomly drawn: each word is produced by a probabilistic source and $n$ words are chosen (usually independently) to be inserted in a trie. A <em>suffix trie</em> is a trie built on the suffixes of <em>one</em> infinite word. The randomness then comes from the source producing such an infinite word and the successive words inserted in the tree are far from being independent, they are strongly correlated.
@@ -246,7 +168,7 @@ As soon as a set of words is given, the way they are inserted in the trie is det
 Suffix tries, also called suffix trees in the literature, have been developped with tools from analysis of algorithms and information theory on one side and from probability theory and ergodic theory on the other side. Construction algorithms of such trees go back to Weiner <cite href="Weiner"/> in 1973 and many applications in computer science and biology can be found in Gusfield's book <cite href="Gusfield97"/>. As a major application of suffix tries one can cite an efficient implementation of the famous Lempel-Ziv lossless compression algorithm LZ77. The first results on the height of random suffix trees are due to Szpankowski <cite href="Szpan91"/> and Devroye <em>et al.</em> <cite href="Devroye2"/>, and the most recent results are in Szpankowski <cite href="Szpan93"/> and Fayolle <cite href="Fayolle"/>.
 </p>
 <p>
-The growing of suffix tries (called prefix trees in Shields' book <cite href="Shieldsbook"/>) is closely related to second occurrences of patterns; this will be precisely explained later in Section <elt href="#ssec:height"/>. Consequently, many results on this subject can be found in papers dealing with occurrences of words, renewal theory or waiting times like Shields <cite href="Shields"/> or Wyner-Ziv <cite href="WynZiv"/>.
+The growing of suffix tries (called prefix trees in Shields' book <cite href="Shieldsbook"/>) is closely related to second occurrences of patterns; this will be precisely explained later in Section <doc href="#ssec:height"/>. Consequently, many results on this subject can be found in papers dealing with occurrences of words, renewal theory or waiting times like Shields <cite href="Shields"/> or Wyner-Ziv <cite href="WynZiv"/>.
 </p>
 <p>
 In the present paper we are interested in the height $H_n$ and the saturation
@@ -276,30 +198,30 @@ For suffix tries, Szpankowski <cite href="Szpan93"/> obtains the same result, wi
 Our aim is to exhibit two cases when the behaviour of the height or the saturation level
 is no longer logarithmic. The first example is the "<em>logarithmic comb</em>", for
  which we show that the mixing is slow in some sense, namely non uniformly polynomial
- (see Section <elt href="#ssec:mixinglogarithmiccomb"/> for a precise statement) and the
+ (see Section <doc href="#ssec:mixinglogarithmiccomb"/> for a precise statement) and the
  measure of some increasing sequence of words decays polynomially. We prove in
- <theorem href="hauteur"/> that the height of this trie is larger than a power
+ <math:theorem href="hauteur"/> that the height of this trie is larger than a power
  of $n$ (when $n$ is the number of inserted suffixes in the tree).
 </p>
 <p>The second example is the "<em>factorial comb</em>", which has a uniformly
 exponential mixing, thus fulfilling the mixing hypothesis of Szpankowski
 <cite href="Szpan93"/>, but the measure of some increasing sequence of words
 decays faster than any exponential. In this case we prove in
-<theorem href="saturation"/> that the saturation level is negligible with respect
+<math:theorem href="saturation"/> that the saturation level is negligible with respect
 to $\log n$. We prove more precisely that, almost surely,
 $\ell _n\in o\left(\frac{\log n}{(\log\log n)^\delta}\right)$, for any $\delta >1$.
 </p>
 
 <p>
-The paper is organised as follows. In Section <elt href="#sec:source"/>, we define a
-VLMC source associated with an infinite comb. In Section <elt href="#sec:mixing"/> we give
+The paper is organised as follows. In Section <doc href="#sec:source"/>, we define a
+VLMC source associated with an infinite comb. In Section <doc href="#sec:mixing"/> we give
 results on the mixing properties of these sources by explicitely computing the suitable
-generating functions in terms of the source data. In Section <elt href="#sec:suffixtrie"/>,
+generating functions in terms of the source data. In Section <doc href="#sec:suffixtrie"/>,
 the associated suffix tries are built, and the two uncommon behaviours are stated and shown.
 The methods are based on two key tools concerning successive occurence times of patterns:
 a duality property and the computation of generating functions. The relation between the mixing
 of the source and the asymptotic behaviour of the trie is highlighted by the proof
-of <prop href="Phi2"/>.
+of <math:prop href="Phi2"/>.
 </p>
 </section>
 
@@ -309,7 +231,7 @@ In this section, a VLMC probabilistic source associated with an infinite comb is
 </p>
 <p>
 The following presentation comes from <cite href="ccpp"/>.
-Consider the binary tree (represented in Figure <elt href="#peigne"/>) whose finite leaves are the words $1, 01, \dots, 0^k1, \dots $ and with an infinite leaf $0^{\infty}$ as well.
+Consider the binary tree (represented in <math:figure href="peigne"/>) whose finite leaves are the words $1, 01, \dots, 0^k1, \dots $ and with an infinite leaf $0^{\infty}$ as well.
 The set of leaves is
 \[
 \mathcal{C}:=\{0^n1,\, n\ge 0\}\cup \{0^\infty\}.
@@ -319,7 +241,7 @@ Each leaf is labelled with a Bernoulli distribution on $\{0,1\}$, respectively  
 This probabilized tree is called <em>the infinite comb</em>.
 </p>
 <p>
-<figure id="peigne" title="An infinite comb"><img width="500" src="uncommon-suffix-tries/infiniteComb.svg"/></figure>
+<math:figure id="peigne" title="An infinite comb"><img width="500" src="uncommon-suffix-tries/infiniteComb.svg"/></math:figure>
 </p>
 <p>
 Let $\mathcal{L}= \{0,1\}^{-\mathbb{N}}$ be the set<note>The notation $-\mathbb{N}$ stands for the set $\{n \in \mathbb{Z} \mbox{ such that } -n \in \mathbb{N}\}$.</note> of left-infinite words on the alphabet $\{0,1\}$.
@@ -345,17 +267,17 @@ It is proved in <cite href="ccpp"/> that in the irreducible case <em>i.e.</em>
 when $q_{0^{\infty}}(0)\not= 1$, there exists a unique stationary probability
 measure $\pi$ on $\rond L$ for $(V_n)_n$ if and only if the series $\sum c_n$ converges.
 From now on, we assume that this condition is fulfilled and we call
-<equation id="def-S">
+<math:equation id="def-S">
 S(x):=\sum_{n\geqslant 0} c_n x^n
-</equation>
+</math:equation>
 its generating function so that $S(1) = \sum_{n\geqslant 0} c_n$. For any finite word $w$, we denote $\pi(w):=\pi(\rond Lw)$. Computations performed in <cite href="ccpp"/> show that for any $n\geqslant 0$,
-<equation id="probas">
+<math:equation id="probas">
  \pi(10^n)=\frac{c_n}{S(1)} \quad \mbox{and}\quad \pi(0^n)=\frac{\sum_{k \geqslant n}c_k}{S(1)}.
-</equation>
+</math:equation>
 Notice that, by disjointness of events $\pi(0^n)=\pi(0^{n+1})+\pi(10^n)$ and by stationarity, $\pi(0^n)=\pi(0^{n+1})+ \pi(0^n1)$ for all $n\geqslant 1$ so that
-<equation id="sym">
+<math:equation id="sym">
 \pi(10^n) =  \pi(0^n1) .
-</equation>
+</math:equation>
 If $U_n$ denotes the final letter of $V_n$, the random sequence $W=U_0U_1U_2\ldots$ is a right-infinite random word. We define in this way a probabilistic source in the sense of information theory <em>i.e.</em> a mechanism that produces random words.
 This VLMC probabilistic source is characterized by the family of nonnegative numbers
 $$
@@ -372,7 +294,7 @@ The corresponding conditional probabilities on the leaves of the tree are
   \[q_1(0)=\frac{1}{24}\quad \mbox{and for }n\geqslant 1, \quad q_{0^n1}(0)=1-\frac{4}{n+4}.\]
 The expression of $c_n$ was chosen to make the computations as simple
 as possible and also because the square-integrability of the waiting time of
-some pattern will be needed (see end of Section <elt href="#ssec:generating"/>),
+some pattern will be needed (see end of Section <doc href="#ssec:generating"/>),
 guaranteed by
 \[\sum_{n\geqslant 0} n^2c_n\lt+\infty.\]
 </p>
@@ -396,7 +318,7 @@ $$
 <p>
 In this section, we first precise what we mean by mixing properties of a random
 sequence. We refer to Doukhan  <cite href="Doukhan"/>, especially for the notion
-of $\psi$-mixing defined in that book. We state in <prop href="melange"/>
+of $\psi$-mixing defined in that book. We state in <math:prop href="melange"/>
 a general result that provides the mixing coefficient for an infinite comb defined by
 $(c_n)_{n\geqslant 0}$ or equivalently by its generating function $S$. This result
 is then applied to our two examples. The mixing of the logarithmic comb is polynomial
@@ -417,16 +339,16 @@ $0\leqslant m\leqslant +\infty$, denote by ${\cal F}_0^m$ the $\sigma$-algebra
 generated by $\{U_k , 0\leqslant k \leqslant m\}$ and introduce for
  $A\in{\cal F}_0^m$ and $B\in{\cal F}_0^{\infty}$ the mixing coefficient
 </p>
-<eqnarray>
+<math:eqnarray>
 <tr><td class="right">$\psi(n,A,B)$</td>
     <td class="center">$:=$</td>
     <td class="left">$\frac{\pi(A\cap T^{-(m+1)-n}B)-\pi(A)\pi(B)}{\pi(A)\pi(B)}$</td>
 </tr>
 <tr><td/>
     <td class="center">$=$</td>
-    <td class="left"><equation id="mixingCoeff">\frac{\sum_{|w|=n}\pi(AwB)-\pi(A)\pi(B)}{\pi(A)\pi(B)}</equation></td>
+    <td class="left"><math:equation id="mixingCoeff">\frac{\sum_{|w|=n}\pi(AwB)-\pi(A)\pi(B)}{\pi(A)\pi(B)}</math:equation></td>
 </tr>
-</eqnarray>
+</math:eqnarray>
 <p>
 where $T$ is the shift map and where the sum runs over the finite words $w$ with length $|w|=n$.
 </p>
@@ -436,7 +358,7 @@ A sequence $(U_n)_{n\geqslant 0}$ is called <em>$\psi$-mixing</em> whenever
 In this definition, the convergence to zero is uniform over all words $A$ and $B$. This is not going
 to be the case in our first example.
 As in Isola <cite href="Isola"/>, we widely use the renewal properties of infinite combs (see
-<lemma href="lemme_un"/>) but more detailed results are needed, in particular we investigate
+<math:lemma href="lemme_un"/>) but more detailed results are needed, in particular we investigate
 the lack of uniformity for the logarithmic comb.
 </p>
 </subsection>
@@ -444,7 +366,7 @@ the lack of uniformity for the logarithmic comb.
 <subsection id="notations" title="Notations and Generating functions">
 <p>
 $\bullet$ For a comb, recall that $S$ is the generating function of the nonincreasing
-sequence $(c_n)_{n\geqslant 0}$ defined by <equation href="def-S"/>.
+sequence $(c_n)_{n\geqslant 0}$ defined by <math:equation href="def-S"/>.
 </p>
 <p>
 $\bullet$ Set $\rho_0=0$ and for $n\geqslant 1$,
@@ -454,35 +376,35 @@ $$
 P(x) := \sum_{n\geqslant 1} \rho_n x^n.
 $$
 $\bullet$ Define the sequence $(u_n)_{n\geqslant 0}$ by $u_0=1$ and for $n\geqslant 1$,
-<equation id="un">
+<math:equation id="un">
 u_n:=\frac{\pi(U_0=1,U_{n}=1)}{\pi(1)}=\frac{1}{\pi(1)}\sum_{|w|=n-1}\pi(1w1),
-</equation>
+</math:equation>
 and let
 \[U(x):=\sum_{n\geqslant 0}u_nx^n\]
 denote its generating function. Hereunder is stated a key lemma that will be widely used
- in <prop href="melange"/>. In some sense, this kind of relation (sometimes called
+ in <math:prop href="melange"/>. In some sense, this kind of relation (sometimes called
   Renewal Equation) reflects the renewal properties of the infinite comb.
 </p>
-<lemma id="lemme_un">
+<math:lemma id="lemme_un">
 <p>
 The sequences $(u_n)_{n\geqslant 0}$ and $(\rho_n)_{n\geqslant 0}$ are connected by the relations:
 \[\forall n\geqslant 1,~~u_n=\rho_n+u_1\rho_{n-1}+\ldots+u_{n-1}\rho_1\]
 and (consequently)
 \[U(x) = \sum_{n=0}^{\infty}u_nx^n=\frac{1}{1-P(x)}=\frac{1}{(1-x)S(x)}.\]
 </p>
-</lemma>
-<proof id="proof1">
+</math:lemma>
+<math:proof id="proof1" of="#lemme_un">
 <p>
 For a finite word $w=\alpha_1\ldots\alpha_m$ such that $w \neq 0^m$, let $l(w)$ denote
 the position of the last $1$ in $w$, that is $l(w):=\max\{1\le i\le m,~\alpha_i=1\}$.
-Then, the sum in the expression <equation href="un"/> of $u_n$ can be decomposed as follows:
+Then, the sum in the expression <math:equation href="un"/> of $u_n$ can be decomposed as follows:
 \[\sum_{|w|=n-1}\pi(1w1)=\pi(10^{n-1}1)+\sum_{i=1}^{n-1}\sum_{{|w|=n-1}\atop{l(w)=i}}\pi(1w1).\]
 Now, by disjoint union $\pi(10^{n-1})=\pi(10^{n-1}1)+\pi(10^{n})$, so that
 \[\pi(10^{n-1}1)=\pi(1)(c_{n-1}-c_{n})=\pi(1)\rho_n.\]
 In the same way, for $w=\alpha_1\ldots\alpha_{n-1}$, if $l(w)=i$ then
  $\pi(1w1)=\pi(1\alpha_1\ldots\alpha_{i-1}1)\rho_{n-i}$, so that
 </p>
-<eqnarray>
+<math:eqnarray>
 <tr><td class="right">$u_n$</td>
      <td class="center">$ = $</td>
      <td class="left">$\rho_n+\sum_{i=1}^{n-1}\rho_{n-i}\frac{1}{\pi(1)}\sum_{|w|=i-1}\pi(1w1)$</td>
@@ -490,12 +412,12 @@ In the same way, for $w=\alpha_1\ldots\alpha_{n-1}$, if $l(w)=i$ then
 <tr><td/><td class="center">$ = $</td>
      <td class="left">$\rho_n+\sum_{i=1}^{n-1}\rho_{n-i}u_{i}$,</td>
 </tr>
-</eqnarray>
+</math:eqnarray>
 <p>
 which leads to $U(x)=(1-P(x))^{-1}$ by summation.
-<qed/>
+<math:qed/>
 </p>
-</proof>
+</math:proof>
 </subsection>
 
 <subsection id="mixingcoefficients" title="Mixing coefficients">
@@ -509,11 +431,11 @@ $$
 r_n : = \sum_{k\geqslant n} c_k, \quad R_n(x):=\sum_{k\geqslant n}c_k x^k
 $$
 and for $a\geqslant 0$, define the "shifted" generating function
-<equation id="defPa">
+<math:equation id="defPa">
 P_a(x):=\frac 1{c_a}\sum _{n\geqslant 1}\rho _{a+n}x^n=x+\frac{x-1}{c_ax^a}R_{a+1}(x).
-</equation>
+</math:equation>
 </p>
-<prop id="melange">
+<math:prop id="melange">
 <p>
 For any finite word $A$ and any word $B$, the identity
 \[\psi(n,A,B)=[x^{n+1}] M^{A,B}(x)\]
@@ -550,39 +472,39 @@ $$
   \]
 </li>
 </ol>
-</prop>
-<remark id="remark1">
+</math:prop>
+<math:remark id="remark1">
 <p>
 It is worth noticing that the asymptotics of $\psi(n,A,B)$ may not be uniform in all
 words $A$ and $B$. We  call this kind of system non-uniformly $\psi$-mixing. It may happen
 that $\psi(n,A,B)$ goes to zero for any fixed $A$ and $B$, but (for example, in case (iii)) the
 larger $a$ or $b$, the slower the convergence, preventing it from being uniform.
 </p>
-</remark>
-<proof id="proof2">
+</math:remark>
+<math:proof id="proof2">
 <p>
 The following identity has been established in <cite href="ccpp"/> (see formula (17) in
 that paper) and will be used many times in the sequel. For any two finite words $w$ and $w'$,
-<equation id="renouvellement">
+<math:equation id="renouvellement">
 \pi(w1w')\pi(1)=\pi(w1)\pi(1w').
-</equation>
+</math:equation>
 </p>
 <ol>
 <li>
- If $A=A'1$ and $B=1B'$, then <equation href="renouvellement"/> yields
+ If $A=A'1$ and $B=1B'$, then <math:equation href="renouvellement"/> yields
 \[\pi(AwB)=\pi(A'1w1B')=\frac{\pi(A'1)}{\pi(1)}\pi(1w1B')=S(1)\pi(A)\pi(B)\frac{\pi(1w1)}{\pi(1)}.\]
 So
 $$
 \psi(n,A,B) = S(1) u_{n+1} - 1
 $$
-and by Lemma <elt href="#lemme_un"/>, the result follows.
+and by Lemma <doc href="#lemme_un"/>, the result follows.
 </li>
 <li>
 <p>
 Let $A=A'10^a$ and $B=0^b1B'$ with $a,b\geqslant 0$ and $a+b\neq 0$.
 To begin with,
 \[\pi(AwB)=\frac{1}{\pi(1)}\pi(A'1)\pi(10^aw0^b1B')=\frac{1}{\pi(1)^2}\pi(A'1)\pi(10^aw0^b1)\pi(1B').\]
-Furthermore, $\pi(A)=c_a\pi(A'1)$ and  by <equation href="sym"/>, $\pi(0^b1)=\pi(10^b)$, so it comes
+Furthermore, $\pi(A)=c_a\pi(A'1)$ and  by <math:equation href="sym"/>, $\pi(0^b1)=\pi(10^b)$, so it comes
  <!--\pnote{une ref ou rappel dans partie Brigitte de $\pi(0^b1)=\pi(10^b)$ ?}-->
  \[\pi(B)=\frac{1}{\pi(1)}\pi(0^b1)\pi(1B')=\frac{\pi(10^b)}{\pi(1)}\pi(1B')=c_b\pi(1B').\]
  Therefore,
@@ -598,7 +520,7 @@ seen in $w$ and recall that $l(w)$ denotes the last place where  $1$ can be seen
 If $i=j$ then $w$ is the word $0^{i-1}10^{n-i}$, else $w$ is of the form
  $0^{i-1}1w'10^{n-j}$, with $|w'|=j-i-1$. Hence, the previous sum can be rewritten as
 </p>
-<eqnarray>
+<math:eqnarray>
 <tr><td class="right">$\sum_{|w|=n}\pi(10^aw0^b1)$</td>
     <td class="center">$ = $</td>
     <td class="left">$\pi(1)\rho_{a+b+n+1}+\pi(1)\sum_{i=1}^{n}\rho_{a+i}\rho_{n+1-i+b}$</td>
@@ -606,11 +528,11 @@ If $i=j$ then $w$ is the word $0^{i-1}10^{n-i}$, else $w$ is of the form
 <tr><td/><td class="center">$ + $</td>
      <td class="left">$\sum_{1\leqslant i\lt j\leqslant n}\sum_{{{w}\atop{|w|=j-i-1}}}\pi(10^{a+i-1}1w10^{n-j+b}1)$.</td>
 </tr>
-</eqnarray>
+</math:eqnarray>
 <p>
-Equation <equation href="renouvellement"/> shows
+Equation <math:equation href="renouvellement"/> shows
 </p>
-<eqnarray>
+<math:eqnarray>
 <tr><td class="right">$\pi(10^{a+i-1}1w10^{n-j+b}1)$</td>
     <td class="center">$ = $</td>
     <td class="left">$\frac{\pi(10^{a+i-1}1)}{\pi(1)}\frac{\pi(1w1)}{\pi(1)}\pi(10^{n-j+b}1)$</td>
@@ -618,14 +540,14 @@ Equation <equation href="renouvellement"/> shows
 <tr><td/><td class="center">$ = $</td>
     <td class="left">$\rho_{a+i}\rho_{n+1-j+b}\pi(1w1)$.</td>
 </tr>
-</eqnarray>
+</math:eqnarray>
 <p>
 This implies:
 \[v_n^{a,b}=\rho_{a+b+n+1}+\sum_{i=1}^{n}\rho_{a+i}\rho_{n+1-i+b}
    +  \sum_{1\le i\lt j\le n}\rho_{a+i}\rho_{n+1-j+b}\sum_{w, |w|=j-i11}\frac{\pi(1w1)}{\pi(1)}.\]
 Recalling that $u_0=1$, one gets
  \[v_n^{a,b}=\rho_{a+b+n+1}+\sum_{1\le i\le j\le n}\rho_{a+i}\rho_{n+1-j+b}u_{j-i}\]
-which gives the result <strong><i>ii)</i></strong> with <lemma href="lemme_un"/>.
+which gives the result <strong><i>ii)</i></strong> with <math:lemma href="lemme_un"/>.
 </p>
 </li>
 <li>
@@ -633,14 +555,14 @@ which gives the result <strong><i>ii)</i></strong> with <lemma href="lemme_un"/>
 Let $A=0^a$ and $B=0^b$ with $a,b\geqslant 1$.
 Set
  \[v_n^{a,b}:=\frac{1}{\pi(1)}\sum_{|w|=n}\pi(0^aw0^b).\]
-First, recall that, due to <equation href="probas"/>, $\pi(A)=\pi(1)r_a$ and $\pi(B)=\pi(1)r_b$.
+First, recall that, due to <math:equation href="probas"/>, $\pi(A)=\pi(1)r_a$ and $\pi(B)=\pi(1)r_b$.
 Consequently,
  \[\psi(n,A,B)=\frac{\pi(1)v_{n}^{a,b}-\pi(A)\pi(B)}{\pi(A)\pi(B)}=S(1)\frac{v_{n}^{a,b}}{r_ar_b}-1.\]
 Let $w$ be a finite word with $|w|=n$. If $w=0^{n}$, then
 \[\pi(AwB)=\pi(0^{a+n+b})=\pi(1)r_{a+b+n}.\]
 If not, let $f(w)$ denote as before the first position of $1$ in $w$ and $l(w)$ the last one in $w$. If $f(w)=l(w)$, then
 </p>
-<eqnarray>
+<math:eqnarray>
 <tr><td class="right">$\pi(AwB)$</td>
     <td class="center">$ = $</td>
     <td class="left">$\pi(0^{a+f(w)-1}10^{n-f(w)+b})$</td>
@@ -648,11 +570,11 @@ If not, let $f(w)$ denote as before the first position of $1$ in $w$ and $l(w)$ 
 <tr><td/><td class="center">$ = $</td>
   <td class="left">$\frac{1}{\pi(1)}\pi(0^{a+f(w)-1}1)\pi(10^{n-f(w)+b})=\pi(1)c_{a+f(w)-1}c_{n-f(w)+b}$.</td>
 </tr>
-</eqnarray>
+</math:eqnarray>
 <p>
  If $f(w)\lt l(w)$, then writing $w=w_1 \ldots w_{n}$,
 </p>
-<eqnarray>
+<math:eqnarray>
 <tr><td class="right">$\pi(AwB)$</td>
     <td class="center">$ = $</td>
     <td class="left">$\pi(0^{a+f(w)-1}1w_{f(w)+1}\ldots w_{l(w)-1}10^{n-l(w)})$</td>
@@ -660,11 +582,11 @@ If not, let $f(w)$ denote as before the first position of $1$ in $w$ and $l(w)$ 
 <tr><td/><td class="center">$ = $</td>
     <td class="left">$\frac{1}{\pi(1)^2}\pi(0^{a+f(w)-1}1)\pi(1w_{f(w)+1}\ldots w_{l(w)-1}1)\pi(10^{n-l(w)+b})$.</td>
 </tr>
-</eqnarray>
+</math:eqnarray>
 <p>
 Summing yields
 </p>
-<eqnarray>
+<math:eqnarray>
 <tr><td class="right">$v_n^{a,b}$</td>
     <td class="center">$ = $</td>
     <td class="left">$r_{a+b+n}+\displaystyle\sum_{i=1}^{n}c_{a+i-1}c_{n+b-i}+\sum_{{{i,j=1}\atop{i\lt j}}}^{n}\sum_{{{w,}\atop{|w|=j-i-1}}}c_{a+i-1}\frac{\pi(1w1)}{\pi(1)}c_{n+b-j}$</td>
@@ -672,33 +594,33 @@ Summing yields
 <tr><td/><td class="center">$ = $</td>
     <td class="left">$r_{a+b+n}+\displaystyle\sum_{1\le i\le j\le n}c_{a+i-1}c_{n+b-j}u_{j-i}$,</td>
 </tr>
-</eqnarray>
+</math:eqnarray>
 <p>
 which gives the desired result. The last two items, left to the reader, follow the same guidelines.
-<qed/>
+<math:qed/>
 </p>
 </li>
 </ol>
-</proof>
+</math:proof>
 </subsection>
 
 <subsection id="ssec:mixinglogarithmiccomb" title="Mixing of the logarithmic infinite comb">
 <p>
-Consider the first example in Section <elt href="#sec:source"/>, that is the probabilized infinite
+Consider the first example in Section <doc href="#sec:source"/>, that is the probabilized infinite
 comb defined by $c_0 = 1$ and  for any $n\geqslant 1$ by
 $$
 c_n= \frac{1}{n(n+1)(n+2)(n+3)}.
 $$
 When $|x|\lt 1$, the series $S(x)$ writes as follows
-<equation id="defSpeigneLog">
+<math:equation id="defSpeigneLog">
 S(x)=\frac{47}{36}-\frac{5}{12x}+\frac{1}{6x^2}+\frac{(1-x)^3\log(1-x)}{6x^3}
-</equation>
+</math:equation>
 and
  \[S(1)=\frac{19}{18}.\]
-With <prop href="melange"/>, the asymptotics of the mixing coefficient comes from
+With <math:prop href="melange"/>, the asymptotics of the mixing coefficient comes from
 singularity analysis of the generating functions $M^{A,B}$.
 </p>
-<prop id="prop-3-4">
+<math:prop id="prop-3-4">
 <p>
 The VLMC defined by the logarithmic infinite comb has a non-uniform polynomial
 mixing of the following form:
@@ -708,8 +630,8 @@ $$
 |\psi (n,A,B)|\leqslant\frac {C_{A,B}}{n^3}.
 $$
 </p>
-</prop>
-<remark id="remark2">
+</math:prop>
+<math:remark id="remark2">
 <p>
 The $C_{A,B}$ cannot be bounded above by some constant that does not depend on $A$ and $B$,
 as can be seen hereunder in the proof.
@@ -719,11 +641,11 @@ $$
 $$
 as $n$ goes to infinity. In particular, $\psi(n,0,0^n)$ tends to the positive constant $\frac{13}{6}$.
 </p>
-</remark>
-<proof id="proof3" title="Proof of &lt;prop href=&quot;prop-3-4&quot;/&gt;.">
+</math:remark>
+<math:proof id="proof3" title="Proof of &lt;prop href=&quot;prop-3-4&quot;/&gt;.">
 <p>
 For any finite words $A$ and $B$ in case <strong><i>i)</i></strong> of
-<prop href="melange"/>, one deals with $U(x)=\left((1-x)S(x)\right)^{-1}$ which
+<math:prop href="melange"/>, one deals with $U(x)=\left((1-x)S(x)\right)^{-1}$ which
 has $1$ as a unique dominant singularity. Indeed, $1$ is the unique dominant
 singularity of $S$, so that the dominant singularities of $U$ are $1$ or
 zeroes of $S$ contained in the closed unit disc. But $S$ does not vanish on
@@ -734,7 +656,7 @@ $$|S(z)| \geqslant 1- \sum_{n\geqslant 1} \frac{1}{n(n+1)(n+2)(n+3)} = 1-(S(1)-1
 Since
 \[M(x) =\frac{S(x)-S(1)}{(x-1)S(x)}= S(1)U(x) - \frac 1{1-x},\]
 the unique dominant singularity of $M$ is $1$, and when $x$ tends to $1$ in
-the unit disc, <equation href="defSpeigneLog"/> leads to
+the unit disc, <math:equation href="defSpeigneLog"/> leads to
 \[
 M(x) = A(x)-\frac{1}{6S(1)}(1-x)^2\log(1-x)+\grandO{(1-x)^3\log(1-x)}
 \]
@@ -746,16 +668,16 @@ we get
 </p>
 <p>
 The cases  <strong><i>ii)</i></strong>, <strong><i>iii)</i></strong>,
-<strong><i>iv)</i></strong> and <strong><i>v)</i></strong> of <prop href="melange"/> are
+<strong><i>iv)</i></strong> and <strong><i>v)</i></strong> of <math:prop href="melange"/> are
 of the same kind, and we completely deal with case <strong><i>iii)</i></strong>.
 </p>
 <p>
 Case <strong><i>iii)</i></strong>: words of the form $A=0^a$ and $B=0^b$, $a,b\geqslant 1$.
-As shown in <prop href="melange"/>, one has to compute the asymptotics of the $n$-th
+As shown in <math:prop href="melange"/>, one has to compute the asymptotics of the $n$-th
 coefficient of the Taylor series of the function
-<equation id="melangeLog3">
+<math:equation id="melangeLog3">
 M^{a,b}(x):=S(1)\displaystyle\frac{1}{r_ar_b}\sum _{n\geqslant 1}r_{a+b+n}x^n + \displaystyle U(x)\left[ \frac{S(1)R_a(x)R_b(x)}{r_ar_bx^{a+b-2}}-S(x)\right].
-</equation>
+</math:equation>
 The contribution of the left-hand term of this sum is directly given by the
 asymptotics of the remainder
 $$
@@ -768,10 +690,10 @@ $$
 Since $1$ is the only dominant singularity of $S$ and $U$ and consequently of any $R_a$,
 it suffices to compute
 an expansion of $N^{a,b}(x)$ at $x=1$.
-It follows from <equation href="defSpeigneLog"/> that
+It follows from <math:equation href="defSpeigneLog"/> that
 $U$, $S$ and $R_a$ admit expansions near $1$ of the forms
 </p>
-<eqnarray>
+<math:eqnarray>
 <tr><td class="right">$U(x)$</td>
     <td class="center">$ = $</td>
     <td class="left">$\frac{1}{S(1)(1-x)}+\mbox{polynomial}+\frac{1}{6S(1)^2}(1-x)^2\log (1-x)+\mathcal{O}(1-x)^2$</td>,
@@ -780,14 +702,14 @@ $U$, $S$ and $R_a$ admit expansions near $1$ of the forms
     <td class="center">$ = $</td>
     <td>$\mbox{polynomial}+\frac{1}{6}(1-x)^3\log (1-x)+\mathcal{O}(1-x)^3$,</td>
 </tr>
-</eqnarray>
+</math:eqnarray>
 and
-<eqnarray>
+<math:eqnarray>
 <tr><td class="right">$R_a(x)$</td>
   <td class="center">$ = $</td>
   <td>$\mbox{polynomial}+\frac{1}{6}(1-x)^3\log (1-x)+\mathcal{O}(1-x)^3$.</td>
 </tr>
-</eqnarray>
+</math:eqnarray>
 <p>
 Consequently,
 $$
@@ -797,7 +719,7 @@ in a neighbourhood of $1$ in the unit disc so that, by singularity analysis,
 $$
 [x^n]N^{a,b}(x)=-\frac 13\left( \frac 1{r_a}+\frac 1{r_b}-\frac 1{S(1)}\right)\frac 1{n^3}+o\left(\frac 1{n^3}\right).
 $$
-Consequently <equation href="melangeLog3"/> leads to
+Consequently <math:equation href="melangeLog3"/> leads to
 \[
 \psi(n-1,0^a,0^b)=  [x^n] M^{a,b}(x)
 \sim\frac 13\left( \frac{S(1)}{r_ar_b}-\frac 1{r_a}-\frac 1{r_b}+\frac 1{S(1)}\right)\frac 1{n^3}
@@ -808,14 +730,14 @@ as $n$ tends to infinity, showing the mixing inequality and the non uniformity.
 <p>
 The remaining cases <strong><i>ii)</i></strong>, <strong><i>iv)</i></strong>
 and <strong><i>v)</i></strong> are of the same flavour.
-<qed/>
+<math:qed/>
 </p>
-</proof>
+</math:proof>
 </subsection>
 
 <subsection id="ssec:mixingfactccomb" title="Mixing of the factorial infinite comb">
 <p>
-Consider now the second Example in Section <elt href="#sec:source"/>, that is the
+Consider now the second Example in Section <doc href="#sec:source"/>, that is the
 probabilized infinite comb defined by
 $$
 \forall n\in\g N,~c_n=\frac 1{(n+1)!}.
@@ -828,7 +750,7 @@ U(x)=\frac {x}{(1-x)(e^x-1)}.
 $$
 </p>
 
-<prop id="UniformMixing">
+<math:prop id="UniformMixing">
 <p>
 The VLMC defined by the factorial infinite comb has a uniform
 exponential mixing of the following form: there exists a positive
@@ -838,12 +760,12 @@ $$
 |\psi (n,A,B)|\leqslant\frac C{(2\pi )^n}.
 $$
 </p>
-</prop>
-<proof id="proof4">
+</math:prop>
+<math:proof id="proof4">
 <ol>
-<li>First case of mixing in <prop href="melange"/>: $A=A'1$ and $B=1B'$.
+<li>First case of mixing in <math:prop href="melange"/>: $A=A'1$ and $B=1B'$.
 <p>
-Because of <prop href="melange"/>, the proof consists in computing the
+Because of <math:prop href="melange"/>, the proof consists in computing the
 asymptotics of $[x^n] M(x)$. We make use of singularity analysis. The
 dominant singularities of
 $$
@@ -873,7 +795,7 @@ $$
 </li>
 <li>Second case of mixing: $A=A'10^a$ and $B=0^b1B'$.
 <p>
-Because of <prop href="melange"/>, one has to compute $[x^n]M^{a,b}(x)$
+Because of <math:prop href="melange"/>, one has to compute $[x^n]M^{a,b}(x)$
 with
 $$
 M^{a,b}(x):= S(1)\frac{c_{a+b}}{c_ac_b}P_{a+b}(x)
@@ -892,11 +814,11 @@ $$
 [x^n]M^{a,b}(x)\equivalent{n\to+\infty}2\Re\left(\frac{1-e}{1-2i\pi}\cdot\frac{P_a(2i\pi )P_b(2i\pi )}{(2i\pi )^n}\right) .
 $$
 Besides, the remainder of the exponential series satisfies
-<equation id="resteSerieExp">
+<math:equation id="resteSerieExp">
 \sum _{n\geqslant a}\frac{x^n}{n!}=\frac{x^a}{a!}\left( 1+\frac xa+\mathcal{O}(\frac 1a)\right)
-</equation>
+</math:equation>
 when $a$ tends to infinity.
-Consequently, by Formula <equation href="defPa"/>, $P_a(2i\pi )$
+Consequently, by Formula <math:equation href="defPa"/>, $P_a(2i\pi )$
 tends to $2i\pi$ as $a$ tends to infinity
 <!--%for any $x\neq 0$, the asymptotics of the rest of the exponential series writes, when $a$ tends to infinity,
 %$$
@@ -928,7 +850,7 @@ $$
 \psi(n-1,A,B) \equivalent{n\to+\infty}
 2\Re\left(\frac{1-e}{1-2i\pi}\cdot\frac{R_a(2i\pi )R_b(2i\pi )}{r_ar_b(2i\pi )^{a+b-2}}\frac{1}{(2i\pi )^n}\right) .
 $$
-Once more, because of <equation href="resteSerieExp"/>, this implies that
+Once more, because of <math:equation href="resteSerieExp"/>, this implies that
 there is a positive constant $C_2$ independent of $a$ and $b$ and
 such that for any $n\geqslant 1$,
 $$
@@ -941,8 +863,8 @@ that respectively correspond to words of the form $A=A'10^a$, $B=0^b$
 and $A=0^a$, $B=0^b1B'$ are of the same vein and lead to similar results.
 </li>
 </ol>
-<qed/>
-</proof>
+<math:qed/>
+</math:proof>
 </subsection>
 </section>
 
@@ -951,23 +873,23 @@ and $A=0^a$, $B=0^b1B'$ are of the same vein and lead to similar results.
 In this section, we consider a suffix trie process $(\rond{T}_n)_{n\geq 1}$
 associated with an infinite random word generated by an infinite comb.
 A precise definition of tries and suffix tries is given in
-section <elt href="#ssec:height"/>. We are interested in the height
+section <doc href="#ssec:height"/>. We are interested in the height
 and the saturation level of such a suffix trie.
 </p>
 <p>
 Our method to study these two parameters uses a duality property à
-la Pittel developed in Section <elt href="#ssec:duality"/>, together with
+la Pittel developed in Section <doc href="#ssec:duality"/>, together with
 a careful and explicit calculation of the generating function of the
-second occurrence of a word (in Section <elt href="#ssec:generating"/>) which
+second occurrence of a word (in Section <doc href="#ssec:generating"/>) which
 can be achieved for any infinite comb. These calculations are not so
 intricate because they are strongly related to the mixing coefficient
-and the mixing properties detailed in Section <elt href="#sec:mixing"/>.
+and the mixing properties detailed in Section <doc href="#sec:mixing"/>.
 </p>
 <p>
 More specifically, we look at our two favourite examples, the logarithmic
-comb and the factorial comb. We prove in Section <elt href="#ssec:heightLog"/>
+comb and the factorial comb. We prove in Section <doc href="#ssec:heightLog"/>
 that the height of the first one is not logarithmic but polynomial
-and in Section <elt href="#ssec:saturation"/> that the saturation
+and in Section <doc href="#ssec:saturation"/> that the saturation
 level of the second one is not logarithmic either but negligibly smaller.
 Remark that despite the very particular form of the comb in the wide
 family of variable length Markov models, the comb sources provide a
@@ -992,13 +914,13 @@ by the successive prefixes of $y_n$; when the branch ends, if an internal
 node is reached, then $y_n$ is inserted at the free leaf, else we make the
 branch grow comparing the next letters of both words until they can be
 inserted in two different leaves. As one can clearly see on
-<figure href="1figtrieconstruction"/> a trie is not a complete tree and
+<math:figure href="1figtrieconstruction"/> a trie is not a complete tree and
 the insertion of a word can make a branch grow by more than one level.
 Notice that if the trie contains a finite word $w$ as internal node, there
 are at least two already inserted infinite words $y_n$ that have $w$ as a prefix.
 This indicates why the <em>second</em> occurrence of a word is prominent in the growing of a trie.
 </p>
-<figure id="1figtrieconstruction" title="Trie construction">
+<math:figure id="1figtrieconstruction" title="Trie construction">
 <table class="img-row">
 <tr>
 <td><img src="uncommon-suffix-tries/trieconstruction.svg" width="300"/></td>
@@ -1009,16 +931,16 @@ This indicates why the <em>second</em> occurrence of a word is prominent in the 
 <div class="legend">
 Last steps of the construction of a trie built from the set $(000\ldots,10\ldots, 1101\ldots, 001,\ldots, 01110\ldots , 1100\ldots, 01111\ldots)$.
 </div>
-</figure>
+</math:figure>
 
-<figure id="1figtriesuffconstruction">
+<math:figure id="1figtriesuffconstruction">
 <!-- \psfrag{a}{\tiny{$10010\ldots$}}\psfrag{b}{\tiny{$00\ldots$}}\psfrag{c}{\tiny{$010\ldots$}}\psfrag{d}{\tiny{$101\ldots$}}\psfrag{e}{\tiny{$011\ldots$}}\psfrag{f}{\tiny{$11\ldots$}}\psfrag{g}{\tiny{$10011\ldots$}}\psfrag{00}{\tiny{$0$}}\psfrag{11}{\tiny{$1$}}
 -->
 <img src="uncommon-suffix-tries/suffixconstruction.svg" width="400"/>
 <div class="legend">
 Suffix trie $\rond T_{10}$ associated with the word $1001011001110\ldots$. Here, $H_{10}=4$ and $\ell_{10}=2$.
 </div>
-</figure>
+</math:figure>
 <p>
 Let $m:=a_1a_2a_3 \ldots$ be an infinite word on $\{0,1\}$.
 The <strong>suffix trie</strong> $\rond{T}_n$ (with $n$ leaves) associated
@@ -1035,7 +957,7 @@ $H_n$ which is the maximal depth of an internal node of $\rond{T}_n$ and the
 the internal nodes are present in $\rond{T}_n$.
 Formally, if $\partial \rond T_n$ denotes the set of leaves of $\rond T_n$,
 </p>
-<eqnarray>
+<math:eqnarray>
 <tr><td class="right">$H_n$</td>
     <td class="center">$=$</td>
     <td class="left">$\max_{u \in \rond{T}_n\setminus \partial \rond{T}_n} \big\{ |u| \big\}$</td>
@@ -1046,9 +968,9 @@ Formally, if $\partial \rond T_n$ denotes the set of leaves of $\rond T_n$,
     <td class="center">$=$</td>
     <td class="left">$\max \big\{j \in \N | \ \# \{u \in  \rond{T}_n\setminus \partial \rond{T}_n, |u|=j\}=2^j\big\}$.</td>
 </tr>
-</eqnarray>
+</math:eqnarray>
 <p>
-See Figure <figure href="1figtriesuffconstruction"/> for an example.
+See Figure <math:figure href="1figtriesuffconstruction"/> for an example.
 Note that the saturation level should not be mistaken for the shortest path up to a leaf.
 </p>
 </subsection>
@@ -1058,8 +980,8 @@ Note that the saturation level should not be mistaken for the shortest path up t
 Let $(U_n)_{n\geqslant 1}$ be an infinite random word generated by some infinite
 comb and $(\rond{T}_n)_{n\geqslant 1}$ be the associated suffix trie process. We
 denote by $\rond R$ the set of right-infinite words. Besides, we define hereunder
-two random variables having a key role in the proof of <theorem href="hauteur"/>
-and <theorem href="saturation"/>. This method goes back to Pittel <cite href="Pittel"/>.
+two random variables having a key role in the proof of <math:theorem href="hauteur"/>
+and <math:theorem href="saturation"/>. This method goes back to Pittel <cite href="Pittel"/>.
 </p>
 <p>
 Let $s\in\rond R$ be a deterministic infinite sequence and $s ^{(k)}$ its prefix of length $k$. For $n\geq 1$,
@@ -1068,7 +990,7 @@ Let $s\in\rond R$ be a deterministic infinite sequence and $s ^{(k)}$ its prefix
 %%%%%%%%%%%%%%%%%%%
 -->
 </p>
-<eqnarray id="defXn">
+<math:eqnarray id="defXn">
 <tr><td class="right">$X_{n}(s)$</td>
   <td class="center">$:=$</td>
   <td class="left">$\left \{
@@ -1084,15 +1006,15 @@ Let $s\in\rond R$ be a deterministic infinite sequence and $s ^{(k)}$ its prefix
   <td class="center">$:=$</td>
   <td class="left">$\min\{n\geqslant 1\ |\ X_{n}(s)=k\}$,</td>
 </tr>
-</eqnarray>
+</math:eqnarray>
 <p>
 where "$s ^{(k)}$ is in $\rond{T}_{n}\setminus \partial \rond{T}_n$"
 stands for: there exists an internal node $v$ in $\rond{T}_{n}$ such that
 $s ^{(k)}$ encodes $v$. For any $k\geqslant 1$, $T_{k}(s)$ denotes the
 number of leaves of the first tree "containing" $s^{(k)}$.
-See <figure href="4figXnetTk"/> for an example.
+See <math:figure href="4figXnetTk"/> for an example.
 </p>
-<figure id="4figXnetTk">
+<math:figure id="4figXnetTk">
 <!--\psfrag{0}{\tiny{$0$}}\psfrag{1}{\tiny{$1$}}\psfrag{s}{\small{$s$}}\psfrag{t}{\small{$\hat{s}$}}-->
 <img src="uncommon-suffix-tries/XnetTk.svg" width="400"/>
 <div class="legend">
@@ -1103,13 +1025,13 @@ realized for any sequence of the form $110101\dots$ (in blue) and
 $H_{20}=6$. Remark that the shortest branch has length $4$ whereas the
 saturation level $\ell_n$ is equal to $3$.
 </div>
-</figure>
+</math:figure>
 <p>
 Thus, the saturation level $\ell_n$ and the height $H_n$ can be
 described using $X_n(s)$:
-<equation id="defi-var">
+<math:equation id="defi-var">
 \ell_n=\min_{s\in \rond R} X_n(s) \quad \mbox{and}\quad H_n=\max_{s\in \rond R} X_n(s).
-</equation>
+</math:equation>
 </p>
 <p>
 Notice that the notation $X_n(s)$ is not exactly the same as in
@@ -1119,9 +1041,9 @@ shortest path in $\mathcal{T}_n$.
 <p>
 Remark that $X_n(s)$ and $T_k(s)$ are in duality in the following sense:
 for all positive integers $k$ and $n$, one has the equality of the events
-<equation id="duality">
+<math:equation id="duality">
 \{ X_{n}(s) \geqslant k \} = \{ T_{k}(s) \leqslant n \}.
-</equation>
+</math:equation>
 The random variable $T_{k}(s)$ (if $k\geqslant 2$) also represents the
 waiting time of the second occurrence of the deterministic word
 $s^{(k)}$ in the random sequence $(U_n)_{n\geq 1}$, <em>i.e.</em>
@@ -1129,21 +1051,21 @@ one has to wait $T_{k}(s)$ for the source to create a prefix containing
 exactly two occurrences of $s^{(k)}$. More precisely, for
 $k \geqslant 2$, $T_{k}(s)$ can be rewritten as
 </p>
-<eqnarray>
+<math:eqnarray>
 <tr><td class="right">$T_k(s)=\min\Bigl\{n\geqslant 1\ \big| U_{n}U_{n+1}\ldots U_{n+k-1}$</td>
      <td class="left">$=s^{(k)} \mbox{  and } \exists ! j\lt n \mbox{ such that } $</td>
 </tr>
 <tr><td class="right">$U_{j}U_{j+1}\ldots U_{j+k-1}$</td>
     <td class="left">$=s^{(k)}\Bigr\}$.</td>
 </tr>
-</eqnarray>
+</math:eqnarray>
 <p>
 Notice that $T_k(s)$ denotes the <em>beginning</em> of the second occurrence
 of $s^{(k)}$ whereas in <cite href="ccpp"/>, $\tau^{(2)}\left(s^{(k)}\right)$
 denotes the <em>end</em> of the second occurrence of $s^{(k)}$, so that
-<equation id="lien-tau-T">
+<math:equation id="lien-tau-T">
 \tau^{(2)}\left(s^{(k)}\right)=T_k(s)+k.
-</equation>
+</math:equation>
 More generally, in <cite href="ccpp"/> , for any $r\geqslant 1$, the random
 waiting time $\tau^{(r)}(w)$ is defined as the end of the $r$-th occurrence
 of $w$ in the sequence $(U_n)_{n\geqslant 1}$ and the generating function of the
@@ -1151,12 +1073,12 @@ $\tau^{(r)}$ is calculated. We go over these calculations in the sequel.
 </p>
 </subsection>
 <subsection id="ssec:generating" title="Successive occurence times generating functions">
-<prop id="Phi2">
+<math:prop id="Phi2">
 <p>
 Let $k\geqslant 1$. Let also $w=10^{k-1}$ and $\tau^{(2)}(w)$ be the
 end of the second occurrence of $w$ in a sequence generated by a comb defined
 by $(c_n)_{n\geqslant 0}$. Let $S$ and $U$ be the ordinary generating
-functions defined in Section <elt href="#ssec:mixingcomb"/>. The
+functions defined in Section <doc href="#ssec:mixingcomb"/>. The
 probability generating function of $\tau^{(2)}(w)$ is
 \[
  \Phi^{(2)}_w(x) = \frac{c_{k-1}^2x^{2k-1}\big(U(x)-1\big)}{S(1)(1-x)\big[ 1+c_{k-1}x^{k-1}(U(x)-1)\big] ^2}.
@@ -1164,12 +1086,12 @@ probability generating function of $\tau^{(2)}(w)$ is
 Furthermore, as soon as $\sum_{n \geqslant 1}n^2c_n \lt \infty$, the random
 variable $\tau^{(2)}(w)$
 is square-integrable and
-<equation id="esp-var">
+<math:equation id="esp-var">
 \g E(\tau^{(2)}(w))=\frac{2S(1)}{c_{k-1}}+o\left(\frac{1}{c_{k-1}}\right), \quad \Var(\tau^{(2)}(w))=\frac{2S(1)^2}{c_{k-1}^2}+o\left(\frac{1}{c_{k-1}^2}\right).
-</equation>
+</math:equation>
 </p>
-</prop>
-<proof id="proof5">
+</math:prop>
+<math:proof id="proof5">
 <p>
 For any $r\geqslant 1
 $, let $\tau^{(r)}(w)$ denote the end of the $r$-th occurrence of $w$
@@ -1195,7 +1117,7 @@ and for $r\geq 1$,
 \]
 where
 </p>
-<eqnarray>
+<math:eqnarray>
 <tr><td class="right">$S_w(x)$</td>
     <td class="center">$:=$</td>
     <td class="left">$C_w(x) + \sum_{n=k}^{\infty}q_{\petitlpref(w)}^{(n)}(w)x^n$,</td>
@@ -1204,15 +1126,15 @@ where
     <td class="center">$:=$</td>
     <td class="left">$1+\sum_{j=1}^{k-1}\ind{w_{j+1}\ldots w_{k}=w_{1}\ldots w_{k-j}}q_{\petitlpref(w)}^{(j)}\left(w_{k-j+1} \ldots w_k\right)x^j$.</td>
 </tr>
-</eqnarray>
+</math:eqnarray>
 <p>
 In the particular case when $w=10^{k-1}$, then
  $\lpref(w)=\overline{w}=0^{k-1}1$ and $\pi(w)=\frac{c_{k-1}}{S(1)}$.
-Moreover, Definition <equation href="mixingCoeff"/> of the mixing
-coefficient and <prop href="melange"/> <i><strong>i)</strong></i>
+Moreover, Definition <math:equation href="mixingCoeff"/> of the mixing
+coefficient and <math:prop href="melange"/> <i><strong>i)</strong></i>
 imply successively that
 </p>
-<eqnarray>
+<math:eqnarray>
 <tr>
   <td class="right">$q_{\petitlpref(w)}^{(n)}(w) $</td>
   <td class="left">$= \pi\Big(U_{n+k-|w|+1}\ldots U_{n+k}=w\Big| U_{1}\ldots U_k=\lpref(w)\Big)$</td>
@@ -1229,7 +1151,7 @@ imply successively that
   <td/>
   <td class="left">$= c_{k-1}u_{n-k+1}$,</td>
 </tr>
-</eqnarray>
+</math:eqnarray>
 <p>
 This relation makes more explicit the link between successive occurence times and mixing.
 This leads to
@@ -1240,7 +1162,7 @@ This entails
  \[\Phi^{(1)}_w(x)=\frac{c_{k-1}x^k}{S(1)(1-x)\left[ 1+c_{k-1}x^{k-1}\big( U(x)-1\big)\right]}\]
 and
 </p>
-<eqnarray>
+<math:eqnarray>
 <tr>
   <td class="right">$ \Phi^{(2)}_w(x)$</td>
   <td class="center">$ = $</td>
@@ -1251,14 +1173,14 @@ and
   <td class="center">$ = $</td>
   <td class="left">$\frac{c_{k-1}^2x^{2k-1}\big( U(x)-1\big)}{S(1)(1-x)\left[ 1+c_{k-1}x^{k-1}\big( U(x)-1\big)\right] ^2}$</td>
 </tr>
-</eqnarray>
+</math:eqnarray>
 <p>
 which is the announced result.
 The assumption
 \[\sum_{n \geqslant 1}n^2c_n \lt \infty\]
 makes $U$ twice differentiable and elementary calculations lead to
 </p>
-<eqnarray>
+<math:eqnarray>
 <tr>
   <td/><td/>
   <td class="left">$(\Phi_w^{(1)})'(1)=\frac{S(1)}{c_{k-1}}-S(1)+1+\frac{S'(1)}{S(1)}, \qquad
@@ -1268,28 +1190,28 @@ makes $U$ twice differentiable and elementary calculations lead to
   <td/><td/>
   <td class="left">$(\Phi_w^{(1)})''(1)=\frac{2S(1)^2}{c_{k-1}^2}+o\left(\frac{1}{c_{k-1}^2}\right)\quad \mbox{and} \quad (\Phi_w^{(2)})''(1)=\frac{6S(1)^2}{c_{k-1}^2}+o\left(\frac{1}{c_{k-1}^2}\right)$,</td>
 </tr>
-</eqnarray>
+</math:eqnarray>
 <p>
-and finally to <equation href="esp-var"/>.
-<qed/>
+and finally to <math:equation href="esp-var"/>.
+<math:qed/>
 </p>
-</proof>
+</math:proof>
 </subsection>
 
 <subsection id="ssec:results" title="Logarithmic comb and factorial comb">
 <p>
 Let $h_+$ and $h_-$ be the constants in $[0,+\infty ]$ defined by
-<equation id="4defh+">
+<math:equation id="4defh+">
 h_+ := \lim_{n\to +\infty}\frac{1}{n} \max\Bigl\{\ln\Bigl(\frac{1}{\pi\left(w\right)}\Bigr)\ \Bigr\}
 \mbox{ and }h_- := \lim_{n\to +\infty}\frac{1}{n} \min\Bigl\{\ln\Bigl(\frac{1}{\pi\left(w\right)}\Bigr)\ \Bigr\},
-</equation>
+</math:equation>
 where the maximum and the minimum range over the words $w$ of length $n$ with
  $\pi\left({w}\right)>0$. In their papers, Pittel <cite href="Pittel"/> and
  Szpankowski <cite href="Szpan93"/> only deal with the cases $h_+\lt +\infty$ and
   $h_->0$, which amounts to saying that the probability of any word is exponentially
   decreasing with its length. Here, we focus on our two examples for which these
   assumptions are not fulfilled. More precisely, for the logarithmic infinite comb,
-  <equation href="probas"/> implies that $\pi(10^n)$ is of order $n^{-4}$, so that
+  <math:equation href="probas"/> implies that $\pi(10^n)$ is of order $n^{-4}$, so that
 $$
 h_- \leqslant \lim_{n\to +\infty}\frac{1}{n} \ln\Bigl(\frac{1}{\pi\left(10^{n-1}\right)}\Bigr) = 4\lim_{n\to +\infty}\frac{\ln n}{n} =0.
 $$
@@ -1304,9 +1226,9 @@ $$
 <p>
 For these two models, the asymptotic behaviour of the lengths of the branches
 is not always logarithmic, as can be seen in the two following theorems, shown in
-Sections <elt href="#ssec:heightLog"/> and <elt href="#ssec:saturation"/>.
+Sections <doc href="#ssec:heightLog"/> and <doc href="#ssec:saturation"/>.
 </p>
-<theorem id="hauteur" title="Height of the logarithmic infinite comb">
+<math:theorem id="hauteur" title="Height of the logarithmic infinite comb">
 <p>
 Let $\rond{T}_n$ be the suffix trie built from the $n$ first suffixes of a
 sequence generated by a logarithmic infinite comb. Then, the height $H_n$
@@ -1315,9 +1237,9 @@ of $\rond{T}_n$ satisfies
 ~\limite{n\to \infty}{}~+\infty \quad \mbox{in probability.}
 \]
 </p>
-</theorem>
+</math:theorem>
 
-<theorem id="saturation" title="Saturation level of the factorial infinite comb">
+<math:theorem id="saturation" title="Saturation level of the factorial infinite comb">
 <p>
 Let $\rond{T}_n$ be the suffix trie built from the $n$ first suffixes of the
 sequence generated by a factorial infinite comb. Then, the saturation level
@@ -1327,12 +1249,12 @@ $$
 \ell _n\in o\left(\frac{\log n}{(\log\log n)^\delta}\right).
 $$
 </p>
-</theorem>
-<remark id="remLogn">
+</math:theorem>
+<math:remark id="remLogn">
 <p>
 The behaviour of the height of the factorial infinite comb can be
 deduced from Szpankowski <cite href="Szpan93"/>. Namely the property of uniform mixing
-stated in <prop href="UniformMixing"/> implies
+stated in <math:prop href="UniformMixing"/> implies
 the existence of two positive constants $C$ and $\gamma$ such
 that, for every integer $n\geqslant 1$ and for every word $w$ of length $n$,
 $\pi(w)\leqslant Ce^{-\gamma n}$ (see Galves and
@@ -1349,9 +1271,9 @@ mixing property. In spite of that we conjecture that the saturation level grows 
 We do not go further on this subject because it is not the main point of the present paper,
 but we think the techniques used here should help to prove such a result.
 </p>
-</remark>
+</math:remark>
 
-<figure id="dyn-peigne">
+<math:figure id="dyn-peigne">
 <img src="uncommon-suffix-tries/rsa_2012_height.jpg" width="800"/>
 <img src="uncommon-suffix-tries/rsa_2012_saturation_level.jpg" width="800"/>
 <div class="legend">
@@ -1363,10 +1285,10 @@ the saturation level of a factorial comb (plain lines) compared with the saturat
 level of a $\log n$-comb (long dashed lines).
 In both figures, mean values of $25$ simulations are represented on the $y$-axes.
 </div>
-</figure>
+</math:figure>
 <p>
 The dynamic asymptotics of the height and of the saturation level can be
-visualized on <figure href="dyn-peigne"/>.
+visualized on <math:figure href="dyn-peigne"/>.
 The number $n$ of leaves of the suffix trie is put on the $x$-axis while heights or
 saturation levels are put on the $y$-axis (mean values of $25$ simulations).
 </p>
@@ -1376,7 +1298,7 @@ saturation level of a trie generated by a factorial comb in the second one.
 </p>
 <p>
 In the first figure, the <em>short dashed line</em> represent the height of a factorial comb.
-As pointed out in <remark href="remLogn"/>, this height is almost surely of the form $c\log n$
+As pointed out in <math:remark href="remLogn"/>, this height is almost surely of the form $c\log n$
 where $c$ is a constant.
 </p>
 <p>
@@ -1404,8 +1326,8 @@ This site has been designed and realized by Eng.
 
 <subsection id="ssec:heightLog" title="Height for the logarithmic comb">
 <p>
-In this subsection, we prove <theorem href="hauteur"/>.
-<!--%the first result concerning the logarithmic infinite comb, Theorem <elt href="#hauteur"/>.-->
+In this subsection, we prove <math:theorem href="hauteur"/>.
+<!--%the first result concerning the logarithmic infinite comb, Theorem <doc href="#hauteur"/>.-->
 </p>
 <p>
 Consider the right-infinite sequence $s=10^{\infty}$. Then, $T_k(s)$ is
@@ -1413,19 +1335,19 @@ the second occurrence time of $w=10^{k-1}$. It is a nondecreasing (random)
 function of $k$. Moreover, $X_n(s)$ is the maximum of all $k$ such that
 $s^{(k)}\in\rond T_n$. It is nondecreasing in $n$. So, by definition of
 $X_n(s)$ and $T_k(s)$, the duality can be written
-<equation id="dualitybis">
+<math:equation id="dualitybis">
 \forall n, \forall \omega, \exists k_n, \quad k_n\leqslant X_n(s)\lt k_n+1 \mbox{ and }T_{k_n}(s)\leqslant n \lt T_{k_n+1}(s).
-</equation>
+</math:equation>
 </p>
 <p>
 <strong>Claim</strong>:
-<equation id="xninfini">
+<math:equation id="xninfini">
 \lim_{n\rightarrow +\infty} X_n(s) = + \infty \quad \mbox{a.s.}
-</equation>
+</math:equation>
 Indeed, if $X_n(s)$ were bounded above, by $K$ say, then take $w = 10^{K}$
 and consider $T_{K+1}(s)$ which is the time of the second occurrence of $10^{K}$.
 The choice of the $c_n$ in the definition of the logarithmic comb implies
-the convergence of the series $\sum _nn^2c_n$. Thus <equation href="esp-var"/>
+the convergence of the series $\sum _nn^2c_n$. Thus <math:equation href="esp-var"/>
 holds and $\g E[T_{K+1}(s)]\lt \infty$ so that $T_{K+1}(s)$ is almost surely
 finite. This means that for $n\gt T_{K+1}(s)$, the word $10^{K}$ has been seen
 twice, leading to $X_n(s)\geqslant K+1$ which is a contradiction.
@@ -1433,24 +1355,24 @@ twice, leading to $X_n(s)\geqslant K+1$ which is a contradiction.
 <p>
 We make use of the following lemma that is proven hereunder.
 </p>
-<lemma id="Tk">
+<math:lemma id="Tk">
 <p>For $s=10^{\infty}$,
 \[\forall \eta > 0, \quad \frac{T_k(s)}{k^{4+\eta}}~\limite{k \to \infty}{}~0\quad \mbox{in probability},
 \]
 and
-<equation id="Tksurk">
+<math:equation id="Tksurk">
 \forall \eta > \frac 12, \quad \frac{T_k(s)}{k^{4+\eta}} \ \ \smash{\mathop{\longrightarrow}\limits _{k\to \infty}} \ \ 0 \quad \mbox{a.s.}
-</equation>
+</math:equation>
 </p>
-</lemma>
+</math:lemma>
 <p>
-With notations <equation href="dualitybis"/>, because of <equation href="xninfini"/>,
+With notations <math:equation href="dualitybis"/>, because of <math:equation href="xninfini"/>,
 the sequence $(k_n)$ tends to infinity, so that $\left(T_{k_n}(s)\right)$ is a subsequence
-of $\left(T_k(s)\right)$. Thus, <equation href="Tksurk"/> implies that
+of $\left(T_k(s)\right)$. Thus, <math:equation href="Tksurk"/> implies that
 \[
 \forall \eta > \frac 12, \quad \frac{T_{k_n}(s)}{k_n^{4+\eta}} \ \ \smash{\mathop{\longrightarrow}\limits _{n\to \infty}} \ \ 0 \quad \mbox{a.s.} \quad \mbox{and} \quad  \forall \eta > 0, \quad \frac{T_{k_n}(s)}{k_n^{4+\eta}}~\limite{k\to \infty}{P}~0.
 \]
-Using duality <equation href="dualitybis"/> again leads to
+Using duality <math:equation href="dualitybis"/> again leads to
 <!--%$$\forall \eta > \frac 12, \hskip 1cm \frac{X_n(s)}{n^{1/({4+\eta})}} \ \ \smash{\mathop{\longrightarrow}\limits _{n\to \infty}} \ \ +\infty \hskip 1cm a.s.$$-->
 \[\forall \eta > 0, \quad \frac{X_n(s)}{n^{1/({4+\eta})}}~\limite{n \to \infty}{P}~+\infty.\]
 In other words
@@ -1459,52 +1381,52 @@ $$
 $$
 so that, since the height of the suffix trie is larger than $X_n(s)$,
 \[\forall \delta > 0, \quad \frac{H_n}{n^{\frac 14 - \delta}}~\limite{n\to \infty}{P}~+\infty.\]
-This ends the proof of <theorem href="hauteur"/>.
-<qed/>
+This ends the proof of <math:theorem href="hauteur"/>.
+<math:qed/>
 </p>
 
-<proof id="proofTk" title="Proof of &lt;lemma href=&quot;#Tk&quot;/&gt;">
+<math:proof id="proofTk" title="Proof of &lt;math:lemma href=&quot;Tk&quot;/&gt;">
 <p>
-Combining <equation href="lien-tau-T"/> and <equation href="esp-var"/> shows that
-<equation id="meanTk">
+Combining <math:equation href="lien-tau-T"/> and <math:equation href="esp-var"/> shows that
+<math:equation id="meanTk">
 \g E(T_k(s)) = \g E(\tau^{(2)}(w))-k= \frac{19}{9} k^4 + o(k^4)
-</equation>
+</math:equation>
 and
-<equation id="varTk">
+<math:equation id="varTk">
 \Var(T_k(s)) = \Var(\tau^{(2)}(w))=\frac{361}{162} k^8 + o(k^8).
-</equation>
+</math:equation>
 For all $\eta >0$, write
 $$
 \frac{T_k(s)}{k^{4+\eta}} = \frac{T_k(s) -\g E(T_k(s))}{k^{4+\eta}} + \frac{\g E(T_k(s))}{k^{4+\eta}} .
 $$
 The deterministic part in the second-hand right term goes to $0$ with $k$ thanks
-to <equation href="meanTk"/>, so that we focus on the term
+to <math:equation href="meanTk"/>, so that we focus on the term
 $\displaystyle\frac{T_k(s) -\g E(T_k(s))}{k^{4+\eta}}$.
 For any $\varepsilon >0$, because of Bienaymé-Tchebychev inequality,
 $$
 \g \PP\left(\frac{|T_k(s) -\g E[T_k(s)]|}{k^{4+\eta}} >\varepsilon\right) \leqslant \frac{Var(T_k(s))}{\varepsilon^2 k^{8+2\eta}}=\mathcal{O}\left(\frac 1{k^{2\eta}}\right).
 $$
-This shows the convergence in probability in <lemma href="Tk"/>.
+This shows the convergence in probability in <math:lemma href="Tk"/>.
 Moreover, Borel-Cantelli Lemma ensures the almost sure convergence as soon as $\eta > \frac 12$.
-<qed/>
+<math:qed/>
 </p>
-</proof>
-<remark id="remark4">
+</math:proof>
+<math:remark id="remark4">
 <p>
 Notice that our proof shows actually that the convergence to
-$+\infty$ in <theorem href="hauteur"/> is valid a.s. (and not only in probability)
+$+\infty$ in <math:theorem href="hauteur"/> is valid a.s. (and not only in probability)
 as soon as $\delta > \frac 1{36}$.
 </p>
-</remark>
+</math:remark>
 </subsection>
 
 <subsection id="ssec:saturation" title="Saturation level for the factorial comb">
 <p>
-In this subsection, we prove <theorem href="saturation"/>.
+In this subsection, we prove <math:theorem href="saturation"/>.
 </p>
 <p>
 Consider the probabilized infinite <em>factorial</em> comb defined in
-Section <elt href="#sec:source"/>
+Section <doc href="#sec:source"/>
 by
 $$
 \forall n\in\g N,~c_n=\frac{1}{(n+1)!}.
@@ -1521,9 +1443,9 @@ bounded sequence, which implies the result.
 -->
 Recall that $\rond R$ denotes the set of all right-infinite sequences.
 By characterization of the saturation level as a function of $X_n$
-(see <equation href="defi-var"/>),
+(see <math:equation href="defi-var"/>),
 $\g P\left(\ell _n\leqslant k\right) =\g P\left(\exists s\in\rond R,~X_n(s)\leqslant k\right)$ for all positive integers $n,k$.
-Duality formula <equation href="duality"/> then provides
+Duality formula <math:equation href="duality"/> then provides
 $$
 \begin{array}{rl}
 \g P\left(\ell _n\leqslant k\right)&amp;=\g P\left(\exists s\in\rond R,~T_k(s)\geqslant n\right)\\ \\
@@ -1532,23 +1454,23 @@ $$
 $$
 where $\widetilde{s}$ denotes any infinite word having $10^{k-1}$ as a prefix.
 Markov inequality implies
-<equation id="postMarkov">
+<math:equation id="postMarkov">
 \forall x\in ]0,1[,~\g P\left( \ell _n\geqslant k+1\right)\leqslant \g P\Big(\tau^{(2)}(10^{k-1})\lt n+k\Big)\leqslant\frac{\Phi ^{(2)}_{10^{k-1}}(x)}{x^{n+k}}
-</equation>
+</math:equation>
 where $\Phi ^{(2)}_{10^{k-1}}(x)$
  denotes as above the generating function of the rank of the final letter
  of the second occurrence of $10^{k-1}$ in the infinite random word
  $(U_n)_{n\geq 1}$. The simple form of the factorial comb leads to the
  explicit expression
 $U(x)=\frac{x}{(1-x)(e^x-1)}$ and, after computation,
-<equation id="phi2Factoriel">
+<math:equation id="phi2Factoriel">
 \Phi ^{(2)}_{10^{k-1}}(x)=
 \frac{e^x-1}{e-1}\cdot
 \frac{x^{2k-1}\big( 1-e^x(1-x)\big)}
 {\Big[ k!\left( e^x-1\right)\left( 1-x\right)+x^{k-1}\big( 1-e^x(1-x)\big)\Big] ^2}.
-</equation>
-In particular, applying Formulae <equation href="postMarkov"/> and
-<equation href="phi2Factoriel"/> with $n=(k-1)!$ and $x=1-\frac 1{(k-1)!}$
+</math:equation>
+In particular, applying Formulae <math:equation href="postMarkov"/> and
+<math:equation href="phi2Factoriel"/> with $n=(k-1)!$ and $x=1-\frac 1{(k-1)!}$
 implies that
 for any $k\geqslant 2$,
 $$
@@ -1582,7 +1504,7 @@ $$
 \Gamma ^{-1}(x)\equivalent {+\infty}\frac{\log x}{\log\log x},
 $$
 which implies the result.
-<qed/>
+<math:qed/>
 </p>
 </subsection>
 <subsection id="acks" title="Acknowledgements">

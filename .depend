@@ -1,6 +1,29 @@
+automata.cmo :
+automata.cmx :
+automata_httpd.cmo : automata.cmo
+automata_httpd.cmx : automata.cmx
+automata_main.cmo : automata.cmo
+automata_main.cmx : automata.cmx
+automata_test.cmo : automata.cmo
+automata_test.cmx : automata.cmx
+random_walk.cmo : vlmc_misc.cmi vlmc.cmi
+random_walk.cmx : vlmc_misc.cmx vlmc.cmx
 trie.cmo : vlmc.cmi trie.cmi
 trie.cmx : vlmc.cmx trie.cmi
+trie_draw.cmo : trie.cmi
+trie_draw.cmx : trie.cmx
 vlmc.cmo : vlmc.cmi
 vlmc.cmx : vlmc.cmi
+vlmc_exp.cmo : vlmc_misc.cmi vlmc_laws.cmi vlmc.cmi trie.cmi
+vlmc_exp.cmx : vlmc_misc.cmx vlmc_laws.cmx vlmc.cmx trie.cmx
+vlmc_laws.cmo : vlmc.cmi vlmc_laws.cmi
+vlmc_laws.cmx : vlmc.cmx vlmc_laws.cmi
+vlmc_misc.cmo : vlmc_misc.cmi
+vlmc_misc.cmx : vlmc_misc.cmi
+vlmc_zero_laws.cmo : vlmc.cmi vlmc_zero_laws.cmi
+vlmc_zero_laws.cmx : vlmc.cmx vlmc_zero_laws.cmi
 trie.cmi : vlmc.cmi
 vlmc.cmi :
+vlmc_laws.cmi : vlmc.cmi
+vlmc_misc.cmi :
+vlmc_zero_laws.cmi : vlmc.cmi

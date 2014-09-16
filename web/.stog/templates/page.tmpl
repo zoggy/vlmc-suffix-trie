@@ -1,6 +1,6 @@
 <html>
 <head>
-<title><site-title/> : <elt-title/></title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title><site-title/> : <doc-title/></title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <link rel="stylesheet" type="text/css" href="&lt;site-url/&gt;/style.css"></link>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -8,7 +8,7 @@ MathJax.Hub.Config({
 });
 </script>
 <script type="text/javascript"
-  src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
 <link href="/favicon.png" rel="shortcut icon" type="image/png" />
 </head><body>
@@ -19,18 +19,18 @@ MathJax.Hub.Config({
 <div class="site-desc"><site-description/></div>
 </div>
 <!--<aside><include file="sidebar.tmpl"/></aside>-->
-<if elt-type="post"><div class="date"><elt-date/></div></if>
+<if doc-type="post"><div class="date"><doc-date/></div></if>
 <if pubdate=""><main_/><div class="date"><pubdate/></div></if>
-<if elt-title="&lt;site-title/&gt;"><span> </span><h1><elt-title/></h1></if>
-<div id="elt-body"><elt-body/></div>
-<if elt-type="post"><div class="comments">
+<if doc-title="&lt;site-title/&gt;"><span> </span><h1><doc-title/></h1></if>
+<div id="doc-body"><doc-body/></div>
+<if doc-type="post"><div class="comments">
 <div>
-<div class="elt-keywords">
+<div class="doc-keywords">
   <div class="bloc-keywords">
-  Thèmes: <div class="keywords"><elt-topics ep=", "/></div>
+  Thèmes: <div class="keywords"><doc-topics ep=", "/></div>
   </div>
   <div class="bloc-keywords">
-  Mots-clés: <div class="keywords"><elt-keywords sep=", "/></div>
+  Mots-clés: <div class="keywords"><doc-keywords sep=", "/></div>
   </div>
 </div>
 </div>

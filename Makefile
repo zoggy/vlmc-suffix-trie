@@ -26,6 +26,7 @@
 PACKAGE=vlmcs
 INCLUDES=-I laws -I +functory
 PACKAGES=unix,dynlink,functory
+NETPACKAGES=nethttpd
 OCAMLFIND=ocamlfind
 OCAMLFLAGS= -g $(INCLUDES) -annot
 
@@ -47,8 +48,9 @@ RWALK_BYTE=$(RWALK).byte
 
 AUTOMATA=automata
 AUTOMATA_BYTE=$(AUTOMATA).byte
+AUTOMATA_HTTPD=automata-httpd
 
-TOOLS=$(VLMC_EXP) $(TRIE_DRAW) $(RWALK) $(AUTOMATA)
+TOOLS=$(VLMC_EXP) $(TRIE_DRAW) $(RWALK) $(AUTOMATA) $(AUTOMATA_HTTPD)
 TOOLS_BYTE=$(VLMC_EXP_BYTE) $(TRIE_DRAW_BYTE) $(RWALK_BYTE) $(AUTOMATA_BYTE)
 
 all: opt byte
@@ -87,11 +89,19 @@ $(RWALK): $(LIB) random_walk.cmx
 $(RWALK_BYTE): $(LIB_BYTE) random_walk.cmo
 	$(OCAMLFIND) ocamlc -package $(PACKAGES) $(OCAMLFLAGS) -o $@ -linkpkg -linkall $^
 
-$(AUTOMATA): automata.cmx
+$(AUTOMATA): automata.cmx automata_main.cmx
 	$(OCAMLFIND) ocamlopt -package $(PACKAGES) $(OCAMLFLAGS)  -o $@ -linkpkg  $^
 
-$(AUTOMATA_BYTE): automata.cmo
+$(AUTOMATA_BYTE): automata.cmo automata_main.cmo
 	$(OCAMLFIND) ocamlc -package $(PACKAGES) $(OCAMLFLAGS) -o $@ -linkpkg $^
+
+$(AUTOMATA_HTTPD): automata.cmx automata_httpd.cmx
+	$(OCAMLFIND) ocamlopt -package $(PACKAGES),$(NETPACKAGES) $(OCAMLFLAGS) \
+	-o $@ -linkpkg $^
+
+automata_test: automata.cmx automata_test.cmx
+	$(OCAMLFIND) ocamlopt -package $(PACKAGES) $(OCAMLFLAGS) \
+	-o $@ -linkpkg $^
 
 LAWS_CMXFILES=\
 	laws/prob1.cmx \
@@ -110,16 +120,16 @@ laws: $(LAWS_CMXSFILES) $(LAWS_CMOFILES)
 .suffixes: .ml .mli .cmx .cmi .cmo .cmxs
 
 %.cmi: %.mli
-	$(OCAMLFIND) ocamlc -package $(PACKAGES) $(OCAMLFLAGS) -c $<
+	$(OCAMLFIND) ocamlc -package $(PACKAGES),$(NETPACKAGES) $(OCAMLFLAGS) -c $<
 
 %.cmx: %.ml
-	$(OCAMLFIND) ocamlopt -package $(PACKAGES) $(OCAMLFLAGS) -inline 10000 -verbose -c $<
+	$(OCAMLFIND) ocamlopt -package $(PACKAGES),$(NETPACKAGES) $(OCAMLFLAGS) -inline 10000 -verbose -c $<
 
 %.cmxs: %.ml
-	$(OCAMLFIND) ocamlopt -package $(PACKAGES) $(OCAMLFLAGS) -inline 10000 -shared -o $@ $<
+	$(OCAMLFIND) ocamlopt -package $(PACKAGES),$(NETPACKAGES) $(OCAMLFLAGS) -inline 10000 -shared -o $@ $<
 
 %.cmo: %.ml
-	$(OCAMLFIND) ocamlc -package $(PACKAGES) $(OCAMLFLAGS)  -verbose -c $<
+	$(OCAMLFIND) ocamlc -package $(PACKAGES),$(NETPACKAGES) $(OCAMLFLAGS)  -verbose -c $<
 
 clean:
 	rm -f *.cm* *.annot $(TOOLS) *.o
