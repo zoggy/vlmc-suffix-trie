@@ -9,7 +9,7 @@ build:
 site:
 	mkdir -p $(DEST_DIR)
 	lessc less/style.less > $(DEST_DIR)/style.css
-	$(STOG) --default-lang fr --package stog.disqus,stog-writing $(STOG_OPTIONS) . $(ONLY)
+	$(STOG) --package stog.disqus,stog-writing,stog.rel-href $(STOG_OPTIONS) . $(ONLY)
 
 test:
 	$(MAKE) DEST_DIR=/tmp/vlmc BASE_URL_OPTION="--site-url file:///tmp/vlmc" site
