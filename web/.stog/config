@@ -2,8 +2,8 @@
 ignored =
   [".*\\.bib"; ".*\\.git"; ".*Makefile"; ".*tmpl$"; ".*less$"; ".*log$";
    ".*\\.chamo.*"]
-(* Regexps of files containing elements *)
-elements = [".*\\.xml$"; ".*confiance.*\\.html$"; ".*html$"]
-(* Regexps of files matching 'elements' regexps but not containing elements
+(* Regexps of files containing documents *)
+documents = [".*\\.xml$"; ".*confiance.*\\.html$"; ".*html$"]
+(* Regexps of files matching 'documents' regexps but not containing documents
    *)
-"not-elements" = [".*chamo\\.layout\\.xml"]
+"not-documents" = [".*chamo\\.layout\\.xml"]

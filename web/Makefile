@@ -1,4 +1,4 @@
-STOG=/home/guesdon/Personal/stog/stog
+STOG=stog
 DEST_DIR=/home/guesdon/devel/vlmc-gh-pages
 BASE_URL_OPTION=
 STOG_OPTIONS=-d $(DEST_DIR) $(BASE_URL_OPTION) -v -v
