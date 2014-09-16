@@ -1,14 +1,14 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Vlmc and suffix tries : Uncommon suffix tries</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<link rel="stylesheet" type="text/css" href="http://zoggy.github.com/vlmc-suffix-trie/style.css"/>
+<title>Vlmc and suffix tries : Uncommon suffix tries</title><meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<link href="http://zoggy.github.io/vlmc-suffix-trie/style.css" rel="stylesheet" type="text/css"/>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
 });
 </script>
-<script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript">
 </script>
 <link href="/favicon.png" rel="shortcut icon" type="image/png"/>
 </head><body>
@@ -16,16 +16,16 @@ MathJax.Hub.Config({
 </div>
 <div id="page">
 <div id="header">
-<div id="site-title"><a href="http://zoggy.github.com/vlmc-suffix-trie/index.html">Vlmc and suffix tries</a></div>
+<div id="site-title"><a href="http://zoggy.github.io/vlmc-suffix-trie/index.html">Vlmc and suffix tries</a></div>
 <div class="site-desc"></div>
 </div>
 
 
 <div class="date">November 2012</div>
 <h1>Uncommon suffix tries</h1>
-<div id="elt-body">
+<div id="doc-body">
 
-<span class="hidden">\(
+<span class="pathden">\(
 %\usepackage{fancyhdr,amsmath, amssymb, psfrag, graphicx, amsfonts, layout, color,enumerate,mathrsfs}
 %\usepackage{enumitem,tikz}
 %\setenumerate[1]{label=\it{\textbf{\roman*)} }}
@@ -132,7 +132,7 @@ MathJax.Hub.Config({
 <span class="author"><span class="ext-a"><a href="http://cenac.perso.math.cnrs.fr/">Peggy Cénac</a></span></span>,<span class="author"><span class="ext-a"><a href="http://chauvin.perso.math.cnrs.fr">Brigitte Chauvin</a></span></span>,<span class="author"><span class="ext-a"><a href="http://lamfa.u-picardie.fr/paccaut/">Frédéric Paccaut</a></span></span>,<span class="author"><span class="ext-a"><a href="http://pouyanne.perso.math.cnrs.fr/">Nicolas Pouyanne</a></span></span>
 </div>
 
-<p id="Commonassump"><a class="paragraph-url" href="#Commonassump"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="Commonassumptionsontheso"><a class="paragraph-url" href="#Commonassumptionsontheso"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 Common assumptions on the source producing the words inserted in a suffix trie
 with $n$ leaves lead to a $\log n$ height and saturation level. We provide
 an example of a suffix trie whose height increases faster than a power of
@@ -146,23 +146,23 @@ is uniform and exponential.
 
 
 
-<ul class="toc"><li class="toc-section"><a href="#sec:Intro">Introduction</a></li><li class="toc-section"><a href="#sec:source">Infinite combs as sources</a></li><li class="toc-section"><a href="#sec:mixing">Mixing properties of infinite combs</a><ul class="toc"><li class="toc-subsection"><a href="#ssec:mixingcomb">Mixing properties of general infinite combs</a></li><li class="toc-subsection"><a href="#notations">Notations and Generating functions</a></li><li class="toc-subsection"><a href="#mixingcoefficients">Mixing coefficients</a></li><li class="toc-subsection"><a href="#ssec:mixinglogarithmiccomb">Mixing of the logarithmic infinite comb</a></li><li class="toc-subsection"><a href="#ssec:mixingfactccomb">Mixing of the factorial infinite comb</a></li></ul></li><li class="toc-section"><a href="#sec:suffixtrie">Height and saturation level of suffix tries</a><ul class="toc"><li class="toc-subsection"><a href="#ssec:height">Suffix tries</a></li><li class="toc-subsection"><a href="#ssec:duality">Duality</a></li><li class="toc-subsection"><a href="#ssec:generating">Successive occurence times generating functions</a></li><li class="toc-subsection"><a href="#ssec:results">Logarithmic comb and factorial comb</a></li><li class="toc-subsection"><a href="#ssec:heightLog">Height for the logarithmic comb</a></li><li class="toc-subsection"><a href="#ssec:saturation">Saturation level for the factorial comb</a></li><li class="toc-subsection"><a href="#acks">Acknowledgements</a></li></ul></li><li class="toc-section"><a href="#bib">Bibliography</a></li></ul>
+<ul class="toc"><li class="toc-section"><a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#sec%3AIntro">1. Introduction</a></li><li class="toc-section"><a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#sec%3Asource">2. Infinite combs as sources</a></li><li class="toc-section"><a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#sec%3Amixing">3. Mixing properties of infinite combs</a><ul class="toc"><li class="toc-subsection"><a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#ssec%3Amixingcomb">3.1. Mixing properties of general infinite combs</a></li><li class="toc-subsection"><a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#notations">3.2. Notations and Generating functions</a></li><li class="toc-subsection"><a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#mixingcoefficients">3.3. Mixing coefficients</a></li><li class="toc-subsection"><a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#ssec%3Amixinglogarithmiccomb">3.4. Mixing of the logarithmic infinite comb</a></li><li class="toc-subsection"><a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#ssec%3Amixingfactccomb">3.5. Mixing of the factorial infinite comb</a></li></ul></li><li class="toc-section"><a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#sec%3Asuffixtrie">4. Height and saturation level of suffix tries</a><ul class="toc"><li class="toc-subsection"><a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#ssec%3Aheight">4.1. Suffix tries</a></li><li class="toc-subsection"><a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#ssec%3Aduality">4.2. Duality</a></li><li class="toc-subsection"><a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#ssec%3Agenerating">4.3. Successive occurence times generating functions</a></li><li class="toc-subsection"><a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#ssec%3Aresults">4.4. Logarithmic comb and factorial comb</a></li><li class="toc-subsection"><a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#ssec%3AheightLog">4.5. Height for the logarithmic comb</a></li><li class="toc-subsection"><a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#ssec%3Asaturation">4.6. Saturation level for the factorial comb</a></li><li class="toc-subsection"><a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#acks">4.7. Acknowledgements</a></li></ul></li><li class="toc-section"><a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bib">5. Bibliography</a></li></ul>
 
 <div class="section"><div class="section-title" id="sec:Intro">1. Introduction</div>
-<p id="Trieabbrevia"><a class="paragraph-url" href="#Trieabbrevia"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="Trieabbreviationofretrie"><a class="paragraph-url" href="#Trieabbreviationofretrie"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 
-<em>Trie</em> (abbreviation of re<em>trie</em>val) is a natural data structure, efficient for searching words in a given set and used in many algorithms as data compression, spell checking or IP addresses lookup. A <em>trie</em> is a digital tree in which words are inserted in external nodes. The trie process grows up by successively inserting words according to their prefixes. A precise definition will be given in Section <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#ssec:height">4.1</a>.
+<em>Trie</em> (abbreviation of re<em>trie</em>val) is a natural data structure, efficient for searching words in a given set and used in many algorithms as data compression, spell checking or IP addresses lookup. A <em>trie</em> is a digital tree in which words are inserted in external nodes. The trie process grows up by successively inserting words according to their prefixes. A precise definition will be given in Section <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#ssec%3Aheight">4.1</a>.
 </p>
-<p id="Assoonasaset"><a class="paragraph-url" href="#Assoonasaset"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="Assoonasasetofwordsisgiv"><a class="paragraph-url" href="#Assoonasasetofwordsisgiv"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 As soon as a set of words is given, the way they are inserted in the trie is deterministic. Nevertheless, a trie becomes random when the words are randomly drawn: each word is produced by a probabilistic source and $n$ words are chosen (usually independently) to be inserted in a trie. A <em>suffix trie</em> is a trie built on the suffixes of <em>one</em> infinite word. The randomness then comes from the source producing such an infinite word and the successive words inserted in the tree are far from being independent, they are strongly correlated.
 </p>
-<p id="Suffixtriesa"><a class="paragraph-url" href="#Suffixtriesa"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
-Suffix tries, also called suffix trees in the literature, have been developped with tools from analysis of algorithms and information theory on one side and from probability theory and ergodic theory on the other side. Construction algorithms of such trees go back to Weiner <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_Weiner">[39]</a> in 1973 and many applications in computer science and biology can be found in Gusfield's book <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_Gusfield97">[21]</a>. As a major application of suffix tries one can cite an efficient implementation of the famous Lempel-Ziv lossless compression algorithm LZ77. The first results on the height of random suffix trees are due to Szpankowski <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_Szpan91">[37]</a> and Devroye <em>et al.</em> <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_Devroye2">[12]</a>, and the most recent results are in Szpankowski <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_Szpan93">[38]</a> and Fayolle <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_Fayolle">[14]</a>.
+<p id="Suffixtriesalsocalledsuf"><a class="paragraph-url" href="#Suffixtriesalsocalledsuf"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
+Suffix tries, also called suffix trees in the literature, have been developped with tools from analysis of algorithms and information theory on one side and from probability theory and ergodic theory on the other side. Construction algorithms of such trees go back to Weiner <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_Weiner">[39]</a> in 1973 and many applications in computer science and biology can be found in Gusfield's book <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_Gusfield97">[21]</a>. As a major application of suffix tries one can cite an efficient implementation of the famous Lempel-Ziv lossless compression algorithm LZ77. The first results on the height of random suffix trees are due to Szpankowski <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_Szpan91">[37]</a> and Devroye <em>et al.</em> <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_Devroye2">[12]</a>, and the most recent results are in Szpankowski <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_Szpan93">[38]</a> and Fayolle <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_Fayolle">[14]</a>.
 </p>
-<p id="Thegrowingof"><a class="paragraph-url" href="#Thegrowingof"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
-The growing of suffix tries (called prefix trees in Shields' book <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_Shieldsbook">[35]</a>) is closely related to second occurrences of patterns; this will be precisely explained later in Section <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#ssec:height">4.1</a>. Consequently, many results on this subject can be found in papers dealing with occurrences of words, renewal theory or waiting times like Shields <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_Shields">[34]</a> or Wyner-Ziv <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_WynZiv">[41]</a>.
+<p id="Thegrowingofsuffixtriesc"><a class="paragraph-url" href="#Thegrowingofsuffixtriesc"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
+The growing of suffix tries (called prefix trees in Shields' book <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_Shieldsbook">[35]</a>) is closely related to second occurrences of patterns; this will be precisely explained later in Section <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#ssec%3Aheight">4.1</a>. Consequently, many results on this subject can be found in papers dealing with occurrences of words, renewal theory or waiting times like Shields <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_Shields">[34]</a> or Wyner-Ziv <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_WynZiv">[41]</a>.
 </p>
-<p id="Inthepresent"><a class="paragraph-url" href="#Inthepresent"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="Inthepresentpaperwearein"><a class="paragraph-url" href="#Inthepresentpaperwearein"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 In the present paper we are interested in the height $H_n$ and the saturation
 level $\ell_n$ of a suffix trie $\rond T_n$ containing the first $n$ suffixes
 of an infinite word produced by a probabilistic source. The analysis of the
@@ -176,54 +176,54 @@ sources are often more complex. We work here with a more general source model.
 It includes nonmarkovian processes where the dependency on past history is
 unbounded. It has the advantage of making calculations possible as well.
 The source is associated with a so-called Variable Length Markov Chain (VLMC)
-(see Rissanen <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_Ris">[31]</a> for the seminal work, Galves-Löcherbach
-<a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_GalLoc">[18]</a> for an overview,  and  <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_ccpp">[9]</a> for a
+(see Rissanen <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_Ris">[31]</a> for the seminal work, Galves-Löcherbach
+<a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_GalLoc">[18]</a> for an overview,  and  <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_ccpp">[9]</a> for a
 probabilistic frame). We deal with a particular VLMC source defined by an
 infinite comb, described hereafter.
 </p>
-<p id="Afirstbrowse"><a class="paragraph-url" href="#Afirstbrowse"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
-A first browse of the literature reveals tries or suffix tries that have a height and a saturation level both growing logarithmically with the number of words inserted. For plain tries, <em>i.e.</em> when the inserted words are independent, the results due to Pittel <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_Pittel">[28]</a> rely on  two assumptions on the source that produces the words: first, the source is uniformly mixing, second, the probability of any word decays exponentially with its length.
-Let us also mention the general analysis of tries by Clément <em>et al.</em> <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_ClementFlajoletVallee">[7]</a> for dynamical sources.
-For suffix tries, Szpankowski <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_Szpan93">[38]</a> obtains the same result, with a weaker mixing assumption (still uniform though) and with the same hypothesis on the measure of the words. Nevertheless, in <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_Shields">[34]</a>, Shields states a result on prefixes of ergodic processes suggesting that the saturation level of suffix tries might not necessarily grow logarithmically with the number of words inserted.
+<p id="Afirstbrowseoftheliterat"><a class="paragraph-url" href="#Afirstbrowseoftheliterat"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
+A first browse of the literature reveals tries or suffix tries that have a height and a saturation level both growing logarithmically with the number of words inserted. For plain tries, <em>i.e.</em> when the inserted words are independent, the results due to Pittel <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_Pittel">[28]</a> rely on  two assumptions on the source that produces the words: first, the source is uniformly mixing, second, the probability of any word decays exponentially with its length.
+Let us also mention the general analysis of tries by Clément <em>et al.</em> <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_ClementFlajoletVallee">[7]</a> for dynamical sources.
+For suffix tries, Szpankowski <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_Szpan93">[38]</a> obtains the same result, with a weaker mixing assumption (still uniform though) and with the same hypothesis on the measure of the words. Nevertheless, in <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_Shields">[34]</a>, Shields states a result on prefixes of ergodic processes suggesting that the saturation level of suffix tries might not necessarily grow logarithmically with the number of words inserted.
 </p>
-<p id="Ouraimistoex"><a class="paragraph-url" href="#Ouraimistoex"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="Ouraimistoexhibittwocase"><a class="paragraph-url" href="#Ouraimistoexhibittwocase"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 Our aim is to exhibit two cases when the behaviour of the height or the saturation level
 is no longer logarithmic. The first example is the &quot;<em>logarithmic comb</em>&quot;, for
  which we show that the mixing is slow in some sense, namely non uniformly polynomial
- (see Section <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#ssec:mixinglogarithmiccomb">3.4</a> for a precise statement) and the
+ (see Section <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#ssec%3Amixinglogarithmiccomb">3.4</a> for a precise statement) and the
  measure of some increasing sequence of words decays polynomially. We prove in
- <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#hauteur">Theorem 1</a> that the height of this trie is larger than a power
+ <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#hauteur">Theorem 1</a> that the height of this trie is larger than a power
  of $n$ (when $n$ is the number of inserted suffixes in the tree).
 </p>
-<p id="Thesecondexa"><a class="paragraph-url" href="#Thesecondexa"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>The second example is the &quot;<em>factorial comb</em>&quot;, which has a uniformly
+<p id="Thesecondexampleisthefac"><a class="paragraph-url" href="#Thesecondexampleisthefac"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>The second example is the &quot;<em>factorial comb</em>&quot;, which has a uniformly
 exponential mixing, thus fulfilling the mixing hypothesis of Szpankowski
-<a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_Szpan93">[38]</a>, but the measure of some increasing sequence of words
+<a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_Szpan93">[38]</a>, but the measure of some increasing sequence of words
 decays faster than any exponential. In this case we prove in
-<a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#saturation">Theorem 2</a> that the saturation level is negligible with respect
+<a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#saturation">Theorem 2</a> that the saturation level is negligible with respect
 to $\log n$. We prove more precisely that, almost surely,
 $\ell _n\in o\left(\frac{\log n}{(\log\log n)^\delta}\right)$, for any $\delta &gt;1$.
 </p>
 
-<p id="Thepaperisor"><a class="paragraph-url" href="#Thepaperisor"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
-The paper is organised as follows. In Section <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#sec:source">2</a>, we define a
-VLMC source associated with an infinite comb. In Section <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#sec:mixing">3</a> we give
+<p id="Thepaperisorganisedasfol"><a class="paragraph-url" href="#Thepaperisorganisedasfol"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
+The paper is organised as follows. In Section <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#sec%3Asource">2</a>, we define a
+VLMC source associated with an infinite comb. In Section <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#sec%3Amixing">3</a> we give
 results on the mixing properties of these sources by explicitely computing the suitable
-generating functions in terms of the source data. In Section <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#sec:suffixtrie">4</a>,
+generating functions in terms of the source data. In Section <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#sec%3Asuffixtrie">4</a>,
 the associated suffix tries are built, and the two uncommon behaviours are stated and shown.
 The methods are based on two key tools concerning successive occurence times of patterns:
 a duality property and the computation of generating functions. The relation between the mixing
 of the source and the asymptotic behaviour of the trie is highlighted by the proof
-of <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#Phi2">Proposition 4</a>.
+of <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#Phi2">Proposition 4</a>.
 </p>
 </div>
 
 <div class="section"><div class="section-title" id="sec:source">2. Infinite combs as sources</div>
-<p id="Inthissectio"><a class="paragraph-url" href="#Inthissectio"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="InthissectionaVLMCprobab"><a class="paragraph-url" href="#InthissectionaVLMCprobab"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 In this section, a VLMC probabilistic source associated with an infinite comb is defined. Moreover, we present the two examples given in introduction: the logarithmic and the factorial combs. We begin with the definition of a general variable length Markov chain associated with a probabilized infinite comb.
 </p>
-<p id="Thefollowing"><a class="paragraph-url" href="#Thefollowing"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
-The following presentation comes from <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_ccpp">[9]</a>.
-Consider the binary tree (represented in Figure <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#peigne">Figure 1</a>) whose finite leaves are the words $1, 01, \dots, 0^k1, \dots $ and with an infinite leaf $0^{\infty}$ as well.
+<p id="Thefollowingpresentation"><a class="paragraph-url" href="#Thefollowingpresentation"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
+The following presentation comes from <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_ccpp">[9]</a>.
+Consider the binary tree (represented in <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#peigne">Figure 1</a>) whose finite leaves are the words $1, 01, \dots, 0^k1, \dots $ and with an infinite leaf $0^{\infty}$ as well.
 The set of leaves is
 \[
 \mathcal{C}:=\{0^n1,\, n\ge 0\}\cup \{0^\infty\}.
@@ -232,15 +232,15 @@ Each leaf is labelled with a Bernoulli distribution on $\{0,1\}$, respectively  
 \[\forall k \geq 0 \quad q_{0^k1}(0)=1-q_{0^k1}(1).\]
 This probabilized tree is called <em>the infinite comb</em>.
 </p>
-<p id="Figure1Aninf"><a class="paragraph-url" href="#Figure1Aninf"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id=""><a class="paragraph-url" href="#"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 
 <div class="figure" id="peigne">
   <div class="title">Figure 1: An infinite comb</div>
-  <div class="contents"><img width="500" src="uncommon-suffix-tries/infiniteComb.svg"/></div>
+  <div class="contents"><img src="uncommon-suffix-tries/infiniteComb.svg" width="500"/></div>
 </div>
 </p>
-<p id="LetmathcalL0"><a class="paragraph-url" href="#LetmathcalL0"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
-Let $\mathcal{L}= \{0,1\}^{-\mathbb{N}}$ be the set<sup id="source_note_1"><a href="#target_note_1">1</a></sup> of left-infinite words on the alphabet $\{0,1\}$.
+<p id="LetmathcalL01mathbbNbeth"><a class="paragraph-url" href="#LetmathcalL01mathbbNbeth"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
+Let $\mathcal{L}= \{0,1\}^{-\mathbb{N}}$ be the set<sup class="footnote-link" id="source_note_1"><a href="#target_note_1">1</a></sup> of left-infinite words on the alphabet $\{0,1\}$.
 The <em>prefix function</em>
 $$\lpref :\mathcal{L}=\{0,1\}^{-\mathbb{N}}\to\mathcal{C}$$
 associates to any left-infinite word (reading from right to left) its first suffix appearing as a leaf of the comb. The prefix function indicates the length of the last run of $0$: for instance,
@@ -252,14 +252,14 @@ $$\g P(V_{n+1} = V_n\alpha | V_n)= q_{\petitlpref (V_n)}(\alpha )
 $$
 where $\alpha\in\{0,1\}$ is a letter. Notice that the VLMC is entirely determined by the family of distributions $q_{0^{\infty}}, q_{0^k1}, k\geqslant 0$. %Moreover the order of dependence  (the memory) depends on the past itself.
 </p>
-<p id="Fromnowonden"><a class="paragraph-url" href="#Fromnowonden"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="Fromnowondenotec_01andfo"><a class="paragraph-url" href="#Fromnowondenotec_01andfo"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 From now on, denote $c_0 = 1$ and for $n\geqslant 1$,
 $$
 c_n:= \prod_{k=0}^{n-1} q_{0^{k}1}(0).
 $$
 </p>
-<p id="Itisprovedin"><a class="paragraph-url" href="#Itisprovedin"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
-It is proved in <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_ccpp">[9]</a> that in the irreducible case <em>i.e.</em>
+<p id="Itisprovedin9thatintheir"><a class="paragraph-url" href="#Itisprovedin9thatintheir"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
+It is proved in <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_ccpp">[9]</a> that in the irreducible case <em>i.e.</em>
 when $q_{0^{\infty}}(0)\not= 1$, there exists a unique stationary probability
 measure $\pi$ on $\rond L$ for $(V_n)_n$ if and only if the series $\sum c_n$ converges.
 From now on, we assume that this condition is fulfilled and we call
@@ -268,7 +268,7 @@ From now on, we assume that this condition is fulfilled and we call
 S(x):=\sum_{n\geqslant 0} c_n x^n
 $</span><span class="title">(1)</span>
 </span>
-its generating function so that $S(1) = \sum_{n\geqslant 0} c_n$. For any finite word $w$, we denote $\pi(w):=\pi(\rond Lw)$. Computations performed in <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_ccpp">[9]</a> show that for any $n\geqslant 0$,
+its generating function so that $S(1) = \sum_{n\geqslant 0} c_n$. For any finite word $w$, we denote $\pi(w):=\pi(\rond Lw)$. Computations performed in <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_ccpp">[9]</a> show that for any $n\geqslant 0$,
 <span class="equation" id="probas">
   <span class="contents">$
  \pi(10^n)=\frac{c_n}{S(1)} \quad \mbox{and}\quad \pi(0^n)=\frac{\sum_{k \geqslant n}c_k}{S(1)}.
@@ -289,21 +289,21 @@ indexed by all finite words $w$. This paper deals with suffix tries built from s
 </p>
 
 <div class="subsection"><div class="subsection-title" id="7df6-dda1-73e1-671a">2.1. Example 1: the logarithmic comb</div>
-<p id="Thelogarithm"><a class="paragraph-url" href="#Thelogarithm"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="Thelogarithmiccombisdefi"><a class="paragraph-url" href="#Thelogarithmiccombisdefi"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 The logarithmic comb is defined by $c_0=1$ and for $n\geqslant 1$,
 \[c_n = \frac{1}{n(n+1)(n+2)(n+3)}. \]
 The corresponding conditional probabilities on the leaves of the tree are
   \[q_1(0)=\frac{1}{24}\quad \mbox{and for }n\geqslant 1, \quad q_{0^n1}(0)=1-\frac{4}{n+4}.\]
 The expression of $c_n$ was chosen to make the computations as simple
 as possible and also because the square-integrability of the waiting time of
-some pattern will be needed (see end of Section <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#ssec:generating">4.3</a>),
+some pattern will be needed (see end of Section <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#ssec%3Agenerating">4.3</a>),
 guaranteed by
 \[\sum_{n\geqslant 0} n^2c_n\lt+\infty.\]
 </p>
 </div>
 
 <div class="subsection"><div class="subsection-title" id="3467-b3c3-e16e-bfa3">2.2. Example 2: the factorial comb</div>
-<p id="Thecondition"><a class="paragraph-url" href="#Thecondition"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="Theconditionalprobabilit"><a class="paragraph-url" href="#Theconditionalprobabilit"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 The conditional probabilities on the leaves are defined by
 $$
 q_{0^n1}(0)= \frac 1{n+2} \quad \mbox{ for }n\geqslant 0,
@@ -317,21 +317,21 @@ $$
 </div>
 
 <div class="section"><div class="section-title" id="sec:mixing">3. Mixing properties of infinite combs</div>
-<p id="Inthissection"><a class="paragraph-url" href="#Inthissection"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="Inthissectionwefirstprec"><a class="paragraph-url" href="#Inthissectionwefirstprec"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 In this section, we first precise what we mean by mixing properties of a random
-sequence. We refer to Doukhan  <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_Doukhan">[13]</a>, especially for the notion
-of $\psi$-mixing defined in that book. We state in <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#melange">Proposition 1</a>
+sequence. We refer to Doukhan  <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_Doukhan">[13]</a>, especially for the notion
+of $\psi$-mixing defined in that book. We state in <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#melange">Proposition 1</a>
 a general result that provides the mixing coefficient for an infinite comb defined by
 $(c_n)_{n\geqslant 0}$ or equivalently by its generating function $S$. This result
 is then applied to our two examples. The mixing of the logarithmic comb is polynomial
 but not uniform, it is a very weak mixing; the mixing of the factorial comb
 is uniform and exponential, it is a very strong mixing. Notice that mixing
-properties of some infinite combs have already been investigated by Isola <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_Isola">[24]</a>,
+properties of some infinite combs have already been investigated by Isola <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_Isola">[24]</a>,
 although with a slight different language.
 </p>
 
 <div class="subsection"><div class="subsection-title" id="ssec:mixingcomb">3.1. Mixing properties of general infinite combs</div>
-<p id="Forastationa"><a class="paragraph-url" href="#Forastationa"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="ForastationarysequenceU_"><a class="paragraph-url" href="#ForastationarysequenceU_"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 For a stationary sequence $(U_n)_{n\geqslant 0}$ with stationary measure
 $\pi$, we want to measure by means of a suitable coefficient the independence between
 two words $A$ and $B$ separated by $n$ letters. The sequence is said to be &quot;mixing&quot;
@@ -346,33 +346,33 @@ generated by $\{U_k , 0\leqslant k \leqslant m\}$ and introduce for
     <td class="center">$:=$</td>
     <td class="left">$\frac{\pi(A\cap T^{-(m+1)-n}B)-\pi(A)\pi(B)}{\pi(A)\pi(B)}$</td>
 </tr>
-<tr><td/>
+<tr><td></td>
     <td class="center">$=$</td>
     <td class="left"><span class="equation" id="mixingCoeff">
   <span class="contents">$\frac{\sum_{|w|=n}\pi(AwB)-\pi(A)\pi(B)}{\pi(A)\pi(B)}$</span><span class="title">(4)</span>
 </span></td>
 </tr>
 </table>
-<p id="whereTisthes"><a class="paragraph-url" href="#whereTisthes"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="whereTistheshiftmapandwh"><a class="paragraph-url" href="#whereTistheshiftmapandwh"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 where $T$ is the shift map and where the sum runs over the finite words $w$ with length $|w|=n$.
 </p>
-<p id="AsequenceU_n"><a class="paragraph-url" href="#AsequenceU_n"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="AsequenceU_n_ngeqslant0i"><a class="paragraph-url" href="#AsequenceU_n_ngeqslant0i"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 A sequence $(U_n)_{n\geqslant 0}$ is called <em>$\psi$-mixing</em> whenever
 \[\lim_{n\to\infty}\ \sup_{m\geqslant 0,A\in{\cal F}_0^m, B\in{\cal F}_0^{\infty}}|\psi(n,A,B)|=0.\]
 In this definition, the convergence to zero is uniform over all words $A$ and $B$. This is not going
 to be the case in our first example.
-As in Isola <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_Isola">[24]</a>, we widely use the renewal properties of infinite combs (see
-<a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#lemme_un">Lemma 1</a>) but more detailed results are needed, in particular we investigate
+As in Isola <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_Isola">[24]</a>, we widely use the renewal properties of infinite combs (see
+<a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#lemme_un">Lemma 1</a>) but more detailed results are needed, in particular we investigate
 the lack of uniformity for the logarithmic comb.
 </p>
 </div>
 
 <div class="subsection"><div class="subsection-title" id="notations">3.2. Notations and Generating functions</div>
-<p id="bulletForaco"><a class="paragraph-url" href="#bulletForaco"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="bulletForacombrecallthat"><a class="paragraph-url" href="#bulletForacombrecallthat"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 $\bullet$ For a comb, recall that $S$ is the generating function of the nonincreasing
-sequence $(c_n)_{n\geqslant 0}$ defined by <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#def-S">(1)</a>.
+sequence $(c_n)_{n\geqslant 0}$ defined by <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#def-S">(1)</a>.
 </p>
-<p id="bulletSetrho"><a class="paragraph-url" href="#bulletSetrho"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="bulletSetrho_00andfornge"><a class="paragraph-url" href="#bulletSetrho_00andfornge"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 $\bullet$ Set $\rho_0=0$ and for $n\geqslant 1$,
 \[\rho_n:=c_{n-1}-c_{n},\]
 with generating function
@@ -388,14 +388,14 @@ $</span><span class="title">(5)</span>
 and let
 \[U(x):=\sum_{n\geqslant 0}u_nx^n\]
 denote its generating function. Hereunder is stated a key lemma that will be widely used
- in <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#melange">Proposition 1</a>. In some sense, this kind of relation (sometimes called
+ in <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#melange">Proposition 1</a>. In some sense, this kind of relation (sometimes called
   Renewal Equation) reflects the renewal properties of the infinite comb.
 </p>
 
 <div class="lemma" id="lemme_un">
   <div class="title">Lemma 1</div>
   <div class="contents">
-<p id="Thesequences"><a class="paragraph-url" href="#Thesequences"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="Thesequencesu_n_ngeqslan"><a class="paragraph-url" href="#Thesequencesu_n_ngeqslan"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 The sequences $(u_n)_{n\geqslant 0}$ and $(\rho_n)_{n\geqslant 0}$ are connected by the relations:
 \[\forall n\geqslant 1,~~u_n=\rho_n+u_1\rho_{n-1}+\ldots+u_{n-1}\rho_1\]
 and (consequently)
@@ -403,15 +403,16 @@ and (consequently)
 </p>
 </div>
 </div>
-<div class="proof">
-<button href="#proof1" data-toggle="collapse" class="btn btn-info proof">Proof.</button>
-<div class="collapse" id="proof1">
-
+<div class="proof" id="proof1">
+<button class="btn btn-info proof" data-toggle="collapse" href="#proof1__body">Proof.</button>
+<div class="collapse" id="proof1__body">
+  <div class="title">Proof
+1 (<a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#lemme_un">Lemma 1</a>)</div>
   <div class="contents">
-<p id="Forafinitewo"><a class="paragraph-url" href="#Forafinitewo"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="Forafinitewordwalpha_1ld"><a class="paragraph-url" href="#Forafinitewordwalpha_1ld"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 For a finite word $w=\alpha_1\ldots\alpha_m$ such that $w \neq 0^m$, let $l(w)$ denote
 the position of the last $1$ in $w$, that is $l(w):=\max\{1\le i\le m,~\alpha_i=1\}$.
-Then, the sum in the expression <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#un">(5)</a> of $u_n$ can be decomposed as follows:
+Then, the sum in the expression <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#un">(5)</a> of $u_n$ can be decomposed as follows:
 \[\sum_{|w|=n-1}\pi(1w1)=\pi(10^{n-1}1)+\sum_{i=1}^{n-1}\sum_{{|w|=n-1}\atop{l(w)=i}}\pi(1w1).\]
 Now, by disjoint union $\pi(10^{n-1})=\pi(10^{n-1}1)+\pi(10^{n})$, so that
 \[\pi(10^{n-1}1)=\pi(1)(c_{n-1}-c_{n})=\pi(1)\rho_n.\]
@@ -423,11 +424,11 @@ In the same way, for $w=\alpha_1\ldots\alpha_{n-1}$, if $l(w)=i$ then
      <td class="center">$ = $</td>
      <td class="left">$\rho_n+\sum_{i=1}^{n-1}\rho_{n-i}\frac{1}{\pi(1)}\sum_{|w|=i-1}\pi(1w1)$</td>
 </tr>
-<tr><td/><td class="center">$ = $</td>
+<tr><td></td><td class="center">$ = $</td>
      <td class="left">$\rho_n+\sum_{i=1}^{n-1}\rho_{n-i}u_{i}$,</td>
 </tr>
 </table>
-<p id="whichleadsto"><a class="paragraph-url" href="#whichleadsto"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="whichleadstoUx1Px1bysumm"><a class="paragraph-url" href="#whichleadstoUx1Px1bysumm"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 which leads to $U(x)=(1-P(x))^{-1}$ by summation.
 ∎
 </p>
@@ -436,7 +437,7 @@ which leads to $U(x)=(1-P(x))^{-1}$ by summation.
 </div>
 
 <div class="subsection"><div class="subsection-title" id="mixingcoefficients">3.3. Mixing coefficients</div>
-<p id="Themixingcoe"><a class="paragraph-url" href="#Themixingcoe"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="Themixingcoefficientspsi"><a class="paragraph-url" href="#Themixingcoefficientspsi"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 The mixing coefficients $\psi(n,A,B)$ are expressed as the $n$-th coefficient
 in the series expansion of an analytic function $M^{A,B}$ which is given in
 terms of $S$ and $U$. The notation $[x^n] A(x)$ means the  coefficient
@@ -455,7 +456,7 @@ $</span><span class="title">(6)</span>
 <div class="prop" id="melange">
   <div class="title">Proposition 1</div>
   <div class="contents">
-<p id="Foranyfinite"><a class="paragraph-url" href="#Foranyfinite"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="ForanyfinitewordAandanyw"><a class="paragraph-url" href="#ForanyfinitewordAandanyw"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 For any finite word $A$ and any word $B$, the identity
 \[\psi(n,A,B)=[x^{n+1}] M^{A,B}(x)\]
 holds for the generating functions $M^{A,B}$ respectively defined by:
@@ -497,7 +498,7 @@ $$
 <div class="remark" id="remark1">
   <div class="title">Remark 1: </div>
   <div class="contents">
-<p id="Itisworthnot"><a class="paragraph-url" href="#Itisworthnot"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="Itisworthnoticingthatthe"><a class="paragraph-url" href="#Itisworthnoticingthatthe"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 It is worth noticing that the asymptotics of $\psi(n,A,B)$ may not be uniform in all
 words $A$ and $B$. We  call this kind of system non-uniformly $\psi$-mixing. It may happen
 that $\psi(n,A,B)$ goes to zero for any fixed $A$ and $B$, but (for example, in case (iii)) the
@@ -505,13 +506,14 @@ larger $a$ or $b$, the slower the convergence, preventing it from being uniform.
 </p>
 </div>
 </div>
-<div class="proof">
-<button href="#proof2" data-toggle="collapse" class="btn btn-info proof">Proof.</button>
-<div class="collapse" id="proof2">
-
+<div class="proof" id="proof2">
+<button class="btn btn-info proof" data-toggle="collapse" href="#proof2__body">Proof.</button>
+<div class="collapse" id="proof2__body">
+  <div class="title">Proof
+2</div>
   <div class="contents">
-<p id="Thefollowingi"><a class="paragraph-url" href="#Thefollowingi"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
-The following identity has been established in <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_ccpp">[9]</a> (see formula (17) in
+<p id="Thefollowingidentityhasb"><a class="paragraph-url" href="#Thefollowingidentityhasb"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
+The following identity has been established in <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_ccpp">[9]</a> (see formula (17) in
 that paper) and will be used many times in the sequel. For any two finite words $w$ and $w'$,
 <span class="equation" id="renouvellement">
   <span class="contents">$
@@ -521,20 +523,20 @@ $</span><span class="title">(7)</span>
 </p>
 <ol>
 <li>
- If $A=A'1$ and $B=1B'$, then <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#renouvellement">(7)</a> yields
+ If $A=A'1$ and $B=1B'$, then <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#renouvellement">(7)</a> yields
 \[\pi(AwB)=\pi(A'1w1B')=\frac{\pi(A'1)}{\pi(1)}\pi(1w1B')=S(1)\pi(A)\pi(B)\frac{\pi(1w1)}{\pi(1)}.\]
 So
 $$
 \psi(n,A,B) = S(1) u_{n+1} - 1
 $$
-and by Lemma <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#lemme_un">Lemma 1</a>, the result follows.
+and by Lemma <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#lemme_un">Lemma 1</a>, the result follows.
 </li>
 <li>
-<p id="LetAA10aandB"><a class="paragraph-url" href="#LetAA10aandB"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="LetAA10aandB0b1Bwithabge"><a class="paragraph-url" href="#LetAA10aandB0b1Bwithabge"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 Let $A=A'10^a$ and $B=0^b1B'$ with $a,b\geqslant 0$ and $a+b\neq 0$.
 To begin with,
 \[\pi(AwB)=\frac{1}{\pi(1)}\pi(A'1)\pi(10^aw0^b1B')=\frac{1}{\pi(1)^2}\pi(A'1)\pi(10^aw0^b1)\pi(1B').\]
-Furthermore, $\pi(A)=c_a\pi(A'1)$ and  by <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#sym">(3)</a>, $\pi(0^b1)=\pi(10^b)$, so it comes
+Furthermore, $\pi(A)=c_a\pi(A'1)$ and  by <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#sym">(3)</a>, $\pi(0^b1)=\pi(10^b)$, so it comes
  
  \[\pi(B)=\frac{1}{\pi(1)}\pi(0^b1)\pi(1B')=\frac{\pi(10^b)}{\pi(1)}\pi(1B')=c_b\pi(1B').\]
  Therefore,
@@ -555,37 +557,37 @@ If $i=j$ then $w$ is the word $0^{i-1}10^{n-i}$, else $w$ is of the form
     <td class="center">$ = $</td>
     <td class="left">$\pi(1)\rho_{a+b+n+1}+\pi(1)\sum_{i=1}^{n}\rho_{a+i}\rho_{n+1-i+b}$</td>
 </tr>
-<tr><td/><td class="center">$ + $</td>
+<tr><td></td><td class="center">$ + $</td>
      <td class="left">$\sum_{1\leqslant i\lt j\leqslant n}\sum_{{{w}\atop{|w|=j-i-1}}}\pi(10^{a+i-1}1w10^{n-j+b}1)$.</td>
 </tr>
 </table>
-<p id="Equation77sh"><a class="paragraph-url" href="#Equation77sh"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
-Equation <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#renouvellement">(7)</a> shows
+<p id="Equationshows"><a class="paragraph-url" href="#Equationshows"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
+Equation <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#renouvellement">(7)</a> shows
 </p>
 <table class="eqnarray">
 <tr><td class="right">$\pi(10^{a+i-1}1w10^{n-j+b}1)$</td>
     <td class="center">$ = $</td>
     <td class="left">$\frac{\pi(10^{a+i-1}1)}{\pi(1)}\frac{\pi(1w1)}{\pi(1)}\pi(10^{n-j+b}1)$</td>
 </tr>
-<tr><td/><td class="center">$ = $</td>
+<tr><td></td><td class="center">$ = $</td>
     <td class="left">$\rho_{a+i}\rho_{n+1-j+b}\pi(1w1)$.</td>
 </tr>
 </table>
-<p id="Thisimpliesv"><a class="paragraph-url" href="#Thisimpliesv"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="Thisimpliesv_nabrho_abn1"><a class="paragraph-url" href="#Thisimpliesv_nabrho_abn1"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 This implies:
 \[v_n^{a,b}=\rho_{a+b+n+1}+\sum_{i=1}^{n}\rho_{a+i}\rho_{n+1-i+b}
    +  \sum_{1\le i\lt j\le n}\rho_{a+i}\rho_{n+1-j+b}\sum_{w, |w|=j-i11}\frac{\pi(1w1)}{\pi(1)}.\]
 Recalling that $u_0=1$, one gets
  \[v_n^{a,b}=\rho_{a+b+n+1}+\sum_{1\le i\le j\le n}\rho_{a+i}\rho_{n+1-j+b}u_{j-i}\]
-which gives the result <strong><i>ii)</i></strong> with <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#lemme_un">Lemma 1</a>.
+which gives the result <strong><i>ii)</i></strong> with <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#lemme_un">Lemma 1</a>.
 </p>
 </li>
 <li>
-<p id="LetA0aandB0b"><a class="paragraph-url" href="#LetA0aandB0b"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="LetA0aandB0bwithabgeqsla"><a class="paragraph-url" href="#LetA0aandB0bwithabgeqsla"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 Let $A=0^a$ and $B=0^b$ with $a,b\geqslant 1$.
 Set
  \[v_n^{a,b}:=\frac{1}{\pi(1)}\sum_{|w|=n}\pi(0^aw0^b).\]
-First, recall that, due to <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#probas">(2)</a>, $\pi(A)=\pi(1)r_a$ and $\pi(B)=\pi(1)r_b$.
+First, recall that, due to <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#probas">(2)</a>, $\pi(A)=\pi(1)r_a$ and $\pi(B)=\pi(1)r_b$.
 Consequently,
  \[\psi(n,A,B)=\frac{\pi(1)v_{n}^{a,b}-\pi(A)\pi(B)}{\pi(A)\pi(B)}=S(1)\frac{v_{n}^{a,b}}{r_ar_b}-1.\]
 Let $w$ be a finite word with $|w|=n$. If $w=0^{n}$, then
@@ -597,11 +599,11 @@ If not, let $f(w)$ denote as before the first position of $1$ in $w$ and $l(w)$ 
     <td class="center">$ = $</td>
     <td class="left">$\pi(0^{a+f(w)-1}10^{n-f(w)+b})$</td>
 </tr>
-<tr><td/><td class="center">$ = $</td>
+<tr><td></td><td class="center">$ = $</td>
   <td class="left">$\frac{1}{\pi(1)}\pi(0^{a+f(w)-1}1)\pi(10^{n-f(w)+b})=\pi(1)c_{a+f(w)-1}c_{n-f(w)+b}$.</td>
 </tr>
 </table>
-<p id="Iffwltlwthen"><a class="paragraph-url" href="#Iffwltlwthen"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="Iffwltlwthenwritingww_1l"><a class="paragraph-url" href="#Iffwltlwthenwritingww_1l"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
  If $f(w)\lt l(w)$, then writing $w=w_1 \ldots w_{n}$,
 </p>
 <table class="eqnarray">
@@ -609,11 +611,11 @@ If not, let $f(w)$ denote as before the first position of $1$ in $w$ and $l(w)$ 
     <td class="center">$ = $</td>
     <td class="left">$\pi(0^{a+f(w)-1}1w_{f(w)+1}\ldots w_{l(w)-1}10^{n-l(w)})$</td>
 </tr>
-<tr><td/><td class="center">$ = $</td>
+<tr><td></td><td class="center">$ = $</td>
     <td class="left">$\frac{1}{\pi(1)^2}\pi(0^{a+f(w)-1}1)\pi(1w_{f(w)+1}\ldots w_{l(w)-1}1)\pi(10^{n-l(w)+b})$.</td>
 </tr>
 </table>
-<p id="Summingyield"><a class="paragraph-url" href="#Summingyield"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="Summingyields"><a class="paragraph-url" href="#Summingyields"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 Summing yields
 </p>
 <table class="eqnarray">
@@ -621,11 +623,11 @@ Summing yields
     <td class="center">$ = $</td>
     <td class="left">$r_{a+b+n}+\displaystyle\sum_{i=1}^{n}c_{a+i-1}c_{n+b-i}+\sum_{{{i,j=1}\atop{i\lt j}}}^{n}\sum_{{{w,}\atop{|w|=j-i-1}}}c_{a+i-1}\frac{\pi(1w1)}{\pi(1)}c_{n+b-j}$</td>
 </tr>
-<tr><td/><td class="center">$ = $</td>
+<tr><td></td><td class="center">$ = $</td>
     <td class="left">$r_{a+b+n}+\displaystyle\sum_{1\le i\le j\le n}c_{a+i-1}c_{n+b-j}u_{j-i}$,</td>
 </tr>
 </table>
-<p id="whichgivesth"><a class="paragraph-url" href="#whichgivesth"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="whichgivesthedesiredresu"><a class="paragraph-url" href="#whichgivesthedesiredresu"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 which gives the desired result. The last two items, left to the reader, follow the same guidelines.
 ∎
 </p>
@@ -636,8 +638,8 @@ which gives the desired result. The last two items, left to the reader, follow t
 </div>
 
 <div class="subsection"><div class="subsection-title" id="ssec:mixinglogarithmiccomb">3.4. Mixing of the logarithmic infinite comb</div>
-<p id="Considerthef"><a class="paragraph-url" href="#Considerthef"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
-Consider the first example in Section <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#sec:source">2</a>, that is the probabilized infinite
+<p id="Considerthefirstexamplei"><a class="paragraph-url" href="#Considerthefirstexamplei"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
+Consider the first example in Section <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#sec%3Asource">2</a>, that is the probabilized infinite
 comb defined by $c_0 = 1$ and  for any $n\geqslant 1$ by
 $$
 c_n= \frac{1}{n(n+1)(n+2)(n+3)}.
@@ -650,13 +652,13 @@ $</span><span class="title">(8)</span>
 </span>
 and
  \[S(1)=\frac{19}{18}.\]
-With <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#melange">Proposition 1</a>, the asymptotics of the mixing coefficient comes from
+With <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#melange">Proposition 1</a>, the asymptotics of the mixing coefficient comes from
 singularity analysis of the generating functions $M^{A,B}$.
 </p>
 <div class="prop" id="prop-3-4">
   <div class="title">Proposition 2</div>
   <div class="contents">
-<p id="TheVLMCdefin"><a class="paragraph-url" href="#TheVLMCdefin"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="TheVLMCdefinedbythelogar"><a class="paragraph-url" href="#TheVLMCdefinedbythelogar"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 The VLMC defined by the logarithmic infinite comb has a non-uniform polynomial
 mixing of the following form:
 for any finite words $A$ and $B$, there exists a positive constant $C_{A,B}$
@@ -671,7 +673,7 @@ $$
 <div class="remark" id="remark2">
   <div class="title">Remark 2: </div>
   <div class="contents">
-<p id="TheC_ABcanno"><a class="paragraph-url" href="#TheC_ABcanno"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="TheC_ABcannotbeboundedab"><a class="paragraph-url" href="#TheC_ABcannotbeboundedab"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 The $C_{A,B}$ cannot be bounded above by some constant that does not depend on $A$ and $B$,
 as can be seen hereunder in the proof.
 Indeed, we show that if $a$ and $b$ are positive integers,
@@ -682,42 +684,43 @@ as $n$ goes to infinity. In particular, $\psi(n,0,0^n)$ tends to the positive co
 </p>
 </div>
 </div>
-<div class="proof">
-<button href="#proof3" data-toggle="collapse" class="btn btn-info proof">Proof.</button>
-<div class="collapse" id="proof3">
-
+<div class="proof" id="proof3">
+<button class="btn btn-info proof" data-toggle="collapse" href="#proof3__body">Proof.</button>
+<div class="collapse" id="proof3__body">
+  <div class="title">Proof
+3</div>
   <div class="contents">
-<p id="Foranyfinitew"><a class="paragraph-url" href="#Foranyfinitew"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="ForanyfinitewordsAandBin"><a class="paragraph-url" href="#ForanyfinitewordsAandBin"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 For any finite words $A$ and $B$ in case <strong><i>i)</i></strong> of
-<a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#melange">Proposition 1</a>, one deals with $U(x)=\left((1-x)S(x)\right)^{-1}$ which
+<a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#melange">Proposition 1</a>, one deals with $U(x)=\left((1-x)S(x)\right)^{-1}$ which
 has $1$ as a unique dominant singularity. Indeed, $1$ is the unique dominant
 singularity of $S$, so that the dominant singularities of $U$ are $1$ or
 zeroes of $S$ contained in the closed unit disc. But $S$ does not vanish on
 the closed unit disc, because for any $z$ such that $ |z| \leqslant 1$,
 $$|S(z)| \geqslant 1- \sum_{n\geqslant 1} \frac{1}{n(n+1)(n+2)(n+3)} = 1-(S(1)-1)=\frac{17}{18}.$$
 </p>
-<p id="SinceMxfracS"><a class="paragraph-url" href="#SinceMxfracS"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="SinceMxfracSxS1x1SxS1Uxf"><a class="paragraph-url" href="#SinceMxfracSxS1x1SxS1Uxf"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 Since
 \[M(x) =\frac{S(x)-S(1)}{(x-1)S(x)}= S(1)U(x) - \frac 1{1-x},\]
 the unique dominant singularity of $M$ is $1$, and when $x$ tends to $1$ in
-the unit disc, <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#defSpeigneLog">(8)</a> leads to
+the unit disc, <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#defSpeigneLog">(8)</a> leads to
 \[
 M(x) = A(x)-\frac{1}{6S(1)}(1-x)^2\log(1-x)+\grandO{(1-x)^3\log(1-x)}
 \]
 where $A(x)$ is a polynomial of degree $2$. Using a classical transfer theorem
 based on the analysis of the singularities of $M$
-(see Flajolet and Sedgewick <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_FS">[15]</a>, section VI.4, p. 393 and special case p. 387&quot;),
+(see Flajolet and Sedgewick <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_FS">[15]</a>, section VI.4, p. 393 and special case p. 387&quot;),
 we get
  \[\psi(n-1,w1,1w')=  [x^n] M(x)=\frac{1}{3S(1)}\frac{1}{n^3}+\petito{\frac{1}{n^3}}.\]
 </p>
-<p id="Thecasesiiii"><a class="paragraph-url" href="#Thecasesiiii"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="Thecasesiiiiiivandvofare"><a class="paragraph-url" href="#Thecasesiiiiiivandvofare"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 The cases  <strong><i>ii)</i></strong>, <strong><i>iii)</i></strong>,
-<strong><i>iv)</i></strong> and <strong><i>v)</i></strong> of <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#melange">Proposition 1</a> are
+<strong><i>iv)</i></strong> and <strong><i>v)</i></strong> of <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#melange">Proposition 1</a> are
 of the same kind, and we completely deal with case <strong><i>iii)</i></strong>.
 </p>
-<p id="Caseiiiwords"><a class="paragraph-url" href="#Caseiiiwords"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="CaseiiiwordsoftheformA0a"><a class="paragraph-url" href="#CaseiiiwordsoftheformA0a"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 Case <strong><i>iii)</i></strong>: words of the form $A=0^a$ and $B=0^b$, $a,b\geqslant 1$.
-As shown in <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#melange">Proposition 1</a>, one has to compute the asymptotics of the $n$-th
+As shown in <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#melange">Proposition 1</a>, one has to compute the asymptotics of the $n$-th
 coefficient of the Taylor series of the function
 <span class="equation" id="melangeLog3">
   <span class="contents">$
@@ -736,7 +739,7 @@ $$
 Since $1$ is the only dominant singularity of $S$ and $U$ and consequently of any $R_a$,
 it suffices to compute
 an expansion of $N^{a,b}(x)$ at $x=1$.
-It follows from <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#defSpeigneLog">(8)</a> that
+It follows from <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#defSpeigneLog">(8)</a> that
 $U$, $S$ and $R_a$ admit expansions near $1$ of the forms
 </p>
 <table class="eqnarray">
@@ -756,7 +759,7 @@ and
   <td>$\mbox{polynomial}+\frac{1}{6}(1-x)^3\log (1-x)+\mathcal{O}(1-x)^3$.</td>
 </tr>
 </table>
-<p id="Consequently"><a class="paragraph-url" href="#Consequently"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="ConsequentlyNabxfrac16le"><a class="paragraph-url" href="#ConsequentlyNabxfrac16le"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 Consequently,
 $$
 N^{a,b}(x)=\frac 16\left( \frac 1{r_a}+\frac 1{r_b}-\frac 1{S(1)}\right)(1-x)^2\log (1-x)+\mathcal{O}(1-x)^2
@@ -765,7 +768,7 @@ in a neighbourhood of $1$ in the unit disc so that, by singularity analysis,
 $$
 [x^n]N^{a,b}(x)=-\frac 13\left( \frac 1{r_a}+\frac 1{r_b}-\frac 1{S(1)}\right)\frac 1{n^3}+o\left(\frac 1{n^3}\right).
 $$
-Consequently <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#melangeLog3">(9)</a> leads to
+Consequently <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#melangeLog3">(9)</a> leads to
 \[
 \psi(n-1,0^a,0^b)=  [x^n] M^{a,b}(x)
 \sim\frac 13\left( \frac{S(1)}{r_ar_b}-\frac 1{r_a}-\frac 1{r_b}+\frac 1{S(1)}\right)\frac 1{n^3}
@@ -773,7 +776,7 @@ Consequently <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon
 \]
 as $n$ tends to infinity, showing the mixing inequality and the non uniformity.
 </p>
-<p id="Theremaining"><a class="paragraph-url" href="#Theremaining"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="Theremainingcasesiiivand"><a class="paragraph-url" href="#Theremainingcasesiiivand"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 The remaining cases <strong><i>ii)</i></strong>, <strong><i>iv)</i></strong>
 and <strong><i>v)</i></strong> are of the same flavour.
 ∎
@@ -783,8 +786,8 @@ and <strong><i>v)</i></strong> are of the same flavour.
 </div>
 
 <div class="subsection"><div class="subsection-title" id="ssec:mixingfactccomb">3.5. Mixing of the factorial infinite comb</div>
-<p id="Considernowt"><a class="paragraph-url" href="#Considernowt"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
-Consider now the second Example in Section <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#sec:source">2</a>, that is the
+<p id="ConsidernowthesecondExam"><a class="paragraph-url" href="#ConsidernowthesecondExam"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
+Consider now the second Example in Section <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#sec%3Asource">2</a>, that is the
 probabilized infinite comb defined by
 $$
 \forall n\in\g N,~c_n=\frac 1{(n+1)!}.
@@ -800,7 +803,7 @@ $$
 <div class="prop" id="UniformMixing">
   <div class="title">Proposition 3</div>
   <div class="contents">
-<p id="TheVLMCdefine"><a class="paragraph-url" href="#TheVLMCdefine"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="TheVLMCdefinedbythefacto"><a class="paragraph-url" href="#TheVLMCdefinedbythefacto"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 The VLMC defined by the factorial infinite comb has a uniform
 exponential mixing of the following form: there exists a positive
 constant $C$ such that for any $n\geqslant 1$ and for any finite
@@ -811,15 +814,16 @@ $$
 </p>
 </div>
 </div>
-<div class="proof">
-<button href="#proof4" data-toggle="collapse" class="btn btn-info proof">Proof.</button>
-<div class="collapse" id="proof4">
-
+<div class="proof" id="proof4">
+<button class="btn btn-info proof" data-toggle="collapse" href="#proof4__body">Proof.</button>
+<div class="collapse" id="proof4__body">
+  <div class="title">Proof
+4</div>
   <div class="contents">
 <ol>
-<li>First case of mixing in <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#melange">Proposition 1</a>: $A=A'1$ and $B=1B'$.
-<p id="BecauseofPro"><a class="paragraph-url" href="#BecauseofPro"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
-Because of <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#melange">Proposition 1</a>, the proof consists in computing the
+<li>First case of mixing in <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#melange">Proposition 1</a>: $A=A'1$ and $B=1B'$.
+<p id="Becauseoftheproofconsist"><a class="paragraph-url" href="#Becauseoftheproofconsist"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
+Because of <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#melange">Proposition 1</a>, the proof consists in computing the
 asymptotics of $[x^n] M(x)$. We make use of singularity analysis. The
 dominant singularities of
 $$
@@ -848,8 +852,8 @@ $$
 </p>
 </li>
 <li>Second case of mixing: $A=A'10^a$ and $B=0^b1B'$.
-<p id="BecauseofProo"><a class="paragraph-url" href="#BecauseofProo"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
-Because of <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#melange">Proposition 1</a>, one has to compute $[x^n]M^{a,b}(x)$
+<p id="Becauseofonehastocompute"><a class="paragraph-url" href="#Becauseofonehastocompute"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
+Because of <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#melange">Proposition 1</a>, one has to compute $[x^n]M^{a,b}(x)$
 with
 $$
 M^{a,b}(x):= S(1)\frac{c_{a+b}}{c_ac_b}P_{a+b}(x)
@@ -874,7 +878,7 @@ Besides, the remainder of the exponential series satisfies
 $</span><span class="title">(10)</span>
 </span>
 when $a$ tends to infinity.
-Consequently, by Formula <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#defPa">(6)</a>, $P_a(2i\pi )$
+Consequently, by Formula <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#defPa">(6)</a>, $P_a(2i\pi )$
 tends to $2i\pi$ as $a$ tends to infinity
 
 so that one gets a positive constant $C_1$ that does not
@@ -885,7 +889,7 @@ $$
 </p>
 </li>
 <li>Third case of mixing: $A=0^a$ and $B=0^b$.
-<p id="Thistimeoneh"><a class="paragraph-url" href="#Thistimeoneh"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="Thistimeonehastocomputex"><a class="paragraph-url" href="#Thistimeonehastocomputex"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 This time, one has to compute $[x^n]M^{a,b}(x)$
 with
 $$
@@ -902,7 +906,7 @@ $$
 \psi(n-1,A,B) \equivalent{n\to+\infty}
 2\Re\left(\frac{1-e}{1-2i\pi}\cdot\frac{R_a(2i\pi )R_b(2i\pi )}{r_ar_b(2i\pi )^{a+b-2}}\frac{1}{(2i\pi )^n}\right) .
 $$
-Once more, because of <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#resteSerieExp">(10)</a>, this implies that
+Once more, because of <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#resteSerieExp">(10)</a>, this implies that
 there is a positive constant $C_2$ independent of $a$ and $b$ and
 such that for any $n\geqslant 1$,
 $$
@@ -922,27 +926,27 @@ and $A=0^a$, $B=0^b1B'$ are of the same vein and lead to similar results.
 </div>
 
 <div class="section"><div class="section-title" id="sec:suffixtrie">4. Height and saturation level of suffix tries</div>
-<p id="Inthissectionw"><a class="paragraph-url" href="#Inthissectionw"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="Inthissectionweconsidera"><a class="paragraph-url" href="#Inthissectionweconsidera"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 In this section, we consider a suffix trie process $(\rond{T}_n)_{n\geq 1}$
 associated with an infinite random word generated by an infinite comb.
 A precise definition of tries and suffix tries is given in
-section <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#ssec:height">4.1</a>. We are interested in the height
+section <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#ssec%3Aheight">4.1</a>. We are interested in the height
 and the saturation level of such a suffix trie.
 </p>
-<p id="Ourmethodtos"><a class="paragraph-url" href="#Ourmethodtos"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="Ourmethodtostudythesetwo"><a class="paragraph-url" href="#Ourmethodtostudythesetwo"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 Our method to study these two parameters uses a duality property à
-la Pittel developed in Section <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#ssec:duality">4.2</a>, together with
+la Pittel developed in Section <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#ssec%3Aduality">4.2</a>, together with
 a careful and explicit calculation of the generating function of the
-second occurrence of a word (in Section <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#ssec:generating">4.3</a>) which
+second occurrence of a word (in Section <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#ssec%3Agenerating">4.3</a>) which
 can be achieved for any infinite comb. These calculations are not so
 intricate because they are strongly related to the mixing coefficient
-and the mixing properties detailed in Section <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#sec:mixing">3</a>.
+and the mixing properties detailed in Section <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#sec%3Amixing">3</a>.
 </p>
-<p id="Morespecific"><a class="paragraph-url" href="#Morespecific"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="Morespecificallywelookat"><a class="paragraph-url" href="#Morespecificallywelookat"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 More specifically, we look at our two favourite examples, the logarithmic
-comb and the factorial comb. We prove in Section <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#ssec:heightLog">4.5</a>
+comb and the factorial comb. We prove in Section <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#ssec%3AheightLog">4.5</a>
 that the height of the first one is not logarithmic but polynomial
-and in Section <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#ssec:saturation">4.6</a> that the saturation
+and in Section <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#ssec%3Asaturation">4.6</a> that the saturation
 level of the second one is not logarithmic either but negligibly smaller.
 Remark that despite the very particular form of the comb in the wide
 family of variable length Markov models, the comb sources provide a
@@ -950,7 +954,7 @@ spectrum of asymptotic behaviours for the suffix tries.
 </p>
 
 <div class="subsection"><div class="subsection-title" id="ssec:height">4.1. Suffix tries</div>
-<p id="Lety_n_ngeqs"><a class="paragraph-url" href="#Lety_n_ngeqs"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="Lety_n_ngeqslant1beasequ"><a class="paragraph-url" href="#Lety_n_ngeqslant1beasequ"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 Let $(y_n)_{n\geqslant 1}$ be a sequence of right-infinite words
 on $\{ 0,1\}$.
 With this sequence is associated a <strong>trie process</strong>
@@ -967,7 +971,7 @@ by the successive prefixes of $y_n$; when the branch ends, if an internal
 node is reached, then $y_n$ is inserted at the free leaf, else we make the
 branch grow comparing the next letters of both words until they can be
 inserted in two different leaves. As one can clearly see on
-<a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#1figtrieconstruction">Figure 2</a> a trie is not a complete tree and
+<a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#1figtrieconstruction">Figure 2</a> a trie is not a complete tree and
 the insertion of a word can make a branch grow by more than one level.
 Notice that if the trie contains a finite word $w$ as internal node, there
 are at least two already inserted infinite words $y_n$ that have $w$ as a prefix.
@@ -1001,7 +1005,7 @@ Suffix trie $\rond T_{10}$ associated with the word $1001011001110\ldots$. Here,
 </div>
 </div>
 </div>
-<p id="Letma_1a_2a_"><a class="paragraph-url" href="#Letma_1a_2a_"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="Letma_1a_2a_3ldotsbeanin"><a class="paragraph-url" href="#Letma_1a_2a_3ldotsbeanin"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 Let $m:=a_1a_2a_3 \ldots$ be an infinite word on $\{0,1\}$.
 The <strong>suffix trie</strong> $\rond{T}_n$ (with $n$ leaves) associated
 with $m$ is the trie built from the first $n$ suffixes of $m$ one obtains
@@ -1010,7 +1014,7 @@ by deleting successively the left-most letter, that is
 y_1=m,~y_2=a_2a_3a_4\dots, ~y_3=a_3a_4\dots, ~\dots,~y_n=a_na_{n+1}\dots
 \]
 </p>
-<p id="Foragiventri"><a class="paragraph-url" href="#Foragiventri"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="ForagiventrierondT_nwear"><a class="paragraph-url" href="#ForagiventrierondT_nwear"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 For a given trie  $\rond{T}_n$, we are mainly interested in the <em>height</em>
 $H_n$ which is the maximal depth of an internal node of $\rond{T}_n$ and the
 <em>saturation level</em> $\ell_n$ which is the maximal depth up to which all
@@ -1029,25 +1033,25 @@ Formally, if $\partial \rond T_n$ denotes the set of leaves of $\rond T_n$,
     <td class="left">$\max \big\{j \in \N | \ \# \{u \in  \rond{T}_n\setminus \partial \rond{T}_n, |u|=j\}=2^j\big\}$.</td>
 </tr>
 </table>
-<p id="SeeFigurefor"><a class="paragraph-url" href="#SeeFigurefor"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
-See Figure <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#1figtriesuffconstruction">Figure 3</a> for an example.
+<p id="SeeFigureforanexampleNot"><a class="paragraph-url" href="#SeeFigureforanexampleNot"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
+See Figure <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#1figtriesuffconstruction">Figure 3</a> for an example.
 Note that the saturation level should not be mistaken for the shortest path up to a leaf.
 </p>
 </div>
 
 <div class="subsection"><div class="subsection-title" id="ssec:duality">4.2. Duality</div>
-<p id="LetU_n_ngeqs"><a class="paragraph-url" href="#LetU_n_ngeqs"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="LetU_n_ngeqslant1beaninf"><a class="paragraph-url" href="#LetU_n_ngeqslant1beaninf"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 Let $(U_n)_{n\geqslant 1}$ be an infinite random word generated by some infinite
 comb and $(\rond{T}_n)_{n\geqslant 1}$ be the associated suffix trie process. We
 denote by $\rond R$ the set of right-infinite words. Besides, we define hereunder
-two random variables having a key role in the proof of <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#hauteur">Theorem 1</a>
-and <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#saturation">Theorem 2</a>. This method goes back to Pittel <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_Pittel">[28]</a>.
+two random variables having a key role in the proof of <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#hauteur">Theorem 1</a>
+and <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#saturation">Theorem 2</a>. This method goes back to Pittel <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_Pittel">[28]</a>.
 </p>
-<p id="LetsinrondRb"><a class="paragraph-url" href="#LetsinrondRb"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="LetsinrondRbeadeterminis"><a class="paragraph-url" href="#LetsinrondRbeadeterminis"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 Let $s\in\rond R$ be a deterministic infinite sequence and $s ^{(k)}$ its prefix of length $k$. For $n\geq 1$,
 
 </p>
-<table class="eqnarray">
+<table class="eqnarray" id="defXn">
 <tr><td class="right">$X_{n}(s)$</td>
   <td class="center">$:=$</td>
   <td class="left">$\left \{
@@ -1064,12 +1068,12 @@ Let $s\in\rond R$ be a deterministic infinite sequence and $s ^{(k)}$ its prefix
   <td class="left">$\min\{n\geqslant 1\ |\ X_{n}(s)=k\}$,</td>
 </tr>
 </table>
-<p id="whereskisinr"><a class="paragraph-url" href="#whereskisinr"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="whereskisinrondT_nsetmin"><a class="paragraph-url" href="#whereskisinrondT_nsetmin"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 where &quot;$s ^{(k)}$ is in $\rond{T}_{n}\setminus \partial \rond{T}_n$&quot;
 stands for: there exists an internal node $v$ in $\rond{T}_{n}$ such that
 $s ^{(k)}$ encodes $v$. For any $k\geqslant 1$, $T_{k}(s)$ denotes the
 number of leaves of the first tree &quot;containing&quot; $s^{(k)}$.
-See <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#4figXnetTk">Figure 4</a> for an example.
+See <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#4figXnetTk">Figure 4</a> for an example.
 </p>
 
 <div class="figure" id="4figXnetTk">
@@ -1087,7 +1091,7 @@ saturation level $\ell_n$ is equal to $3$.
 </div>
 </div>
 </div>
-<p id="Thusthesatur"><a class="paragraph-url" href="#Thusthesatur"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="Thusthesaturationlevelel"><a class="paragraph-url" href="#Thusthesaturationlevelel"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 Thus, the saturation level $\ell_n$ and the height $H_n$ can be
 described using $X_n(s)$:
 <span class="equation" id="defi-var">
@@ -1096,12 +1100,12 @@ described using $X_n(s)$:
 $</span><span class="title">(11)</span>
 </span>
 </p>
-<p id="Noticethatth"><a class="paragraph-url" href="#Noticethatth"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="NoticethatthenotationX_n"><a class="paragraph-url" href="#NoticethatthenotationX_n"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 Notice that the notation $X_n(s)$ is not exactly the same as in
-Pittel <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_Pittel">[28]</a> so that $\ell_n$ does not correspond to the
+Pittel <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_Pittel">[28]</a> so that $\ell_n$ does not correspond to the
 shortest path in $\mathcal{T}_n$.
 </p>
-<p id="RemarkthatX_"><a class="paragraph-url" href="#RemarkthatX_"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="RemarkthatX_nsandT_ksare"><a class="paragraph-url" href="#RemarkthatX_nsandT_ksare"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 Remark that $X_n(s)$ and $T_k(s)$ are in duality in the following sense:
 for all positive integers $k$ and $n$, one has the equality of the events
 <span class="equation" id="duality">
@@ -1124,16 +1128,16 @@ $k \geqslant 2$, $T_{k}(s)$ can be rewritten as
     <td class="left">$=s^{(k)}\Bigr\}$.</td>
 </tr>
 </table>
-<p id="NoticethatT_"><a class="paragraph-url" href="#NoticethatT_"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="NoticethatT_ksdenotesthe"><a class="paragraph-url" href="#NoticethatT_ksdenotesthe"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 Notice that $T_k(s)$ denotes the <em>beginning</em> of the second occurrence
-of $s^{(k)}$ whereas in <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_ccpp">[9]</a>, $\tau^{(2)}\left(s^{(k)}\right)$
+of $s^{(k)}$ whereas in <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_ccpp">[9]</a>, $\tau^{(2)}\left(s^{(k)}\right)$
 denotes the <em>end</em> of the second occurrence of $s^{(k)}$, so that
 <span class="equation" id="lien-tau-T">
   <span class="contents">$
 \tau^{(2)}\left(s^{(k)}\right)=T_k(s)+k.
 $</span><span class="title">(13)</span>
 </span>
-More generally, in <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_ccpp">[9]</a> , for any $r\geqslant 1$, the random
+More generally, in <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_ccpp">[9]</a> , for any $r\geqslant 1$, the random
 waiting time $\tau^{(r)}(w)$ is defined as the end of the $r$-th occurrence
 of $w$ in the sequence $(U_n)_{n\geqslant 1}$ and the generating function of the
 $\tau^{(r)}$ is calculated. We go over these calculations in the sequel.
@@ -1143,11 +1147,11 @@ $\tau^{(r)}$ is calculated. We go over these calculations in the sequel.
 <div class="prop" id="Phi2">
   <div class="title">Proposition 4</div>
   <div class="contents">
-<p id="Letkgeqslant"><a class="paragraph-url" href="#Letkgeqslant"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="Letkgeqslant1Letalsow10k"><a class="paragraph-url" href="#Letkgeqslant1Letalsow10k"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 Let $k\geqslant 1$. Let also $w=10^{k-1}$ and $\tau^{(2)}(w)$ be the
 end of the second occurrence of $w$ in a sequence generated by a comb defined
 by $(c_n)_{n\geqslant 0}$. Let $S$ and $U$ be the ordinary generating
-functions defined in Section <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#ssec:mixingcomb">3.1</a>. The
+functions defined in Section <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#ssec%3Amixingcomb">3.1</a>. The
 probability generating function of $\tau^{(2)}(w)$ is
 \[
  \Phi^{(2)}_w(x) = \frac{c_{k-1}^2x^{2k-1}\big(U(x)-1\big)}{S(1)(1-x)\big[ 1+c_{k-1}x^{k-1}(U(x)-1)\big] ^2}.
@@ -1163,12 +1167,13 @@ $</span><span class="title">(14)</span>
 </p>
 </div>
 </div>
-<div class="proof">
-<button href="#proof5" data-toggle="collapse" class="btn btn-info proof">Proof.</button>
-<div class="collapse" id="proof5">
-
+<div class="proof" id="proof5">
+<button class="btn btn-info proof" data-toggle="collapse" href="#proof5__body">Proof.</button>
+<div class="collapse" id="proof5__body">
+  <div class="title">Proof
+5</div>
   <div class="contents">
-<p id="Foranyrgeqsl"><a class="paragraph-url" href="#Foranyrgeqsl"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="Foranyrgeqslant1lettaurw"><a class="paragraph-url" href="#Foranyrgeqslant1lettaurw"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 For any $r\geqslant 1
 $, let $\tau^{(r)}(w)$ denote the end of the $r$-th occurrence of $w$
 in a random sequence generated by a comb and $\Phi_w^{(r)}$ its
@@ -1176,15 +1181,15 @@ probability generating function. The reversed word
 of $c=\alpha _1\dots\alpha _N$ will be denoted by the overline
 $\overline c:=\alpha _N\dots\alpha _1$
 </p>
-<p id="Weusearesult"><a class="paragraph-url" href="#Weusearesult"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
-We use a result of <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_ccpp">[9]</a> that computes these generating
+<p id="Weusearesultof9thatcompu"><a class="paragraph-url" href="#Weusearesultof9thatcompu"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
+We use a result of <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_ccpp">[9]</a> that computes these generating
 functions in terms of stationary probabilities $q_c^{(n)}$. These
 probabilities measure the occurrence of a finite word after $n$ steps,
 conditioned to start from the word $\overline{c}$.
 More precisely,  for any finite words $u$ and $\overline{c}$ and for any
 $n\geqslant 0$, let
 \[q_c^{(n)}(u):=\pi\left(U_{n-|u|+|c|+1}\ldots U_{n+|c|}=u\big| U_{1}\ldots U_{|c|}=\overline c\right).\]
-It is shown in <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_ccpp">[9]</a> that, for $|x|\lt 1$,
+It is shown in <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_ccpp">[9]</a> that, for $|x|\lt 1$,
 $$
 \Phi_w^{(1)}(x)=\frac{x^k\pi(w)}{(1-x)S_w(x)}
 $$
@@ -1203,11 +1208,11 @@ where
     <td class="left">$1+\sum_{j=1}^{k-1}\ind{w_{j+1}\ldots w_{k}=w_{1}\ldots w_{k-j}}q_{\petitlpref(w)}^{(j)}\left(w_{k-j+1} \ldots w_k\right)x^j$.</td>
 </tr>
 </table>
-<p id="Intheparticu"><a class="paragraph-url" href="#Intheparticu"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="Intheparticularcasewhenw"><a class="paragraph-url" href="#Intheparticularcasewhenw"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 In the particular case when $w=10^{k-1}$, then
  $\lpref(w)=\overline{w}=0^{k-1}1$ and $\pi(w)=\frac{c_{k-1}}{S(1)}$.
-Moreover, Definition <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#mixingCoeff">(4)</a> of the mixing
-coefficient and <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#melange">Proposition 1</a> <i><strong>i)</strong></i>
+Moreover, Definition <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#mixingCoeff">(4)</a> of the mixing
+coefficient and <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#melange">Proposition 1</a> <i><strong>i)</strong></i>
 imply successively that
 </p>
 <table class="eqnarray">
@@ -1216,19 +1221,19 @@ imply successively that
   <td class="left">$= \pi\Big(U_{n+k-|w|+1}\ldots U_{n+k}=w\Big| U_{1}\ldots U_k=\lpref(w)\Big)$</td>
 </tr>
 <tr>
-  <td/>
+  <td></td>
   <td class="left">$ = \pi(w) \Big( \psi\big( n-k,\lpref (w),w\big) +1\Big)$</td>
 </tr>
 <tr>
-  <td/>
+  <td></td>
   <td class="left">$ = \pi(w) S(1)u_{n-k+1}$</td>
 </tr>
 <tr>
-  <td/>
+  <td></td>
   <td class="left">$= c_{k-1}u_{n-k+1}$,</td>
 </tr>
 </table>
-<p id="Thisrelation"><a class="paragraph-url" href="#Thisrelation"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="Thisrelationmakesmoreexp"><a class="paragraph-url" href="#Thisrelationmakesmoreexp"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 This relation makes more explicit the link between successive occurence times and mixing.
 This leads to
  \[\sum_{n\geqslant k}q_{\petitlpref(w)}^{(n)}(w)x^n=c_{k-1}x^{k-1}\sum_{n\geqslant 1}u_nx^n=c_{k-1}x^{k-1}\big( U(x)-1\big) .\]
@@ -1245,12 +1250,12 @@ and
   <td class="left">$\Phi^{(1)}_w(x)\left(1-\frac{1}{S_w(x)}\right)$</td>
 </tr>
 <tr>
-  <td/>
+  <td></td>
   <td class="center">$ = $</td>
   <td class="left">$\frac{c_{k-1}^2x^{2k-1}\big( U(x)-1\big)}{S(1)(1-x)\left[ 1+c_{k-1}x^{k-1}\big( U(x)-1\big)\right] ^2}$</td>
 </tr>
 </table>
-<p id="whichisthean"><a class="paragraph-url" href="#whichisthean"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="whichistheannouncedresul"><a class="paragraph-url" href="#whichistheannouncedresul"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 which is the announced result.
 The assumption
 \[\sum_{n \geqslant 1}n^2c_n \lt \infty\]
@@ -1258,17 +1263,17 @@ makes $U$ twice differentiable and elementary calculations lead to
 </p>
 <table class="eqnarray">
 <tr>
-  <td/><td/>
+  <td></td><td></td>
   <td class="left">$(\Phi_w^{(1)})'(1)=\frac{S(1)}{c_{k-1}}-S(1)+1+\frac{S'(1)}{S(1)}, \qquad
      (\Phi_w^{(2)})'(1)=(\Phi_w^{(1)})'(1)+\frac{S(1)}{c_{k-1}},$</td>
 </tr>
 <tr>
-  <td/><td/>
+  <td></td><td></td>
   <td class="left">$(\Phi_w^{(1)})''(1)=\frac{2S(1)^2}{c_{k-1}^2}+o\left(\frac{1}{c_{k-1}^2}\right)\quad \mbox{and} \quad (\Phi_w^{(2)})''(1)=\frac{6S(1)^2}{c_{k-1}^2}+o\left(\frac{1}{c_{k-1}^2}\right)$,</td>
 </tr>
 </table>
-<p id="andfinallyto"><a class="paragraph-url" href="#andfinallyto"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
-and finally to <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#esp-var">(14)</a>.
+<p id="andfinallyto"><a class="paragraph-url" href="#andfinallyto"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
+and finally to <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#esp-var">(14)</a>.
 ∎
 </p>
 </div>
@@ -1276,7 +1281,7 @@ and finally to <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncomm
 </div>
 
 <div class="subsection"><div class="subsection-title" id="ssec:results">4.4. Logarithmic comb and factorial comb</div>
-<p id="Leth_andh_be"><a class="paragraph-url" href="#Leth_andh_be"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="Leth_andh_betheconstants"><a class="paragraph-url" href="#Leth_andh_betheconstants"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 Let $h_+$ and $h_-$ be the constants in $[0,+\infty ]$ defined by
 <span class="equation" id="4defh+">
   <span class="contents">$
@@ -1285,33 +1290,33 @@ h_+ := \lim_{n\to +\infty}\frac{1}{n} \max\Bigl\{\ln\Bigl(\frac{1}{\pi\left(w\ri
 $</span><span class="title">(15)</span>
 </span>
 where the maximum and the minimum range over the words $w$ of length $n$ with
- $\pi\left({w}\right)&gt;0$. In their papers, Pittel <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_Pittel">[28]</a> and
- Szpankowski <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_Szpan93">[38]</a> only deal with the cases $h_+\lt +\infty$ and
+ $\pi\left({w}\right)&gt;0$. In their papers, Pittel <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_Pittel">[28]</a> and
+ Szpankowski <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_Szpan93">[38]</a> only deal with the cases $h_+\lt +\infty$ and
   $h_-&gt;0$, which amounts to saying that the probability of any word is exponentially
   decreasing with its length. Here, we focus on our two examples for which these
   assumptions are not fulfilled. More precisely, for the logarithmic infinite comb,
-  <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#probas">(2)</a> implies that $\pi(10^n)$ is of order $n^{-4}$, so that
+  <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#probas">(2)</a> implies that $\pi(10^n)$ is of order $n^{-4}$, so that
 $$
 h_- \leqslant \lim_{n\to +\infty}\frac{1}{n} \ln\Bigl(\frac{1}{\pi\left(10^{n-1}\right)}\Bigr) = 4\lim_{n\to +\infty}\frac{\ln n}{n} =0.
 $$
 </p>
-<p id="Besidesforth"><a class="paragraph-url" href="#Besidesforth"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="Besidesforthefactorialin"><a class="paragraph-url" href="#Besidesforthefactorialin"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 Besides, for the factorial infinite comb, $\pi(10^n)$ is of order $\frac 1{(n+1)!}$ so that
 $$
 h_+ \geqslant \lim_{n\to +\infty}\frac{1}{n} \ln\Bigl(\frac{1}{\pi\left(10^{n-1}\right)}\Bigr) =  \lim_{n\to +\infty}\frac{\log n!}{n} = +\infty .
 $$
 
 </p>
-<p id="Forthesetwom"><a class="paragraph-url" href="#Forthesetwom"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="Forthesetwomodelstheasym"><a class="paragraph-url" href="#Forthesetwomodelstheasym"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 For these two models, the asymptotic behaviour of the lengths of the branches
 is not always logarithmic, as can be seen in the two following theorems, shown in
-Sections <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#ssec:heightLog">4.5</a> and <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#ssec:saturation">4.6</a>.
+Sections <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#ssec%3AheightLog">4.5</a> and <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#ssec%3Asaturation">4.6</a>.
 </p>
 
 <div class="theorem" id="hauteur">
   <div class="title">Theorem 1: Height of the logarithmic infinite comb</div>
   <div class="contents">
-<p id="LetrondT_nbe"><a class="paragraph-url" href="#LetrondT_nbe"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="LetrondT_nbethesuffixtri"><a class="paragraph-url" href="#LetrondT_nbethesuffixtri"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 Let $\rond{T}_n$ be the suffix trie built from the $n$ first suffixes of a
 sequence generated by a logarithmic infinite comb. Then, the height $H_n$
 of $\rond{T}_n$ satisfies
@@ -1326,7 +1331,7 @@ of $\rond{T}_n$ satisfies
 <div class="theorem" id="saturation">
   <div class="title">Theorem 2: Saturation level of the factorial infinite comb</div>
   <div class="contents">
-<p id="LetrondT_nbet"><a class="paragraph-url" href="#LetrondT_nbet"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p>
 Let $\rond{T}_n$ be the suffix trie built from the $n$ first suffixes of the
 sequence generated by a factorial infinite comb. Then, the saturation level
 $\ell_n$ of $\rond{T}_n$ satisfies:
@@ -1341,22 +1346,22 @@ $$
 <div class="remark" id="remLogn">
   <div class="title">Remark 3: </div>
   <div class="contents">
-<p id="Thebehaviour"><a class="paragraph-url" href="#Thebehaviour"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="Thebehaviouroftheheighto"><a class="paragraph-url" href="#Thebehaviouroftheheighto"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 The behaviour of the height of the factorial infinite comb can be
-deduced from Szpankowski <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_Szpan93">[38]</a>. Namely the property of uniform mixing
-stated in <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#UniformMixing">Proposition 3</a> implies
+deduced from Szpankowski <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_Szpan93">[38]</a>. Namely the property of uniform mixing
+stated in <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#UniformMixing">Proposition 3</a> implies
 the existence of two positive constants $C$ and $\gamma$ such
 that, for every integer $n\geqslant 1$ and for every word $w$ of length $n$,
 $\pi(w)\leqslant Ce^{-\gamma n}$ (see Galves and
- Schmitt <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_GalSch">[19]</a> for a proof). This
+ Schmitt <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_GalSch">[19]</a> for a proof). This
 entails $h_2\geqslant\frac{\gamma}{2}&gt;0$ and therefore Theorem 2. in
-Szpankowski <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_Szpan93">[38]</a>  applies: $\frac{H_n}{\log n}$ converges
+Szpankowski <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_Szpan93">[38]</a>  applies: $\frac{H_n}{\log n}$ converges
 almost surely to
 $\frac{1}{h_2}$.
 </p>
-<p id="Asforthesatu"><a class="paragraph-url" href="#Asforthesatu"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="Asforthesaturationlevelo"><a class="paragraph-url" href="#Asforthesaturationlevelo"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 As for the saturation level of the logarithmic infinite comb, the results of
-<a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_Szpan93">[38]</a> no longer apply since the process does not enjoy the uniform
+<a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_Szpan93">[38]</a> no longer apply since the process does not enjoy the uniform
 mixing property. In spite of that we conjecture that the saturation level grows like $\log n$.
 We do not go further on this subject because it is not the main point of the present paper,
 but we think the techniques used here should help to prove such a result.
@@ -1381,36 +1386,36 @@ In both figures, mean values of $25$ simulations are represented on the $y$-axes
 </div>
 </div>
 </div>
-<p id="Thedynamicas"><a class="paragraph-url" href="#Thedynamicas"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="Thedynamicasymptoticsoft"><a class="paragraph-url" href="#Thedynamicasymptoticsoft"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 The dynamic asymptotics of the height and of the saturation level can be
-visualized on <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#dyn-peigne">Figure 5</a>.
+visualized on <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#dyn-peigne">Figure 5</a>.
 The number $n$ of leaves of the suffix trie is put on the $x$-axis while heights or
 saturation levels are put on the $y$-axis (mean values of $25$ simulations).
 </p>
-<p id="Plainlinesil"><a class="paragraph-url" href="#Plainlinesil"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a><em>Plain lines</em> illustrate our results:
+<p id="Plainlinesillustrateourr"><a class="paragraph-url" href="#Plainlinesillustrateourr"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a><em>Plain lines</em> illustrate our results:
 height of a suffix trie generated by a logarithmic comb in the first figure,
 saturation level of a trie generated by a factorial comb in the second one.
 </p>
-<p id="Inthefirstfi"><a class="paragraph-url" href="#Inthefirstfi"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="Inthefirstfiguretheshort"><a class="paragraph-url" href="#Inthefirstfiguretheshort"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 In the first figure, the <em>short dashed line</em> represent the height of a factorial comb.
-As pointed out in <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#remLogn">Remark 3</a>, this height is almost surely of the form $c\log n$
+As pointed out in <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#remLogn">Remark 3</a>, this height is almost surely of the form $c\log n$
 where $c$ is a constant.
 </p>
-<p id="Inbothfigure"><a class="paragraph-url" href="#Inbothfigure"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="Inbothfigureslongdashedl"><a class="paragraph-url" href="#Inbothfigureslongdashedl"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 In both figures, <em>long dashed lines</em> represent a third infinite comb defined by the
 data $c_n=\frac13\prod_{k=1}^{n-1}\left(\frac{1}{3}+\frac{1}{(1+k)^2}\right)$ for $n\geqslant 1$.
 Such a process has a uniform exponential mixing, a finite $h_+$ and a positive $h_-$ as can be
 elementarily checked. As a matter of consequence, it satisfies all assumptions of Pittel
-<a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_Pittel">[28]</a> and Szpankowski <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_Szpan93">[38]</a> implying that the height and
+<a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_Pittel">[28]</a> and Szpankowski <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#bibentry_Szpan93">[38]</a> implying that the height and
 the saturation level are both of order $\log n$.
 Such assumptions is fulfilled for any VLMC defined by a comb as soon as the data $(c_n)_n$ satisfy
 $\limsup _nc_n^{1/n}\lt 1$; the proof of this result is left to the reader.
 </p>
-<p id="Theseasympto"><a class="paragraph-url" href="#Theseasympto"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="Theseasymptoticbehaviour"><a class="paragraph-url" href="#Theseasymptoticbehaviour"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 These asymptotic behaviours, all coming from the same model, the infinite comb,
 stress its surprising richness.
 </p>
-<p id="Simulationso"><a class="paragraph-url" href="#Simulationso"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="Simulationsofsuffixtries"><a class="paragraph-url" href="#Simulationsofsuffixtries"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 Simulations of suffix tries built from a sequence generated by an infinite comb VLMC can
 be made by anyone using the source code available on
 <code><span class="ext-a"><a href="http://zoggy.github.com/vlmc-suffix-trie/">http://zoggy.github.com/vlmc-suffix-trie</a></span></code>.
@@ -1420,11 +1425,11 @@ This site has been designed and realized by Eng.
 </div>
 
 <div class="subsection"><div class="subsection-title" id="ssec:heightLog">4.5. Height for the logarithmic comb</div>
-<p id="Inthissubsec"><a class="paragraph-url" href="#Inthissubsec"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
-In this subsection, we prove <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#hauteur">Theorem 1</a>.
+<p id="Inthissubsectionweprove"><a class="paragraph-url" href="#Inthissubsectionweprove"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
+In this subsection, we prove <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#hauteur">Theorem 1</a>.
 
 </p>
-<p id="Considerther"><a class="paragraph-url" href="#Considerther"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="Considertherightinfinite"><a class="paragraph-url" href="#Considertherightinfinite"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 Consider the right-infinite sequence $s=10^{\infty}$. Then, $T_k(s)$ is
 the second occurrence time of $w=10^{k-1}$. It is a nondecreasing (random)
 function of $k$. Moreover, $X_n(s)$ is the maximum of all $k$ such that
@@ -1436,7 +1441,7 @@ $X_n(s)$ and $T_k(s)$, the duality can be written
 $</span><span class="title">(16)</span>
 </span>
 </p>
-<p id="Claimlim_nri"><a class="paragraph-url" href="#Claimlim_nri"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="Claimlim_nrightarrowinft"><a class="paragraph-url" href="#Claimlim_nrightarrowinft"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 <strong>Claim</strong>:
 <span class="equation" id="xninfini">
   <span class="contents">$
@@ -1446,19 +1451,19 @@ $</span><span class="title">(17)</span>
 Indeed, if $X_n(s)$ were bounded above, by $K$ say, then take $w = 10^{K}$
 and consider $T_{K+1}(s)$ which is the time of the second occurrence of $10^{K}$.
 The choice of the $c_n$ in the definition of the logarithmic comb implies
-the convergence of the series $\sum _nn^2c_n$. Thus <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#esp-var">(14)</a>
+the convergence of the series $\sum _nn^2c_n$. Thus <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#esp-var">(14)</a>
 holds and $\g E[T_{K+1}(s)]\lt \infty$ so that $T_{K+1}(s)$ is almost surely
 finite. This means that for $n\gt T_{K+1}(s)$, the word $10^{K}$ has been seen
 twice, leading to $X_n(s)\geqslant K+1$ which is a contradiction.
 </p>
-<p id="Wemakeuseoft"><a class="paragraph-url" href="#Wemakeuseoft"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="Wemakeuseofthefollowingl"><a class="paragraph-url" href="#Wemakeuseofthefollowingl"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 We make use of the following lemma that is proven hereunder.
 </p>
 
 <div class="lemma" id="Tk">
   <div class="title">Lemma 2</div>
   <div class="contents">
-<p id="Fors10inftyf"><a class="paragraph-url" href="#Fors10inftyf"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>For $s=10^{\infty}$,
+<p id="Fors10inftyforalleta0qua"><a class="paragraph-url" href="#Fors10inftyforalleta0qua"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>For $s=10^{\infty}$,
 \[\forall \eta &gt; 0, \quad \frac{T_k(s)}{k^{4+\eta}}~\limite{k \to \infty}{}~0\quad \mbox{in probability},
 \]
 and
@@ -1470,14 +1475,14 @@ $</span><span class="title">(18)</span>
 </p>
 </div>
 </div>
-<p id="Withnotation"><a class="paragraph-url" href="#Withnotation"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
-With notations <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#dualitybis">(16)</a>, because of <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#xninfini">(17)</a>,
+<p id="Withnotationsbecauseofth"><a class="paragraph-url" href="#Withnotationsbecauseofth"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
+With notations <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#dualitybis">(16)</a>, because of <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#xninfini">(17)</a>,
 the sequence $(k_n)$ tends to infinity, so that $\left(T_{k_n}(s)\right)$ is a subsequence
-of $\left(T_k(s)\right)$. Thus, <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#Tksurk">(18)</a> implies that
+of $\left(T_k(s)\right)$. Thus, <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#Tksurk">(18)</a> implies that
 \[
 \forall \eta &gt; \frac 12, \quad \frac{T_{k_n}(s)}{k_n^{4+\eta}} \ \ \smash{\mathop{\longrightarrow}\limits _{n\to \infty}} \ \ 0 \quad \mbox{a.s.} \quad \mbox{and} \quad  \forall \eta &gt; 0, \quad \frac{T_{k_n}(s)}{k_n^{4+\eta}}~\limite{k\to \infty}{P}~0.
 \]
-Using duality <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#dualitybis">(16)</a> again leads to
+Using duality <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#dualitybis">(16)</a> again leads to
 
 \[\forall \eta &gt; 0, \quad \frac{X_n(s)}{n^{1/({4+\eta})}}~\limite{n \to \infty}{P}~+\infty.\]
 In other words
@@ -1486,17 +1491,18 @@ $$
 $$
 so that, since the height of the suffix trie is larger than $X_n(s)$,
 \[\forall \delta &gt; 0, \quad \frac{H_n}{n^{\frac 14 - \delta}}~\limite{n\to \infty}{P}~+\infty.\]
-This ends the proof of <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#hauteur">Theorem 1</a>.
+This ends the proof of <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#hauteur">Theorem 1</a>.
 ∎
 </p>
 
-<div class="proof">
-<button href="#proofTk" data-toggle="collapse" class="btn btn-info proof">Proof.</button>
-<div class="collapse" id="proofTk">
-
+<div class="proof" id="proofTk">
+<button class="btn btn-info proof" data-toggle="collapse" href="#proofTk__body">Proof.</button>
+<div class="collapse" id="proofTk__body">
+  <div class="title">Proof
+6</div>
   <div class="contents">
-<p id="Combining181"><a class="paragraph-url" href="#Combining181"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
-Combining <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#lien-tau-T">(13)</a> and <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#esp-var">(14)</a> shows that
+<p id="CombiningandshowsthatgET"><a class="paragraph-url" href="#CombiningandshowsthatgET"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
+Combining <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#lien-tau-T">(13)</a> and <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#esp-var">(14)</a> shows that
 <span class="equation" id="meanTk">
   <span class="contents">$
 \g E(T_k(s)) = \g E(\tau^{(2)}(w))-k= \frac{19}{9} k^4 + o(k^4)
@@ -1513,13 +1519,13 @@ $$
 \frac{T_k(s)}{k^{4+\eta}} = \frac{T_k(s) -\g E(T_k(s))}{k^{4+\eta}} + \frac{\g E(T_k(s))}{k^{4+\eta}} .
 $$
 The deterministic part in the second-hand right term goes to $0$ with $k$ thanks
-to <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#meanTk">(19)</a>, so that we focus on the term
+to <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#meanTk">(19)</a>, so that we focus on the term
 $\displaystyle\frac{T_k(s) -\g E(T_k(s))}{k^{4+\eta}}$.
 For any $\varepsilon &gt;0$, because of Bienaymé-Tchebychev inequality,
 $$
 \g \PP\left(\frac{|T_k(s) -\g E[T_k(s)]|}{k^{4+\eta}} &gt;\varepsilon\right) \leqslant \frac{Var(T_k(s))}{\varepsilon^2 k^{8+2\eta}}=\mathcal{O}\left(\frac 1{k^{2\eta}}\right).
 $$
-This shows the convergence in probability in <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#Tk">Lemma 2</a>.
+This shows the convergence in probability in <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#Tk">Lemma 2</a>.
 Moreover, Borel-Cantelli Lemma ensures the almost sure convergence as soon as $\eta &gt; \frac 12$.
 ∎
 </p>
@@ -1529,9 +1535,9 @@ Moreover, Borel-Cantelli Lemma ensures the almost sure convergence as soon as $\
 <div class="remark" id="remark4">
   <div class="title">Remark 4: </div>
   <div class="contents">
-<p id="Noticethatou"><a class="paragraph-url" href="#Noticethatou"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="Noticethatourproofshowsa"><a class="paragraph-url" href="#Noticethatourproofshowsa"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 Notice that our proof shows actually that the convergence to
-$+\infty$ in <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#hauteur">Theorem 1</a> is valid a.s. (and not only in probability)
+$+\infty$ in <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#hauteur">Theorem 1</a> is valid a.s. (and not only in probability)
 as soon as $\delta &gt; \frac 1{36}$.
 </p>
 </div>
@@ -1539,12 +1545,12 @@ as soon as $\delta &gt; \frac 1{36}$.
 </div>
 
 <div class="subsection"><div class="subsection-title" id="ssec:saturation">4.6. Saturation level for the factorial comb</div>
-<p id="Inthissubsect"><a class="paragraph-url" href="#Inthissubsect"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
-In this subsection, we prove <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#saturation">Theorem 2</a>.
+<p>
+In this subsection, we prove <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#saturation">Theorem 2</a>.
 </p>
-<p id="Considerthep"><a class="paragraph-url" href="#Considerthep"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="Considertheprobabilizedi"><a class="paragraph-url" href="#Considertheprobabilizedi"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 Consider the probabilized infinite <em>factorial</em> comb defined in
-Section <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#sec:source">2</a>
+Section <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#sec%3Asource">2</a>
 by
 $$
 \forall n\in\g N,~c_n=\frac{1}{(n+1)!}.
@@ -1555,9 +1561,9 @@ bounded sequence, which implies the result.
 
 Recall that $\rond R$ denotes the set of all right-infinite sequences.
 By characterization of the saturation level as a function of $X_n$
-(see <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#defi-var">(11)</a>),
+(see <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#defi-var">(11)</a>),
 $\g P\left(\ell _n\leqslant k\right) =\g P\left(\exists s\in\rond R,~X_n(s)\leqslant k\right)$ for all positive integers $n,k$.
-Duality formula <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#duality">(12)</a> then provides
+Duality formula <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#duality">(12)</a> then provides
 $$
 \begin{array}{rl}
 \g P\left(\ell _n\leqslant k\right)&amp;=\g P\left(\exists s\in\rond R,~T_k(s)\geqslant n\right)\\ \\
@@ -1585,8 +1591,8 @@ $U(x)=\frac{x}{(1-x)(e^x-1)}$ and, after computation,
 {\Big[ k!\left( e^x-1\right)\left( 1-x\right)+x^{k-1}\big( 1-e^x(1-x)\big)\Big] ^2}.
 $</span><span class="title">(22)</span>
 </span>
-In particular, applying Formulae <a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#postMarkov">(21)</a> and
-<a href="http://zoggy.github.com/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#phi2Factoriel">(22)</a> with $n=(k-1)!$ and $x=1-\frac 1{(k-1)!}$
+In particular, applying Formulae <a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#postMarkov">(21)</a> and
+<a href="http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html#phi2Factoriel">(22)</a> with $n=(k-1)!$ and $x=1-\frac 1{(k-1)!}$
 implies that
 for any $k\geqslant 2$,
 $$
@@ -1624,7 +1630,7 @@ which implies the result.
 </p>
 </div>
 <div class="subsection"><div class="subsection-title" id="acks">4.7. Acknowledgements</div>
-<p id="Theauthorsar"><a class="paragraph-url" href="#Theauthorsar"><img src="http://zoggy.github.com/vlmc-suffix-trie/paragraph-url.png" alt="anchor"/></a>
+<p id="Theauthorsareverygratefu"><a class="paragraph-url" href="#Theauthorsareverygratefu"><img alt="anchor" src="http://zoggy.github.io/vlmc-suffix-trie/paragraph-url.png"/></a>
 The authors are very grateful to Eng.
 <span class="ext-a"><a href="http://pauillac.inria.fr/~guesdon/">Maxence Guesdon</a></span> for providing
 simulations with great talent and an infinite patience.
@@ -2031,6 +2037,6 @@ Cambridge University Press<span>, Cambridge</span><span>, 1991</span>.
 <footer id="bottombar">
 </footer>
 </body>
-<script type="text/javascript" src="http://zoggy.github.com/vlmc-suffix-trie/jquery.js">_</script>
-<script type="text/javascript" src="http://zoggy.github.com/vlmc-suffix-trie/bootstrap-collapse.js">_</script>
+<script src="http://zoggy.github.io/vlmc-suffix-trie/jquery.js" type="text/javascript">_</script>
+<script src="http://zoggy.github.io/vlmc-suffix-trie/bootstrap-collapse.js" type="text/javascript">_</script>
 </html>

@@ -1,2 +1,22 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<rss version="2.0"><channel><title>Vlmc and suffix tries: suffix tree</title><link>http://zoggy.github.com/vlmc-suffix-trie/kw_suffix%20tree.html</link><description></description><managingEditor>foo@bar.com</managingEditor><generator>Stog</generator><image><url>http://zoggy.github.com/vlmc-suffix-trie/</url><title>Vlmc and suffix tries</title><link>http://zoggy.github.com/vlmc-suffix-trie</link></image></channel></rss>
+<!DOCTYPE HTML>
+<rss version="2.0">
+       <channel>
+         <title>Vlmc and suffix tries : suffix tree</title>
+         <link>http://zoggy.github.io/vlmc-suffix-trie</link>
+         <description></description>
+         <managingEditor></managingEditor>
+         <pubDate>16 Sep 2014 07:29:52 +0000</pubDate><lastBuildDate>16 Sep 2014 08:36:31 +0000</lastBuildDate>
+         <generator>Stog</generator>
+         <div class="img"><img class="img" src="" width=""/><div class="legend"><url>http://zoggy.github.io/vlmc-suffix-trie/logo.png</url>
+           <title>Vlmc and suffix tries</title><link>http://zoggy.github.io/vlmc-suffix-trie</link>
+         </div></div>
+         <item>
+      <title>Uncommon suffix tries</title>
+      <link>http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html</link>
+      <description>
+&lt;a href=&quot;http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html&quot;&gt;&lt;img alt=&quot;next&quot; src=&quot;http://zoggy.github.io/vlmc-suffix-trie/next.png&quot;/&gt;&lt;/a&gt;</description>
+      <pubDate></pubDate>
+      <guid isPermaLink="true">http://zoggy.github.io/vlmc-suffix-trie/articles/uncommon-suffix-tries.html</guid>
+    </item>
+       </channel>
+     </rss>
