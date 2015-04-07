@@ -235,7 +235,7 @@ let complemented_context_tree ?(max_iter=120) tree =
       iter tree [] (ACMap.empty, ACSet.empty, ACSet.empty) tree
     in
     if (ACSet.is_empty to_break && ACSet.is_empty to_unroll)
-      or n >= max_iter
+      || n >= max_iter
     then
       { cct_map = map ; cct_tree = tree }
     else
@@ -307,7 +307,7 @@ let strip_string s =
 let string_of_file name =
   let chanin = open_in_bin name in
   let len = 1024 in
-  let s = String.create len in
+  let s = Bytes.create len in
   let buf = Buffer.create len in
   let rec iter () =
     try
@@ -519,7 +519,7 @@ let context_tree_of_spec ?(autofill=false) spec =
       let rec build_node cur_revpath i paths =
         match paths with
           [] when autofill ->
-            Context (Array.create (Array.length spec.spec_symbols) 0.0)
+            Context (Array.make (Array.length spec.spec_symbols) 0.0)
         | [] ->
             failwith ("Missing context: "^(string_of_path (List.rev (i::cur_revpath))))
         | [ ([], _, Ctx ctx) ] ->
