@@ -127,8 +127,8 @@ module Dynamic (Trie : Trie.S) =
     let dynamic_experiment ?(dot=false) ?progress len =
       let vlmc = Trie.Vlmc.create len in
       let trie = ref Trie.empty in
-      let heights = Array.create (len / !measure_step) 0 in
-      let saturations = Array.create (len / !measure_step) 0 in
+      let heights = Array.make (len / !measure_step) 0 in
+      let saturations = Array.make (len / !measure_step) 0 in
 
       for i = 0 to len - 1 do
         trie := Trie.insert vlmc !trie i ;
@@ -151,11 +151,11 @@ module Dynamic (Trie : Trie.S) =
     let generate_R_dynamic_exp ?(exp=1) heights sats prefix =
       let len = Array.length heights in
       let x = Array.init len (fun i -> (i+1) * !measure_step) in
-      let max_y =
+      (*let max_y =
         Array.fold_left max
         (Array.fold_left max 0. heights)
         sats
-      in
+      in*)
       let var_heights = Printf.sprintf "%s_heights" prefix in
       let var_sats = Printf.sprintf "%s_sats" prefix in
       let code_x = Vlmc_misc.r_vector "x" string_of_int (Array.to_list x) in

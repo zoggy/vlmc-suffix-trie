@@ -278,7 +278,7 @@ let start_server param ?(host=Unix.inet_addr_any) ~pending ~port =
     }
   in
   let lstn_engine =
-    Uq_engines.listener
+    Uq_server.listener
       (`Socket(`Sock_inet(Unix.SOCK_STREAM, host, port), opts)) ues
   in
   Uq_engines.when_state ~is_done:(accept param ues) lstn_engine;

@@ -36,7 +36,7 @@ module Random_walk (L:Walk_law) =
 
     let compute length =
       let seq = Vlmc.create length in
-      let t = Array.create length (0, 0) in
+      let t = Array.make length (0, 0) in
       let vector = function
         N -> (0, 1)
       | S -> (0, -1)

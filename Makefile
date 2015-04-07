@@ -24,10 +24,10 @@
 #################################################################################
 
 PACKAGE=vlmcs
-INCLUDES=-I laws -I +functory
+OCAMLFIND=ocamlfind
+INCLUDES=-I laws # -I `$(OCAMLFIND) -query functory`
 PACKAGES=unix,dynlink,functory
 NETPACKAGES=nethttpd
-OCAMLFIND=ocamlfind
 OCAMLFLAGS= -g $(INCLUDES) -annot
 
 LIB=vlmcs.cmxa
@@ -90,7 +90,7 @@ $(RWALK_BYTE): $(LIB_BYTE) random_walk.cmo
 	$(OCAMLFIND) ocamlc -package $(PACKAGES) $(OCAMLFLAGS) -o $@ -linkpkg -linkall $^
 
 $(AUTOMATA): automata.cmx automata_main.cmx
-	$(OCAMLFIND) ocamlopt -package $(PACKAGES) $(OCAMLFLAGS)  -o $@ -linkpkg  $^
+	$(OCAMLFIND) ocamlopt -package $(PACKAGES),$(NET_PACKAGES) $(OCAMLFLAGS)  -o $@ -linkpkg  $^
 
 $(AUTOMATA_BYTE): automata.cmo automata_main.cmo
 	$(OCAMLFIND) ocamlc -package $(PACKAGES) $(OCAMLFLAGS) -o $@ -linkpkg $^
