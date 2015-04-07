@@ -71,7 +71,7 @@ module Make (L : Law) =
 
     let increase vlmc =
       let curlen = Array.length vlmc.seq in
-      let seq = Array.create (curlen+vlmc.increment) L.symbols.(0) in
+      let seq = Array.make (curlen+vlmc.increment) L.symbols.(0) in
       Array.blit vlmc.seq 0 seq 0 curlen;
       vlmc.seq <- seq;
       for i = 0 to vlmc.increment - 1 do

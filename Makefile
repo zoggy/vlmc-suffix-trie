@@ -24,7 +24,7 @@
 #################################################################################
 
 PACKAGE=vlmcs
-INCLUDES=-I laws -I +functory
+INCLUDES=-I laws -I `ocamlfind -query functory`
 OCAMLFIND=ocamlfind
 OCAMLFLAGS= -g $(INCLUDES) -annot
 SYS_LIBS=unix.cmxa functory.cmxa dynlink.cmxa
