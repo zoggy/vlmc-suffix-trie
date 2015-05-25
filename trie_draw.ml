@@ -102,7 +102,7 @@ let main () =
   for i = 0 to len - 1 do
     t:= T.insert vseq !t i
   done;
-  let dot = T.dot ~rankdir: "BT" ~dots: true vseq !t in
+  let dot = T.dot ~rankdir: "BT" ~dots: true ~color_from: (len-1) vseq !t in
   file_of_string ~file: !output_file dot
 ;;
 

@@ -36,7 +36,8 @@ module type S = sig
   val cardinal : t -> int * int
   val height : t -> int
   val saturation_level: t -> int
-  val dot : ?depth:int -> ?rankdir:string -> ?dots:bool -> Vlmc.t -> t -> string
+  val dot : ?depth:int -> ?rankdir:string -> ?dots:bool ->
+    ?color_from: Vlmc.pos -> Vlmc.t -> t -> string
 end;;
 
 module Make : functor (V:Vlmc.S) -> S

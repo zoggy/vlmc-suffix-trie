@@ -33,7 +33,8 @@ module type S = sig
     val cardinal : t -> int * int
     val height : t -> int
     val saturation_level: t -> int
-    val dot : ?depth:int -> ?rankdir:string -> ?dots:bool -> Vlmc.t -> t -> string
+    val dot : ?depth:int -> ?rankdir:string -> ?dots:bool ->
+      ?color_from: Vlmc.pos -> Vlmc.t -> t -> string
 end;;
 
 module Make (V : Vlmc.S) =
@@ -140,7 +141,7 @@ module Make (V : Vlmc.S) =
      in
      (iter max_int 1 t) - 1
 
-    let dot ?depth ?(rankdir="TB") ?(dots=false) seq t =
+    let dot ?depth ?(rankdir="TB") ?(dots=false) ?color_from seq t =
       let b = Buffer.create 1024 in
       Printf.bprintf b
        "digraph G {\nrankdir=%s;\n ratio=auto;\n"
@@ -157,35 +158,48 @@ module Make (V : Vlmc.S) =
           None -> (fun _ -> true)
         | Some n -> fun h -> h <= n
       in
-      let rec try_map h t s sym map =
+      let rec try_map ?color h t s sym map =
         match
           try Some(Map.find sym map)
           with Not_found -> None
         with
           Some t2 ->
             let s2 = Printf.sprintf "%s%s" s (V.Law.string sym) in
-            iter h s2 t2;
-            Printf.bprintf b "%s -> %s [ label=\"%s\"];\n" (id s t) (id s2 t2) (V.Law.string sym)
+            let color =
+              match color with
+                None -> None
+              | Some n ->
+                  let sym2 = V.get seq n in
+                  if sym2 = sym then
+                    Some (n+1)
+                  else
+                    None
+            in
+            iter ?color h s2 t2;
+            Printf.bprintf b "%s -> %s [ label=\"%s\" %s];\n"
+              (id s t) (id s2 t2) (V.Law.string sym)
+              (match color with None -> "" | Some _ -> ", color=green")
         | None ->
           ()
 
-      and iter h s t =
+      and iter ?color h s t =
         match t with
          Leaf n ->
            let s = if s = "" then V.Law.string (V.get seq n) else s in
-           Printf.bprintf b "  %s [ shape=\"rect\", label=\"%s%s\" ];\n"
+           Printf.bprintf b "  %s [ shape=\"rect\", label=\"%s%s\" %s];\n"
              (id s t)
              (if String.length s < 10 then s else (String.sub s 0 10)^"...")
              (if dots then "..." else "")
+             (match color with None -> "" | Some _ -> "color=green")
              (*(string_of_int n)*)
        | Node map ->
            Printf.bprintf b "  %s [ label=\"\", shape=\"point\"]; \n" (id s t);
            if continue h then
              begin
-              Array.iter (fun sym -> try_map (h+1) t s sym map) V.Law.symbols
+              Array.iter (fun sym -> try_map ?color (h+1) t s sym map) V.Law.symbols
              end
       in
-      iter 0 "" t;
+      iter ?color: color_from 0 "" t;
       Buffer.add_string b "\n}\n";
       Buffer.contents b;;
 
